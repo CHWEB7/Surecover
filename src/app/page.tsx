@@ -25,9 +25,9 @@ export default function Home() {
             x2="100"
             y2="50"
           >
-            <stop offset="0" stopColor="#06b6d4" />
-            <stop offset="0.5" stopColor="#6366f1" />
-            <stop offset="1" stopColor="#a855f7" />
+            <stop offset="0" stopColor="#a21caf" />
+            <stop offset="0.55" stopColor="#ec4899" />
+            <stop offset="1" stopColor="#f9a8d4" />
           </linearGradient>
         </defs>
 
@@ -39,7 +39,6 @@ export default function Home() {
           strokeWidth="6"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeDasharray="43 7"
         />
       </svg>
 

@@ -20,16 +20,26 @@ body {
 }
 
 .infinity-logo {
-  filter: drop-shadow(0 6px 18px rgba(99, 102, 241, 0.25));
+  filter: drop-shadow(0 6px 18px rgba(236, 72, 153, 0.28));
 }
 
-/* Two rounded cuts travel quickly around the infinity loop. */
+/* The stroke draws itself to a nearly-complete infinity, then erases,
+   travelling around the loop — like a circular loader. */
 .infinity-runner {
-  animation: infinity-loop 1.4s linear infinite;
+  animation: infinity-draw 1.6s ease-in-out infinite;
 }
 
-@keyframes infinity-loop {
-  to {
+@keyframes infinity-draw {
+  0% {
+    stroke-dasharray: 1 99;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90 10;
+    stroke-dashoffset: -38;
+  }
+  100% {
+    stroke-dasharray: 1 99;
     stroke-dashoffset: -100;
   }
 }
@@ -37,6 +47,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .infinity-runner {
     animation: none;
-    stroke-dasharray: none;
+    stroke-dasharray: 92 8;
   }
 }
