@@ -83,8 +83,8 @@ export function NotifyForm() {
         <p
           role="status"
           aria-live="polite"
-          className={`mt-3 text-sm ${
-            status === "error" ? "text-rose-300" : "text-emerald-300"
+          className={`mt-3 text-sm font-medium ${
+            status === "error" ? "text-red-400" : "text-emerald-400"
           }`}
         >
           {message}
