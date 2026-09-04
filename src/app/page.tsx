@@ -33,6 +33,15 @@ export default function Home() {
           </linearGradient>
         </defs>
 
+        <path
+          d={INFINITY_PATH}
+          stroke="url(#infinity-gradient)"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          opacity={0.18}
+        />
+
         {Array.from({ length: TRAIL_SEGMENTS }).map((_, i) => (
           <path
             key={i}
