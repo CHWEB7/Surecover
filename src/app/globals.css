@@ -20,22 +20,23 @@ body {
 }
 
 .infinity-logo {
-  filter: drop-shadow(0 8px 24px rgba(99, 102, 241, 0.25));
-  animation: infinity-pulse 5s ease-in-out infinite;
+  filter: drop-shadow(0 8px 22px rgba(99, 102, 241, 0.28));
 }
 
-@keyframes infinity-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
+/* A gradient segment continuously travels around the infinity loop. */
+.infinity-runner {
+  animation: infinity-loop 2.6s linear infinite;
+}
+
+@keyframes infinity-loop {
+  to {
+    stroke-dashoffset: -100;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .infinity-logo {
+  .infinity-runner {
     animation: none;
+    stroke-dasharray: none;
   }
 }

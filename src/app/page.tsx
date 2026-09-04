@@ -1,3 +1,6 @@
+const INFINITY_PATH =
+  "M50,50 C50,35 35,25 25,35 C15,45 15,55 25,65 C35,75 50,65 50,50 C50,35 65,25 75,35 C85,45 85,55 75,65 C65,75 50,65 50,50 Z";
+
 export default function Home() {
   return (
     <main className="flex min-h-dvh flex-col items-center justify-center gap-10 bg-[#f5f4ef] px-6 text-center">
@@ -10,7 +13,7 @@ export default function Home() {
         viewBox="0 0 100 100"
         fill="none"
         role="img"
-        aria-label="Infinity logo"
+        aria-label="Animated infinity loop logo"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
@@ -18,38 +21,33 @@ export default function Home() {
             id="infinity-gradient"
             gradientUnits="userSpaceOnUse"
             x1="0"
-            y1="0"
+            y1="50"
             x2="100"
-            y2="0"
-            spreadMethod="repeat"
+            y2="50"
           >
-            <stop offset="0" stopColor="#6366f1" />
-            <stop offset="0.25" stopColor="#a855f7" />
-            <stop offset="0.5" stopColor="#ec4899" />
-            <stop offset="0.75" stopColor="#f59e0b" />
-            <stop offset="1" stopColor="#6366f1" />
-            <animate
-              attributeName="x1"
-              from="0"
-              to="100"
-              dur="4s"
-              repeatCount="indefinite"
-            />
-            <animate
-              attributeName="x2"
-              from="100"
-              to="200"
-              dur="4s"
-              repeatCount="indefinite"
-            />
+            <stop offset="0" stopColor="#06b6d4" />
+            <stop offset="0.5" stopColor="#6366f1" />
+            <stop offset="1" stopColor="#a855f7" />
           </linearGradient>
         </defs>
+
         <path
-          d="M50,50 C50,35 35,25 25,35 C15,45 15,55 25,65 C35,75 50,65 50,50 C50,35 65,25 75,35 C85,45 85,55 75,65 C65,75 50,65 50,50 Z"
+          className="infinity-track"
+          d={INFINITY_PATH}
+          stroke="#e7e5e4"
+          strokeWidth="7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          className="infinity-runner"
+          d={INFINITY_PATH}
+          pathLength={100}
           stroke="url(#infinity-gradient)"
           strokeWidth="7"
           strokeLinecap="round"
           strokeLinejoin="round"
+          strokeDasharray="32 68"
         />
       </svg>
 
