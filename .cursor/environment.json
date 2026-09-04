@@ -1,0 +1,10 @@
+{
+  "name": "Surecover Web",
+  "install": "npm install",
+  "terminals": [
+    {
+      "name": "next-dev",
+      "command": "npm run dev"
+    }
+  ]
+}
