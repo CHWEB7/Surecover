@@ -1,5 +1,5 @@
 const INFINITY_PATH =
-  "M42.856,34.68 A20,20 0 1,0 42.856,65.32 L57.144,34.68 A20,20 0 1,1 57.144,65.32 L42.856,34.68 Z";
+  "M42.856,34.68 A20,20 0 1,0 42.856,65.32 C51.28,58.25 48.71,41.75 57.144,34.68 A20,20 0 1,1 57.144,65.32 C48.71,58.25 51.28,41.75 42.856,34.68 Z";
 
 // Number of stacked, staggered segments that form the fading comet trail.
 const TRAIL_SEGMENTS = 14;
