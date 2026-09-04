@@ -1,5 +1,8 @@
 const INFINITY_PATH =
-  "M24.3,30 C11.4,30 5,43.3 5,50 C5,56.7 11.4,70 24.3,70 C37.2,70 43.5,56.7 50,50 C56.5,43.3 62.8,30 75.7,30 C88.6,30 95,43.3 95,50 C95,56.7 88.6,70 75.7,70 C62.8,70 56.5,56.7 50,50 C43.5,43.3 37.2,30 24.3,30 Z";
+  "M42.856,34.68 A20,20 0 1,0 42.856,65.32 L57.144,34.68 A20,20 0 1,1 57.144,65.32 L42.856,34.68 Z";
+
+// Number of stacked, staggered segments that form the fading comet trail.
+const TRAIL_SEGMENTS = 14;
 
 export default function Home() {
   return (
@@ -30,15 +33,23 @@ export default function Home() {
           </linearGradient>
         </defs>
 
-        <path
-          className="infinity-runner"
-          d={INFINITY_PATH}
-          pathLength={100}
-          stroke="url(#infinity-gradient)"
-          strokeWidth="6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        {Array.from({ length: TRAIL_SEGMENTS }).map((_, i) => (
+          <path
+            key={i}
+            className="infinity-runner"
+            d={INFINITY_PATH}
+            pathLength={100}
+            stroke="url(#infinity-gradient)"
+            strokeWidth="6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeDasharray="4 96"
+            style={{
+              opacity: (i + 1) / TRAIL_SEGMENTS,
+              animationDelay: `${(-(i * 0.038)).toFixed(3)}s`,
+            }}
+          />
+        ))}
       </svg>
 
       <p className="text-lg font-semibold uppercase tracking-[0.4em] text-neutral-800 sm:text-xl">
