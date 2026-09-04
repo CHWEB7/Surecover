@@ -9,7 +9,7 @@ export default function Home() {
       </p>
 
       <svg
-        className="infinity-logo h-auto w-48 sm:w-64"
+        className="infinity-logo h-auto w-40 sm:w-52"
         viewBox="0 0 100 100"
         fill="none"
         role="img"
@@ -25,9 +25,8 @@ export default function Home() {
             x2="100"
             y2="50"
           >
-            <stop offset="0" stopColor="#a21caf" />
-            <stop offset="0.55" stopColor="#ec4899" />
-            <stop offset="1" stopColor="#f9a8d4" />
+            <stop offset="0" stopColor="#516b8b" />
+            <stop offset="1" stopColor="#056b3b" />
           </linearGradient>
         </defs>
 

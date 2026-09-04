@@ -20,33 +20,32 @@ body {
 }
 
 .infinity-logo {
-  filter: drop-shadow(0 6px 18px rgba(236, 72, 153, 0.28));
+  filter: drop-shadow(0 6px 18px rgba(5, 107, 59, 0.22));
 }
 
-/* The stroke draws itself to a nearly-complete infinity, then erases,
-   travelling around the loop — like a circular loader. */
+/* The stroke draws all the way around the full infinity, then erases,
+   and repeats — like a circular loader. */
 .infinity-runner {
-  animation: infinity-draw 1.6s ease-in-out infinite;
+  stroke-dasharray: 100 100;
+  animation: infinity-draw 1.7s ease-in-out infinite;
 }
 
 @keyframes infinity-draw {
   0% {
-    stroke-dasharray: 1 99;
-    stroke-dashoffset: 0;
+    stroke-dashoffset: 98;
   }
   50% {
-    stroke-dasharray: 90 10;
-    stroke-dashoffset: -38;
+    stroke-dashoffset: 0;
   }
   100% {
-    stroke-dasharray: 1 99;
-    stroke-dashoffset: -100;
+    stroke-dashoffset: -98;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .infinity-runner {
     animation: none;
-    stroke-dasharray: 92 8;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
   }
 }
