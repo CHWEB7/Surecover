@@ -32,22 +32,14 @@ export default function Home() {
         </defs>
 
         <path
-          className="infinity-track"
-          d={INFINITY_PATH}
-          stroke="#e7e5e4"
-          strokeWidth="9"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
           className="infinity-runner"
           d={INFINITY_PATH}
           pathLength={100}
           stroke="url(#infinity-gradient)"
-          strokeWidth="9"
+          strokeWidth="6"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeDasharray="32 68"
+          strokeDasharray="43 7"
         />
       </svg>
 
