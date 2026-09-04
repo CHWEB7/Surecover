@@ -1,5 +1,5 @@
 const INFINITY_PATH =
-  "M50,50 C50,35 35,25 25,35 C15,45 15,55 25,65 C35,75 50,65 50,50 C50,35 65,25 75,35 C85,45 85,55 75,65 C65,75 50,65 50,50 Z";
+  "M24.3,30 C11.4,30 5,43.3 5,50 C5,56.7 11.4,70 24.3,70 C37.2,70 43.5,56.7 50,50 C56.5,43.3 62.8,30 75.7,30 C88.6,30 95,43.3 95,50 C95,56.7 88.6,70 75.7,70 C62.8,70 56.5,56.7 50,50 C43.5,43.3 37.2,30 24.3,30 Z";
 
 export default function Home() {
   return (
@@ -35,7 +35,7 @@ export default function Home() {
           className="infinity-track"
           d={INFINITY_PATH}
           stroke="#e7e5e4"
-          strokeWidth="7"
+          strokeWidth="9"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
@@ -44,7 +44,7 @@ export default function Home() {
           d={INFINITY_PATH}
           pathLength={100}
           stroke="url(#infinity-gradient)"
-          strokeWidth="7"
+          strokeWidth="9"
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeDasharray="32 68"
