@@ -13,15 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Surecover — Independent Financial Consulting | Coming Soon",
-  description:
-    "Surecover is a boutique financial consultancy offering independent, straight-talking advice on planning, protection, and growth. Our new website is coming soon.",
-  openGraph: {
-    title: "Surecover — Independent Financial Consulting",
-    description:
-      "Clarity and confidence for every financial decision. Our new website is coming soon — join the waitlist.",
-    type: "website",
-  },
+  title: "New website under development — CHWEB",
+  description: "A new website is currently under development by CHWEB.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

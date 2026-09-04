@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #020617;
-  --foreground: #f8fafc;
+  --background: #f5f4ef;
+  --foreground: #1c1917;
 }
 
 @theme inline {
@@ -17,4 +17,25 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+.infinity-logo {
+  filter: drop-shadow(0 8px 24px rgba(99, 102, 241, 0.25));
+  animation: infinity-pulse 5s ease-in-out infinite;
+}
+
+@keyframes infinity-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .infinity-logo {
+    animation: none;
+  }
 }
