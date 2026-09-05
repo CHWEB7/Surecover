@@ -39,49 +39,42 @@ body {
   }
 }
 
-/* Flickering, jittering segments trailing off the end of the comet. */
+/* The glitch fragments trail the chaser and flicker/jitter (its disintegrating tail). */
 .infinity-glitch {
   animation:
     infinity-travel 1.6s linear infinite,
-    tail-glitch 0.42s steps(1, end) infinite;
+    tail-glitch 0.36s steps(1, end) infinite;
 }
 
 @keyframes tail-glitch {
-  0% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-  10% {
-    opacity: 0.6;
-    transform: translate(2px, -1px);
-  }
-  20% {
-    opacity: 0;
-    transform: translate(-2px, 1px);
-  }
-  35% {
-    opacity: 0.4;
-    transform: translate(1.5px, 1px);
-  }
-  45% {
-    opacity: 0;
-    transform: translate(-1px, -1.5px);
-  }
-  60% {
-    opacity: 0.55;
-    transform: translate(2px, 0.5px);
-  }
-  72% {
-    opacity: 0;
-    transform: translate(-1.5px, 1px);
-  }
-  88% {
-    opacity: 0.35;
-    transform: translate(1px, -1px);
-  }
+  0%,
   100% {
     opacity: 0;
     transform: translate(0, 0);
+  }
+  12% {
+    opacity: 0.85;
+    transform: translate(3px, -2px);
+  }
+  24% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  40% {
+    opacity: 0.6;
+    transform: translate(-3px, 2px);
+  }
+  52% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  70% {
+    opacity: 0.75;
+    transform: translate(2px, 2px);
+  }
+  84% {
+    opacity: 0;
+    transform: translate(-2px, -1px);
   }
 }
 
