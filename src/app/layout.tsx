@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "New website under development — CHWEB",
-  description: "A new website is currently under development by CHWEB.",
+  title: "New website under development — Foxlead",
+  description: "A new website is currently under development by Foxlead.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
