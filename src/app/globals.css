@@ -23,58 +23,36 @@ body {
   filter: drop-shadow(0 6px 18px rgba(153, 142, 224, 0.22));
 }
 
-/* Keep an even stroke width even though the mark is non-uniformly scaled. */
-.infinity-logo path {
-  vector-effect: non-scaling-stroke;
-}
-
-/* A fading comet trail travels continuously all the way around the loop. */
+/*
+ * A single "snake" segment draws itself along the infinity from one tucked
+ * end to the other, then erases from the same end, leaving a brief empty
+ * pause before repeating. Round caps give the travelling head/tail their
+ * soft, rounded look.
+ */
 .infinity-runner {
-  animation: infinity-travel 1.6s linear infinite;
+  animation: infinity-draw 1.9s ease-in-out infinite;
 }
 
-@keyframes infinity-travel {
-  to {
+@keyframes infinity-draw {
+  /* empty (start end) */
+  0% {
+    stroke-dasharray: 0 100;
+    stroke-dashoffset: 0;
+  }
+  /* fully drawn */
+  48% {
+    stroke-dasharray: 100 100;
+    stroke-dashoffset: 0;
+  }
+  /* erased from the start end (tail chases the head) */
+  96% {
+    stroke-dasharray: 100 100;
     stroke-dashoffset: -100;
   }
-}
-
-/* The glitch fragments trail the chaser and flicker/jitter (its disintegrating tail). */
-.infinity-glitch {
-  animation:
-    infinity-travel 1.6s linear infinite,
-    tail-glitch 0.36s steps(1, end) infinite;
-}
-
-@keyframes tail-glitch {
-  0%,
+  /* brief empty hold */
   100% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-  12% {
-    opacity: 0.85;
-    transform: translate(3px, -2px);
-  }
-  24% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-  40% {
-    opacity: 0.6;
-    transform: translate(-3px, 2px);
-  }
-  52% {
-    opacity: 0;
-    transform: translate(0, 0);
-  }
-  70% {
-    opacity: 0.75;
-    transform: translate(2px, 2px);
-  }
-  84% {
-    opacity: 0;
-    transform: translate(-2px, -1px);
+    stroke-dasharray: 100 100;
+    stroke-dashoffset: -100;
   }
 }
 
@@ -82,8 +60,5 @@ body {
   .infinity-runner {
     animation: none;
     stroke-dasharray: none;
-  }
-  .infinity-glitch {
-    display: none;
   }
 }
