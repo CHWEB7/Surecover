@@ -80,11 +80,12 @@ export default function Home() {
             strokeWidth="6"
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeDasharray="2.5 97.5"
+            strokeDasharray="3 97"
             style={{
-              // First delay positions the ghost just behind the tail tip;
-              // second delay desyncs each segment's flicker.
-              animationDelay: `${(0.03 + i * 0.024).toFixed(3)}s, ${(-(i * 0.11)).toFixed(3)}s`,
+              // Travel delay places each fragment just behind the chaser's tail
+              // (wrapping negative delay avoids an initial pause); the second
+              // delay desyncs each fragment's flicker.
+              animationDelay: `${(-(1.6 - 0.03 * (i + 1))).toFixed(3)}s, ${(-(i * 0.08)).toFixed(3)}s`,
             }}
           />
         ))}
@@ -95,9 +96,9 @@ export default function Home() {
         <Image
           src="/foxlead.png"
           alt="Foxlead logo"
-          width={24}
-          height={24}
-          className="h-6 w-6 shrink-0"
+          width={32}
+          height={32}
+          className="h-8 w-8 shrink-0"
           priority
         />
         <span className="text-sm font-semibold uppercase tracking-[0.25em] text-neutral-800">
