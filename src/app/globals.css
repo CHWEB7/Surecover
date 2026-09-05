@@ -20,7 +20,12 @@ body {
 }
 
 .infinity-logo {
-  filter: drop-shadow(0 6px 18px rgba(5, 107, 59, 0.22));
+  filter: drop-shadow(0 6px 18px rgba(153, 142, 224, 0.22));
+}
+
+/* Keep an even stroke width even though the mark is non-uniformly scaled. */
+.infinity-logo path {
+  vector-effect: non-scaling-stroke;
 }
 
 /* A fading comet trail travels continuously all the way around the loop. */
@@ -34,9 +39,58 @@ body {
   }
 }
 
+/* Flickering, jittering segments trailing off the end of the comet. */
+.infinity-glitch {
+  animation:
+    infinity-travel 1.6s linear infinite,
+    tail-glitch 0.42s steps(1, end) infinite;
+}
+
+@keyframes tail-glitch {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  10% {
+    opacity: 0.6;
+    transform: translate(2px, -1px);
+  }
+  20% {
+    opacity: 0;
+    transform: translate(-2px, 1px);
+  }
+  35% {
+    opacity: 0.4;
+    transform: translate(1.5px, 1px);
+  }
+  45% {
+    opacity: 0;
+    transform: translate(-1px, -1.5px);
+  }
+  60% {
+    opacity: 0.55;
+    transform: translate(2px, 0.5px);
+  }
+  72% {
+    opacity: 0;
+    transform: translate(-1.5px, 1px);
+  }
+  88% {
+    opacity: 0.35;
+    transform: translate(1px, -1px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .infinity-runner {
     animation: none;
     stroke-dasharray: none;
+  }
+  .infinity-glitch {
+    display: none;
   }
 }
