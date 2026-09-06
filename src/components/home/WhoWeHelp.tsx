@@ -33,16 +33,16 @@ const audiences = [
 
 export function WhoWeHelp() {
   return (
-    <section id="clients" className="scroll-mt-24 bg-white py-20 lg:py-28">
+    <section id="clients" className="scroll-mt-24 bg-[#f5f4ef] py-20 lg:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold tracking-[0.28em] text-teal-700 uppercase">
+          <p className="text-xs font-semibold tracking-[0.28em] text-[#2d6a4f] uppercase">
             Who we help
           </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#0b1220] sm:text-4xl">
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#1f4037] sm:text-4xl">
             Built for the institutions that run clearing
           </h2>
-          <p className="mt-4 text-lg text-slate-600">
+          <p className="mt-4 text-lg text-stone-600">
             From incumbents to new entrants, we advise organisations that need
             specialist judgement — not generic frameworks.
           </p>
@@ -52,12 +52,12 @@ export function WhoWeHelp() {
           {audiences.map((audience) => (
             <article
               key={audience.title}
-              className="rounded-2xl border border-slate-200 bg-[#f7f8fa] p-6"
+              className="rounded-2xl border border-[#e7e5df] bg-white/70 p-6"
             >
-              <h3 className="text-lg font-semibold text-[#0b1220]">
+              <h3 className="text-lg font-semibold text-[#1f4037]">
                 {audience.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              <p className="mt-2 text-sm leading-relaxed text-stone-600">
                 {audience.description}
               </p>
             </article>

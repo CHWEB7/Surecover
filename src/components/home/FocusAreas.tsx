@@ -23,16 +23,16 @@ const areas = [
 
 export function FocusAreas() {
   return (
-    <section id="focus" className="scroll-mt-24 bg-[#f7f8fa] py-20 lg:py-28">
+    <section id="focus" className="scroll-mt-24 bg-[#f5f4ef] py-20 lg:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold tracking-[0.28em] text-teal-700 uppercase">
+          <p className="text-xs font-semibold tracking-[0.28em] text-[#2d6a4f] uppercase">
             Where we focus
           </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#0b1220] sm:text-4xl">
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#1f4037] sm:text-4xl">
             Better decisions across the clearing lifecycle
           </h2>
-          <p className="mt-4 text-lg text-slate-600">
+          <p className="mt-4 text-lg text-stone-600">
             We work where clearing strategy, change and operations meet —
             helping clients move with clarity in a complex market.
           </p>
@@ -42,12 +42,12 @@ export function FocusAreas() {
           {areas.map((area) => (
             <article
               key={area.title}
-              className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition hover:border-teal-200 hover:shadow-md"
+              className="rounded-2xl border border-[#e7e5df] bg-white/70 p-8 shadow-sm transition hover:border-[#99f2c8] hover:shadow-md"
             >
-              <h3 className="text-xl font-semibold text-[#0b1220]">
+              <h3 className="text-xl font-semibold text-[#1f4037]">
                 {area.title}
               </h3>
-              <p className="mt-3 leading-relaxed text-slate-600">
+              <p className="mt-3 leading-relaxed text-stone-600">
                 {area.description}
               </p>
             </article>
