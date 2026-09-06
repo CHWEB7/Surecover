@@ -123,7 +123,14 @@ const ChipIcon = (
 
 const DatabaseIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <ellipse cx="12" cy="6" rx="7" ry="3" stroke="currentColor" strokeWidth="1.75" />
+    <ellipse
+      cx="12"
+      cy="6"
+      rx="7"
+      ry="3"
+      stroke="currentColor"
+      strokeWidth="1.75"
+    />
     <path
       d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"
       stroke="currentColor"
@@ -181,9 +188,13 @@ const cards = [
   },
 ];
 
+function clamp(value: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, value));
+}
+
 export function FocusAreas() {
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const [progress, setProgress] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
@@ -195,38 +206,42 @@ export function FocusAreas() {
   }, []);
 
   useEffect(() => {
-    const nodes = cardRefs.current.filter(Boolean) as HTMLDivElement[];
-    if (!nodes.length) return;
+    const track = trackRef.current;
+    if (!track || reduceMotion) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              Math.abs(0.35 - a.intersectionRatio) -
-              Math.abs(0.35 - b.intersectionRatio),
-          );
-        if (!visible.length) return;
-        const index = Number(
-          (visible[0].target as HTMLElement).dataset.index ?? 0,
-        );
-        setActiveIndex(index);
-      },
-      {
-        root: null,
-        threshold: [0.25, 0.4, 0.55, 0.7],
-        rootMargin: "-20% 0px -35% 0px",
-      },
-    );
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const rect = track.getBoundingClientRect();
+      const scrollable = track.offsetHeight - window.innerHeight;
+      if (scrollable <= 0) {
+        setProgress(0);
+        return;
+      }
+      setProgress(clamp(-rect.top / scrollable, 0, 1));
+    };
 
-    nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
-  }, []);
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [reduceMotion]);
+
+  // 0 = first card pinned; 1 = fourth card fully stacked on top
+  const stackIndex = progress * Math.max(cards.length - 1, 1);
 
   return (
-    <section id="focus" className="scroll-mt-24 bg-[#f5f4ef] pt-16 pb-8 lg:pt-24">
-      <div className="mx-auto max-w-6xl px-6">
+    <section id="focus" className="scroll-mt-24 bg-[#f5f4ef]">
+      <div className="mx-auto max-w-6xl px-6 pt-16 lg:pt-24">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold tracking-[0.28em] text-[#2d6a4f] uppercase">
             Where we focus
@@ -235,59 +250,100 @@ export function FocusAreas() {
             Better decisions across the clearing lifecycle
           </h2>
           <p className="mt-4 text-lg text-stone-600">
-            Scroll through how we help — each area builds on the last as
-            strategy, change, regulation and operations come together.
+            Keep scrolling — the next card stacks over the current one until all
+            four are complete, then the page continues.
           </p>
         </div>
-
-        {/* Mobile: normal vertical list */}
-        <div className="mt-12 space-y-6 md:hidden">
-          {cards.map((card) => (
-            <FocusStackCard
-              key={card.title}
-              icon={card.icon}
-              title={card.title}
-              description={card.description}
-              ctaLabel={card.ctaLabel}
-              visualIcons={card.visualIcons}
-            />
-          ))}
-        </div>
-
-        {/* Desktop/tablet: sticky stacking cards */}
-        <div className="mt-14 hidden md:block">
-          {cards.map((card, index) => {
-            const isBuried = index < activeIndex && !reduceMotion;
-            return (
-              <div
-                key={card.title}
-                data-index={index}
-                ref={(el) => {
-                  cardRefs.current[index] = el;
-                }}
-                className="relative h-[100vh]"
-                style={{ zIndex: index + 1 }}
-              >
-                <div className="sticky top-24 pt-2">
-                  <FocusStackCard
-                    icon={card.icon}
-                    title={card.title}
-                    description={card.description}
-                    ctaLabel={card.ctaLabel}
-                    visualIcons={card.visualIcons}
-                    className="w-full transition-[transform,opacity,filter] duration-300 ease-out will-change-transform"
-                    style={{
-                      transform: isBuried ? "scale(0.94)" : "scale(1)",
-                      opacity: isBuried ? 0.72 : 1,
-                      filter: isBuried ? "brightness(0.92)" : "none",
-                    }}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
       </div>
+
+      {/* Mobile / reduced motion: static vertical list */}
+      <div
+        className={`mx-auto max-w-6xl space-y-6 px-6 pt-12 pb-16 ${
+          reduceMotion ? "block" : "md:hidden"
+        }`}
+      >
+        {cards.map((card) => (
+          <FocusStackCard
+            key={card.title}
+            icon={card.icon}
+            title={card.title}
+            description={card.description}
+            ctaLabel={card.ctaLabel}
+            visualIcons={card.visualIcons}
+          />
+        ))}
+      </div>
+
+      {/* Desktop: scroll is “spent” inside a tall track while a sticky
+          viewport stays fixed and cards stack over the first one. */}
+      {!reduceMotion && (
+        <div
+          ref={trackRef}
+          className="relative mt-10 hidden md:block"
+          style={{ height: `${cards.length * 100}vh` }}
+        >
+          <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+            <div className="relative mx-auto w-full max-w-6xl px-6">
+              <div className="relative h-[min(34rem,70vh)] overflow-hidden lg:h-[min(36rem,72vh)]">
+                {cards.map((card, index) => {
+                  const delta = stackIndex - index;
+                  const translateY =
+                    delta < 0 ? Math.min(120, -delta * 120) : 0;
+                  const buried = clamp(delta, 0, 1);
+                  const scale = 1 - buried * 0.05;
+                  const opacity = delta < -0.98 ? 0 : 1 - buried * 0.18;
+                  const brightness = 1 - buried * 0.08;
+
+                  return (
+                    <div
+                      key={card.title}
+                      className="absolute inset-x-0 top-0 will-change-transform"
+                      style={{
+                        zIndex: index + 1,
+                        transform: `translateY(${translateY}%) scale(${scale})`,
+                        opacity,
+                        filter: `brightness(${brightness})`,
+                        pointerEvents:
+                          delta < -0.05 || delta > 1.05 ? "none" : "auto",
+                      }}
+                    >
+                      <FocusStackCard
+                        icon={card.icon}
+                        title={card.title}
+                        description={card.description}
+                        ctaLabel={card.ctaLabel}
+                        visualIcons={card.visualIcons}
+                        className="w-full"
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div
+                className="mt-8 flex items-center justify-center gap-2"
+                aria-hidden="true"
+              >
+                {cards.map((card, index) => {
+                  const active =
+                    Math.round(stackIndex) === index ||
+                    (index === cards.length - 1 && progress >= 0.99);
+                  return (
+                    <span
+                      key={card.title}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        active
+                          ? "w-6 bg-[#1f4037]"
+                          : "w-1.5 bg-[#1f4037]/25"
+                      }`}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
