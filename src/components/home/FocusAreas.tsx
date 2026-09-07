@@ -236,25 +236,16 @@ export function FocusAreas() {
     };
   }, [reduceMotion]);
 
-  // One sticky step per card interval, then a tiny buffer after the last
-  // card lands. Peeks collapse with a short CSS transition so the page
-  // can keep scrolling immediately — no long scroll-driven settle.
+  // Same pacing for every card, including the last: one sticky step per
+  // interval. The track ends when the final card lands, so the page
+  // continues immediately — no settle / collapse phase.
   const lastIndex = Math.max(cards.length - 1, 1);
-  const stackVh = lastIndex * 100;
-  const releaseBufferVh = 8;
-  const trackVh = stackVh + releaseBufferVh;
-  const stackCompleteAt = stackVh / trackVh;
-  const stackProgress = clamp(progress / stackCompleteAt, 0, 1);
-  const stackIndex = stackProgress * lastIndex;
-  // Collapse as soon as the final card is effectively stacked; the short
-  // track buffer then lets the page release without a settle scroll.
-  const isComplete = stackProgress >= 0.985;
-  const collapseProgress = isComplete ? 1 : 0;
-  const peekRoom = 40 * (1 - collapseProgress);
+  const stackIndex = progress * lastIndex;
+  const peekRoom = 48;
 
   return (
     <section id="focus" className="scroll-mt-24 bg-[#f5f4ef]">
-      <div className="mx-auto max-w-6xl px-6 pt-16 lg:pt-24">
+      <div className="mx-auto max-w-7xl px-6 pt-16 lg:px-10 lg:pt-24">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold tracking-[0.28em] text-[#2d6a4f] uppercase">
             Where we focus
@@ -264,15 +255,14 @@ export function FocusAreas() {
           </h2>
           <p className="mt-4 text-lg text-stone-600">
             Keep scrolling — each card grows into place and stacks under the
-            last. When the final card lands, the stack settles into one card and
-            the page continues.
+            last. When the final card lands, the page continues.
           </p>
         </div>
       </div>
 
       {/* Mobile / reduced motion: static vertical list */}
       <div
-        className={`mx-auto max-w-6xl space-y-6 px-6 pt-12 pb-16 ${
+        className={`mx-auto max-w-7xl space-y-6 px-6 pt-12 pb-16 lg:px-10 ${
           reduceMotion ? "block" : "md:hidden"
         }`}
       >
@@ -292,34 +282,23 @@ export function FocusAreas() {
       {!reduceMotion && (
         <div
           ref={trackRef}
-          className="relative mt-10 hidden md:block"
-          style={{ height: `${trackVh}vh` }}
+          className="relative mt-8 hidden md:block"
+          style={{ height: `${lastIndex * 100}vh` }}
         >
           <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-            <div className="relative mx-auto w-full max-w-6xl px-6">
-              <div className="relative h-[min(38rem,74vh)] overflow-hidden lg:h-[min(40rem,76vh)]">
+            <div className="relative mx-auto w-[min(86vw,88rem)]">
+              <div className="relative h-[min(46rem,80vh)] overflow-hidden xl:h-[min(50rem,82vh)]">
                 {cards.map((card, index) => {
                   const delta = stackIndex - index;
                   // Incoming: start narrower than the original card, grow to
                   // full width as it arrives. Buried cards peek ABOVE the
-                  // front card (tops visible). On completion, peeks snap
-                  // flush with a short CSS transition.
+                  // front card (tops visible), including after the last card.
                   const approach = clamp(1 + delta, 0, 1);
                   const translateYPercent =
-                    delta < 0
-                      ? Math.min(110, -delta * 110) * (1 - collapseProgress)
-                      : 0;
-                  const peekUpPx =
-                    delta >= 0
-                      ? -delta * 14 * (1 - collapseProgress)
-                      : 0;
-                  const scaleX =
-                    delta < 0
-                      ? 0.88 + 0.12 * approach
-                      : 1;
-                  const visible = isComplete
-                    ? index === cards.length - 1
-                    : delta >= -0.98;
+                    delta < 0 ? Math.min(110, -delta * 110) : 0;
+                  const peekUpPx = delta >= 0 ? -delta * 16 : 0;
+                  const scaleX = delta < 0 ? 0.88 + 0.12 * approach : 1;
+                  const visible = delta >= -0.98;
 
                   return (
                     <div
@@ -327,17 +306,13 @@ export function FocusAreas() {
                       className="absolute inset-x-0 will-change-transform"
                       style={{
                         top: peekRoom,
+                        bottom: 0,
                         zIndex: index + 1,
                         transformOrigin: "center top",
                         transform: `translate3d(0, calc(${translateYPercent}% + ${peekUpPx}px), 0) scaleX(${scaleX})`,
-                        transition: isComplete
-                          ? "transform 200ms cubic-bezier(0.22, 1, 0.36, 1), top 200ms cubic-bezier(0.22, 1, 0.36, 1)"
-                          : "none",
                         visibility: visible ? "visible" : "hidden",
                         pointerEvents:
-                          isComplete || delta < -0.05 || delta > 1.05
-                            ? "none"
-                            : "auto",
+                          delta < -0.05 || delta > 1.05 ? "none" : "auto",
                       }}
                     >
                       <FocusStackCard
@@ -346,7 +321,7 @@ export function FocusAreas() {
                         description={card.description}
                         ctaLabel={card.ctaLabel}
                         visualIcons={card.visualIcons}
-                        className="w-full"
+                        className="h-full w-full"
                       />
                     </div>
                   );
@@ -354,13 +329,11 @@ export function FocusAreas() {
               </div>
 
               <div
-                className="mt-8 flex items-center justify-center gap-2"
+                className="mt-5 flex items-center justify-center gap-2"
                 aria-hidden="true"
               >
                 {cards.map((card, index) => {
-                  const active = isComplete
-                    ? index === cards.length - 1
-                    : Math.round(stackIndex) === index;
+                  const active = Math.round(stackIndex) === index;
                   return (
                     <span
                       key={card.title}

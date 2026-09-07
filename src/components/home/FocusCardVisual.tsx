@@ -7,7 +7,7 @@ export function FocusCardVisual({ icons }: FocusCardVisualProps) {
 
   return (
     <div
-      className="relative flex h-full min-h-[280px] items-center justify-center overflow-hidden lg:min-h-full"
+      className="relative flex h-full min-h-[320px] items-center justify-center overflow-hidden lg:min-h-full"
       style={{
         backgroundImage:
           "radial-gradient(ellipse at 30% 20%, rgba(153,242,200,0.22), transparent 55%), linear-gradient(145deg, #0f1f1a 0%, #1f4037 45%, #14261f 100%)",
