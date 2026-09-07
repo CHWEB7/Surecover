@@ -88,10 +88,16 @@ export function Hero() {
     <section className="bg-[#f5f4ef] px-3 pt-3 pb-24 sm:px-4 sm:pt-4 sm:pb-28 lg:px-5 lg:pt-5 lg:pb-32">
       <div className="relative mx-auto max-w-[92rem]">
         {/* Large gradient panel — nearly full bleed, thin off-white edge */}
-        <div className="hero-gradient-panel relative min-h-[70vh] overflow-hidden rounded-[1.75rem] px-6 pt-20 pb-36 text-white sm:rounded-[2rem] sm:px-10 sm:pt-24 sm:pb-40 lg:min-h-[75vh] lg:rounded-[2.5rem] lg:px-16 lg:pt-28 lg:pb-44">
+        <div
+          className="relative min-h-[70vh] overflow-hidden rounded-[1.75rem] px-6 pt-20 pb-36 text-white sm:rounded-[2rem] sm:px-10 sm:pt-24 sm:pb-40 lg:min-h-[75vh] lg:rounded-[2.5rem] lg:px-16 lg:pt-28 lg:pb-44"
+          style={{
+            backgroundImage:
+              "linear-gradient(145deg, #1f4037 0%, #2d6a4f 42%, #99f2c8 100%)",
+          }}
+        >
           <div
             aria-hidden
-            className="hero-gradient-glow pointer-events-none absolute inset-0"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,255,255,0.12),_transparent_50%)]"
           />
 
           <div className="relative mx-auto max-w-3xl text-center">

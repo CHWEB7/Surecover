@@ -3,19 +3,20 @@
 import { useEffect, useRef, useState } from "react";
 import { FocusStackCard } from "@/components/home/FocusStackCard";
 
-const iconClass = "h-6 w-6";
+const iconClass = "h-8 w-8";
+const iconStroke = "url(#sureclear-icon-gradient)";
 
 const CubeIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
     <path
       d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinejoin="round"
     />
     <path
       d="M12 12l8-4.5M12 12v9M12 12L4 7.5"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -27,14 +28,14 @@ const RefreshIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
     <path
       d="M4 12a8 8 0 0 1 13.66-5.66M20 4v4h-4"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
       d="M20 12a8 8 0 0 1-13.66 5.66M4 20v-4h4"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -46,13 +47,13 @@ const ShieldIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
     <path
       d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3z"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinejoin="round"
     />
     <path
       d="M9 12l2 2 4-4"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -62,10 +63,10 @@ const ShieldIcon = (
 
 const GearIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.75" />
+    <circle cx="12" cy="12" r="3" stroke={iconStroke} strokeWidth="1.75" />
     <path
       d="M12 3v2.5M12 18.5V21M4.9 6.5l1.8 1.8M17.3 15.7l1.8 1.8M3 12h2.5M18.5 12H21M4.9 17.5l1.8-1.8M17.3 8.3l1.8-1.8"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinecap="round"
     />
@@ -76,13 +77,13 @@ const LayersIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
     <path
       d="M12 3l9 5-9 5-9-5 9-5z"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinejoin="round"
     />
     <path
       d="M3 12l9 5 9-5M3 16l9 5 9-5"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -94,7 +95,7 @@ const SparkIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
     <path
       d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinejoin="round"
     />
@@ -109,12 +110,12 @@ const ChipIcon = (
       width="10"
       height="10"
       rx="1.5"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
     />
     <path
       d="M9 3v4M12 3v4M15 3v4M9 17v4M12 17v4M15 17v4M3 9h4M3 12h4M3 15h4M17 9h4M17 12h4M17 15h4"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinecap="round"
     />
@@ -128,12 +129,12 @@ const DatabaseIcon = (
       cy="6"
       rx="7"
       ry="3"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
     />
     <path
       d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
     />
   </svg>
@@ -141,12 +142,12 @@ const DatabaseIcon = (
 
 const NetworkIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <circle cx="6" cy="7" r="2.25" stroke="currentColor" strokeWidth="1.75" />
-    <circle cx="18" cy="7" r="2.25" stroke="currentColor" strokeWidth="1.75" />
-    <circle cx="12" cy="17" r="2.25" stroke="currentColor" strokeWidth="1.75" />
+    <circle cx="6" cy="7" r="2.25" stroke={iconStroke} strokeWidth="1.75" />
+    <circle cx="18" cy="7" r="2.25" stroke={iconStroke} strokeWidth="1.75" />
+    <circle cx="12" cy="17" r="2.25" stroke={iconStroke} strokeWidth="1.75" />
     <path
       d="M8 8.5l3 6.5M16 8.5l-3 6.5M8.2 7h7.6"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinecap="round"
     />
@@ -245,6 +246,22 @@ export function FocusAreas() {
 
   return (
     <section id="focus" className="scroll-mt-24 bg-[#f5f4ef]">
+      <svg width="0" height="0" className="absolute" aria-hidden="true">
+        <defs>
+          <linearGradient
+            id="sureclear-icon-gradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
+            <stop offset="0%" stopColor="#1f4037" />
+            <stop offset="45%" stopColor="#2d6a4f" />
+            <stop offset="100%" stopColor="#99f2c8" />
+          </linearGradient>
+        </defs>
+      </svg>
+
       <div className="mx-auto max-w-7xl px-6 pt-16 lg:px-10 lg:pt-24">
         <div className="max-w-3xl">
           <h2 className="text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">

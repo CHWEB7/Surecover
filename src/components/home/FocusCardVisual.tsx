@@ -39,11 +39,11 @@ export function FocusCardVisual({ icons }: FocusCardVisualProps) {
           </span>
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3.5">
           {icons.slice(0, 5).map((icon, index) => (
             <div
               key={index}
-              className="flex h-11 w-11 items-center justify-center rounded-xl border border-[#99f2c8]/35 bg-[#0b1220]/55 text-[#99f2c8] shadow-md shadow-black/20 backdrop-blur-sm"
+              className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#99f2c8]/35 bg-[#0b1220]/45 shadow-md shadow-black/20 backdrop-blur-sm sm:h-14 sm:w-14"
             >
               {icon}
             </div>
