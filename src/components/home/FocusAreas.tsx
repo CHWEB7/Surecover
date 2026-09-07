@@ -236,16 +236,20 @@ export function FocusAreas() {
     };
   }, [reduceMotion]);
 
-  // Stacking uses most of the track; the final stretch collapses the
-  // peek offsets so the deck becomes a single flush card before exit.
-  const STACK_PORTION = 0.78;
-  const stackProgress = clamp(progress / STACK_PORTION, 0, 1);
-  const collapseProgress = clamp(
-    (progress - STACK_PORTION) / (1 - STACK_PORTION),
-    0,
-    1,
-  );
-  const stackIndex = stackProgress * Math.max(cards.length - 1, 1);
+  // One sticky step per card interval, then a tiny buffer after the last
+  // card lands. Peeks collapse with a short CSS transition so the page
+  // can keep scrolling immediately — no long scroll-driven settle.
+  const lastIndex = Math.max(cards.length - 1, 1);
+  const stackVh = lastIndex * 100;
+  const releaseBufferVh = 8;
+  const trackVh = stackVh + releaseBufferVh;
+  const stackCompleteAt = stackVh / trackVh;
+  const stackProgress = clamp(progress / stackCompleteAt, 0, 1);
+  const stackIndex = stackProgress * lastIndex;
+  // Collapse as soon as the final card is effectively stacked; the short
+  // track buffer then lets the page release without a settle scroll.
+  const isComplete = stackProgress >= 0.985;
+  const collapseProgress = isComplete ? 1 : 0;
   const peekRoom = 40 * (1 - collapseProgress);
 
   return (
@@ -289,7 +293,7 @@ export function FocusAreas() {
         <div
           ref={trackRef}
           className="relative mt-10 hidden md:block"
-          style={{ height: `${(cards.length + 0.45) * 100}vh` }}
+          style={{ height: `${trackVh}vh` }}
         >
           <div className="sticky top-0 flex h-screen items-center overflow-hidden">
             <div className="relative mx-auto w-full max-w-6xl px-6">
@@ -298,14 +302,13 @@ export function FocusAreas() {
                   const delta = stackIndex - index;
                   // Incoming: start narrower than the original card, grow to
                   // full width as it arrives. Buried cards peek ABOVE the
-                  // front card (tops visible). Collapse flushes everything
-                  // into one card at the end.
+                  // front card (tops visible). On completion, peeks snap
+                  // flush with a short CSS transition.
                   const approach = clamp(1 + delta, 0, 1);
                   const translateYPercent =
                     delta < 0
                       ? Math.min(110, -delta * 110) * (1 - collapseProgress)
                       : 0;
-                  // Negative = higher: previous cards show above the front one
                   const peekUpPx =
                     delta >= 0
                       ? -delta * 14 * (1 - collapseProgress)
@@ -314,7 +317,9 @@ export function FocusAreas() {
                     delta < 0
                       ? 0.88 + 0.12 * approach
                       : 1;
-                  const visible = delta >= -0.98 || collapseProgress > 0;
+                  const visible = isComplete
+                    ? index === cards.length - 1
+                    : delta >= -0.98;
 
                   return (
                     <div
@@ -325,11 +330,12 @@ export function FocusAreas() {
                         zIndex: index + 1,
                         transformOrigin: "center top",
                         transform: `translate3d(0, calc(${translateYPercent}% + ${peekUpPx}px), 0) scaleX(${scaleX})`,
+                        transition: isComplete
+                          ? "transform 200ms cubic-bezier(0.22, 1, 0.36, 1), top 200ms cubic-bezier(0.22, 1, 0.36, 1)"
+                          : "none",
                         visibility: visible ? "visible" : "hidden",
                         pointerEvents:
-                          collapseProgress > 0.2 ||
-                          delta < -0.05 ||
-                          delta > 1.05
+                          isComplete || delta < -0.05 || delta > 1.05
                             ? "none"
                             : "auto",
                       }}
@@ -352,10 +358,9 @@ export function FocusAreas() {
                 aria-hidden="true"
               >
                 {cards.map((card, index) => {
-                  const active =
-                    collapseProgress > 0.5
-                      ? index === cards.length - 1
-                      : Math.round(stackIndex) === index;
+                  const active = isComplete
+                    ? index === cards.length - 1
+                    : Math.round(stackIndex) === index;
                   return (
                     <span
                       key={card.title}
