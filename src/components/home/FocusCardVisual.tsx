@@ -29,10 +29,7 @@ function StrategyGraphic() {
 
   return (
     <div className="relative z-10 flex h-full w-full flex-col justify-between p-8 sm:p-10">
-      <p className="text-xs font-semibold tracking-[0.22em] text-white/70 uppercase">
-        Market structure
-      </p>
-      <div className="relative mx-auto aspect-square w-full max-w-[17rem]">
+      <div className="relative mx-auto aspect-square w-full max-w-[17rem] flex-1">
         <svg
           viewBox="0 0 200 200"
           className="h-full w-full"
@@ -167,10 +164,7 @@ function TransformationGraphic() {
 
   return (
     <div className="relative z-10 flex h-full w-full flex-col justify-between p-8 sm:p-10">
-      <p className="text-xs font-semibold tracking-[0.22em] text-[#99f2c8]/80 uppercase">
-        Delivery path
-      </p>
-      <div className="space-y-4">
+      <div className="space-y-4 pt-2">
         {stages.map((stage, index) => (
           <div key={stage.label} className="flex items-stretch gap-3">
             <div className="flex w-10 flex-col items-center">
@@ -198,10 +192,7 @@ function TransformationGraphic() {
 function RegulationGraphic() {
   return (
     <div className="relative z-10 flex h-full w-full flex-col justify-between p-8 sm:p-10">
-      <p className="text-xs font-semibold tracking-[0.22em] text-white/75 uppercase">
-        Regulatory programmes
-      </p>
-      <div className="relative mx-auto flex aspect-square w-full max-w-[16rem] items-center justify-center">
+      <div className="relative mx-auto flex aspect-square w-full max-w-[16rem] flex-1 items-center justify-center">
         <svg
           viewBox="0 0 200 200"
           className="absolute inset-0 h-full w-full"
@@ -281,10 +272,7 @@ function OperationsGraphic() {
 
   return (
     <div className="relative z-10 flex h-full w-full flex-col justify-between p-8 sm:p-10">
-      <p className="text-xs font-semibold tracking-[0.22em] text-white/70 uppercase">
-        Operating balance
-      </p>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-3 gap-3 pt-2">
         {pillars.map((pillar) => (
           <div
             key={pillar.label}

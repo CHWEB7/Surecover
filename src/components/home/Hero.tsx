@@ -7,7 +7,7 @@ const services = [
       <svg
         viewBox="0 0 24 24"
         fill="none"
-        className="h-6 w-6"
+        className="h-10 w-10"
         aria-hidden="true"
       >
         <path
@@ -34,7 +34,7 @@ const services = [
       <svg
         viewBox="0 0 24 24"
         fill="none"
-        className="h-6 w-6"
+        className="h-10 w-10"
         aria-hidden="true"
       >
         <path
@@ -62,7 +62,7 @@ const services = [
       <svg
         viewBox="0 0 24 24"
         fill="none"
-        className="h-6 w-6"
+        className="h-10 w-10"
         aria-hidden="true"
       >
         <path
@@ -138,9 +138,7 @@ export function Hero() {
               key={service.title}
               className="rounded-2xl border border-white/10 bg-[#0b1220] p-6 text-left shadow-2xl shadow-[#1f4037]/25 transition hover:-translate-y-0.5 hover:shadow-[#1f4037]/35"
             >
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-[#99f2c8]">
-                {service.icon}
-              </div>
+              <div className="mb-5 text-[#99f2c8]">{service.icon}</div>
               <h2 className="text-lg font-semibold text-white">
                 {service.title}
               </h2>
