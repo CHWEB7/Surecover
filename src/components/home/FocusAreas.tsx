@@ -287,12 +287,11 @@ export function FocusAreas() {
               <div className="relative h-[min(34rem,70vh)] overflow-hidden lg:h-[min(36rem,72vh)]">
                 {cards.map((card, index) => {
                   const delta = stackIndex - index;
+                  // Motion only: slide up into place. No opacity/brightness
+                  // fades — those made overlapping shadows look translucent.
                   const translateY =
-                    delta < 0 ? Math.min(120, -delta * 120) : 0;
-                  const buried = clamp(delta, 0, 1);
-                  const scale = 1 - buried * 0.05;
-                  const opacity = delta < -0.98 ? 0 : 1 - buried * 0.18;
-                  const brightness = 1 - buried * 0.08;
+                    delta < 0 ? Math.min(110, -delta * 110) : 0;
+                  const visible = delta >= -0.98;
 
                   return (
                     <div
@@ -300,9 +299,8 @@ export function FocusAreas() {
                       className="absolute inset-x-0 top-0 will-change-transform"
                       style={{
                         zIndex: index + 1,
-                        transform: `translateY(${translateY}%) scale(${scale})`,
-                        opacity,
-                        filter: `brightness(${brightness})`,
+                        transform: `translate3d(0, ${translateY}%, 0)`,
+                        visibility: visible ? "visible" : "hidden",
                         pointerEvents:
                           delta < -0.05 || delta > 1.05 ? "none" : "auto",
                       }}

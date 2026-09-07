@@ -17,7 +17,7 @@ export function SiteHeader() {
             SC
           </span>
           <span className="text-sm font-semibold tracking-[0.18em] text-[#1f4037] uppercase">
-            Sure Clear
+            Sureclear
           </span>
         </a>
 

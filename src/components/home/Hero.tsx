@@ -108,7 +108,7 @@ export function Hero() {
               Clarity for decisions that shape clearing.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/85 text-pretty">
-              Sure Clear is an independent specialist advisory firm focused
+              Sureclear is an independent specialist advisory firm focused
               exclusively on the cleared derivatives industry. We help banks,
               brokers, exchanges, CCPs, fintechs and new market participants
               make better decisions across clearing strategy, transformation,

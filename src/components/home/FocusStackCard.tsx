@@ -22,7 +22,7 @@ export function FocusStackCard({
   return (
     <article
       style={style}
-      className={`overflow-hidden rounded-[1.5rem] border border-[#e7e5df] bg-white shadow-[0_20px_50px_rgba(31,64,55,0.12)] ${className}`}
+      className={`overflow-hidden rounded-[1.5rem] border border-[#e7e5df] bg-white shadow-[0_12px_28px_rgba(15,31,26,0.10)] ${className}`}
     >
       <div className="grid lg:grid-cols-2">
         <div className="flex flex-col justify-between p-8 sm:p-10 lg:p-12">

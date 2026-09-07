@@ -8,16 +8,16 @@ import { SiteHeader } from "@/components/home/SiteHeader";
 import { WhoWeHelp } from "@/components/home/WhoWeHelp";
 
 export const metadata: Metadata = {
-  title: "Sure Clear — Cleared Derivatives Advisory",
+  title: "Sureclear — Cleared Derivatives Advisory",
   description:
-    "Sure Clear is an independent specialist advisory firm focused exclusively on the cleared derivatives industry.",
+    "Sureclear is an independent specialist advisory firm focused exclusively on the cleared derivatives industry.",
   robots: {
     index: false,
     follow: false,
   },
 };
 
-export default function SureClearHomePage() {
+export default function SureclearHomePage() {
   return (
     <div className="flex min-h-dvh flex-col bg-[#f5f4ef] text-[#0b1220]">
       <SiteHeader />
