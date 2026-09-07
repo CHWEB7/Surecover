@@ -153,7 +153,7 @@ export function WhoWeHelp() {
           </p>
           <a
             href="/home/services"
-            className="mt-8 inline-flex rounded-full border border-[#0b1220] px-6 py-3 text-sm font-semibold text-[#0b1220] transition hover:bg-[#0b1220] hover:text-white"
+            className="services-cta-pulse mt-8 inline-flex rounded-full border border-[#0b1220]/55 px-6 py-3 text-sm font-semibold text-[#0b1220] transition hover:border-[#0b1220] hover:bg-[#0b1220]/10"
           >
             View our services
           </a>

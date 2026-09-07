@@ -85,7 +85,8 @@ html {
   .strategy-node-dot,
   .strategy-hub,
   .strategy-label,
-  .hero-focus-pulse {
+  .hero-focus-pulse,
+  .services-cta-pulse {
     animation: none !important;
   }
 
@@ -93,7 +94,8 @@ html {
     opacity: 0;
   }
 
-  .hero-focus-pulse {
+  .hero-focus-pulse,
+  .services-cta-pulse {
     box-shadow: none;
   }
 }
@@ -257,5 +259,32 @@ html {
     border-color: rgba(255, 255, 255, 0.95);
     box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
     background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Who we help — same pulse rhythm on View our services (dark on cream) */
+.services-cta-pulse {
+  position: relative;
+  animation: services-cta-pulse 2.4s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(11, 18, 32, 0.18);
+}
+
+.services-cta-pulse:hover {
+  animation-play-state: paused;
+}
+
+@keyframes services-cta-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    border-color: rgba(11, 18, 32, 0.55);
+    box-shadow: 0 0 0 0 rgba(11, 18, 32, 0.22);
+    background-color: rgba(11, 18, 32, 0);
+  }
+  50% {
+    transform: scale(1.035);
+    border-color: rgba(11, 18, 32, 1);
+    box-shadow: 0 0 0 10px rgba(11, 18, 32, 0);
+    background-color: rgba(11, 18, 32, 0.06);
   }
 }
