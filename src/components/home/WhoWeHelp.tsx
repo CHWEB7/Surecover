@@ -2,12 +2,17 @@ import type { ReactNode } from "react";
 
 type Audience = {
   title: string;
+  description: string;
+  href: string;
   mark: (gradientId: string) => ReactNode;
 };
 
 const audiences: Audience[] = [
   {
     title: "Banks",
+    description:
+      "Navigate clearing membership, capital, client clearing propositions and operating model choices.",
+    href: "#contact",
     mark: (g) => (
       <path
         d="M4 18V8.5L12 4l8 4.5V18M4 18h16M7 18v-5h3v5M14 18v-5h3v5M9.5 9.5h5"
@@ -21,6 +26,9 @@ const audiences: Audience[] = [
   },
   {
     title: "Brokers",
+    description:
+      "Shape clearing access, margin efficiency and service models that win and retain sophisticated clients.",
+    href: "#contact",
     mark: (g) => (
       <path
         d="M5 16.5 9.5 8l3 5.5L16 7.5 19 16.5M4 19h16"
@@ -34,6 +42,9 @@ const audiences: Audience[] = [
   },
   {
     title: "Exchanges",
+    description:
+      "Align clearing arrangements, product launches and market structure with commercial goals.",
+    href: "#contact",
     mark: (g) => (
       <>
         <path
@@ -55,6 +66,9 @@ const audiences: Audience[] = [
   },
   {
     title: "CCPs",
+    description:
+      "Support risk, membership, operations and change agendas that keep markets resilient and competitive.",
+    href: "#contact",
     mark: (g) => (
       <>
         <circle
@@ -71,6 +85,9 @@ const audiences: Audience[] = [
   },
   {
     title: "Fintechs",
+    description:
+      "Bridge product ambition with clearing realities — connectivity, risk, regulation and go-to-market.",
+    href: "#contact",
     mark: (g) => (
       <>
         <rect
@@ -96,6 +113,9 @@ const audiences: Audience[] = [
   },
   {
     title: "New market participants",
+    description:
+      "Enter cleared markets with a clear path through onboarding, membership and operating readiness.",
+    href: "#contact",
     mark: (g) => (
       <>
         <circle
@@ -117,7 +137,7 @@ const audiences: Audience[] = [
   },
 ];
 
-function IndustryLogoGradient({
+function IndustryIconGradient({
   id,
   delay,
 }: {
@@ -135,11 +155,11 @@ function IndustryLogoGradient({
       y2="12"
       style={{ animationDelay: delay }}
     >
-      <stop offset="0%" stopColor="#1f4037" stopOpacity="0.22" />
-      <stop offset="42%" stopColor="#2d6a4f" stopOpacity="0.7" />
+      <stop offset="0%" stopColor="#1f4037" stopOpacity="0.28" />
+      <stop offset="42%" stopColor="#2d6a4f" stopOpacity="0.75" />
       <stop offset="50%" stopColor="#99f2c8" stopOpacity="1" />
-      <stop offset="58%" stopColor="#2d6a4f" stopOpacity="0.7" />
-      <stop offset="100%" stopColor="#1f4037" stopOpacity="0.22" />
+      <stop offset="58%" stopColor="#2d6a4f" stopOpacity="0.75" />
+      <stop offset="100%" stopColor="#1f4037" stopOpacity="0.28" />
     </linearGradient>
   );
 }
@@ -154,31 +174,39 @@ export function WhoWeHelp() {
           </h2>
         </div>
 
-        <ul className="mt-14 grid list-none grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:mt-16 lg:grid-cols-6 lg:gap-x-5">
+        <ul className="mt-14 grid list-none gap-x-10 gap-y-14 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-x-16 lg:gap-y-16">
           {audiences.map((audience, index) => {
-            const gradientId = `industry-logo-gradient-${index}`;
+            const gradientId = `industry-icon-gradient-${index}`;
             const delay = `${index * 0.35}s`;
             return (
-              <li
-                key={audience.title}
-                className="flex flex-col items-center text-center"
-              >
+              <li key={audience.title} className="max-w-sm">
                 <svg
                   viewBox="0 0 24 24"
-                  className="h-12 w-12 sm:h-14 sm:w-14"
+                  className="h-9 w-9"
                   aria-hidden="true"
                 >
                   <defs>
-                    <IndustryLogoGradient id={gradientId} delay={delay} />
+                    <IndustryIconGradient id={gradientId} delay={delay} />
                   </defs>
                   {audience.mark(gradientId)}
                 </svg>
-                <span
-                  className="industry-logo-label mt-4 max-w-[10rem] text-sm font-semibold tracking-[0.08em] uppercase sm:text-[0.95rem]"
-                  style={{ animationDelay: delay }}
+
+                <a
+                  href={audience.href}
+                  className="group mt-5 inline-flex items-center gap-1.5 text-lg font-semibold tracking-tight text-[#0b1220] transition hover:text-[#2d6a4f]"
                 >
                   {audience.title}
-                </span>
+                  <span
+                    aria-hidden="true"
+                    className="translate-y-px text-base font-normal text-[#0b1220] transition group-hover:translate-x-0.5 group-hover:text-[#2d6a4f]"
+                  >
+                    ›
+                  </span>
+                </a>
+
+                <p className="mt-3 text-base leading-relaxed text-stone-600">
+                  {audience.description}
+                </p>
               </li>
             );
           })}

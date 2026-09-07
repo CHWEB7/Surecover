@@ -35,38 +35,11 @@ html {
   }
 }
 
-/* Who we help — fading gradient sweep (left → right) on industry logos */
-.industry-logo-label {
-  background-image: linear-gradient(
-    90deg,
-    #1f4037 0%,
-    #1f4037 38%,
-    #99f2c8 50%,
-    #1f4037 62%,
-    #1f4037 100%
-  );
-  background-size: 220% 100%;
-  background-position: 100% 50%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: industry-logo-fade-ltr 3.6s ease-in-out infinite;
-}
-
+/* Who we help — fading gradient sweep (left → right) on icons only */
 .industry-logo-gradient {
   transform-box: fill-box;
   transform-origin: center;
   animation: industry-logo-gradient-ltr 3.6s ease-in-out infinite;
-}
-
-@keyframes industry-logo-fade-ltr {
-  0%,
-  100% {
-    background-position: 100% 50%;
-  }
-  50% {
-    background-position: 0% 50%;
-  }
 }
 
 @keyframes industry-logo-gradient-ltr {
@@ -131,14 +104,6 @@ html {
   .strategy-label,
   .hero-focus-pulse {
     animation: none !important;
-  }
-
-  .industry-logo-label {
-    animation: none !important;
-    background-image: none;
-    color: #1f4037;
-    -webkit-background-clip: unset;
-    background-clip: unset;
   }
 
   .industry-logo-gradient {
