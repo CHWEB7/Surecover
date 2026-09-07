@@ -68,12 +68,17 @@ body {
   .strategy-node,
   .strategy-node-dot,
   .strategy-hub,
-  .strategy-label {
+  .strategy-label,
+  .hero-focus-pulse {
     animation: none !important;
   }
 
   .strategy-link-flow {
     opacity: 0;
+  }
+
+  .hero-focus-pulse {
+    box-shadow: none;
   }
 }
 
@@ -209,5 +214,32 @@ body {
   }
   50% {
     opacity: 1;
+  }
+}
+
+/* Hero — soft constant pulse on Explore our focus */
+.hero-focus-pulse {
+  position: relative;
+  animation: hero-focus-pulse 2.4s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.28);
+}
+
+.hero-focus-pulse:hover {
+  animation-play-state: paused;
+}
+
+@keyframes hero-focus-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0);
+  }
+  50% {
+    transform: scale(1.035);
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0.08);
   }
 }

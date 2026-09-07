@@ -123,7 +123,7 @@ export function Hero() {
               </a>
               <a
                 href="#focus"
-                className="rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition hover:border-white hover:bg-white/10"
+                className="hero-focus-pulse rounded-full border border-white/55 px-6 py-3 text-sm font-semibold text-white transition hover:border-white hover:bg-white/10"
               >
                 Explore our focus
               </a>
