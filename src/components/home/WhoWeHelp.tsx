@@ -148,7 +148,8 @@ export function WhoWeHelp() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-3xl">
           <h2 className="text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">
-            We help organisations make complex clearing decisions clearer.
+            We help organisations make complex clearing decisions{" "}
+            <span className="text-[#2d6a4f]">clearer.</span>
           </h2>
           <p className="mt-5 max-w-2xl text-lg text-stone-600 sm:text-xl">
             From incumbents to new entrants, we advise organisations that need
