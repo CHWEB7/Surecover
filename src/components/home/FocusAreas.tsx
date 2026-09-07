@@ -185,7 +185,7 @@ export function FocusAreas() {
 
       {/* Mobile / reduced motion: static vertical list */}
       <div
-        className={`mx-auto max-w-7xl space-y-6 px-6 pt-6 pb-16 lg:px-10 ${
+        className={`mx-auto max-w-7xl space-y-6 px-6 pt-6 pb-8 lg:px-10 ${
           reduceMotion ? "block" : "md:hidden"
         }`}
       >
@@ -208,7 +208,7 @@ export function FocusAreas() {
           className="relative mt-3 hidden md:block"
           style={{ height: `${lastIndex * 100}vh` }}
         >
-          <div className="sticky top-16 flex h-[calc(100vh-4rem)] items-start overflow-hidden pt-3">
+          <div className="sticky top-16 overflow-hidden pt-3 pb-10">
             <div className="relative mx-auto w-[min(80vw,78rem)]">
               <div className="relative h-[min(40rem,70vh)] overflow-hidden xl:h-[min(44rem,72vh)]">
                 {cards.map((card, index) => {
