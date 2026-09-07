@@ -107,10 +107,12 @@ export function Hero() {
             <p className="mx-auto mt-7 max-w-3xl text-xl leading-snug font-medium text-white text-pretty sm:text-2xl lg:text-[1.75rem]">
               Sureclear is an independent cleared derivatives advisory.
             </p>
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/80 text-pretty sm:text-base">
+            <p className="mx-auto mt-4 max-w-4xl text-sm leading-relaxed text-white/80 text-pretty sm:max-w-5xl sm:text-base lg:max-w-6xl">
               We help banks, brokers, exchanges, CCPs, fintechs and new market
-              participants make better decisions across clearing strategy,
-              transformation, regulatory change and operations.
+              participants
+              <br className="hidden sm:block" />
+              make better decisions across clearing strategy, transformation,
+              regulatory change and operations.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <a
