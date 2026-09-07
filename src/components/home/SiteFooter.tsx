@@ -4,7 +4,7 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-10 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm font-semibold tracking-[0.18em] text-[#1f4037] uppercase">
-            Sure Clear
+            Sureclear
           </p>
           <p className="mt-1 text-sm text-stone-500">
             Independent specialist advisory for the cleared derivatives
@@ -12,7 +12,7 @@ export function SiteFooter() {
           </p>
         </div>
         <p className="text-sm text-stone-400">
-          © {new Date().getFullYear()} Sure Clear. All rights reserved.
+          © {new Date().getFullYear()} Sureclear. All rights reserved.
         </p>
       </div>
     </footer>
