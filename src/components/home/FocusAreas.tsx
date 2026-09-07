@@ -286,8 +286,8 @@ export function FocusAreas() {
           style={{ height: `${lastIndex * 100}vh` }}
         >
           <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-            <div className="relative mx-auto w-[min(86vw,88rem)]">
-              <div className="relative h-[min(46rem,80vh)] overflow-hidden xl:h-[min(50rem,82vh)]">
+            <div className="relative mx-auto w-[min(80vw,78rem)]">
+              <div className="relative h-[min(40rem,70vh)] overflow-hidden xl:h-[min(44rem,72vh)]">
                 {cards.map((card, index) => {
                   const delta = stackIndex - index;
                   // Incoming: start narrower than the original card, grow to
@@ -299,20 +299,34 @@ export function FocusAreas() {
                   const peekUpPx = delta >= 0 ? -delta * 16 : 0;
                   const scaleX = delta < 0 ? 0.88 + 0.12 * approach : 1;
                   const visible = delta >= -0.98;
+                  const frontIndex = Math.min(
+                    lastIndex,
+                    Math.floor(stackIndex + 0.999),
+                  );
 
                   return (
                     <div
                       key={card.title}
-                      className="absolute inset-x-0 will-change-transform"
+                      className="absolute rounded-[1.75rem]"
                       style={{
+                        // Leave room for the rounded shadow so the overflow
+                        // container doesn't hard-clip it into a square edge.
                         top: peekRoom,
-                        bottom: 0,
+                        right: 52,
+                        bottom: 56,
+                        left: 52,
                         zIndex: index + 1,
                         transformOrigin: "center top",
                         transform: `translate3d(0, calc(${translateYPercent}% + ${peekUpPx}px), 0) scaleX(${scaleX})`,
                         visibility: visible ? "visible" : "hidden",
                         pointerEvents:
                           delta < -0.05 || delta > 1.05 ? "none" : "auto",
+                        // Shadow on this rounded wrapper so it shares the
+                        // same radius as the card (avoids a square halo).
+                        boxShadow:
+                          index === frontIndex
+                            ? "0 10px 24px rgba(15, 31, 26, 0.12), 0 2px 6px rgba(15, 31, 26, 0.05)"
+                            : "none",
                       }}
                     >
                       <FocusStackCard
@@ -321,6 +335,7 @@ export function FocusAreas() {
                         description={card.description}
                         ctaLabel={card.ctaLabel}
                         visualIcons={card.visualIcons}
+                        elevated={false}
                         className="h-full w-full"
                       />
                     </div>

@@ -8,6 +8,8 @@ type FocusStackCardProps = {
   visualIcons: React.ReactNode[];
   style?: React.CSSProperties;
   className?: string;
+  /** When false, parent owns the elevation shadow. */
+  elevated?: boolean;
 };
 
 export function FocusStackCard({
@@ -18,34 +20,47 @@ export function FocusStackCard({
   visualIcons,
   style,
   className = "",
+  elevated = true,
 }: FocusStackCardProps) {
   return (
     <article
-      style={style}
-      className={`overflow-hidden rounded-[1.75rem] border border-[#e7e5df] bg-white shadow-[0_16px_40px_rgba(15,31,26,0.12)] ${className}`}
+      style={{
+        ...style,
+        ...(elevated
+          ? {
+              boxShadow:
+                "0 10px 24px rgba(15, 31, 26, 0.12), 0 2px 6px rgba(15, 31, 26, 0.05)",
+            }
+          : null),
+      }}
+      // Keep overflow off this shell when elevated so the rounded shadow
+      // isn't clipped into a square.
+      className={`rounded-[1.75rem] bg-transparent ${className}`}
     >
-      <div className="grid h-full lg:grid-cols-2">
-        <div className="flex flex-col justify-between p-8 sm:p-10 lg:p-12 xl:p-14">
-          <div>
-            <div className="mb-6 flex h-11 w-11 items-center justify-center rounded-lg text-[#2d6a4f]">
-              {icon}
+      <div className="h-full overflow-hidden rounded-[1.75rem] border border-[#e7e5df] bg-white">
+        <div className="grid h-full lg:grid-cols-2">
+          <div className="flex flex-col justify-between p-8 sm:p-10 lg:p-12">
+            <div>
+              <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-lg text-[#2d6a4f]">
+                {icon}
+              </div>
+              <h3 className="max-w-xl text-2xl leading-tight font-semibold tracking-tight text-[#0b1220] sm:text-3xl">
+                {title}
+              </h3>
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-stone-600 sm:text-lg">
+                {description}
+              </p>
             </div>
-            <h3 className="max-w-xl text-2xl leading-tight font-semibold tracking-tight text-[#0b1220] sm:text-3xl xl:text-4xl">
-              {title}
-            </h3>
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-stone-600 sm:text-lg">
-              {description}
-            </p>
+            <a
+              href="#contact"
+              className="mt-8 inline-flex w-fit rounded-lg border border-[#0b1220] px-5 py-2.5 text-sm font-semibold text-[#0b1220] transition hover:bg-[#0b1220] hover:text-white"
+            >
+              {ctaLabel}
+            </a>
           </div>
-          <a
-            href="#contact"
-            className="mt-10 inline-flex w-fit rounded-lg border border-[#0b1220] px-5 py-3 text-sm font-semibold text-[#0b1220] transition hover:bg-[#0b1220] hover:text-white"
-          >
-            {ctaLabel}
-          </a>
-        </div>
 
-        <FocusCardVisual icons={visualIcons} />
+          <FocusCardVisual icons={visualIcons} />
+        </div>
       </div>
     </article>
   );
