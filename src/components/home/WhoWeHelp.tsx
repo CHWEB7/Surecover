@@ -147,6 +147,16 @@ export function WhoWeHelp() {
           <h2 className="text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">
             We help organisations make complex clearing decisions clearer.
           </h2>
+          <p className="mt-5 max-w-2xl text-lg text-stone-600 sm:text-xl">
+            From incumbents to new entrants, we advise organisations that need
+            specialist judgement — not generic frameworks.
+          </p>
+          <a
+            href="/home/services"
+            className="mt-8 inline-flex rounded-full border border-[#0b1220] px-6 py-3 text-sm font-semibold text-[#0b1220] transition hover:bg-[#0b1220] hover:text-white"
+          >
+            View our services
+          </a>
         </div>
 
         <ul className="mt-14 grid list-none gap-x-10 gap-y-14 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-x-16 lg:gap-y-16">
