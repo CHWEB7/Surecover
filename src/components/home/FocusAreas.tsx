@@ -307,7 +307,7 @@ export function FocusAreas() {
                   return (
                     <div
                       key={card.title}
-                      className="absolute rounded-[1.75rem]"
+                      className="absolute overflow-visible rounded-[1.75rem] bg-white"
                       style={{
                         // Leave room for the rounded shadow so the overflow
                         // container doesn't hard-clip it into a square edge.
@@ -321,8 +321,8 @@ export function FocusAreas() {
                         visibility: visible ? "visible" : "hidden",
                         pointerEvents:
                           delta < -0.05 || delta > 1.05 ? "none" : "auto",
-                        // Shadow on this rounded wrapper so it shares the
-                        // same radius as the card (avoids a square halo).
+                        // Opaque rounded shell + matching radius = soft
+                        // shadow that reads as part of the card.
                         boxShadow:
                           index === frontIndex
                             ? "0 10px 24px rgba(15, 31, 26, 0.12), 0 2px 6px rgba(15, 31, 26, 0.05)"
