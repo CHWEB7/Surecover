@@ -73,87 +73,6 @@ const GearIcon = (
   </svg>
 );
 
-const LayersIcon = (
-  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <path
-      d="M12 3l9 5-9 5-9-5 9-5z"
-      stroke={iconStroke}
-      strokeWidth="1.75"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M3 12l9 5 9-5M3 16l9 5 9-5"
-      stroke={iconStroke}
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-const SparkIcon = (
-  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <path
-      d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"
-      stroke={iconStroke}
-      strokeWidth="1.75"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-const ChipIcon = (
-  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <rect
-      x="7"
-      y="7"
-      width="10"
-      height="10"
-      rx="1.5"
-      stroke={iconStroke}
-      strokeWidth="1.75"
-    />
-    <path
-      d="M9 3v4M12 3v4M15 3v4M9 17v4M12 17v4M15 17v4M3 9h4M3 12h4M3 15h4M17 9h4M17 12h4M17 15h4"
-      stroke={iconStroke}
-      strokeWidth="1.75"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
-const DatabaseIcon = (
-  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <ellipse
-      cx="12"
-      cy="6"
-      rx="7"
-      ry="3"
-      stroke={iconStroke}
-      strokeWidth="1.75"
-    />
-    <path
-      d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"
-      stroke={iconStroke}
-      strokeWidth="1.75"
-    />
-  </svg>
-);
-
-const NetworkIcon = (
-  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <circle cx="6" cy="7" r="2.25" stroke={iconStroke} strokeWidth="1.75" />
-    <circle cx="18" cy="7" r="2.25" stroke={iconStroke} strokeWidth="1.75" />
-    <circle cx="12" cy="17" r="2.25" stroke={iconStroke} strokeWidth="1.75" />
-    <path
-      d="M8 8.5l3 6.5M16 8.5l-3 6.5M8.2 7h7.6"
-      stroke={iconStroke}
-      strokeWidth="1.75"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
 const cards = [
   {
     title: "Clearing strategy that fits how markets actually work",
@@ -161,7 +80,7 @@ const cards = [
       "Define clearing models, membership choices, product coverage and competitive positioning with decisions grounded in market structure — not generic frameworks.",
     ctaLabel: "Talk to us about strategy",
     icon: CubeIcon,
-    visualIcons: [LayersIcon, NetworkIcon, SparkIcon, ChipIcon, DatabaseIcon],
+    visualVariant: "strategy" as const,
   },
   {
     title: "Transformation designed for delivery, not just diagnosis",
@@ -169,7 +88,7 @@ const cards = [
       "Shape and deliver change across technology, target operating models and client propositions — with outcomes that can be implemented by the teams who run the business.",
     ctaLabel: "Talk to us about transformation",
     icon: RefreshIcon,
-    visualIcons: [ChipIcon, LayersIcon, GearIcon, SparkIcon, NetworkIcon],
+    visualVariant: "transformation" as const,
   },
   {
     title: "Regulatory change that protects the franchise",
@@ -177,7 +96,7 @@ const cards = [
       "Translate regulatory requirements into practical programmes that meet obligations while preserving commercial momentum and operational resilience.",
     ctaLabel: "Talk to us about regulation",
     icon: ShieldIcon,
-    visualIcons: [ShieldIcon, DatabaseIcon, LayersIcon, ChipIcon, SparkIcon],
+    visualVariant: "regulation" as const,
   },
   {
     title: "Operations that keep scale, risk and service in balance",
@@ -185,7 +104,7 @@ const cards = [
       "Strengthen day-to-day clearing operations, controls and resilience so growth does not come at the expense of risk or client service quality.",
     ctaLabel: "Talk to us about operations",
     icon: GearIcon,
-    visualIcons: [GearIcon, NetworkIcon, DatabaseIcon, LayersIcon, ChipIcon],
+    visualVariant: "operations" as const,
   },
 ];
 
@@ -293,7 +212,7 @@ export function FocusAreas() {
             title={card.title}
             description={card.description}
             ctaLabel={card.ctaLabel}
-            visualIcons={card.visualIcons}
+            visualVariant={card.visualVariant}
           />
         ))}
       </div>
@@ -354,7 +273,7 @@ export function FocusAreas() {
                         title={card.title}
                         description={card.description}
                         ctaLabel={card.ctaLabel}
-                        visualIcons={card.visualIcons}
+                        visualVariant={card.visualVariant}
                         elevated={false}
                         className="h-full w-full"
                       />

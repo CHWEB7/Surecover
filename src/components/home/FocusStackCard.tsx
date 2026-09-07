@@ -1,11 +1,14 @@
-import { FocusCardVisual } from "@/components/home/FocusCardVisual";
+import {
+  FocusCardVisual,
+  type FocusVisualVariant,
+} from "@/components/home/FocusCardVisual";
 
 type FocusStackCardProps = {
   icon: React.ReactNode;
   title: string;
   description: string;
   ctaLabel: string;
-  visualIcons: React.ReactNode[];
+  visualVariant: FocusVisualVariant;
   style?: React.CSSProperties;
   className?: string;
   /** When false, parent owns the elevation shadow. */
@@ -17,7 +20,7 @@ export function FocusStackCard({
   title,
   description,
   ctaLabel,
-  visualIcons,
+  visualVariant,
   style,
   className = "",
   elevated = true,
@@ -59,7 +62,7 @@ export function FocusStackCard({
             </a>
           </div>
 
-          <FocusCardVisual icons={visualIcons} />
+          <FocusCardVisual variant={visualVariant} />
         </div>
       </div>
     </article>
