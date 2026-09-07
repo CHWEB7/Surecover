@@ -35,23 +35,6 @@ html {
   }
 }
 
-/* Who we help — fading gradient sweep (left → right) on icons only */
-.industry-logo-gradient {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: industry-logo-gradient-ltr 3.6s ease-in-out infinite;
-}
-
-@keyframes industry-logo-gradient-ltr {
-  0%,
-  100% {
-    transform: translateX(-28px);
-  }
-  50% {
-    transform: translateX(28px);
-  }
-}
-
 .infinity-logo {
   filter: drop-shadow(0 6px 18px rgba(153, 142, 224, 0.22));
 }
@@ -104,11 +87,6 @@ html {
   .strategy-label,
   .hero-focus-pulse {
     animation: none !important;
-  }
-
-  .industry-logo-gradient {
-    animation: none !important;
-    transform: none !important;
   }
 
   .strategy-link-flow {
