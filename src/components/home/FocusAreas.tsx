@@ -236,8 +236,17 @@ export function FocusAreas() {
     };
   }, [reduceMotion]);
 
-  // 0 = first card pinned; 1 = fourth card fully stacked on top
-  const stackIndex = progress * Math.max(cards.length - 1, 1);
+  // Stacking uses most of the track; the final stretch collapses the
+  // peek offsets so the deck becomes a single flush card before exit.
+  const STACK_PORTION = 0.78;
+  const stackProgress = clamp(progress / STACK_PORTION, 0, 1);
+  const collapseProgress = clamp(
+    (progress - STACK_PORTION) / (1 - STACK_PORTION),
+    0,
+    1,
+  );
+  const stackIndex = stackProgress * Math.max(cards.length - 1, 1);
+  const peekRoom = 40 * (1 - collapseProgress);
 
   return (
     <section id="focus" className="scroll-mt-24 bg-[#f5f4ef]">
@@ -250,8 +259,9 @@ export function FocusAreas() {
             Better decisions across the clearing lifecycle
           </h2>
           <p className="mt-4 text-lg text-stone-600">
-            Keep scrolling — the next card stacks over the current one until all
-            four are complete, then the page continues.
+            Keep scrolling — each card grows into place and stacks under the
+            last. When the final card lands, the stack settles into one card and
+            the page continues.
           </p>
         </div>
       </div>
@@ -274,46 +284,54 @@ export function FocusAreas() {
         ))}
       </div>
 
-      {/* Desktop: scroll is “spent” inside a tall track while a sticky
-          viewport stays fixed and cards stack over the first one. */}
+      {/* Desktop: pinned viewport — page scroll drives card stacking */}
       {!reduceMotion && (
         <div
           ref={trackRef}
           className="relative mt-10 hidden md:block"
-          style={{ height: `${cards.length * 100}vh` }}
+          style={{ height: `${(cards.length + 0.45) * 100}vh` }}
         >
           <div className="sticky top-0 flex h-screen items-center overflow-hidden">
             <div className="relative mx-auto w-full max-w-6xl px-6">
-              <div className="relative h-[min(36rem,72vh)] overflow-hidden lg:h-[min(38rem,74vh)]">
+              <div className="relative h-[min(38rem,74vh)] overflow-hidden lg:h-[min(40rem,76vh)]">
                 {cards.map((card, index) => {
                   const delta = stackIndex - index;
-                  // Incoming cards start slightly narrower and grow to full
-                  // width as they arrive. Settled/buried cards sit a touch
-                  // lower (and a hair narrower) for a stacked-deck look.
-                  // No opacity/brightness — keeps overlaps solid.
-                  const buried = clamp(delta, 0, 1);
+                  // Incoming: start narrower than the original card, grow to
+                  // full width as it arrives. Buried cards peek ABOVE the
+                  // front card (tops visible). Collapse flushes everything
+                  // into one card at the end.
                   const approach = clamp(1 + delta, 0, 1);
-
                   const translateYPercent =
-                    delta < 0 ? Math.min(110, -delta * 110) : 0;
-                  const translateYPx = delta >= 0 ? buried * 20 : 0;
+                    delta < 0
+                      ? Math.min(110, -delta * 110) * (1 - collapseProgress)
+                      : 0;
+                  // Negative = higher: previous cards show above the front one
+                  const peekUpPx =
+                    delta >= 0
+                      ? -delta * 14 * (1 - collapseProgress)
+                      : 0;
                   const scaleX =
                     delta < 0
-                      ? 0.92 + 0.08 * approach
-                      : 1 - buried * 0.035;
-                  const visible = delta >= -0.98;
+                      ? 0.88 + 0.12 * approach
+                      : 1;
+                  const visible = delta >= -0.98 || collapseProgress > 0;
 
                   return (
                     <div
                       key={card.title}
-                      className="absolute inset-x-0 top-0 will-change-transform"
+                      className="absolute inset-x-0 will-change-transform"
                       style={{
+                        top: peekRoom,
                         zIndex: index + 1,
                         transformOrigin: "center top",
-                        transform: `translate3d(0, calc(${translateYPercent}% + ${translateYPx}px), 0) scaleX(${scaleX})`,
+                        transform: `translate3d(0, calc(${translateYPercent}% + ${peekUpPx}px), 0) scaleX(${scaleX})`,
                         visibility: visible ? "visible" : "hidden",
                         pointerEvents:
-                          delta < -0.05 || delta > 1.05 ? "none" : "auto",
+                          collapseProgress > 0.2 ||
+                          delta < -0.05 ||
+                          delta > 1.05
+                            ? "none"
+                            : "auto",
                       }}
                     >
                       <FocusStackCard
@@ -335,8 +353,9 @@ export function FocusAreas() {
               >
                 {cards.map((card, index) => {
                   const active =
-                    Math.round(stackIndex) === index ||
-                    (index === cards.length - 1 && progress >= 0.99);
+                    collapseProgress > 0.5
+                      ? index === cards.length - 1
+                      : Math.round(stackIndex) === index;
                   return (
                     <span
                       key={card.title}
