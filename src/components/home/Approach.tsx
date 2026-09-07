@@ -33,22 +33,14 @@ export function Approach() {
         <div className="overflow-hidden rounded-[1.75rem] border border-[#e7e5df] bg-white">
           <div className="grid lg:grid-cols-2">
             {/* Left — intro */}
-            <div className="flex flex-col justify-between gap-10 p-8 sm:p-10 lg:p-12">
-              <div>
-                <span className="inline-flex rounded-md bg-[#e8f5ef] px-2.5 py-1 text-xs font-semibold text-[#1f4037]">
-                  Our approach
-                </span>
-                <h2 className="mt-5 text-3xl font-semibold tracking-tight text-[#0b1220] sm:text-4xl">
-                  A clear process for complex clearing decisions
-                </h2>
-                <p className="mt-4 max-w-md text-base leading-relaxed text-stone-600 sm:text-lg">
-                  Specialist advice from practitioners who have lived clearing
-                  strategy, regulation and delivery — structured so each
-                  engagement moves from diagnosis to lasting capability.
-                </p>
-              </div>
-              <p className="text-sm text-stone-500 italic">
-                Independent advice for the cleared derivatives industry.
+            <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
+              <h2 className="text-3xl font-semibold tracking-tight text-[#0b1220] sm:text-4xl">
+                A clear process for complex clearing decisions
+              </h2>
+              <p className="mt-4 max-w-md text-base leading-relaxed text-stone-600 sm:text-lg">
+                Specialist advice from practitioners who have lived clearing
+                strategy, regulation and delivery — structured so each
+                engagement moves from diagnosis to lasting capability.
               </p>
             </div>
 
@@ -98,7 +90,7 @@ export function Approach() {
               <div className="mt-8 flex flex-wrap items-center gap-5">
                 <a
                   href="#contact"
-                  className="inline-flex rounded-lg bg-[#0b1220] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#1f4037]"
+                  className="services-cta-pulse inline-flex rounded-full border border-[#0b1220]/55 px-6 py-3 text-sm font-semibold text-[#0b1220] transition hover:border-[#0b1220] hover:bg-[#0b1220]/10"
                 >
                   Talk to us
                 </a>
