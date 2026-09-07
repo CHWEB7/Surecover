@@ -61,4 +61,153 @@ body {
     animation: none;
     stroke-dasharray: none;
   }
+
+  .strategy-pulse-ring,
+  .strategy-link,
+  .strategy-link-flow,
+  .strategy-node,
+  .strategy-node-dot,
+  .strategy-hub,
+  .strategy-label {
+    animation: none !important;
+  }
+
+  .strategy-link-flow {
+    opacity: 0;
+  }
+}
+
+/* Strategy card — subtle motion to draw the eye */
+.strategy-pulse-ring,
+.strategy-hub,
+.strategy-node,
+.strategy-node-dot {
+  transform-box: fill-box;
+}
+
+.strategy-pulse-ring {
+  transform-origin: center;
+  animation: strategy-ring 3.6s ease-out infinite;
+}
+
+.strategy-pulse-ring--delayed {
+  animation-delay: 1.2s;
+}
+
+.strategy-hub {
+  transform-origin: center;
+  animation: strategy-hub-breathe 3.2s ease-in-out infinite;
+}
+
+.strategy-link {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: strategy-link-draw 2.8s ease-in-out infinite;
+}
+
+.strategy-link-flow {
+  stroke-dasharray: 14 110;
+  stroke-dashoffset: 120;
+  animation: strategy-link-travel 2.4s linear infinite;
+  opacity: 0.9;
+}
+
+.strategy-node {
+  animation: strategy-node-float 3.4s ease-in-out infinite;
+}
+
+.strategy-node-dot {
+  animation: strategy-dot-pulse 2.2s ease-in-out infinite;
+}
+
+.strategy-label {
+  animation: strategy-label-fade 3.4s ease-in-out infinite;
+}
+
+@keyframes strategy-ring {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.72);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(1.55);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.55);
+  }
+}
+
+@keyframes strategy-hub-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+}
+
+@keyframes strategy-link-draw {
+  0%,
+  12% {
+    stroke-dashoffset: 120;
+    opacity: 0.25;
+  }
+  35%,
+  70% {
+    stroke-dashoffset: 0;
+    opacity: 0.7;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.45;
+  }
+}
+
+@keyframes strategy-link-travel {
+  0% {
+    stroke-dashoffset: 120;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.15;
+  }
+}
+
+@keyframes strategy-node-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes strategy-dot-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes strategy-label-fade {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
 }
