@@ -100,19 +100,17 @@ export function Hero() {
             className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,255,255,0.12),_transparent_50%)]"
           />
 
-          <div className="relative mx-auto max-w-3xl text-center">
-            <p className="mb-5 text-xs font-semibold tracking-[0.28em] text-[#d8f3dc] uppercase">
-              Cleared derivatives advisory
-            </p>
-            <h1 className="text-4xl leading-tight font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
+          <div className="relative mx-auto max-w-5xl text-center lg:max-w-6xl">
+            <h1 className="font-[family-name:var(--font-outfit)] text-5xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl xl:text-8xl">
               Clarity for decisions that shape clearing.
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/85 text-pretty">
-              Sureclear is an independent specialist advisory firm focused
-              exclusively on the cleared derivatives industry. We help banks,
-              brokers, exchanges, CCPs, fintechs and new market participants
-              make better decisions across clearing strategy, transformation,
-              regulatory change and operations.
+            <p className="mx-auto mt-7 max-w-3xl text-xl leading-snug font-medium text-white text-pretty sm:text-2xl lg:text-[1.75rem]">
+              Sureclear is an independent cleared derivatives advisory.
+            </p>
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/80 text-pretty sm:text-base">
+              We help banks, brokers, exchanges, CCPs, fintechs and new market
+              participants make better decisions across clearing strategy,
+              transformation, regulatory change and operations.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <a
