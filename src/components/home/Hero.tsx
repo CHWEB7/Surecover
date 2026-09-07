@@ -101,7 +101,7 @@ export function Hero() {
           />
 
           <div className="relative mx-auto max-w-5xl text-center lg:max-w-6xl">
-            <h1 className="font-[family-name:var(--font-outfit)] text-5xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl xl:text-8xl">
+            <h1 className="text-5xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl xl:text-8xl">
               Clarity for decisions that shape clearing.
             </h1>
             <div className="mx-auto mt-8 grid w-full max-w-5xl grid-cols-1 items-center gap-5 sm:mt-10 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-stretch sm:gap-0 lg:max-w-6xl">
