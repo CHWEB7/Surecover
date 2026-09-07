@@ -19,6 +19,16 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 .infinity-logo {
   filter: drop-shadow(0 6px 18px rgba(153, 142, 224, 0.22));
 }

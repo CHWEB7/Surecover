@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { FocusStackCard } from "@/components/home/FocusStackCard";
 
-const iconClass = "h-8 w-8";
-const iconStroke = "url(#sureclear-icon-gradient)";
+const iconClass = "h-10 w-10";
+const iconStroke = "#0b1220";
 
 const CubeIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
@@ -165,22 +165,6 @@ export function FocusAreas() {
 
   return (
     <section id="focus" className="scroll-mt-24 bg-[#f5f4ef]">
-      <svg width="0" height="0" className="absolute" aria-hidden="true">
-        <defs>
-          <linearGradient
-            id="sureclear-icon-gradient"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
-          >
-            <stop offset="0%" stopColor="#1f4037" />
-            <stop offset="45%" stopColor="#2d6a4f" />
-            <stop offset="100%" stopColor="#99f2c8" />
-          </linearGradient>
-        </defs>
-      </svg>
-
       <div className="mx-auto max-w-7xl px-6 pt-16 lg:px-10 lg:pt-24">
         <div className="max-w-3xl">
           <h2 className="text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">

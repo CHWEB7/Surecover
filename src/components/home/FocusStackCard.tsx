@@ -44,10 +44,10 @@ export function FocusStackCard({
         <div className="grid h-full lg:grid-cols-2">
           <div className="flex flex-col justify-between p-8 sm:p-10 lg:p-12">
             <div>
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center text-[#0b1220]">
                 {icon}
               </div>
-              <h3 className="max-w-xl text-2xl leading-tight font-semibold tracking-tight text-[#0b1220] sm:text-3xl">
+              <h3 className="max-w-xl text-3xl leading-[1.12] font-semibold tracking-tight text-[#0b1220] sm:text-4xl lg:text-[2.75rem]">
                 {title}
               </h3>
               <p className="mt-4 max-w-xl text-base leading-relaxed text-stone-600 sm:text-lg">
