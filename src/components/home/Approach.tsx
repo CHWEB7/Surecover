@@ -29,8 +29,8 @@ export function Approach() {
       id="approach"
       className="scroll-mt-24 bg-[#f5f4ef] py-16 lg:py-24"
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="overflow-hidden rounded-[1.75rem] border border-[#e7e5df] bg-white">
+      <div className="mx-auto w-full max-w-[90rem] px-5 sm:px-6 lg:px-8">
+        <div className="overflow-hidden rounded-[1.75rem] border border-[#d9d6cf] bg-transparent">
           <div className="grid lg:grid-cols-2">
             {/* Left — intro */}
             <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
