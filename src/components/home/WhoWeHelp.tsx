@@ -141,7 +141,10 @@ const audiences: Audience[] = [
 
 export function WhoWeHelp() {
   return (
-    <section id="clients" className="scroll-mt-24 bg-[#f5f4ef] pt-10 pb-20 lg:pt-12 lg:pb-28">
+    <section
+      id="clients"
+      className="scroll-mt-24 -mt-16 bg-[#f5f4ef] pt-8 pb-20 lg:-mt-24 lg:pt-10 lg:pb-28"
+    >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-3xl">
           <h2 className="text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">

@@ -208,9 +208,9 @@ export function FocusAreas() {
           className="relative mt-3 hidden md:block"
           style={{ height: `${lastIndex * 100}vh` }}
         >
-          <div className="sticky top-16 overflow-hidden pt-3 pb-10">
+          <div className="sticky top-16 flex h-[calc(100vh-4rem)] flex-col overflow-hidden pt-3 pb-6">
             <div className="relative mx-auto w-[min(80vw,78rem)]">
-              <div className="relative h-[min(40rem,70vh)] overflow-hidden xl:h-[min(44rem,72vh)]">
+              <div className="relative h-[min(42rem,74vh)] overflow-hidden xl:h-[min(46rem,76vh)]">
                 {cards.map((card, index) => {
                   const delta = stackIndex - index;
                   // Incoming: start narrower than the original card, grow to
@@ -236,7 +236,7 @@ export function FocusAreas() {
                         // container doesn't hard-clip it into a square edge.
                         top: peekRoom,
                         right: 52,
-                        bottom: 56,
+                        bottom: 36,
                         left: 52,
                         zIndex: index + 1,
                         transformOrigin: "center top",
@@ -267,7 +267,7 @@ export function FocusAreas() {
               </div>
 
               <div
-                className="mt-5 flex items-center justify-center gap-2"
+                className="mt-4 flex items-center justify-center gap-2"
                 aria-hidden="true"
               >
                 {cards.map((card, index) => {
