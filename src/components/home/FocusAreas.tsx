@@ -246,17 +246,41 @@ export function FocusAreas() {
   return (
     <section id="focus" className="scroll-mt-24 bg-[#f5f4ef]">
       <div className="mx-auto max-w-7xl px-6 pt-16 lg:px-10 lg:pt-24">
-        <div className="max-w-2xl">
-          <p className="text-xs font-semibold tracking-[0.28em] text-[#2d6a4f] uppercase">
-            Where we focus
-          </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#1f4037] sm:text-4xl">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+          <h2 className="max-w-4xl text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">
             Better decisions across the clearing lifecycle
           </h2>
-          <p className="mt-4 text-lg text-stone-600">
-            Keep scrolling — each card grows into place and stacks under the
-            last. When the final card lands, the page continues.
-          </p>
+
+          <a
+            href="/home/services"
+            className="group flex w-full max-w-sm shrink-0 flex-col justify-between rounded-2xl border border-[#e7e5df] bg-white p-6 shadow-[0_10px_24px_rgba(15,31,26,0.08)] transition hover:border-[#1f4037]/25 hover:shadow-[0_14px_32px_rgba(15,31,26,0.12)] sm:p-7"
+          >
+            <div>
+              <p className="text-xs font-semibold tracking-[0.22em] text-[#2d6a4f] uppercase">
+                Services
+              </p>
+              <p className="mt-3 text-xl font-semibold tracking-tight text-[#0b1220]">
+                See how we help across strategy, change and operations
+              </p>
+            </div>
+            <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#1f4037] transition group-hover:gap-3">
+              Explore our services
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                className="h-4 w-4"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 12h14M13 6l6 6-6 6"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
         </div>
       </div>
 

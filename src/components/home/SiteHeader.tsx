@@ -1,8 +1,8 @@
 const navLinks = [
-  { href: "#focus", label: "Focus" },
-  { href: "#clients", label: "Who we help" },
-  { href: "#approach", label: "Approach" },
-  { href: "#contact", label: "Contact" },
+  { href: "/home#focus", label: "Focus" },
+  { href: "/home#clients", label: "Who we help" },
+  { href: "/home#approach", label: "Approach" },
+  { href: "/home#contact", label: "Contact" },
 ];
 
 export function SiteHeader() {
@@ -34,7 +34,7 @@ export function SiteHeader() {
         </nav>
 
         <a
-          href="#contact"
+          href="/home#contact"
           className="rounded-full bg-[#1f4037] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2d6a4f]"
         >
           Talk to us
