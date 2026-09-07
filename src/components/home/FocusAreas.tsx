@@ -284,13 +284,23 @@ export function FocusAreas() {
         >
           <div className="sticky top-0 flex h-screen items-center overflow-hidden">
             <div className="relative mx-auto w-full max-w-6xl px-6">
-              <div className="relative h-[min(34rem,70vh)] overflow-hidden lg:h-[min(36rem,72vh)]">
+              <div className="relative h-[min(36rem,72vh)] overflow-hidden lg:h-[min(38rem,74vh)]">
                 {cards.map((card, index) => {
                   const delta = stackIndex - index;
-                  // Motion only: slide up into place. No opacity/brightness
-                  // fades — those made overlapping shadows look translucent.
-                  const translateY =
+                  // Incoming cards start slightly narrower and grow to full
+                  // width as they arrive. Settled/buried cards sit a touch
+                  // lower (and a hair narrower) for a stacked-deck look.
+                  // No opacity/brightness — keeps overlaps solid.
+                  const buried = clamp(delta, 0, 1);
+                  const approach = clamp(1 + delta, 0, 1);
+
+                  const translateYPercent =
                     delta < 0 ? Math.min(110, -delta * 110) : 0;
+                  const translateYPx = delta >= 0 ? buried * 20 : 0;
+                  const scaleX =
+                    delta < 0
+                      ? 0.92 + 0.08 * approach
+                      : 1 - buried * 0.035;
                   const visible = delta >= -0.98;
 
                   return (
@@ -299,7 +309,8 @@ export function FocusAreas() {
                       className="absolute inset-x-0 top-0 will-change-transform"
                       style={{
                         zIndex: index + 1,
-                        transform: `translate3d(0, ${translateY}%, 0)`,
+                        transformOrigin: "center top",
+                        transform: `translate3d(0, calc(${translateYPercent}% + ${translateYPx}px), 0) scaleX(${scaleX})`,
                         visibility: visible ? "visible" : "hidden",
                         pointerEvents:
                           delta < -0.05 || delta > 1.05 ? "none" : "auto",
