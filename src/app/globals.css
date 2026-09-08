@@ -29,6 +29,23 @@ html {
   scroll-behavior: smooth;
 }
 
+/* About hero — transformation fiber image fills the SureClear mark */
+.about-mark-fill {
+  background-color: #1f4037;
+  /* Match the transformation card fiber treatment */
+  filter: hue-rotate(-48deg) saturate(1.25) brightness(0.92) contrast(1.06);
+  -webkit-mask-image: url(/about-icon-mask.png);
+  mask-image: url(/about-icon-mask.png);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
