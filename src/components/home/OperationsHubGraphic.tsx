@@ -5,6 +5,8 @@ import { useEffect, useRef } from "react";
 
 const ACCENT = "#99f2c8";
 const ACCENT_BASE = "rgba(153, 242, 200, 0.88)";
+/** Gap between the logo’s right edge and where connectors begin */
+const HUB_LINE_GAP = 28;
 
 const nodes = [
   {
@@ -136,8 +138,8 @@ export function OperationsHubGraphic() {
     const syncPaths = () => {
       const wr = wrap.getBoundingClientRect();
       const hr = hub.getBoundingClientRect();
-      // Overlap the hub edge so the stroke reads as plugged in
-      const startX = hr.right - wr.left - 0.5;
+      // Start connectors slightly away from the logo, not flush against it
+      const startX = hr.right - wr.left + HUB_LINE_GAP;
       const startY = hr.top + hr.height / 2 - wr.top;
 
       hubDotRef.current?.setAttribute("cx", String(startX));
