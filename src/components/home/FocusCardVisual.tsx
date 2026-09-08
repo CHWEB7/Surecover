@@ -17,7 +17,7 @@ const backgrounds: Record<FocusVisualVariant, string> = {
     "linear-gradient(145deg, #1f4037 0%, #2d6a4f 42%, #99f2c8 100%)",
   transformation:
     "linear-gradient(155deg, #0b1220 0%, #14261f 48%, #1f4037 100%)",
-  regulation: "linear-gradient(160deg, #2d6a4f 0%, #52b788 100%)",
+  regulation: "linear-gradient(155deg, #2d6a4f 0%, #52b788 48%, #99f2c8 100%)",
   operations:
     "linear-gradient(145deg, #1f4037 0%, #2d6a4f 42%, #99f2c8 100%)",
 };
@@ -161,74 +161,20 @@ function TransformationGraphic() {
 
 function RegulationGraphic() {
   return (
-    <div className="relative z-10 flex h-full w-full flex-col justify-between p-8 sm:p-10">
-      <div className="relative mx-auto flex aspect-square w-full max-w-[16rem] flex-1 items-center justify-center">
-        <svg
-          viewBox="0 0 200 200"
-          className="absolute inset-0 h-full w-full"
-          aria-hidden="true"
-        >
-          <circle
-            cx="100"
-            cy="100"
-            r="78"
-            fill="none"
-            stroke="rgba(255,255,255,0.2)"
-            strokeWidth="1"
-            strokeDasharray="4 6"
-          />
-          <circle
-            cx="100"
-            cy="100"
-            r="58"
-            fill="none"
-            stroke="rgba(255,255,255,0.28)"
-            strokeWidth="1.5"
-          />
-        </svg>
-        <div className="relative z-10 flex h-28 w-28 flex-col items-center justify-center rounded-[1.75rem] border border-white/35 bg-[#1f4037]/35 text-white shadow-lg shadow-black/20 backdrop-blur-sm">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            className="h-9 w-9"
-            aria-hidden="true"
-          >
-            <path
-              d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3z"
-              stroke="currentColor"
-              strokeWidth="1.75"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M9 12l2 2 4-4"
-              stroke="currentColor"
-              strokeWidth="1.75"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span className="mt-2 text-[11px] font-semibold tracking-[0.18em] uppercase">
-            Protect
-          </span>
-        </div>
-        {[
-          { label: "Obligations", style: "top-2 left-1/2 -translate-x-1/2" },
-          { label: "Resilience", style: "right-0 bottom-10" },
-          { label: "Franchise", style: "bottom-2 left-1/2 -translate-x-1/2" },
-          { label: "Momentum", style: "top-16 left-0" },
-        ].map((item) => (
-          <span
-            key={item.label}
-            className={`absolute rounded-full border border-white/30 bg-[#1f4037]/25 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-white uppercase backdrop-blur-sm ${item.style}`}
-          >
-            {item.label}
-          </span>
-        ))}
-      </div>
-      <p className="max-w-[16rem] text-sm text-white/85">
-        Practical programmes that meet obligations without stalling the
-        business.
-      </p>
+    <div className="relative z-10 h-full w-full overflow-hidden" aria-hidden="true">
+      <Image
+        src="/regulation-network.jpg"
+        alt=""
+        fill
+        sizes="(max-width: 1024px) 100vw, 40vw"
+        className="regulation-network-image object-cover"
+        priority={false}
+      />
+      {/* Lighter brand-green wash */}
+      <div className="pointer-events-none absolute inset-0 bg-[#99f2c8]/25 mix-blend-screen" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#2d6a4f]/35 via-[#52b788]/20 to-[#99f2c8]/45 mix-blend-soft-light" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#1f4037]/35 via-transparent to-[#99f2c8]/15" />
+      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/15" />
     </div>
   );
 }
