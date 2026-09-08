@@ -1,3 +1,5 @@
+import { BrandLogo } from "@/components/home/BrandLogo";
+
 const navLinks = [
   { href: "/home#focus", label: "Focus" },
   { href: "/home#clients", label: "Who we help" },
@@ -9,16 +11,12 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-[#e7e5df] bg-[#f5f4ef]/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <a href="/home" className="group flex items-center gap-2.5">
-          <span
-            aria-hidden
-            className="flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-[#1f4037] to-[#99f2c8] text-sm font-bold text-white"
-          >
-            SC
-          </span>
-          <span className="text-sm font-semibold tracking-[0.18em] text-[#1f4037] uppercase">
-            Sureclear
-          </span>
+        <a href="/home" className="group inline-flex items-center">
+          <BrandLogo
+            variant="dark"
+            priority
+            className="h-7 w-auto sm:h-8"
+          />
         </a>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">

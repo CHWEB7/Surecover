@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 const ACCENT = "#99f2c8";
@@ -190,14 +191,19 @@ export function OperationsHubGraphic() {
       <div className="pointer-events-none absolute -top-24 -left-8 h-56 w-56 rounded-full bg-[#99f2c8]/18 blur-3xl" />
       <div className="pointer-events-none absolute right-0 bottom-0 h-44 w-44 rounded-full bg-[#2d6a4f]/40 blur-3xl" />
 
-      {/* SC logo placeholder — static hub */}
+      {/* SureClear logo hub — light mark for the dark panel */}
       <div
         ref={hubRef}
-        className="relative z-10 flex h-[5.25rem] w-[5.25rem] shrink-0 items-center justify-center rounded-[1.35rem] bg-white shadow-[0_12px_36px_rgba(0,0,0,0.28)] sm:h-28 sm:w-28 sm:rounded-[1.6rem]"
+        className="relative z-10 flex shrink-0 items-center justify-center px-1 py-2"
       >
-        <span className="text-2xl font-bold tracking-tight text-[#0b1220] sm:text-[1.75rem]">
-          SC
-        </span>
+        <Image
+          src="/sureclear-logo-light.png"
+          alt=""
+          width={1557}
+          height={300}
+          className="h-10 w-auto sm:h-12 lg:h-14"
+          priority={false}
+        />
       </div>
 
       {/* Five connected icon boxes — subtle float; lines track these refs */}

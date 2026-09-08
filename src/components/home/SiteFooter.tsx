@@ -1,3 +1,5 @@
+import { BrandLogo } from "@/components/home/BrandLogo";
+
 const footerColumns = [
   {
     title: "Focus",
@@ -41,17 +43,9 @@ export function SiteFooter() {
     <footer className="w-full bg-[#0b1220] text-white">
       <div className="mx-auto max-w-7xl px-6 pt-14 pb-10 lg:px-10 lg:pt-16 lg:pb-12">
         <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
-          <div className="shrink-0 lg:w-56">
-            <a href="/home" className="inline-flex items-center gap-2.5">
-              <span
-                aria-hidden
-                className="flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-[#1f4037] to-[#99f2c8] text-sm font-bold text-white"
-              >
-                SC
-              </span>
-              <span className="text-sm font-semibold tracking-[0.18em] text-white uppercase">
-                Sureclear
-              </span>
+          <div className="shrink-0 lg:max-w-xs lg:w-64">
+            <a href="/home" className="inline-flex items-center">
+              <BrandLogo variant="light" className="h-8 w-auto sm:h-9" />
             </a>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">
               Independent specialist advisory for the cleared derivatives
