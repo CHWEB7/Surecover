@@ -91,6 +91,7 @@ html {
   .transform-circuit-flow,
   .transform-circuit-node,
   .transform-circuit-cluster,
+  .transform-fiber-image,
   .hero-focus-pulse,
   .services-cta-pulse {
     animation: none !important;
@@ -106,6 +107,10 @@ html {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
     opacity: 0.85;
+  }
+
+  .transform-fiber-image {
+    transform: scale(1.1) !important;
   }
 
   .strategy-link-flow {
@@ -166,7 +171,23 @@ html {
   animation: strategy-node-pulse 2.4s ease-in-out infinite;
 }
 
-/* Transformation card — circuit network */
+/* Transformation card — fiber plate tinted to brand greens */
+.transform-fiber-image {
+  filter: hue-rotate(95deg) saturate(1.2) brightness(0.88) contrast(1.05);
+  transform-origin: center;
+  animation: transform-fiber-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes transform-fiber-drift {
+  from {
+    transform: scale(1.1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.16) translate3d(-1.5%, 1%, 0);
+  }
+}
+
+/* Transformation card — circuit network (legacy, unused) */
 .transform-circuit-flow {
   stroke-dasharray: 18 90;
   stroke-dashoffset: 220;
