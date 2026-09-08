@@ -5,8 +5,6 @@ import { useEffect, useRef } from "react";
 
 const ACCENT = "#99f2c8";
 const ACCENT_BASE = "rgba(153, 242, 200, 0.88)";
-/** Gap between the logo’s right edge and where connectors begin */
-const HUB_LINE_GAP = 28;
 
 const nodes = [
   {
@@ -138,8 +136,8 @@ export function OperationsHubGraphic() {
     const syncPaths = () => {
       const wr = wrap.getBoundingClientRect();
       const hr = hub.getBoundingClientRect();
-      // Start connectors slightly away from the logo, not flush against it
-      const startX = hr.right - wr.left + HUB_LINE_GAP;
+      // Anchor on the logo’s right-middle edge
+      const startX = hr.right - wr.left;
       const startY = hr.top + hr.height / 2 - wr.top;
 
       hubDotRef.current?.setAttribute("cx", String(startX));
@@ -187,23 +185,23 @@ export function OperationsHubGraphic() {
   return (
     <div
       ref={wrapRef}
-      className="relative z-10 flex h-full w-full items-center justify-between gap-8 overflow-hidden px-7 py-8 sm:gap-10 sm:px-10 sm:py-10"
+      className="relative z-10 flex h-full w-full items-center justify-between gap-10 overflow-hidden px-7 py-8 sm:gap-14 sm:px-10 sm:py-10"
       aria-hidden="true"
     >
       <div className="pointer-events-none absolute -top-24 -left-8 h-56 w-56 rounded-full bg-[#99f2c8]/18 blur-3xl" />
       <div className="pointer-events-none absolute right-0 bottom-0 h-44 w-44 rounded-full bg-[#2d6a4f]/40 blur-3xl" />
 
-      {/* SureClear logo hub — light mark for the dark panel */}
+      {/* SureClear logo hub — smaller, nudged left from the connectors */}
       <div
         ref={hubRef}
-        className="relative z-10 flex shrink-0 items-center justify-center px-1 py-2"
+        className="relative z-10 mr-3 flex shrink-0 items-center justify-center sm:mr-5"
       >
         <Image
           src="/sureclear-logo-light.png"
           alt=""
           width={1557}
           height={300}
-          className="h-10 w-auto sm:h-12 lg:h-14"
+          className="h-7 w-auto sm:h-8 lg:h-9"
           priority={false}
         />
       </div>
