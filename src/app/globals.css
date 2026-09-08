@@ -88,6 +88,9 @@ html {
   .strategy-label,
   .strategy-step-enter,
   .strategy-step-line,
+  .transform-circuit-flow,
+  .transform-circuit-node,
+  .transform-circuit-cluster,
   .hero-focus-pulse,
   .services-cta-pulse {
     animation: none !important;
@@ -97,6 +100,12 @@ html {
   .strategy-step-line {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .transform-circuit-flow {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    opacity: 0.85;
   }
 
   .strategy-link-flow {
@@ -155,6 +164,59 @@ html {
 
 .strategy-node-pulse {
   animation: strategy-node-pulse 2.4s ease-in-out infinite;
+}
+
+/* Transformation card — circuit network */
+.transform-circuit-flow {
+  stroke-dasharray: 18 90;
+  stroke-dashoffset: 220;
+  animation: transform-circuit-flow 3.2s linear infinite;
+}
+
+.transform-circuit-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: transform-circuit-node 2.6s ease-in-out infinite;
+}
+
+.transform-circuit-cluster {
+  animation: transform-circuit-cluster 3s ease-in-out infinite;
+}
+
+@keyframes transform-circuit-flow {
+  0% {
+    stroke-dashoffset: 220;
+    opacity: 0.35;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.45;
+  }
+}
+
+@keyframes transform-circuit-node {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+}
+
+@keyframes transform-circuit-cluster {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .strategy-step-enter {

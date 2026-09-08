@@ -13,7 +13,7 @@ const backgrounds: Record<FocusVisualVariant, string> = {
   // Match hero: top-left → bottom-right site gradient
   strategy:
     "linear-gradient(145deg, #1f4037 0%, #2d6a4f 42%, #99f2c8 100%)",
-  transformation: "linear-gradient(160deg, #14261f 0%, #1f4037 100%)",
+  transformation: "linear-gradient(155deg, #0b1220 0%, #14261f 42%, #1f4037 100%)",
   regulation: "linear-gradient(160deg, #2d6a4f 0%, #52b788 100%)",
   operations:
     "linear-gradient(145deg, #1f4037 0%, #2d6a4f 42%, #99f2c8 100%)",
@@ -136,35 +136,171 @@ function StrategyGraphic() {
 }
 
 function TransformationGraphic() {
-  const stages = [
-    { label: "Diagnose", detail: "Operating model gaps" },
-    { label: "Design", detail: "Target architecture" },
-    { label: "Deliver", detail: "Implementation path" },
+  const traces = [
+    "M -20 40 H 70 Q 82 40 82 52 V 110 Q 82 122 94 122 H 180",
+    "M 20 -10 V 70 Q 20 82 32 82 H 120 Q 132 82 132 94 V 210",
+    "M -10 150 H 55 Q 68 150 68 138 V 90 Q 68 78 80 78 H 210",
+    "M 160 -15 V 48 Q 160 60 148 60 H 95 Q 83 60 83 72 V 160 Q 83 172 95 172 H 220",
+    "M 40 210 V 130 Q 40 118 52 118 H 145 Q 157 118 157 106 V 30",
+    "M 200 100 H 140 Q 128 100 128 112 V 175 Q 128 187 140 187 H 90",
+    "M 10 20 H 100 Q 112 20 112 32 V 85",
+    "M 175 200 V 140 Q 175 128 163 128 H 110",
+  ];
+
+  const nodes = [
+    { x: 82, y: 52 },
+    { x: 94, y: 122 },
+    { x: 32, y: 82 },
+    { x: 132, y: 94 },
+    { x: 68, y: 138 },
+    { x: 80, y: 78 },
+    { x: 148, y: 60 },
+    { x: 83, y: 72 },
+    { x: 95, y: 172 },
+    { x: 52, y: 118 },
+    { x: 157, y: 106 },
+    { x: 128, y: 112 },
+    { x: 112, y: 32 },
+    { x: 163, y: 128 },
+    { x: 55, y: 150 },
+    { x: 145, y: 118 },
+  ];
+
+  const clusters = [
+    { x: 118, y: 48 },
+    { x: 48, y: 98 },
+    { x: 150, y: 148 },
+    { x: 95, y: 95 },
   ];
 
   return (
-    <div className="relative z-10 flex h-full w-full flex-col justify-between p-8 sm:p-10">
-      <div className="space-y-4 pt-2">
-        {stages.map((stage, index) => (
-          <div key={stage.label} className="flex items-stretch gap-3">
-            <div className="flex w-10 flex-col items-center">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#99f2c8]/50 bg-[#0b1220]/35 text-sm font-semibold text-[#99f2c8]">
-                {index + 1}
-              </div>
-              {index < stages.length - 1 && (
-                <div className="mt-1 w-px flex-1 bg-[#99f2c8]/35" />
-              )}
-            </div>
-            <div className="flex-1 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm">
-              <p className="text-base font-semibold text-white">{stage.label}</p>
-              <p className="mt-1 text-sm text-[#99f2c8]/85">{stage.detail}</p>
-            </div>
-          </div>
+    <div className="relative z-10 h-full w-full overflow-hidden" aria-hidden="true">
+      <div className="pointer-events-none absolute -top-16 -left-10 h-56 w-56 rounded-full bg-[#99f2c8]/25 blur-3xl" />
+      <div className="pointer-events-none absolute top-10 right-0 h-40 w-40 rounded-full bg-[#2d6a4f]/45 blur-3xl" />
+      <div className="pointer-events-none absolute -right-8 bottom-0 h-48 w-48 rounded-full bg-[#52b788]/20 blur-3xl" />
+
+      <svg
+        viewBox="0 0 200 200"
+        preserveAspectRatio="xMidYMid slice"
+        className="transform-circuit absolute inset-0 h-[130%] w-[130%] -translate-x-[8%] -translate-y-[12%] rotate-[-8deg]"
+      >
+        <defs>
+          <linearGradient id="transform-trace" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#1f4037" stopOpacity="0.35" />
+            <stop offset="45%" stopColor="#52b788" stopOpacity="0.85" />
+            <stop offset="100%" stopColor="#99f2c8" stopOpacity="0.95" />
+          </linearGradient>
+          <linearGradient id="transform-trace-soft" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#0b1220" stopOpacity="0.2" />
+            <stop offset="100%" stopColor="#2d6a4f" stopOpacity="0.55" />
+          </linearGradient>
+          <filter id="transform-glow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="1.6" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        {/* Soft background grid */}
+        {Array.from({ length: 10 }).map((_, i) => (
+          <line
+            key={`h-${i}`}
+            x1="-20"
+            y1={i * 24}
+            x2="220"
+            y2={i * 24}
+            stroke="rgba(153,242,200,0.08)"
+            strokeWidth="0.6"
+          />
         ))}
-      </div>
-      <p className="max-w-[16rem] text-sm text-white/75">
-        Change programmes built to be implemented — not just diagnosed.
-      </p>
+        {Array.from({ length: 10 }).map((_, i) => (
+          <line
+            key={`v-${i}`}
+            x1={i * 24}
+            y1="-20"
+            x2={i * 24}
+            y2="220"
+            stroke="rgba(153,242,200,0.06)"
+            strokeWidth="0.6"
+          />
+        ))}
+
+        {traces.map((d, index) => (
+          <g key={`trace-${index}`}>
+            <path
+              d={d}
+              fill="none"
+              stroke="url(#transform-trace-soft)"
+              strokeWidth={index % 2 === 0 ? 3.2 : 2.2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity="0.55"
+            />
+            <path
+              d={d}
+              className="transform-circuit-flow"
+              fill="none"
+              stroke="url(#transform-trace)"
+              strokeWidth={index % 2 === 0 ? 2.4 : 1.6}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              filter="url(#transform-glow)"
+              style={{ animationDelay: `${index * 0.35}s` }}
+            />
+          </g>
+        ))}
+
+        {nodes.map((node, index) => (
+          <g key={`node-${index}`}>
+            <circle
+              cx={node.x}
+              cy={node.y}
+              r="5.5"
+              className="transform-circuit-node"
+              fill="rgba(15,31,26,0.55)"
+              stroke="rgba(153,242,200,0.9)"
+              strokeWidth="1.2"
+              style={{ animationDelay: `${(index % 6) * 0.28}s` }}
+            />
+            <circle
+              cx={node.x}
+              cy={node.y}
+              r="2.2"
+              fill="#99f2c8"
+              opacity="0.95"
+            />
+          </g>
+        ))}
+
+        {clusters.map((cluster, index) => (
+          <g
+            key={`cluster-${index}`}
+            transform={`translate(${cluster.x} ${cluster.y})`}
+            className="transform-circuit-cluster"
+            style={{ animationDelay: `${index * 0.45}s` }}
+          >
+            {[0, 1, 2].map((row) =>
+              [0, 1].map((col) => (
+                <rect
+                  key={`${row}-${col}`}
+                  x={col * 7}
+                  y={row * 6}
+                  width="4.5"
+                  height="3.5"
+                  rx="1"
+                  fill={
+                    (row + col) % 2 === 0
+                      ? "rgba(153,242,200,0.85)"
+                      : "rgba(45,106,79,0.9)"
+                  }
+                />
+              )),
+            )}
+          </g>
+        ))}
+      </svg>
     </div>
   );
 }
