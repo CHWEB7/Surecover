@@ -93,6 +93,7 @@ html {
   .transform-circuit-cluster,
   .transform-fiber-image,
   .regulation-network-image,
+  .ops-node-float,
   .hero-focus-pulse,
   .services-cta-pulse {
     animation: none !important;
@@ -206,6 +207,21 @@ html {
   }
   to {
     transform: scale(1.14) translate3d(1.2%, -0.8%, 0);
+  }
+}
+
+/* Operations card — subtle float on icon boxes only */
+.ops-node-float {
+  animation: ops-node-float 3.4s ease-in-out infinite;
+}
+
+@keyframes ops-node-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
   }
 }
 

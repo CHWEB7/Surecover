@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { OperationsHubGraphic } from "@/components/home/OperationsHubGraphic";
 
 type FocusVisualVariant =
   | "strategy"
@@ -19,7 +20,7 @@ const backgrounds: Record<FocusVisualVariant, string> = {
     "linear-gradient(155deg, #0b1220 0%, #14261f 48%, #1f4037 100%)",
   regulation: "linear-gradient(155deg, #2d6a4f 0%, #52b788 48%, #99f2c8 100%)",
   operations:
-    "linear-gradient(145deg, #1f4037 0%, #2d6a4f 42%, #99f2c8 100%)",
+    "linear-gradient(155deg, #0b1220 0%, #14261f 45%, #1f4037 100%)",
 };
 
 function StrategyGraphic() {
@@ -180,51 +181,7 @@ function RegulationGraphic() {
 }
 
 function OperationsGraphic() {
-  const pillars = [
-    { label: "Scale", value: "Growth ready" },
-    { label: "Risk", value: "Controls tight" },
-    { label: "Service", value: "Client first" },
-  ];
-
-  return (
-    <div className="relative z-10 flex h-full w-full flex-col justify-between p-8 sm:p-10">
-      <div className="grid grid-cols-3 gap-3 pt-2">
-        {pillars.map((pillar) => (
-          <div
-            key={pillar.label}
-            className="rounded-2xl border border-white/25 bg-[#0b1220]/25 px-3 py-5 text-center backdrop-blur-sm"
-          >
-            <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full border border-white/40 bg-white/10">
-              <span className="text-sm font-bold text-white">
-                {pillar.label[0]}
-              </span>
-            </div>
-            <p className="text-sm font-semibold text-white">{pillar.label}</p>
-            <p className="mt-1 text-[11px] leading-snug text-white/75">
-              {pillar.value}
-            </p>
-          </div>
-        ))}
-      </div>
-      <div className="rounded-2xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur-sm">
-        <div className="flex items-center justify-between gap-3">
-          <span className="text-xs font-semibold tracking-[0.18em] text-white/70 uppercase">
-            Day-to-day clearing
-          </span>
-          <span className="text-xs font-semibold text-white">In balance</span>
-        </div>
-        <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#0b1220]/25">
-          <div
-            className="h-full rounded-full bg-white/85"
-            style={{ width: "72%" }}
-          />
-        </div>
-      </div>
-      <p className="max-w-[16rem] text-sm text-white/80">
-        Operations that keep growth, risk and client service aligned.
-      </p>
-    </div>
-  );
+  return <OperationsHubGraphic />;
 }
 
 const graphics: Record<FocusVisualVariant, () => React.ReactNode> = {
