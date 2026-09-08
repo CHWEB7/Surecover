@@ -1,8 +1,13 @@
 const services = [
   {
-    title: "Clearing strategy",
-    description:
-      "Membership models, product coverage and competitive positioning grounded in how clearing markets actually work.",
+    title: "Clearing Strategy",
+    items: [
+      "CCP connectivity",
+      "Exchange membership",
+      "Clearing operating models",
+      "Clearing mandates",
+      "Regulatory evolution",
+    ],
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -27,9 +32,15 @@ const services = [
     ),
   },
   {
-    title: "Transformation",
-    description:
-      "Technology, operating model and client proposition change — designed for delivery, not just diagnosis.",
+    title: "Transformation & Change",
+    items: [
+      "Roadmaps",
+      "Vendor assessment",
+      "RFPs",
+      "Product strategy",
+      "Governance",
+      "Platform transformation",
+    ],
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -55,9 +66,15 @@ const services = [
     ),
   },
   {
-    title: "Regulatory change",
-    description:
-      "Practical programmes that meet regulatory requirements while protecting commercial momentum.",
+    title: "Operations & Resilience",
+    items: [
+      "Controls",
+      "Procedures",
+      "Risk reviews",
+      "Automation",
+      "Operating models",
+      "Outsourcing",
+    ],
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -65,18 +82,12 @@ const services = [
         className="h-10 w-10"
         aria-hidden="true"
       >
+        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.75" />
         <path
-          d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3z"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M9 12l2 2 4-4"
+          d="M12 3v2.5M12 18.5V21M4.9 6.5l1.8 1.8M17.3 15.7l1.8 1.8M3 12h2.5M18.5 12H21M4.9 17.5l1.8-1.8M17.3 8.3l1.8-1.8"
           stroke="currentColor"
           strokeWidth="1.75"
           strokeLinecap="round"
-          strokeLinejoin="round"
         />
       </svg>
     ),
@@ -146,9 +157,11 @@ export function Hero() {
               <h2 className="text-lg font-semibold text-white">
                 {service.title}
               </h2>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                {service.description}
-              </p>
+              <div className="mt-4 space-y-1.5 text-sm leading-relaxed text-slate-300">
+                {service.items.map((item) => (
+                  <p key={item}>{item}</p>
+                ))}
+              </div>
             </article>
           ))}
         </div>
