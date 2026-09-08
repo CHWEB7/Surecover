@@ -233,17 +233,17 @@ function TransformationGraphic() {
               d={d}
               fill="none"
               stroke="url(#transform-trace-soft)"
-              strokeWidth={index % 2 === 0 ? 3.2 : 2.2}
+              strokeWidth={index % 2 === 0 ? 4.5 : 3.2}
               strokeLinecap="round"
               strokeLinejoin="round"
-              opacity="0.55"
+              opacity="0.7"
             />
             <path
               d={d}
               className="transform-circuit-flow"
               fill="none"
               stroke="url(#transform-trace)"
-              strokeWidth={index % 2 === 0 ? 2.4 : 1.6}
+              strokeWidth={index % 2 === 0 ? 3.2 : 2.2}
               strokeLinecap="round"
               strokeLinejoin="round"
               filter="url(#transform-glow)"
