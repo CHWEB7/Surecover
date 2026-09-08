@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type FocusVisualVariant =
   | "strategy"
   | "transformation"
@@ -140,10 +142,13 @@ function TransformationGraphic() {
   return (
     <div className="relative z-10 h-full w-full overflow-hidden" aria-hidden="true">
       {/* Fiber optic plate — hue-shifted toward brand greens */}
-      <img
+      <Image
         src="/transformation-fibers.jpg"
         alt=""
-        className="transform-fiber-image absolute inset-0 h-full w-full object-cover"
+        fill
+        sizes="(max-width: 1024px) 100vw, 40vw"
+        className="transform-fiber-image object-cover"
+        priority={false}
       />
       {/* Brand color wash */}
       <div className="pointer-events-none absolute inset-0 bg-[#1f4037]/35 mix-blend-multiply" />
