@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AboutHero } from "@/components/home/AboutHero";
+import { AboutStory } from "@/components/home/AboutStory";
 import { ContactCta } from "@/components/home/ContactCta";
 import { SiteFooter } from "@/components/home/SiteFooter";
 import { SiteHeader } from "@/components/home/SiteHeader";
@@ -20,6 +21,7 @@ export default function AboutPage() {
       <SiteHeader />
       <main className="flex-1">
         <AboutHero />
+        <AboutStory />
       </main>
       <ContactCta />
       <SiteFooter />
