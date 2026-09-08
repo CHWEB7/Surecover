@@ -102,20 +102,20 @@ export function Hero() {
 
           <div className="relative mx-auto max-w-5xl text-center lg:max-w-6xl">
             <h1 className="text-5xl leading-[1.05] font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl xl:text-8xl">
-              Clarity for decisions that shape clearing.
+              Clarity for complex clearing decisions.
             </h1>
             <div className="mx-auto mt-8 grid w-full max-w-5xl grid-cols-1 items-center gap-5 sm:mt-10 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] sm:items-stretch sm:gap-0 lg:max-w-6xl">
-              <p className="text-center text-xl leading-snug font-medium text-white text-pretty sm:px-6 sm:text-2xl lg:px-8 lg:text-[1.75rem]">
-                Sureclear is an independent cleared derivatives advisory.
+              <p className="text-center text-base leading-snug font-medium text-white text-pretty sm:px-6 sm:text-lg lg:px-8 lg:text-xl">
+                SureClear is an independent specialist advisory firm focused
+                exclusively on the cleared derivatives industry
               </p>
               <div
                 aria-hidden
                 className="mx-auto h-px w-16 bg-white/35 sm:mx-0 sm:h-auto sm:w-px sm:self-stretch"
               />
               <p className="text-center text-sm leading-relaxed text-white/80 text-pretty sm:px-6 sm:text-base lg:px-8">
-                We help banks, brokers, exchanges, CCPs, fintechs and new market
-                participants make better decisions across clearing strategy,
-                transformation, regulatory change and operations.
+                We help financial institutions make confident decisions across
+                clearing strategy, transformation and operations
               </p>
             </div>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
