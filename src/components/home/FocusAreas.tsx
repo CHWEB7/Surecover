@@ -168,12 +168,18 @@ export function FocusAreas() {
       <div className="mx-auto max-w-7xl px-6 pt-16 lg:px-10 lg:pt-24">
         <div className="max-w-3xl">
           <h2 className="text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">
-            Better decisions across the clearing lifecycle
+            Make complex clearing decisions with confidence.
           </h2>
-          <p className="mt-5 max-w-2xl text-lg text-stone-600 sm:text-xl">
-            Specialist advice for banks, brokers, exchanges, CCPs, fintechs and
-            new market participants — grounded in how clearing actually works.
-          </p>
+          <div className="mt-5 max-w-2xl space-y-4 text-lg text-stone-600 sm:text-xl">
+            <p>
+              Specialist cleared derivatives advisory across strategy,
+              transformation, operations and regulatory change.
+            </p>
+            <p>
+              Built on 30+ years inside clearing across operations,
+              transformation, product and market infrastructure.
+            </p>
+          </div>
           <a
             href="/home/services"
             className="mt-8 inline-flex rounded-lg border border-[#0b1220] px-5 py-2.5 text-sm font-semibold text-[#0b1220] transition hover:bg-[#0b1220] hover:text-white"
