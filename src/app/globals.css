@@ -94,9 +94,16 @@ html {
   .transform-fiber-image,
   .regulation-network-image,
   .ops-node-float,
+  .ops-line-trail,
   .hero-focus-pulse,
   .services-cta-pulse {
     animation: none !important;
+  }
+
+  .ops-line-trail {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    opacity: 0.9;
   }
 
   .strategy-step-enter,
@@ -222,6 +229,19 @@ html {
   }
   50% {
     transform: translateY(-4px);
+  }
+}
+
+/* Operations connectors — short bright pulse traveling hub → node */
+.ops-line-trail {
+  stroke-dasharray: 26 220;
+  stroke-dashoffset: 0;
+  animation: ops-line-trail 2.5s linear infinite;
+}
+
+@keyframes ops-line-trail {
+  to {
+    stroke-dashoffset: -246;
   }
 }
 
