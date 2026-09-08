@@ -83,6 +83,7 @@ html {
   .strategy-link-flow,
   .strategy-node,
   .strategy-node-dot,
+  .strategy-node-pulse,
   .strategy-hub,
   .strategy-label,
   .hero-focus-pulse,
@@ -95,7 +96,8 @@ html {
   }
 
   .hero-focus-pulse,
-  .services-cta-pulse {
+  .services-cta-pulse,
+  .strategy-node-pulse {
     box-shadow: none;
   }
 }
@@ -141,6 +143,10 @@ html {
 
 .strategy-node-dot {
   animation: strategy-dot-pulse 2.2s ease-in-out infinite;
+}
+
+.strategy-node-pulse {
+  animation: strategy-node-pulse 2.4s ease-in-out infinite;
 }
 
 .strategy-label {
@@ -222,6 +228,20 @@ html {
   50% {
     opacity: 1;
     transform: scale(1.35);
+  }
+}
+
+@keyframes strategy-node-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(153, 242, 200, 0.4);
+    border-color: rgba(255, 255, 255, 0.75);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 10px rgba(153, 242, 200, 0);
+    border-color: rgba(153, 242, 200, 0.95);
   }
 }
 

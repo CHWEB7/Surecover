@@ -21,21 +21,105 @@ const backgrounds: Record<FocusVisualVariant, string> = {
 
 function StrategyGraphic() {
   const nodes = [
-    { x: 36, y: 42, label: "Membership", delay: "0s" },
-    { x: 164, y: 48, label: "Products", delay: "0.35s" },
-    { x: 168, y: 148, label: "Positioning", delay: "0.7s" },
-    { x: 32, y: 152, label: "Access", delay: "1.05s" },
+    {
+      id: "advise",
+      x: 38,
+      y: 44,
+      label: "Advise",
+      delay: "0s",
+      placement: "top" as const,
+      icon: (
+        <path
+          d="M5 6.5h14v9.5H12l-3.5 3V16H5V6.5z"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      ),
+    },
+    {
+      id: "strategy",
+      x: 162,
+      y: 44,
+      label: "Strategy",
+      delay: "0.35s",
+      placement: "top" as const,
+      icon: (
+        <>
+          <circle
+            cx="12"
+            cy="12"
+            r="7.25"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            fill="none"
+          />
+          <circle cx="12" cy="12" r="2.5" fill="currentColor" />
+          <path
+            d="M12 3.5v2.2M12 18.3v2.2M3.5 12h2.2M18.3 12h2.2"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+          />
+        </>
+      ),
+    },
+    {
+      id: "transformation",
+      x: 162,
+      y: 156,
+      label: "Transformation",
+      delay: "0.7s",
+      placement: "bottom" as const,
+      icon: (
+        <path
+          d="M4 12a8 8 0 0 1 13.66-5.66M20 4v4h-4M20 12a8 8 0 0 1-13.66 5.66M4 20v-4h4"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          fill="none"
+        />
+      ),
+    },
+    {
+      id: "risk",
+      x: 38,
+      y: 156,
+      label: "Risk & Compliance",
+      delay: "1.05s",
+      placement: "bottom" as const,
+      icon: (
+        <>
+          <path
+            d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3z"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinejoin="round"
+            fill="none"
+          />
+          <path
+            d="M9 12l2 2 4-4"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+        </>
+      ),
+    },
   ];
 
   return (
-    <div className="relative z-10 flex h-full w-full flex-col justify-between p-8 sm:p-10">
-      <div className="relative mx-auto aspect-square w-full max-w-[17rem] flex-1">
+    <div className="relative z-10 flex h-full w-full flex-col justify-between gap-4 p-8 sm:p-10">
+      <div className="relative mx-auto aspect-square w-full max-w-[20rem] flex-1">
         <svg
           viewBox="0 0 200 200"
           className="h-full w-full"
           aria-hidden="true"
         >
-          {/* Soft expanding rings from the SC hub */}
           <circle
             cx="100"
             cy="100"
@@ -56,7 +140,7 @@ function StrategyGraphic() {
           />
 
           {nodes.map((node, index) => (
-            <g key={node.label}>
+            <g key={node.id}>
               <line
                 x1="100"
                 y1="100"
@@ -68,7 +152,6 @@ function StrategyGraphic() {
                 strokeWidth="1.6"
                 strokeLinecap="round"
               />
-              {/* Travelling highlight along each link */}
               <line
                 x1="100"
                 y1="100"
@@ -80,26 +163,6 @@ function StrategyGraphic() {
                 strokeWidth="2"
                 strokeLinecap="round"
               />
-              <g
-                className="strategy-node"
-                style={{ animationDelay: node.delay, transformOrigin: `${node.x}px ${node.y}px` }}
-              >
-                <circle
-                  cx={node.x}
-                  cy={node.y}
-                  r="16"
-                  fill="rgba(15,31,26,0.35)"
-                  stroke="rgba(255,255,255,0.75)"
-                  strokeWidth="1.5"
-                />
-                <circle
-                  cx={node.x}
-                  cy={node.y}
-                  r="4"
-                  className="strategy-node-dot"
-                  fill="rgba(153,242,200,0.95)"
-                />
-              </g>
             </g>
           ))}
 
@@ -124,28 +187,47 @@ function StrategyGraphic() {
             </text>
           </g>
         </svg>
+
         <div className="pointer-events-none absolute inset-0">
-          <span className="strategy-label absolute top-[12%] left-[2%] text-[10px] font-semibold tracking-wide text-white/90 uppercase">
-            Membership
-          </span>
-          <span
-            className="strategy-label absolute top-[14%] right-[0%] text-[10px] font-semibold tracking-wide text-white/90 uppercase"
-            style={{ animationDelay: "0.35s" }}
-          >
-            Products
-          </span>
-          <span
-            className="strategy-label absolute right-[0%] bottom-[18%] text-[10px] font-semibold tracking-wide text-white/90 uppercase"
-            style={{ animationDelay: "0.7s" }}
-          >
-            Positioning
-          </span>
-          <span
-            className="strategy-label absolute bottom-[16%] left-[4%] text-[10px] font-semibold tracking-wide text-white/90 uppercase"
-            style={{ animationDelay: "1.05s" }}
-          >
-            Access
-          </span>
+          {nodes.map((node) => (
+            <div
+              key={node.id}
+              className="absolute flex w-[7.25rem] flex-col items-center gap-2"
+              style={{
+                left: `${(node.x / 200) * 100}%`,
+                top: `${(node.y / 200) * 100}%`,
+                transform:
+                  node.placement === "top"
+                    ? "translate(-50%, calc(-50% - 0.15rem))"
+                    : "translate(-50%, calc(-50% + 0.15rem))",
+              }}
+            >
+              {node.placement === "top" && (
+                <span
+                  className="strategy-label text-center text-base font-semibold leading-tight tracking-tight text-white sm:text-lg"
+                  style={{ animationDelay: node.delay }}
+                >
+                  {node.label}
+                </span>
+              )}
+              <div
+                className="strategy-node-pulse flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/80 bg-[#0b1220]/40 text-white backdrop-blur-sm"
+                style={{ animationDelay: node.delay }}
+              >
+                <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
+                  {node.icon}
+                </svg>
+              </div>
+              {node.placement === "bottom" && (
+                <span
+                  className="strategy-label text-center text-base font-semibold leading-tight tracking-tight text-white sm:text-lg"
+                  style={{ animationDelay: node.delay }}
+                >
+                  {node.label}
+                </span>
+              )}
+            </div>
+          ))}
         </div>
       </div>
       <p className="max-w-[16rem] text-sm text-white/80">
