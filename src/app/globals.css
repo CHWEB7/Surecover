@@ -173,7 +173,8 @@ html {
 
 /* Transformation card — fiber plate tinted to brand greens */
 .transform-fiber-image {
-  filter: hue-rotate(95deg) saturate(1.2) brightness(0.88) contrast(1.05);
+  /* Shift cool blue/cyan fibers toward Sureclear greens */
+  filter: hue-rotate(-48deg) saturate(1.25) brightness(0.9) contrast(1.06);
   transform-origin: center;
   animation: transform-fiber-drift 18s ease-in-out infinite alternate;
 }
