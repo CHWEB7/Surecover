@@ -1,13 +1,8 @@
 const services = [
   {
     title: "Clearing Strategy",
-    items: [
-      "CCP connectivity",
-      "Exchange membership",
-      "Clearing operating models",
-      "Clearing mandates",
-      "Regulatory evolution",
-    ],
+    description:
+      "CCP connectivity, exchange membership, clearing operating models, clearing mandates and regulatory evolution.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -33,14 +28,8 @@ const services = [
   },
   {
     title: "Transformation & Change",
-    items: [
-      "Roadmaps",
-      "Vendor assessment",
-      "RFPs",
-      "Product strategy",
-      "Governance",
-      "Platform transformation",
-    ],
+    description:
+      "Roadmaps, vendor assessment, RFPs, product strategy, governance and platform transformation.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -67,14 +56,8 @@ const services = [
   },
   {
     title: "Operations & Resilience",
-    items: [
-      "Controls",
-      "Procedures",
-      "Risk reviews",
-      "Automation",
-      "Operating models",
-      "Outsourcing",
-    ],
+    description:
+      "Controls, procedures, risk reviews, automation, operating models and outsourcing.",
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -157,11 +140,9 @@ export function Hero() {
               <h2 className="text-lg font-semibold text-white">
                 {service.title}
               </h2>
-              <div className="mt-4 space-y-1.5 text-sm leading-relaxed text-slate-300">
-                {service.items.map((item) => (
-                  <p key={item}>{item}</p>
-                ))}
-              </div>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                {service.description}
+              </p>
             </article>
           ))}
         </div>
