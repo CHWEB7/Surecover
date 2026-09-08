@@ -136,8 +136,8 @@ export function OperationsHubGraphic() {
     const syncPaths = () => {
       const wr = wrap.getBoundingClientRect();
       const hr = hub.getBoundingClientRect();
-      // Anchor on the logo’s right-middle edge
-      const startX = hr.right - wr.left;
+      // Origin is a separate anchor — not the logo — so lines never overlap it
+      const startX = hr.left + hr.width / 2 - wr.left;
       const startY = hr.top + hr.height / 2 - wr.top;
 
       hubDotRef.current?.setAttribute("cx", String(startX));
@@ -191,11 +191,8 @@ export function OperationsHubGraphic() {
       <div className="pointer-events-none absolute -top-24 -left-8 h-56 w-56 rounded-full bg-[#99f2c8]/18 blur-3xl" />
       <div className="pointer-events-none absolute right-0 bottom-0 h-44 w-44 rounded-full bg-[#2d6a4f]/40 blur-3xl" />
 
-      {/* SureClear logo hub — smaller, nudged left from the connectors */}
-      <div
-        ref={hubRef}
-        className="relative z-10 mr-3 flex shrink-0 items-center justify-center sm:mr-5"
-      >
+      {/* Logo sits left of the connector origin — not attached to the lines */}
+      <div className="relative z-10 flex shrink-0 items-center gap-6 sm:gap-8">
         <Image
           src="/sureclear-logo-light.png"
           alt=""
@@ -203,6 +200,12 @@ export function OperationsHubGraphic() {
           height={300}
           className="h-7 w-auto sm:h-8 lg:h-9"
           priority={false}
+        />
+        {/* Invisible line origin — connectors start here, clear of the logo */}
+        <div
+          ref={hubRef}
+          className="h-2 w-2 shrink-0"
+          aria-hidden="true"
         />
       </div>
 
