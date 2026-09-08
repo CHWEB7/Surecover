@@ -166,11 +166,11 @@ export function FocusAreas() {
   return (
     <section id="focus" className="scroll-mt-24 bg-[#f5f4ef]">
       <div className="mx-auto max-w-7xl px-6 pt-16 lg:px-10 lg:pt-24">
-        <div className="max-w-3xl">
-          <h2 className="text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">
+        <div className="max-w-5xl">
+          <h2 className="max-w-3xl text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">
             Make complex clearing decisions with confidence.
           </h2>
-          <div className="mt-5 max-w-2xl space-y-4 text-lg text-stone-600 sm:text-xl">
+          <div className="mt-5 space-y-4 text-lg text-stone-600 sm:text-xl">
             <p>
               Specialist cleared derivatives advisory across strategy,
               transformation, operations and regulatory change.
