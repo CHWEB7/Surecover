@@ -195,7 +195,7 @@ html {
 
 /* Regulation card — network plate tinted to lighter site greens */
 .regulation-network-image {
-  filter: hue-rotate(-28deg) saturate(1.15) brightness(1.05) contrast(1.04);
+  filter: hue-rotate(-22deg) saturate(1.2) brightness(1.18) contrast(1.02);
   transform-origin: center;
   animation: regulation-network-drift 20s ease-in-out infinite alternate;
 }

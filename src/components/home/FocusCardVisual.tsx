@@ -171,10 +171,10 @@ function RegulationGraphic() {
         priority={false}
       />
       {/* Lighter brand-green wash */}
-      <div className="pointer-events-none absolute inset-0 bg-[#99f2c8]/25 mix-blend-screen" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#2d6a4f]/35 via-[#52b788]/20 to-[#99f2c8]/45 mix-blend-soft-light" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#1f4037]/35 via-transparent to-[#99f2c8]/15" />
-      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/15" />
+      <div className="pointer-events-none absolute inset-0 bg-[#99f2c8]/40 mix-blend-screen" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#52b788]/30 via-[#99f2c8]/35 to-[#d8f3dc]/40 mix-blend-soft-light" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2d6a4f]/25 via-transparent to-[#99f2c8]/20" />
+      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/20" />
     </div>
   );
 }
