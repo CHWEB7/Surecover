@@ -38,9 +38,9 @@ export function AboutHero() {
         </div>
       </div>
 
-      {/* Desktop: smaller mark straddling the white / tint split */}
+      {/* Desktop: smaller mark straddling the split, biased onto the tinted panel */}
       <div
-        className="about-mark-fill pointer-events-none absolute top-1/2 left-[64%] hidden aspect-square w-[min(22rem,28vw)] -translate-x-1/2 -translate-y-1/2 lg:block xl:w-[min(24rem,26vw)]"
+        className="about-mark-fill pointer-events-none absolute top-1/2 left-[70%] hidden aspect-square w-[min(22rem,28vw)] -translate-x-1/2 -translate-y-1/2 lg:block xl:w-[min(24rem,26vw)]"
         role="img"
         aria-label="SureClear mark filled with clearing network imagery"
         style={{
