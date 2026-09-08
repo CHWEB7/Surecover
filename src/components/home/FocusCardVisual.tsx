@@ -20,31 +20,34 @@ const backgrounds: Record<FocusVisualVariant, string> = {
 };
 
 function StrategyGraphic() {
-  const nodes = [
+  const points = [
     {
-      id: "advise",
-      x: 38,
-      y: 44,
-      label: "Advise",
-      delay: "0s",
-      placement: "top" as const,
+      title: "Error Reduction",
+      body: "Catching discrepancies and mismatched instructions before money or assets move.",
       icon: (
-        <path
-          d="M5 6.5h14v9.5H12l-3.5 3V16H5V6.5z"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinejoin="round"
-          fill="none"
-        />
+        <>
+          <circle
+            cx="10.5"
+            cy="10.5"
+            r="6"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            fill="none"
+          />
+          <path
+            d="M15 15l4.5 4.5M8.5 10.5l1.5 1.5 3-3"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+        </>
       ),
     },
     {
-      id: "strategy",
-      x: 162,
-      y: 44,
-      label: "Strategy",
-      delay: "0.35s",
-      placement: "top" as const,
+      title: "Liquidity Management",
+      body: "Optimizing cash flow and reducing the amount of idle capital needed to back pending trades.",
       icon: (
         <>
           <circle
@@ -55,57 +58,34 @@ function StrategyGraphic() {
             strokeWidth="1.75"
             fill="none"
           />
-          <circle cx="12" cy="12" r="2.5" fill="currentColor" />
           <path
-            d="M12 3.5v2.2M12 18.3v2.2M3.5 12h2.2M18.3 12h2.2"
+            d="M12 8v4l2.5 1.5"
             stroke="currentColor"
             strokeWidth="1.75"
             strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
           />
         </>
       ),
     },
     {
-      id: "transformation",
-      x: 162,
-      y: 156,
-      label: "Transformation",
-      delay: "0.7s",
-      placement: "bottom" as const,
-      icon: (
-        <path
-          d="M4 12a8 8 0 0 1 13.66-5.66M20 4v4h-4M20 12a8 8 0 0 1-13.66 5.66M4 20v-4h4"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-      ),
-    },
-    {
-      id: "risk",
-      x: 38,
-      y: 156,
-      label: "Risk & Compliance",
-      delay: "1.05s",
-      placement: "bottom" as const,
+      title: "Regulatory Compliance",
+      body: "Maintaining transparent audit trails to meet anti-money laundering (AML) and know-your-customer (KYC) standards.",
       icon: (
         <>
           <path
-            d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3z"
+            d="M7 4h10v16H7z"
             stroke="currentColor"
             strokeWidth="1.75"
             strokeLinejoin="round"
             fill="none"
           />
           <path
-            d="M9 12l2 2 4-4"
+            d="M9.5 8h5M9.5 12h5M9.5 16h3"
             stroke="currentColor"
             strokeWidth="1.75"
             strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
           />
         </>
       ),
@@ -113,124 +93,42 @@ function StrategyGraphic() {
   ];
 
   return (
-    <div className="relative z-10 flex h-full w-full flex-col justify-between gap-4 p-8 sm:p-10">
-      <div className="relative mx-auto aspect-square w-full max-w-[20rem] flex-1">
-        <svg
-          viewBox="0 0 200 200"
-          className="h-full w-full"
-          aria-hidden="true"
-        >
-          <circle
-            cx="100"
-            cy="100"
-            r="42"
-            className="strategy-pulse-ring"
-            fill="none"
-            stroke="rgba(255,255,255,0.35)"
-            strokeWidth="1"
-          />
-          <circle
-            cx="100"
-            cy="100"
-            r="42"
-            className="strategy-pulse-ring strategy-pulse-ring--delayed"
-            fill="none"
-            stroke="rgba(153,242,200,0.45)"
-            strokeWidth="1"
-          />
-
-          {nodes.map((node, index) => (
-            <g key={node.id}>
-              <line
-                x1="100"
-                y1="100"
-                x2={node.x}
-                y2={node.y}
-                className="strategy-link"
-                style={{ animationDelay: `${index * 0.28}s` }}
-                stroke="rgba(255,255,255,0.55)"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-              />
-              <line
-                x1="100"
-                y1="100"
-                x2={node.x}
-                y2={node.y}
-                className="strategy-link-flow"
-                style={{ animationDelay: `${index * 0.45}s` }}
-                stroke="rgba(255,255,255,0.95)"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </g>
-          ))}
-
-          <g className="strategy-hub">
-            <circle
-              cx="100"
-              cy="100"
-              r="34"
-              fill="rgba(255,255,255,0.14)"
-              stroke="rgba(255,255,255,0.7)"
-              strokeWidth="1.5"
-            />
-            <text
-              x="100"
-              y="106"
-              textAnchor="middle"
-              fill="white"
-              fontSize="18"
-              fontWeight="700"
-            >
-              SC
-            </text>
-          </g>
-        </svg>
-
-        <div className="pointer-events-none absolute inset-0">
-          {nodes.map((node) => (
-            <div
-              key={node.id}
-              className="absolute flex w-[7.25rem] flex-col items-center gap-2"
-              style={{
-                left: `${(node.x / 200) * 100}%`,
-                top: `${(node.y / 200) * 100}%`,
-                transform:
-                  node.placement === "top"
-                    ? "translate(-50%, calc(-50% - 0.15rem))"
-                    : "translate(-50%, calc(-50% + 0.15rem))",
-              }}
-            >
-              {node.placement === "top" && (
-                <span
-                  className="strategy-label text-center text-base font-semibold leading-tight tracking-tight text-white sm:text-lg"
-                  style={{ animationDelay: node.delay }}
-                >
-                  {node.label}
-                </span>
-              )}
+    <div className="relative z-10 flex h-full w-full flex-col justify-between p-8 sm:p-10">
+      <div className="flex flex-1 flex-col justify-center gap-0 pt-1">
+        {points.map((point, index) => (
+          <div
+            key={point.title}
+            className="strategy-step-enter flex items-stretch gap-4"
+            style={{ animationDelay: `${index * 0.55}s` }}
+          >
+            <div className="flex w-12 shrink-0 flex-col items-center">
               <div
-                className="strategy-node-pulse flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/80 bg-[#0b1220]/40 text-white backdrop-blur-sm"
-                style={{ animationDelay: node.delay }}
+                className="strategy-node-pulse flex h-12 w-12 items-center justify-center rounded-full border border-white/80 bg-[#0b1220]/40 text-white backdrop-blur-sm"
+                style={{ animationDelay: `${index * 0.55}s` }}
               >
                 <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-                  {node.icon}
+                  {point.icon}
                 </svg>
               </div>
-              {node.placement === "bottom" && (
-                <span
-                  className="strategy-label text-center text-base font-semibold leading-tight tracking-tight text-white sm:text-lg"
-                  style={{ animationDelay: node.delay }}
-                >
-                  {node.label}
-                </span>
+              {index < points.length - 1 && (
+                <div
+                  className="strategy-step-line mt-2 w-px flex-1 bg-gradient-to-b from-white/70 to-white/15"
+                  style={{ animationDelay: `${index * 0.55 + 0.25}s` }}
+                />
               )}
             </div>
-          ))}
-        </div>
+            <div className="min-w-0 flex-1 pb-7 last:pb-0">
+              <p className="text-lg font-semibold tracking-tight text-white sm:text-xl">
+                {point.title}
+              </p>
+              <p className="mt-1.5 text-sm leading-relaxed text-white/80 sm:text-[0.95rem]">
+                {point.body}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
-      <p className="max-w-[16rem] text-sm text-white/80">
+      <p className="max-w-[18rem] text-sm text-white/75">
         Clearing models shaped around how markets actually clear.
       </p>
     </div>
