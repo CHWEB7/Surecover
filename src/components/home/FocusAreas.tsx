@@ -170,16 +170,13 @@ export function FocusAreas() {
           <h2 className="max-w-3xl text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">
             Make complex clearing decisions with confidence.
           </h2>
-          <div className="mt-5 space-y-4 text-lg text-stone-600 sm:text-xl">
-            <p>
-              Specialist cleared derivatives advisory across strategy,
-              transformation, operations and regulatory change.
-            </p>
-            <p>
-              Built on 30+ years inside clearing across operations,
-              transformation, product and market infrastructure.
-            </p>
-          </div>
+          <p className="mt-5 text-lg leading-relaxed text-stone-600 sm:text-xl">
+            Specialist cleared derivatives advisory across strategy,
+            transformation, operations and regulatory change.
+            <br />
+            Built on 30+ years inside clearing across operations, transformation,
+            product and market infrastructure.
+          </p>
           <a
             href="/home/services"
             className="mt-8 inline-flex rounded-lg border border-[#0b1220] px-5 py-2.5 text-sm font-semibold text-[#0b1220] transition hover:bg-[#0b1220] hover:text-white"
