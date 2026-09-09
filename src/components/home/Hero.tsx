@@ -1,81 +1,4 @@
-const services = [
-  {
-    title: "Clearing Strategy",
-    description:
-      "CCP connectivity, exchange membership, clearing operating models, clearing mandates and regulatory evolution.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        className="h-10 w-10"
-        aria-hidden="true"
-      >
-        <path
-          d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M12 12l8-4.5M12 12v9M12 12L4 7.5"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Transformation & Change",
-    description:
-      "Roadmaps, vendor assessment, RFPs, product strategy, governance and platform transformation.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        className="h-10 w-10"
-        aria-hidden="true"
-      >
-        <path
-          d="M4 12a8 8 0 0 1 13.66-5.66M20 4v4h-4"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M20 12a8 8 0 0 1-13.66 5.66M4 20v-4h4"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Operations & Resilience",
-    description:
-      "Controls, procedures, risk reviews, automation, operating models and outsourcing.",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        className="h-10 w-10"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.75" />
-        <path
-          d="M12 3v2.5M12 18.5V21M4.9 6.5l1.8 1.8M17.3 15.7l1.8 1.8M3 12h2.5M18.5 12H21M4.9 17.5l1.8-1.8M17.3 8.3l1.8-1.8"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-];
+import { HeroServiceCards } from "@/components/home/HeroServiceCards";
 
 export function Hero() {
   return (
@@ -129,23 +52,7 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Service cards — half over the gradient panel, half on the page below */}
-        <div className="relative z-10 mx-auto -mt-28 grid max-w-6xl gap-5 px-4 sm:-mt-32 sm:grid-cols-2 sm:px-6 lg:-mt-36 lg:grid-cols-3">
-          {services.map((service) => (
-            <article
-              key={service.title}
-              className="rounded-2xl border border-white/10 bg-[#0b1220] p-6 text-left shadow-2xl shadow-[#1f4037]/25 transition hover:-translate-y-0.5 hover:shadow-[#1f4037]/35"
-            >
-              <div className="mb-5 text-[#99f2c8]">{service.icon}</div>
-              <h2 className="text-lg font-semibold text-white">
-                {service.title}
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                {service.description}
-              </p>
-            </article>
-          ))}
-        </div>
+        <HeroServiceCards />
       </div>
     </section>
   );
