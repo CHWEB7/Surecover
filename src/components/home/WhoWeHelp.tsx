@@ -146,26 +146,22 @@ export function WhoWeHelp() {
       className="scroll-mt-24 -mt-16 bg-[#f5f4ef] pt-8 pb-20 lg:-mt-24 lg:pt-10 lg:pb-28"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="max-w-3xl">
-          <h2 className="text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">
+        <div className="max-w-5xl">
+          <h2 className="max-w-4xl text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">
             We help organisations make complex clearing decisions{" "}
             <span className="text-[#2d6a4f]">clearer.</span>
           </h2>
-          <div className="mt-6 max-w-2xl space-y-4 text-lg leading-relaxed text-stone-600 sm:text-xl">
+          <div className="mt-5 max-w-5xl space-y-3 text-lg leading-relaxed text-stone-600 sm:text-xl">
             <p>
               SURECLEAR exists because the cleared derivatives industry
-              doesn&apos;t need another generalist consultancy.
-            </p>
-            <p className="font-medium text-[#0b1220]">
-              It needs specialist experience.
+              doesn&apos;t need another generalist consultancy. It needs
+              specialist experience.
             </p>
             <p>
               Our focus is deliberately narrow: helping organisations navigate
-              clearing strategy, transformation and operations.
-            </p>
-            <p>
-              SURECLEAR draws on more than 30 years of experience across the
-              cleared derivatives industry.
+              clearing strategy, transformation and operations. SURECLEAR draws
+              on more than 30 years of experience across the cleared derivatives
+              industry.
             </p>
             <p className="font-medium text-[#0b1220]">
               We understand the industry because we&apos;ve worked inside it.
