@@ -180,14 +180,14 @@ function TransformationGraphic() {
         aria-hidden
       />
 
-      <ul className="absolute inset-0 z-10 flex flex-col justify-center gap-3.5 px-8 py-10 sm:gap-4 sm:px-10 lg:px-12">
+      <ul className="absolute inset-0 z-10 flex flex-col justify-center gap-4 px-8 py-10 sm:gap-5 sm:px-10 lg:px-12">
         {TRANSFORM_SERVICES.map((service, i) => (
           <li
             key={service}
-            className="flex items-center gap-3 text-[0.95rem] font-medium leading-snug text-white sm:text-[1.02rem]"
+            className="flex items-center gap-3.5 text-[1.08rem] font-medium leading-snug text-white sm:text-[1.18rem]"
           >
             <span
-              className="transform-service-pulse relative inline-flex h-2 w-2 shrink-0 rounded-full bg-[#52b788]"
+              className="transform-service-pulse relative inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-[#52b788]"
               style={{ animationDelay: `${i * 0.2}s` }}
               aria-hidden
             />
