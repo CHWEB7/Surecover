@@ -113,7 +113,8 @@ html {
   .ops-node-float,
   .ops-line-trail,
   .hero-focus-pulse,
-  .services-cta-pulse {
+  .services-cta-pulse,
+  .transform-service-pulse {
     animation: none !important;
   }
 
@@ -136,7 +137,7 @@ html {
   }
 
   .transform-fiber-image {
-    transform: scale(1.1) !important;
+    transform: scale(1.12) !important;
   }
 
   .regulation-network-image {
@@ -149,7 +150,8 @@ html {
 
   .hero-focus-pulse,
   .services-cta-pulse,
-  .strategy-node-pulse {
+  .strategy-node-pulse,
+  .transform-service-pulse {
     box-shadow: none;
   }
 }
@@ -203,19 +205,37 @@ html {
 
 /* Transformation card — fiber plate tinted to brand greens */
 .transform-fiber-image {
-  /* Shift cool blue/cyan fibers toward Sureclear greens */
-  filter: hue-rotate(-48deg) saturate(1.25) brightness(0.9) contrast(1.06);
+  /* Shift cool blue/cyan fibers toward Sureclear greens + soft blur */
+  filter: hue-rotate(-48deg) saturate(1.25) brightness(0.9) contrast(1.06)
+    blur(2.5px);
   transform-origin: center;
   animation: transform-fiber-drift 18s ease-in-out infinite alternate;
 }
 
 @keyframes transform-fiber-drift {
   from {
-    transform: scale(1.1) translate3d(0, 0, 0);
+    transform: scale(1.12) translate3d(0, 0, 0);
   }
   to {
-    transform: scale(1.16) translate3d(-1.5%, 1%, 0);
+    transform: scale(1.18) translate3d(-1.5%, 1%, 0);
   }
+}
+
+/* Transformation card — pulsing service bullets */
+@keyframes transform-service-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(82, 183, 136, 0.55);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(82, 183, 136, 0);
+    transform: scale(1.18);
+  }
+}
+
+.transform-service-pulse {
+  animation: transform-service-pulse 2.4s ease-in-out infinite;
 }
 
 /* Regulation card — network plate tinted to lighter site greens */

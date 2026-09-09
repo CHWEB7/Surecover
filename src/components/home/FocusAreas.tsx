@@ -83,9 +83,10 @@ const cards = [
     visualVariant: "strategy" as const,
   },
   {
-    title: "Transformation designed for delivery, not just diagnosis",
+    title: "Transformation & Change",
+    tagline: "Turn decisions into capability.",
     description:
-      "Shape and deliver change across technology, target operating models and client propositions — with outcomes that can be implemented by the teams who run the business.",
+      "We help turn a clearing decision into a workable operating model, roadmap and delivery plan.",
     ctaLabel: "Talk to us about transformation",
     icon: RefreshIcon,
     visualVariant: "transformation" as const,
@@ -197,6 +198,7 @@ export function FocusAreas() {
             key={card.title}
             icon={card.icon}
             title={card.title}
+            tagline={card.tagline}
             description={card.description}
             ctaLabel={card.ctaLabel}
             visualVariant={card.visualVariant}
@@ -258,6 +260,7 @@ export function FocusAreas() {
                       <FocusStackCard
                         icon={card.icon}
                         title={card.title}
+                        tagline={card.tagline}
                         description={card.description}
                         ctaLabel={card.ctaLabel}
                         visualVariant={card.visualVariant}

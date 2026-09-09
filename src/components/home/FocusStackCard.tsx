@@ -9,6 +9,8 @@ type FocusStackCardProps = {
   description: string;
   ctaLabel: string;
   visualVariant: FocusVisualVariant;
+  /** Optional line under the title */
+  tagline?: string;
   style?: React.CSSProperties;
   className?: string;
   /** When false, parent owns the elevation shadow. */
@@ -21,6 +23,7 @@ export function FocusStackCard({
   description,
   ctaLabel,
   visualVariant,
+  tagline,
   style,
   className = "",
   elevated = true,
@@ -50,6 +53,11 @@ export function FocusStackCard({
               <h3 className="max-w-xl text-3xl leading-[1.12] font-semibold tracking-tight text-[#0b1220] sm:text-4xl lg:text-[2.75rem]">
                 {title}
               </h3>
+              {tagline ? (
+                <p className="mt-3 max-w-xl text-lg font-medium tracking-tight text-[#2d6a4f] sm:text-xl">
+                  {tagline}
+                </p>
+              ) : null}
               <p className="mt-4 max-w-xl text-base leading-relaxed text-stone-600 sm:text-lg">
                 {description}
               </p>

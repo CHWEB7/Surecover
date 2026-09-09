@@ -139,10 +139,20 @@ function StrategyGraphic() {
   );
 }
 
+const TRANSFORM_SERVICES = [
+  "Roadmaps",
+  "Vendor assessment and scoping",
+  "RFPs",
+  "Product strategy",
+  "Programme Governance",
+  "RAID Analysis",
+  "Platform transformation",
+] as const;
+
 function TransformationGraphic() {
   return (
-    <div className="relative z-10 h-full w-full overflow-hidden" aria-hidden="true">
-      {/* Fiber optic plate — hue-shifted toward brand greens */}
+    <div className="relative z-10 h-full w-full overflow-hidden">
+      {/* Fiber optic plate — hue-shifted + softly blurred */}
       <Image
         src="/transformation-fibers.jpg"
         alt=""
@@ -150,12 +160,43 @@ function TransformationGraphic() {
         sizes="(max-width: 1024px) 100vw, 40vw"
         className="transform-fiber-image object-cover"
         priority={false}
+        aria-hidden
       />
-      {/* Brand color wash */}
-      <div className="pointer-events-none absolute inset-0 bg-[#1f4037]/35 mix-blend-multiply" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#0b1220]/55 via-[#2d6a4f]/25 to-[#99f2c8]/35 mix-blend-soft-light" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1220]/50 via-transparent to-[#1f4037]/20" />
-      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
+      {/* Brand color wash — slightly stronger so service list stays readable */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-[#1f4037]/45 mix-blend-multiply"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#0b1220]/60 via-[#2d6a4f]/30 to-[#99f2c8]/25 mix-blend-soft-light"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1220]/55 via-[#0b1220]/20 to-[#1f4037]/25"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10"
+        aria-hidden
+      />
+
+      <ul className="absolute inset-0 z-10 flex flex-col justify-center gap-3.5 px-8 py-10 sm:gap-4 sm:px-10 lg:px-12">
+        {TRANSFORM_SERVICES.map((service, i) => (
+          <li
+            key={service}
+            className="flex items-center gap-3 text-[0.95rem] font-medium leading-snug text-white sm:text-[1.02rem]"
+          >
+            <span
+              className="transform-service-pulse relative inline-flex h-2 w-2 shrink-0 rounded-full bg-[#52b788]"
+              style={{ animationDelay: `${i * 0.2}s` }}
+              aria-hidden
+            />
+            <span className="drop-shadow-[0_1px_10px_rgba(0,0,0,0.5)]">
+              {service}
+            </span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
