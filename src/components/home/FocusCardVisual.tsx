@@ -201,9 +201,18 @@ function TransformationGraphic() {
   );
 }
 
+const FRACTIONAL_SERVICES = [
+  "Operations leadership",
+  "Change & Transformation leadership",
+  "Programme recovery",
+  "Governance",
+  "Steering committee preparation",
+  "Executive reporting",
+] as const;
+
 function RegulationGraphic() {
   return (
-    <div className="relative z-10 h-full w-full overflow-hidden" aria-hidden="true">
+    <div className="relative z-10 h-full w-full overflow-hidden">
       <Image
         src="/regulation-network.jpg"
         alt=""
@@ -211,12 +220,43 @@ function RegulationGraphic() {
         sizes="(max-width: 1024px) 100vw, 40vw"
         className="regulation-network-image object-cover"
         priority={false}
+        aria-hidden
       />
-      {/* Lighter brand-green wash */}
-      <div className="pointer-events-none absolute inset-0 bg-[#99f2c8]/40 mix-blend-screen" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#52b788]/30 via-[#99f2c8]/35 to-[#d8f3dc]/40 mix-blend-soft-light" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#2d6a4f]/25 via-transparent to-[#99f2c8]/20" />
-      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/20" />
+      {/* Darker wash so service list stays readable over the light network plate */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-[#0b1220]/45 mix-blend-multiply"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#0b1220]/55 via-[#1f4037]/35 to-[#2d6a4f]/30"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1220]/55 via-[#0b1220]/15 to-[#1f4037]/20"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/15"
+        aria-hidden
+      />
+
+      <ul className="absolute inset-0 z-10 flex flex-col justify-center gap-4 px-8 py-10 sm:gap-5 sm:px-10 lg:px-12">
+        {FRACTIONAL_SERVICES.map((service, i) => (
+          <li
+            key={service}
+            className="flex items-center gap-3.5 text-[1.08rem] font-medium leading-snug text-white sm:text-[1.18rem]"
+          >
+            <span
+              className="transform-service-pulse relative inline-flex h-2.5 w-2.5 shrink-0 rounded-full bg-[#52b788]"
+              style={{ animationDelay: `${i * 0.2}s` }}
+              aria-hidden
+            />
+            <span className="drop-shadow-[0_1px_10px_rgba(0,0,0,0.5)]">
+              {service}
+            </span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

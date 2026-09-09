@@ -92,10 +92,11 @@ const cards = [
     visualVariant: "transformation" as const,
   },
   {
-    title: "Regulatory change that protects the franchise",
+    title: "Fractional Leadership",
+    tagline: "Senior experience when it matters.",
     description:
-      "Translate regulatory requirements into practical programmes that meet obligations while preserving commercial momentum and operational resilience.",
-    ctaLabel: "Talk to us about regulation",
+      "Providing experienced leadership without the commitment of a permanent senior hire.",
+    ctaLabel: "Talk to us about fractional leadership",
     icon: ShieldIcon,
     visualVariant: "regulation" as const,
   },
