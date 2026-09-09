@@ -1,8 +1,20 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
-const services = [
+type ServiceCard = {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+};
+
+const services: ServiceCard[] = [
   {
     title: "Clearing Strategy",
     description:
@@ -118,12 +130,18 @@ const services = [
 
 const GAP_PX = 20; // gap-5
 const VISIBLE = 3;
+const INTERVAL_MS = 2000;
+const SLIDE_MS = 900;
 
 export function HeroServiceCards() {
   const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const [cardWidth, setCardWidth] = useState(0);
-  const [shifted, setShifted] = useState(false);
+  const [queue, setQueue] = useState(services);
+  const [offset, setOffset] = useState(0);
+  const [animate, setAnimate] = useState(true);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const slidingRef = useRef(false);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -139,7 +157,8 @@ export function HeroServiceCards() {
 
     const measure = () => {
       const width = viewport.clientWidth;
-      setCardWidth((width - GAP_PX * (VISIBLE - 1)) / VISIBLE);
+      // Floor so 3 cards + 2 gaps never exceed the clip width
+      setCardWidth(Math.floor((width - GAP_PX * (VISIBLE - 1)) / VISIBLE));
     };
 
     measure();
@@ -148,67 +167,113 @@ export function HeroServiceCards() {
     return () => observer.disconnect();
   }, []);
 
+  const advance = useCallback(() => {
+    if (slidingRef.current) return;
+
+    if (reduceMotion) {
+      setQueue((current) => {
+        const [first, ...rest] = current;
+        return [...rest, first];
+      });
+      return;
+    }
+
+    slidingRef.current = true;
+    setAnimate(true);
+    setOffset(1);
+  }, [reduceMotion]);
+
   useEffect(() => {
-    let timeoutId = 0;
+    let intervalId = 0;
     let cancelled = false;
 
-    const arm = () => {
+    const startLoop = () => {
       if (cancelled) return;
-      timeoutId = window.setTimeout(() => {
-        if (!cancelled) setShifted(true);
-      }, 2000);
+      intervalId = window.setInterval(() => {
+        if (!cancelled) advance();
+      }, INTERVAL_MS);
     };
 
     if (document.readyState === "complete") {
-      arm();
+      startLoop();
     } else {
-      window.addEventListener("load", arm, { once: true });
+      window.addEventListener("load", startLoop, { once: true });
     }
 
     return () => {
       cancelled = true;
-      window.clearTimeout(timeoutId);
-      window.removeEventListener("load", arm);
+      window.clearInterval(intervalId);
+      window.removeEventListener("load", startLoop);
     };
-  }, []);
+  }, [advance]);
 
+  const handleTransitionEnd = (
+    event: React.TransitionEvent<HTMLDivElement>,
+  ) => {
+    if (event.target !== trackRef.current) return;
+    if (event.propertyName !== "transform") return;
+    if (offset === 0) return;
+
+    setAnimate(false);
+    setQueue((current) => {
+      const [first, ...rest] = current;
+      return [...rest, first];
+    });
+    setOffset(0);
+    slidingRef.current = false;
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => setAnimate(true));
+    });
+  };
+
+  // Slot includes the trailing gap so a departing card fully clears the clip
   const stepPx = cardWidth > 0 ? cardWidth + GAP_PX : 0;
 
   return (
-    <div
-      ref={viewportRef}
-      className="relative z-10 mx-auto -mt-28 max-w-6xl overflow-hidden px-4 sm:-mt-32 sm:px-6 lg:-mt-36"
-    >
-      <div
-        className={`flex ${
-          reduceMotion
-            ? ""
-            : "transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-        }`}
-        style={{
-          gap: GAP_PX,
-          transform:
-            shifted && stepPx > 0
-              ? `translate3d(-${stepPx}px, 0, 0)`
-              : "translate3d(0, 0, 0)",
-        }}
-      >
-        {services.map((service) => (
-          <article
-            key={service.title}
-            className="shrink-0 rounded-2xl border border-white/10 bg-[#0b1220] p-6 text-left shadow-2xl shadow-[#1f4037]/25"
-            style={{
-              width: cardWidth || undefined,
-              flex: cardWidth ? `0 0 ${cardWidth}px` : `0 0 calc((100% - ${GAP_PX * (VISIBLE - 1)}px) / ${VISIBLE})`,
-            }}
-          >
-            <div className="mb-5 text-[#99f2c8]">{service.icon}</div>
-            <h2 className="text-lg font-semibold text-white">{service.title}</h2>
-            <p className="mt-3 text-sm leading-relaxed text-slate-300">
-              {service.description}
-            </p>
-          </article>
-        ))}
+    <div className="relative z-10 mx-auto -mt-28 max-w-6xl px-4 sm:-mt-32 sm:px-6 lg:-mt-36">
+      {/* Padding is outside the clip so rounded corners are not squared off */}
+      <div ref={viewportRef} className="overflow-x-hidden overflow-y-visible">
+        <div
+          ref={trackRef}
+          className="flex will-change-transform"
+          onTransitionEnd={handleTransitionEnd}
+          style={{
+            transform:
+              offset && stepPx > 0
+                ? `translate3d(-${stepPx}px, 0, 0)`
+                : "translate3d(0, 0, 0)",
+            transition:
+              animate && !reduceMotion
+                ? `transform ${SLIDE_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`
+                : "none",
+          }}
+        >
+          {queue.map((service) => (
+            <div
+              key={service.title}
+              className="shrink-0"
+              style={{
+                width: stepPx || undefined,
+                flex: stepPx
+                  ? `0 0 ${stepPx}px`
+                  : `0 0 calc((100% + ${GAP_PX}px) / ${VISIBLE})`,
+                paddingRight: GAP_PX,
+                boxSizing: "border-box",
+              }}
+            >
+              <article className="h-full overflow-hidden rounded-2xl border border-white/10 bg-[#0b1220] p-6 text-left shadow-2xl shadow-[#1f4037]/25">
+                <div className="mb-5 text-[#99f2c8]">{service.icon}</div>
+                <h2 className="text-lg font-semibold text-white">
+                  {service.title}
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                  {service.description}
+                </p>
+              </article>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
