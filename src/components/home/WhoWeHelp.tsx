@@ -151,10 +151,26 @@ export function WhoWeHelp() {
             We help organisations make complex clearing decisions{" "}
             <span className="text-[#2d6a4f]">clearer.</span>
           </h2>
-          <p className="mt-5 max-w-2xl text-lg text-stone-600 sm:text-xl">
-            From incumbents to new entrants, we advise organisations that need
-            specialist judgement — not generic frameworks.
-          </p>
+          <div className="mt-6 max-w-2xl space-y-4 text-lg leading-relaxed text-stone-600 sm:text-xl">
+            <p>
+              SURECLEAR exists because the cleared derivatives industry
+              doesn&apos;t need another generalist consultancy.
+            </p>
+            <p className="font-medium text-[#0b1220]">
+              It needs specialist experience.
+            </p>
+            <p>
+              Our focus is deliberately narrow: helping organisations navigate
+              clearing strategy, transformation and operations.
+            </p>
+            <p>
+              SURECLEAR draws on more than 30 years of experience across the
+              cleared derivatives industry.
+            </p>
+            <p className="font-medium text-[#0b1220]">
+              We understand the industry because we&apos;ve worked inside it.
+            </p>
+          </div>
           <a
             href="/home/services"
             className="services-cta-pulse mt-8 inline-flex rounded-full border border-[#0b1220]/55 px-6 py-3 text-sm font-semibold text-[#0b1220] transition hover:border-[#0b1220] hover:bg-[#0b1220]/10"
