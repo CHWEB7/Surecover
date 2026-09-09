@@ -11,6 +11,10 @@ type FocusStackCardProps = {
   visualVariant: FocusVisualVariant;
   /** Optional line under the title */
   tagline?: string;
+  /** Optional label above left-side bullets (e.g. "Includes:") */
+  includesLabel?: string;
+  /** Optional left-side service / include bullets */
+  bullets?: readonly string[];
   style?: React.CSSProperties;
   className?: string;
   /** When false, parent owns the elevation shadow. */
@@ -24,10 +28,14 @@ export function FocusStackCard({
   ctaLabel,
   visualVariant,
   tagline,
+  includesLabel,
+  bullets,
   style,
   className = "",
   elevated = true,
 }: FocusStackCardProps) {
+  const hasBullets = Boolean(bullets?.length);
+
   return (
     <article
       style={{
@@ -58,9 +66,36 @@ export function FocusStackCard({
                   {tagline}
                 </p>
               ) : null}
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-stone-600 sm:text-lg">
+              <p
+                className={`max-w-xl text-base leading-relaxed text-stone-600 sm:text-lg ${
+                  hasBullets ? "mt-3" : "mt-4"
+                }`}
+              >
                 {description}
               </p>
+              {hasBullets ? (
+                <div className="mt-5">
+                  {includesLabel ? (
+                    <p className="text-sm font-semibold tracking-tight text-[#0b1220] sm:text-[0.95rem]">
+                      {includesLabel}
+                    </p>
+                  ) : null}
+                  <ul className="mt-2.5 flex flex-col gap-2">
+                    {bullets!.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-2.5 text-[0.95rem] leading-snug text-stone-700 sm:text-base"
+                      >
+                        <span
+                          className="mt-1.5 inline-flex h-2 w-2 shrink-0 rounded-full bg-[#52b788]"
+                          aria-hidden
+                        />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
             </div>
             <a
               href="#contact"

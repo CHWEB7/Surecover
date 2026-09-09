@@ -8,19 +8,8 @@ const ACCENT_BASE = "rgba(153, 242, 200, 0.88)";
 
 const nodes = [
   {
-    id: "layers",
-    icon: (
-      <path
-        d="M4 8.5 12 4l8 4.5L12 13 4 8.5zM4 12.5 12 17l8-4.5M4 16.5 12 21l8-4.5"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinejoin="round"
-        fill="none"
-      />
-    ),
-  },
-  {
-    id: "shield",
+    // Operational risk reviews
+    id: "risk-review",
     icon: (
       <>
         <path
@@ -31,30 +20,85 @@ const nodes = [
           fill="none"
         />
         <path
-          d="M9.5 12l2 2 3.5-3.5"
+          d="M12 8v4.5"
           stroke="currentColor"
           strokeWidth="1.75"
           strokeLinecap="round"
+        />
+        <circle cx="12" cy="15.5" r="1" fill="currentColor" />
+      </>
+    ),
+  },
+  {
+    // Standard Operating Procedures and controls
+    id: "sop-controls",
+    icon: (
+      <>
+        <path
+          d="M8 3.5h6.5L18.5 7.5V20a1.5 1.5 0 0 1-1.5 1.5H8A1.5 1.5 0 0 1 6.5 20V5A1.5 1.5 0 0 1 8 3.5z"
+          stroke="currentColor"
+          strokeWidth="1.75"
           strokeLinejoin="round"
+          fill="none"
+        />
+        <path
+          d="M14.5 3.5V7h3.5"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinejoin="round"
+          fill="none"
+        />
+        <path
+          d="M9.5 12.5h5M9.5 15.5h5M9.5 9.5h2"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
+        />
+      </>
+    ),
+  },
+  {
+    // Process optimization
+    id: "process-optimize",
+    icon: (
+      <>
+        <circle
+          cx="8"
+          cy="8"
+          r="2.25"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          fill="none"
+        />
+        <circle
+          cx="16"
+          cy="12"
+          r="2.25"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          fill="none"
+        />
+        <circle
+          cx="8"
+          cy="16"
+          r="2.25"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          fill="none"
+        />
+        <path
+          d="M10 8h3.5M10 16h3.5M13.5 8c1.5 0 2.5 1.8 2.5 4s-1 4-2.5 4"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinecap="round"
           fill="none"
         />
       </>
     ),
   },
   {
-    id: "spark",
-    icon: (
-      <path
-        d="M12 3.5 13.2 9.2 18.5 12 13.2 14.8 12 20.5 10.8 14.8 5.5 12l5.3-2.8L12 3.5zM17.5 5.5l.6 1.8L20 8l-1.9.6-.6 1.9-.6-1.9L15 8l1.9-.7.6-1.8z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-        fill="none"
-      />
-    ),
-  },
-  {
-    id: "chip",
+    // Process automation
+    id: "automation",
     icon: (
       <>
         <rect
@@ -77,26 +121,20 @@ const nodes = [
     ),
   },
   {
-    id: "database",
+    // Outsourcing and Offshoring
+    id: "outsourcing",
     icon: (
       <>
-        <ellipse
+        <circle
           cx="12"
-          cy="7"
-          rx="6.5"
-          ry="2.5"
+          cy="12"
+          r="8"
           stroke="currentColor"
           strokeWidth="1.75"
           fill="none"
         />
         <path
-          d="M5.5 7v10c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5V7"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          fill="none"
-        />
-        <path
-          d="M5.5 12c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5"
+          d="M4.5 12h15M12 4c2.2 2.4 3.3 5 3.3 8s-1.1 5.6-3.3 8c-2.2-2.4-3.3-5-3.3-8s1.1-5.6 3.3-8z"
           stroke="currentColor"
           strokeWidth="1.75"
           fill="none"

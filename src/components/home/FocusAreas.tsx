@@ -101,9 +101,18 @@ const cards = [
     visualVariant: "regulation" as const,
   },
   {
-    title: "Operations that keep scale, risk and service in balance",
+    title: "Operations & Resilience",
+    tagline: "Make clearing work better.",
     description:
-      "Strengthen day-to-day clearing operations, controls and resilience so growth does not come at the expense of risk or client service quality.",
+      "Helping organisations improve resilience, efficiency, controls and governance.",
+    includesLabel: "Includes:",
+    bullets: [
+      "Operational risk reviews",
+      "Standard Operating Procedures and controls",
+      "Process optimization",
+      "Process automation",
+      "Outsourcing and Offshoring",
+    ],
     ctaLabel: "Talk to us about operations",
     icon: GearIcon,
     visualVariant: "operations" as const,
@@ -201,6 +210,8 @@ export function FocusAreas() {
             title={card.title}
             tagline={card.tagline}
             description={card.description}
+            includesLabel={card.includesLabel}
+            bullets={card.bullets}
             ctaLabel={card.ctaLabel}
             visualVariant={card.visualVariant}
           />
@@ -263,6 +274,8 @@ export function FocusAreas() {
                         title={card.title}
                         tagline={card.tagline}
                         description={card.description}
+                        includesLabel={card.includesLabel}
+                        bullets={card.bullets}
                         ctaLabel={card.ctaLabel}
                         visualVariant={card.visualVariant}
                         elevated={false}
