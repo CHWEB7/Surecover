@@ -105,14 +105,6 @@ const cards = [
     tagline: "Make clearing work better.",
     description:
       "Helping organisations improve resilience, efficiency, controls and governance.",
-    includesLabel: "Includes:",
-    bullets: [
-      "Operational risk reviews",
-      "Standard Operating Procedures and controls",
-      "Process optimization",
-      "Process automation",
-      "Outsourcing and Offshoring",
-    ],
     ctaLabel: "Talk to us about operations",
     icon: GearIcon,
     visualVariant: "operations" as const,

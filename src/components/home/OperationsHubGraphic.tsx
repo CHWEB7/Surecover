@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 const ACCENT = "#99f2c8";
@@ -8,8 +7,8 @@ const ACCENT_BASE = "rgba(153, 242, 200, 0.88)";
 
 const nodes = [
   {
-    // Operational risk reviews
     id: "risk-review",
+    label: "Operational risk reviews",
     icon: (
       <>
         <path
@@ -30,8 +29,8 @@ const nodes = [
     ),
   },
   {
-    // Standard Operating Procedures and controls
     id: "sop-controls",
+    label: "Standard Operating Procedures and controls",
     icon: (
       <>
         <path
@@ -58,8 +57,8 @@ const nodes = [
     ),
   },
   {
-    // Process optimization
     id: "process-optimize",
+    label: "Process optimization",
     icon: (
       <>
         <circle
@@ -97,8 +96,8 @@ const nodes = [
     ),
   },
   {
-    // Process automation
     id: "automation",
+    label: "Process automation",
     icon: (
       <>
         <rect
@@ -121,8 +120,8 @@ const nodes = [
     ),
   },
   {
-    // Outsourcing and Offshoring
     id: "outsourcing",
+    label: "Outsourcing and Offshoring",
     icon: (
       <>
         <circle
@@ -150,7 +149,7 @@ function curvePath(
   endX: number,
   endY: number,
 ) {
-  const dx = Math.max((endX - startX) * 0.55, 28);
+  const dx = Math.max((endX - startX) * 0.55, 20);
   return `M ${startX} ${startY} C ${startX + dx} ${startY}, ${endX - dx} ${endY}, ${endX} ${endY}`;
 }
 
@@ -174,7 +173,6 @@ export function OperationsHubGraphic() {
     const syncPaths = () => {
       const wr = wrap.getBoundingClientRect();
       const hr = hub.getBoundingClientRect();
-      // Origin is a separate anchor — not the logo — so lines never overlap it
       const startX = hr.left + hr.width / 2 - wr.left;
       const startY = hr.top + hr.height / 2 - wr.top;
 
@@ -223,54 +221,62 @@ export function OperationsHubGraphic() {
   return (
     <div
       ref={wrapRef}
-      className="relative z-10 flex h-full w-full items-center justify-between gap-10 overflow-hidden px-7 py-8 sm:gap-14 sm:px-10 sm:py-10"
-      aria-hidden="true"
+      className="relative z-10 flex h-full w-full items-center overflow-hidden py-8 pr-5 pl-4 sm:py-10 sm:pr-7 sm:pl-5"
     >
-      <div className="pointer-events-none absolute -top-24 -left-8 h-56 w-56 rounded-full bg-[#99f2c8]/18 blur-3xl" />
-      <div className="pointer-events-none absolute right-0 bottom-0 h-44 w-44 rounded-full bg-[#2d6a4f]/40 blur-3xl" />
+      <div
+        className="pointer-events-none absolute -top-24 -left-8 h-56 w-56 rounded-full bg-[#99f2c8]/18 blur-3xl"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute right-0 bottom-0 h-44 w-44 rounded-full bg-[#2d6a4f]/40 blur-3xl"
+        aria-hidden
+      />
 
-      {/* Logo sits left of the connector origin — not attached to the lines */}
-      <div className="relative z-10 flex shrink-0 items-center gap-6 sm:gap-8">
-        <Image
-          src="/sureclear-logo-light.png"
-          alt=""
-          width={1557}
-          height={300}
-          className="h-7 w-auto sm:h-8 lg:h-9"
-          priority={false}
-        />
-        {/* Invisible line origin — connectors start here, clear of the logo */}
+      {/* Hub + service rows pulled toward the left edge */}
+      <div className="relative z-10 flex w-full max-w-xl items-center gap-4 sm:gap-5 lg:gap-6">
+        {/* Line origin near the left edge */}
         <div
           ref={hubRef}
-          className="h-2 w-2 shrink-0"
+          className="h-2.5 w-2.5 shrink-0"
           aria-hidden="true"
         />
-      </div>
 
-      {/* Five connected icon boxes — subtle float; lines track these refs */}
-      <div className="relative z-[5] flex flex-col justify-center gap-3.5 sm:gap-4">
-        {nodes.map((node, index) => (
-          <div
-            key={node.id}
-            className="flex h-12 w-12 items-center justify-center sm:h-[3.35rem] sm:w-[3.35rem]"
-          >
-            <div
-              ref={(el) => {
-                boxRefs.current[index] = el;
-              }}
-              className="ops-node-float flex h-full w-full items-center justify-center rounded-[0.9rem] border border-[#99f2c8]/85 bg-[#0b1220]/55 text-white shadow-[0_0_18px_rgba(153,242,200,0.18)] backdrop-blur-sm sm:rounded-[1rem]"
-              style={{ animationDelay: `${index * 0.28}s` }}
-            >
-              <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-                {node.icon}
-              </svg>
-            </div>
-          </div>
-        ))}
+        {/* Icon boxes + labels share the float so text tracks the animation */}
+        <ul className="relative z-[5] flex min-w-0 flex-1 list-none flex-col justify-center gap-3.5 sm:gap-4">
+          {nodes.map((node, index) => (
+            <li key={node.id}>
+              <div
+                className="ops-node-float flex items-center gap-3.5 sm:gap-4"
+                style={{ animationDelay: `${index * 0.28}s` }}
+              >
+                <div
+                  ref={(el) => {
+                    boxRefs.current[index] = el;
+                  }}
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[0.9rem] border border-[#99f2c8]/85 bg-[#0b1220]/55 text-white shadow-[0_0_18px_rgba(153,242,200,0.18)] backdrop-blur-sm sm:h-[3.35rem] sm:w-[3.35rem] sm:rounded-[1rem]"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-6 w-6"
+                    aria-hidden="true"
+                  >
+                    {node.icon}
+                  </svg>
+                </div>
+                <span className="min-w-0 text-[0.95rem] leading-snug font-medium text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)] sm:text-[1.05rem]">
+                  {node.label}
+                </span>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* Connectors above boxes so joins sit on the border */}
-      <svg className="pointer-events-none absolute inset-0 z-20 h-full w-full overflow-visible">
+      <svg
+        className="pointer-events-none absolute inset-0 z-20 h-full w-full overflow-visible"
+        aria-hidden="true"
+      >
         <defs>
           <filter
             id="ops-line-glow"
