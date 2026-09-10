@@ -25,7 +25,7 @@ const footerColumns = [
       { href: "/home/about", label: "About" },
       { href: "/home#approach", label: "Our approach" },
       { href: "/home/services", label: "Services" },
-      { href: "/home#contact", label: "Contact" },
+      { href: "/contact", label: "Contact" },
       { href: "mailto:hello@sureclear.com", label: "hello@sureclear.com" },
     ],
   },
@@ -34,7 +34,7 @@ const footerColumns = [
     links: [
       { href: "/home#focus", label: "Explore our focus" },
       { href: "/home#approach", label: "How we work" },
-      { href: "/home#contact", label: "Start a conversation" },
+      { href: "/contact", label: "Start a conversation" },
     ],
   },
 ];

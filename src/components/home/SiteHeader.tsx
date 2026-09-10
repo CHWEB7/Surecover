@@ -5,7 +5,7 @@ const navLinks = [
   { href: "/home#clients", label: "Who we help" },
   { href: "/home#approach", label: "Approach" },
   { href: "/home/about", label: "About" },
-  { href: "/home#contact", label: "Contact" },
+  { href: "/contact", label: "Contact" },
 ];
 
 type SiteHeaderProps = {
@@ -42,7 +42,7 @@ export function SiteHeader({ logoVariant = "dark" }: SiteHeaderProps) {
         </nav>
 
         <a
-          href="/home#contact"
+          href="/contact"
           className="rounded-full bg-[#1f4037] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2d6a4f]"
         >
           Talk to us

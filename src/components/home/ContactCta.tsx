@@ -1,3 +1,5 @@
+import { ContactForm } from "@/components/home/ContactForm";
+
 export function ContactCta() {
   return (
     <section
@@ -27,20 +29,9 @@ export function ContactCta() {
             front of you. We will respond with a focused conversation — not a
             generic pitch.
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-5">
-            <a
-              href="mailto:hello@sureclear.com"
-              className="inline-flex rounded-lg bg-[#0b1220] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#14201a]"
-            >
-              Email hello@sureclear.com
-            </a>
-            <a
-              href="#focus"
-              className="inline-flex items-center gap-1 text-sm font-semibold text-white transition hover:text-white/85"
-            >
-              Explore our focus
-              <span aria-hidden="true">›</span>
-            </a>
+
+          <div className="mx-auto mt-10 max-w-2xl text-left">
+            <ContactForm />
           </div>
         </div>
       </div>
