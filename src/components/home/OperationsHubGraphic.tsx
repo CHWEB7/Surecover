@@ -149,7 +149,7 @@ function curvePath(
   endX: number,
   endY: number,
 ) {
-  const dx = Math.max((endX - startX) * 0.55, 20);
+  const dx = Math.max((endX - startX) * 0.55, 28);
   return `M ${startX} ${startY} C ${startX + dx} ${startY}, ${endX - dx} ${endY}, ${endX} ${endY}`;
 }
 
@@ -221,7 +221,7 @@ export function OperationsHubGraphic() {
   return (
     <div
       ref={wrapRef}
-      className="relative z-10 flex h-full w-full items-center overflow-hidden py-8 pr-5 pl-4 sm:py-10 sm:pr-7 sm:pl-5"
+      className="relative z-10 flex h-full w-full items-center overflow-hidden px-7 py-8 sm:px-10 sm:py-10"
     >
       <div
         className="pointer-events-none absolute -top-24 -left-8 h-56 w-56 rounded-full bg-[#99f2c8]/18 blur-3xl"
@@ -232,21 +232,24 @@ export function OperationsHubGraphic() {
         aria-hidden
       />
 
-      {/* Hub + service rows pulled toward the left edge */}
-      <div className="relative z-10 flex w-full max-w-xl items-center gap-4 sm:gap-5 lg:gap-6">
-        {/* Line origin near the left edge */}
+      {/* Keep original icon scale + long connectors; labels use leftover right space */}
+      <div className="relative z-10 flex w-full items-center">
+        {/* Line origin — left side, where the logo used to sit */}
         <div
           ref={hubRef}
-          className="h-2.5 w-2.5 shrink-0"
+          className="h-2 w-2 shrink-0"
           aria-hidden="true"
         />
 
-        {/* Icon boxes + labels share the float so text tracks the animation */}
-        <ul className="relative z-[5] flex min-w-0 flex-1 list-none flex-col justify-center gap-3.5 sm:gap-4">
+        {/* Flexible span preserves connector length like the pre-logo layout */}
+        <div className="min-w-[5rem] flex-1" aria-hidden="true" />
+
+        {/* Original-size icon boxes with labels in remaining width */}
+        <ul className="relative z-[5] flex w-[min(100%,14.75rem)] shrink-0 list-none flex-col justify-center gap-3.5 sm:w-[min(100%,15.5rem)] sm:gap-4">
           {nodes.map((node, index) => (
             <li key={node.id}>
               <div
-                className="ops-node-float flex items-center gap-3.5 sm:gap-4"
+                className="ops-node-float flex items-center gap-2.5 sm:gap-3"
                 style={{ animationDelay: `${index * 0.28}s` }}
               >
                 <div
@@ -263,7 +266,7 @@ export function OperationsHubGraphic() {
                     {node.icon}
                   </svg>
                 </div>
-                <span className="min-w-0 text-[0.95rem] leading-snug font-medium text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)] sm:text-[1.05rem]">
+                <span className="min-w-0 text-[0.78rem] leading-snug font-medium text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)] sm:text-[0.84rem]">
                   {node.label}
                 </span>
               </div>
