@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { FocusStackCard } from "@/components/home/FocusStackCard";
+import type { FocusVisualVariant } from "@/components/home/FocusCardVisual";
 
 const iconClass = "h-10 w-10";
 const iconStroke = "#0b1220";
@@ -73,14 +74,25 @@ const GearIcon = (
   </svg>
 );
 
-const cards = [
+type FocusCard = {
+  title: string;
+  tagline?: string;
+  description: string;
+  includesLabel?: string;
+  bullets?: readonly string[];
+  ctaLabel: string;
+  icon: ReactNode;
+  visualVariant: FocusVisualVariant;
+};
+
+const cards: FocusCard[] = [
   {
     title: "Clearing strategy that fits how markets actually work",
     description:
       "Define clearing models, membership choices, product coverage and competitive positioning with decisions grounded in market structure — not generic frameworks.",
     ctaLabel: "Talk to us about strategy",
     icon: CubeIcon,
-    visualVariant: "strategy" as const,
+    visualVariant: "strategy",
   },
   {
     title: "Transformation & Change",
@@ -89,7 +101,7 @@ const cards = [
       "We help turn a clearing decision into a workable operating model, roadmap and delivery plan.",
     ctaLabel: "Talk to us about transformation",
     icon: RefreshIcon,
-    visualVariant: "transformation" as const,
+    visualVariant: "transformation",
   },
   {
     title: "Fractional Leadership",
@@ -98,7 +110,7 @@ const cards = [
       "Providing experienced leadership without the commitment of a permanent senior hire.",
     ctaLabel: "Talk to us about fractional leadership",
     icon: ShieldIcon,
-    visualVariant: "regulation" as const,
+    visualVariant: "regulation",
   },
   {
     title: "Operations & Resilience",
@@ -107,7 +119,7 @@ const cards = [
       "Helping organisations improve resilience, efficiency, controls and governance.",
     ctaLabel: "Talk to us about operations",
     icon: GearIcon,
-    visualVariant: "operations" as const,
+    visualVariant: "operations",
   },
 ];
 
