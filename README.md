@@ -28,9 +28,7 @@ Contact form: [http://localhost:3000/contact](http://localhost:3000/contact)
 
 ## Contact form (Web3Forms)
 
-The contact UI is custom (no provider iframe). Submissions POST to
-[Web3Forms](https://web3forms.com) and are emailed to the inbox configured on
-that access key.
+The contact UI is custom (no provider iframe). Submissions go to our `/api/contact` route, which forwards to [Web3Forms](https://web3forms.com) and emails the inbox configured on that access key.
 
 1. Create a free Web3Forms access key for `hello@sureclear.com`.
 2. Set `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` in `.env.local` (local) and in the
