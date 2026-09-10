@@ -63,21 +63,18 @@ export function ContactForm() {
     setStatus("submitting");
 
     try {
+      const payload = new FormData();
+      payload.append("access_key", accessKey);
+      payload.append("subject", "SureClear website enquiry");
+      payload.append("from_name", "SureClear website");
+      payload.append("name", name);
+      payload.append("email", email);
+      payload.append("organisation", organisation || "Not provided");
+      payload.append("message", message);
+
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: accessKey,
-          subject: "SureClear website enquiry",
-          from_name: "SureClear website",
-          name,
-          email,
-          organisation: organisation || "Not provided",
-          message,
-        }),
+        body: payload,
       });
 
       const result = (await response.json()) as {
