@@ -40,7 +40,9 @@ export async function POST(request: Request) {
     );
   }
 
-  const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+  const accessKey =
+    process.env.WEB3FORMS_ACCESS_KEY ||
+    process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
   if (!accessKey) {
     return NextResponse.json(
       {
@@ -69,6 +71,18 @@ export async function POST(request: Request) {
         Accept: "application/json",
       },
     });
+
+    const contentType = response.headers.get("content-type") || "";
+    if (!contentType.includes("application/json")) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "The form service could not be reached. Please try again shortly or email hello@sureclear.com.",
+        },
+        { status: 502 },
+      );
+    }
 
     const result = (await response.json()) as {
       success?: boolean;

@@ -28,13 +28,19 @@ Contact form: [http://localhost:3000/contact](http://localhost:3000/contact)
 
 ## Contact form (Web3Forms)
 
-The contact UI is custom (no provider iframe). Submissions go to our `/api/contact` route, which forwards to [Web3Forms](https://web3forms.com) and emails the inbox configured on that access key.
+The contact UI is custom (no provider iframe). Submissions go to our
+`/api/contact` route, which forwards to [Web3Forms](https://web3forms.com) and
+emails the inbox configured on that access key.
 
 1. Create a free Web3Forms access key for `hello@sureclear.com`.
-2. Set `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` in `.env.local` (local) and in the
-   Vercel project Environment Variables (Production + Preview).
-3. In Web3Forms, allow the site domain (e.g. `sureclear-dev.vercel.app`).
+2. In Vercel → Project → Settings → Environment Variables, add:
+   - `WEB3FORMS_ACCESS_KEY` = your access key  
+     (Production + Preview). Prefer this server-only name.
+3. In Web3Forms, allow the site domain (`sureclear-dev.vercel.app`).
 4. Redeploy after adding the env var.
+5. Test at `/contact` and `/home#contact`.
+
+Locally, copy `.env.example` to `.env.local` and set `WEB3FORMS_ACCESS_KEY`.
 
 ## Deploying to Vercel
 

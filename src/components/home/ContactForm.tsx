@@ -44,15 +44,6 @@ export function ContactForm() {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-    if (!accessKey) {
-      setStatus("error");
-      setErrorMessage(
-        "The contact form is not configured yet. Please email hello@sureclear.com.",
-      );
-      return;
-    }
-
     // Honeypot: bots that fill this are rejected silently as "success"
     if (botcheck) {
       setStatus("success");
