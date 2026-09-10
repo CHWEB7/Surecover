@@ -153,13 +153,13 @@ export function WhoWeHelp() {
           </h2>
           <div className="mt-5 max-w-5xl space-y-3 text-lg leading-relaxed text-stone-600 sm:text-xl">
             <p>
-              SURECLEAR exists because the cleared derivatives industry
+              SureClear exists because the cleared derivatives industry
               doesn&apos;t need another generalist consultancy. It needs
               specialist experience.
             </p>
             <p>
               Our focus is deliberately narrow: helping organisations navigate
-              clearing strategy, transformation and operations. SURECLEAR draws
+              clearing strategy, transformation and operations. SureClear draws
               on more than 30 years of experience across the cleared derivatives
               industry.
             </p>
