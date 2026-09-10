@@ -26,20 +26,19 @@ const backgrounds: Record<FocusVisualVariant, string> = {
 function StrategyGraphic() {
   const points = [
     {
-      title: "Error Reduction",
-      body: "Catching discrepancies and mismatched instructions before money or assets move.",
+      title: "Clearing Strategy",
+      body: "Define membership, product coverage and competitive positioning.",
       icon: (
         <>
-          <circle
-            cx="10.5"
-            cy="10.5"
-            r="6"
+          <path
+            d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"
             stroke="currentColor"
             strokeWidth="1.75"
+            strokeLinejoin="round"
             fill="none"
           />
           <path
-            d="M15 15l4.5 4.5M8.5 10.5l1.5 1.5 3-3"
+            d="M12 12l8-4.5M12 12v9M12 12L4 7.5"
             stroke="currentColor"
             strokeWidth="1.75"
             strokeLinecap="round"
@@ -50,46 +49,61 @@ function StrategyGraphic() {
       ),
     },
     {
-      title: "Liquidity Management",
-      body: "Optimizing cash flow and reducing the amount of idle capital needed to back pending trades.",
+      title: "Build scale and operating models",
+      body: "Design operating models that can grow with the franchise.",
+      icon: (
+        <>
+          <path
+            d="M4 8.5 12 4l8 4.5L12 13 4 8.5zM4 12.5 12 17l8-4.5M4 16.5 12 21l8-4.5"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinejoin="round"
+            fill="none"
+          />
+        </>
+      ),
+    },
+    {
+      title: "Adapt to regulatory change",
+      body: "Turn new obligations into practical, resilient programmes.",
+      icon: (
+        <>
+          <path
+            d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3z"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinejoin="round"
+            fill="none"
+          />
+          <path
+            d="M9.5 12l2 2 3.5-3.5"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+        </>
+      ),
+    },
+    {
+      title: "Expanding into new markets",
+      body: "Enter new products and geographies with a clear clearing plan.",
       icon: (
         <>
           <circle
             cx="12"
             cy="12"
-            r="7.25"
+            r="8"
             stroke="currentColor"
             strokeWidth="1.75"
             fill="none"
           />
           <path
-            d="M12 8v4l2.5 1.5"
+            d="M4.5 12h15M12 4c2.2 2.4 3.3 5 3.3 8s-1.1 5.6-3.3 8c-2.2-2.4-3.3-5-3.3-8s1.1-5.6 3.3-8z"
             stroke="currentColor"
             strokeWidth="1.75"
-            strokeLinecap="round"
-            strokeLinejoin="round"
             fill="none"
-          />
-        </>
-      ),
-    },
-    {
-      title: "Regulatory Compliance",
-      body: "Maintaining transparent audit trails to meet anti-money laundering (AML) and know-your-customer (KYC) standards.",
-      icon: (
-        <>
-          <path
-            d="M7 4h10v16H7z"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinejoin="round"
-            fill="none"
-          />
-          <path
-            d="M9.5 8h5M9.5 12h5M9.5 16h3"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinecap="round"
           />
         </>
       ),
@@ -97,44 +111,41 @@ function StrategyGraphic() {
   ];
 
   return (
-    <div className="relative z-10 flex h-full w-full flex-col justify-between p-8 sm:p-10">
-      <div className="flex flex-1 flex-col justify-center gap-0 pt-1">
+    <div className="relative z-10 flex h-full w-full flex-col justify-center p-7 sm:p-9">
+      <div className="flex flex-col justify-center gap-0">
         {points.map((point, index) => (
           <div
             key={point.title}
             className="strategy-step-enter flex items-stretch gap-4"
-            style={{ animationDelay: `${index * 0.55}s` }}
+            style={{ animationDelay: `${index * 0.45}s` }}
           >
             <div className="flex w-12 shrink-0 flex-col items-center">
               <div
-                className="strategy-node-pulse flex h-12 w-12 items-center justify-center rounded-full border border-white/80 bg-[#0b1220]/40 text-white backdrop-blur-sm"
-                style={{ animationDelay: `${index * 0.55}s` }}
+                className="strategy-node-pulse flex h-11 w-11 items-center justify-center rounded-full border border-white/80 bg-[#0b1220]/40 text-white backdrop-blur-sm sm:h-12 sm:w-12"
+                style={{ animationDelay: `${index * 0.45}s` }}
               >
-                <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
+                <svg viewBox="0 0 24 24" className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true">
                   {point.icon}
                 </svg>
               </div>
               {index < points.length - 1 && (
                 <div
-                  className="strategy-step-line mt-2 w-px flex-1 bg-gradient-to-b from-white/70 to-white/15"
-                  style={{ animationDelay: `${index * 0.55 + 0.25}s` }}
+                  className="strategy-step-line mt-1.5 w-px flex-1 bg-gradient-to-b from-white/70 to-white/15"
+                  style={{ animationDelay: `${index * 0.45 + 0.2}s` }}
                 />
               )}
             </div>
-            <div className="min-w-0 flex-1 pb-7 last:pb-0">
-              <p className="text-lg font-semibold tracking-tight text-white sm:text-xl">
+            <div className="min-w-0 flex-1 pb-5 last:pb-0 sm:pb-6">
+              <p className="text-base font-semibold tracking-tight text-white sm:text-lg">
                 {point.title}
               </p>
-              <p className="mt-1.5 text-sm leading-relaxed text-white/80 sm:text-[0.95rem]">
+              <p className="mt-1 text-sm leading-snug text-white/80 sm:text-[0.92rem]">
                 {point.body}
               </p>
             </div>
           </div>
         ))}
       </div>
-      <p className="max-w-[18rem] text-sm text-white/75">
-        Clearing models shaped around how markets actually clear.
-      </p>
     </div>
   );
 }

@@ -87,9 +87,10 @@ type FocusCard = {
 
 const cards: FocusCard[] = [
   {
-    title: "Clearing strategy that fits how markets actually work",
+    title: "Clearing Strategy",
+    tagline: "Navigate what comes next.",
     description:
-      "Define clearing models, membership choices, product coverage and competitive positioning with decisions grounded in market structure — not generic frameworks.",
+      "Helping organisations understand and respond to changes in Clearing and market infrastructure.",
     ctaLabel: "Talk to us about strategy",
     icon: CubeIcon,
     visualVariant: "strategy",
