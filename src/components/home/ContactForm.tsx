@@ -29,6 +29,17 @@ const CHALLENGES = [
 /** Web3Forms free-plan hCaptcha site key */
 const HCAPTCHA_SITEKEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
 
+/**
+ * Web3Forms access keys are designed to be public (browser-side).
+ * Env can override; this fallback keeps production builds working even if
+ * NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY was not set at build time.
+ */
+const WEB3FORMS_ACCESS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
+  "4e54d961-2c6d-49f4-a382-ce7e909f8763";
+
+const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+
 const fieldClass =
   "w-full rounded-lg border border-[#0b1220]/18 bg-white px-4 py-3 text-sm text-[#0b1220] outline-none transition placeholder:text-stone-400 focus:border-[#2d6a4f] focus:ring-2 focus:ring-[#52b788]/30";
 
@@ -36,6 +47,28 @@ const labelClass = "mb-1.5 block text-left text-sm font-semibold text-[#0b1220]"
 
 function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+async function readWeb3FormsResult(response: Response): Promise<{
+  success?: boolean;
+  message?: string;
+}> {
+  const contentType = response.headers.get("content-type") || "";
+  if (contentType.includes("application/json")) {
+    return (await response.json()) as { success?: boolean; message?: string };
+  }
+  const text = await response.text();
+  if (text.toLowerCase().includes("just a moment") || response.status === 403) {
+    return {
+      success: false,
+      message:
+        "The form service blocked this request. Please try again in a moment.",
+    };
+  }
+  return {
+    success: false,
+    message: "The form service returned an unexpected response.",
+  };
 }
 
 export function ContactForm() {
@@ -80,22 +113,12 @@ export function ContactForm() {
     if (Object.keys(nextErrors).length > 0) return;
     if (!captchaToken) return;
 
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-    if (!accessKey) {
-      setStatus("error");
-      setErrorMessage(
-        "The contact form is not configured yet. Please email hello@sureclear.com.",
-      );
-      return;
-    }
-
     setStatus("submitting");
 
     try {
-      // Submit from the browser so Cloudflare does not block the request
-      // (server-side proxy from Vercel/local is often challenged).
+      // Free-plan Web3Forms only accepts browser submissions (not server proxies).
       const payload = new FormData();
-      payload.append("access_key", accessKey);
+      payload.append("access_key", WEB3FORMS_ACCESS_KEY);
       payload.append("subject", `SureClear enquiry — ${challenge}`);
       payload.append("from_name", "SureClear website");
       payload.append("name", name.trim());
@@ -116,18 +139,18 @@ export function ContactForm() {
       payload.append("h-captcha-response", captchaToken);
       payload.append("botcheck", "");
 
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
         body: payload,
       });
 
-      const result = (await response.json()) as {
-        success?: boolean;
-        message?: string;
-      };
+      const result = await readWeb3FormsResult(response);
 
       if (!response.ok || !result.success) {
-        throw new Error(result.message || "Submission failed");
+        throw new Error(
+          result.message ||
+            "Something went wrong sending your message. Please try again.",
+        );
       }
 
       setStatus("success");
@@ -136,7 +159,7 @@ export function ContactForm() {
       const detail =
         error instanceof Error && error.message
           ? error.message
-          : "Something went wrong sending your message.";
+          : "Something went wrong sending your message. Please try again.";
       setStatus("error");
       setErrorMessage(
         `${detail} If this continues, email hello@sureclear.com.`,
