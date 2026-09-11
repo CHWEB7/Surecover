@@ -88,6 +88,8 @@ export function ContactForm() {
       return;
     }
 
+    const verifiedCaptchaToken = captchaToken;
+
     setStatus("submitting");
 
     try {
@@ -112,7 +114,7 @@ export function ContactForm() {
           `Phone: ${phone.trim()}`,
         ].join("\n"),
       );
-      payload.append("h-captcha-response", captchaToken);
+      payload.append("h-captcha-response", verifiedCaptchaToken);
       payload.append("botcheck", "");
 
       const response = await fetch("https://api.web3forms.com/submit", {
