@@ -1,11 +1,4 @@
-import { ContactForm } from "@/components/home/ContactForm";
-
-type ContactCtaProps = {
-  /** When true, render the Web3Forms-backed contact form. */
-  showForm?: boolean;
-};
-
-export function ContactCta({ showForm = false }: ContactCtaProps) {
+export function ContactCta() {
   return (
     <section
       id="contact"
@@ -35,27 +28,21 @@ export function ContactCta({ showForm = false }: ContactCtaProps) {
             generic pitch.
           </p>
 
-          {showForm ? (
-            <div className="mx-auto mt-10 max-w-2xl text-left">
-              <ContactForm />
-            </div>
-          ) : (
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-5">
-              <a
-                href="/contact"
-                className="inline-flex rounded-lg bg-[#0b1220] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#14201a]"
-              >
-                Get in touch
-              </a>
-              <a
-                href="mailto:hello@sureclear.com"
-                className="inline-flex items-center gap-1 text-sm font-semibold text-white transition hover:text-white/85"
-              >
-                Or email hello@sureclear.com
-                <span aria-hidden="true">›</span>
-              </a>
-            </div>
-          )}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4 sm:gap-5">
+            <a
+              href="/contact"
+              className="inline-flex rounded-lg bg-[#0b1220] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#14201a]"
+            >
+              Get in touch
+            </a>
+            <a
+              href="mailto:hello@sureclear.com"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-white transition hover:text-white/85"
+            >
+              Or email hello@sureclear.com
+              <span aria-hidden="true">›</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>

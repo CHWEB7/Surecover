@@ -4,8 +4,11 @@ type Body = {
   name?: string;
   email?: string;
   organisation?: string;
+  phone?: string;
+  challenge?: string;
   message?: string;
   botcheck?: string;
+  "h-captcha-response"?: string;
 };
 
 function isValidEmail(value: string) {
@@ -26,14 +29,24 @@ export async function POST(request: Request) {
   const name = String(body.name || "").trim();
   const email = String(body.email || "").trim();
   const organisation = String(body.organisation || "").trim();
-  const message = String(body.message || "").trim();
+  const phone = String(body.phone || "").trim();
+  const challenge = String(body.challenge || "").trim();
+  const captcha = String(body["h-captcha-response"] || "").trim();
   const botcheck = String(body.botcheck || "");
 
   if (botcheck) {
     return NextResponse.json({ success: true });
   }
 
-  if (!name || !email || !message || !isValidEmail(email)) {
+  if (
+    !name ||
+    !email ||
+    !organisation ||
+    !phone ||
+    !challenge ||
+    !captcha ||
+    !isValidEmail(email)
+  ) {
     return NextResponse.json(
       { success: false, message: "Please complete the required fields." },
       { status: 400 },
@@ -56,12 +69,24 @@ export async function POST(request: Request) {
 
   const payload = new FormData();
   payload.append("access_key", accessKey);
-  payload.append("subject", "SureClear website enquiry");
+  payload.append("subject", `SureClear enquiry — ${challenge}`);
   payload.append("from_name", "SureClear website");
   payload.append("name", name);
   payload.append("email", email);
-  payload.append("organisation", organisation || "Not provided");
-  payload.append("message", message);
+  payload.append("organisation", organisation);
+  payload.append("phone", phone);
+  payload.append("challenge", challenge);
+  payload.append(
+    "message",
+    [
+      `Challenge: ${challenge}`,
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Organisation: ${organisation}`,
+      `Phone: ${phone}`,
+    ].join("\n"),
+  );
+  payload.append("h-captcha-response", captcha);
 
   try {
     const response = await fetch("https://api.web3forms.com/submit", {

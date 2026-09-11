@@ -1,17 +1,36 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
+import { useRef, useState, type FormEvent } from "react";
 
+type Step = 1 | 2;
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
 type FormErrors = {
-  name?: string;
+  challenge?: string;
   email?: string;
-  message?: string;
+  name?: string;
+  organisation?: string;
+  phone?: string;
+  captcha?: string;
 };
 
+const CHALLENGES = [
+  "Clearing strategy",
+  "Transformation & change",
+  "Operations & resilience",
+  "Regulatory change",
+  "Fractional leadership",
+  "Vendor or platform decision",
+  "Programme recovery",
+  "Not sure yet",
+] as const;
+
+/** Web3Forms free-plan hCaptcha site key */
+const HCAPTCHA_SITEKEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
+
 const fieldClass =
-  "w-full rounded-lg border border-[#0b1220]/12 bg-white px-4 py-3 text-sm text-[#0b1220] shadow-sm outline-none transition placeholder:text-stone-400 focus:border-[#2d6a4f] focus:ring-2 focus:ring-[#52b788]/35";
+  "w-full rounded-lg border border-[#0b1220]/18 bg-white px-4 py-3 text-sm text-[#0b1220] outline-none transition placeholder:text-stone-400 focus:border-[#2d6a4f] focus:ring-2 focus:ring-[#52b788]/30";
 
 const labelClass = "mb-1.5 block text-left text-sm font-semibold text-[#0b1220]";
 
@@ -20,36 +39,45 @@ function isValidEmail(value: string) {
 }
 
 export function ContactForm() {
+  const [step, setStep] = useState<Step>(1);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errors, setErrors] = useState<FormErrors>({});
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const [challenge, setChallenge] = useState("");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [organisation, setOrganisation] = useState("");
+  const [phone, setPhone] = useState("");
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const captchaRef = useRef<HCaptcha>(null);
+
+  const step1Ready = Boolean(challenge) && isValidEmail(email.trim());
+
+  function goToStep2() {
+    const nextErrors: FormErrors = {};
+    if (!challenge) nextErrors.challenge = "This field is required.";
+    if (!email.trim()) nextErrors.email = "Please enter your work email.";
+    else if (!isValidEmail(email.trim()))
+      nextErrors.email = "Enter a valid email address.";
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) return;
+    setErrorMessage(null);
+    setStep(2);
+  }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setErrorMessage(null);
 
-    const form = event.currentTarget;
-    const data = new FormData(form);
-    const name = String(data.get("name") || "").trim();
-    const email = String(data.get("email") || "").trim();
-    const organisation = String(data.get("organisation") || "").trim();
-    const message = String(data.get("message") || "").trim();
-    const botcheck = String(data.get("botcheck") || "");
-
     const nextErrors: FormErrors = {};
-    if (!name) nextErrors.name = "Please enter your name.";
-    if (!email) nextErrors.email = "Please enter your work email.";
-    else if (!isValidEmail(email)) nextErrors.email = "Enter a valid email address.";
-    if (!message) nextErrors.message = "Please tell us a little about what you need.";
+    if (!name.trim()) nextErrors.name = "Please enter your name.";
+    if (!organisation.trim())
+      nextErrors.organisation = "Please enter your organisation.";
+    if (!phone.trim()) nextErrors.phone = "Please enter a phone number.";
+    if (!captchaToken) nextErrors.captcha = "Please complete the captcha.";
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
-
-    // Honeypot: bots that fill this are rejected silently as "success"
-    if (botcheck) {
-      setStatus("success");
-      form.reset();
-      return;
-    }
 
     setStatus("submitting");
 
@@ -61,11 +89,13 @@ export function ContactForm() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          name,
-          email,
-          organisation,
-          message,
-          botcheck,
+          challenge,
+          email: email.trim(),
+          name: name.trim(),
+          organisation: organisation.trim(),
+          phone: phone.trim(),
+          "h-captcha-response": captchaToken,
+          botcheck: "",
         }),
       });
 
@@ -79,43 +109,42 @@ export function ContactForm() {
       }
 
       setStatus("success");
-      form.reset();
       setErrors({});
     } catch {
       setStatus("error");
       setErrorMessage(
         "Something went wrong sending your message. Please try again or email hello@sureclear.com.",
       );
+      setCaptchaToken(null);
+      captchaRef.current?.resetCaptcha();
     }
   }
 
   if (status === "success") {
     return (
       <div
-        className="rounded-2xl border border-white/40 bg-white/95 p-8 text-left shadow-[0_16px_40px_rgba(11,18,32,0.18)] sm:p-10"
+        className="overflow-hidden rounded-2xl bg-white text-left shadow-[0_18px_50px_rgba(11,18,32,0.18)]"
         role="status"
       >
-        <p className="text-xl font-semibold tracking-tight text-[#0b1220]">
-          Thanks — your message is on its way.
-        </p>
-        <p className="mt-3 text-base leading-relaxed text-stone-600">
-          We will review what you shared and come back with a focused
-          conversation. If it is urgent, email{" "}
-          <a
-            href="mailto:hello@sureclear.com"
-            className="font-semibold text-[#2d6a4f] underline-offset-2 hover:underline"
-          >
-            hello@sureclear.com
-          </a>
-          .
-        </p>
-        <button
-          type="button"
-          onClick={() => setStatus("idle")}
-          className="mt-6 inline-flex rounded-lg border border-[#0b1220] px-5 py-2.5 text-sm font-semibold text-[#0b1220] transition hover:bg-[#0b1220] hover:text-white"
-        >
-          Send another message
-        </button>
+        <div className="h-1.5 w-full bg-[#0b1220]" aria-hidden />
+        <div className="p-8 sm:p-10">
+          <p className="text-sm text-stone-500">Submitted</p>
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight text-[#0b1220]">
+            Thanks — we have your details.
+          </h3>
+          <p className="mt-3 text-base leading-relaxed text-stone-600">
+            We will review what you shared about{" "}
+            <span className="font-medium text-[#0b1220]">{challenge}</span> and
+            come back with a focused conversation. If it is urgent, email{" "}
+            <a
+              href="mailto:hello@sureclear.com"
+              className="font-semibold text-[#2d6a4f] underline-offset-2 hover:underline"
+            >
+              hello@sureclear.com
+            </a>
+            .
+          </p>
+        </div>
       </div>
     );
   }
@@ -124,124 +153,238 @@ export function ContactForm() {
     <form
       onSubmit={onSubmit}
       noValidate
-      className="rounded-2xl border border-white/40 bg-white/95 p-6 text-left shadow-[0_16px_40px_rgba(11,18,32,0.18)] sm:p-8 lg:p-10"
+      className="overflow-hidden rounded-2xl bg-white text-left shadow-[0_18px_50px_rgba(11,18,32,0.18)]"
     >
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="sm:col-span-1">
-          <label htmlFor="contact-name" className={labelClass}>
-            Name
-          </label>
-          <input
-            id="contact-name"
-            name="name"
-            type="text"
-            autoComplete="name"
-            className={fieldClass}
-            placeholder="Your name"
-            aria-invalid={Boolean(errors.name)}
-            aria-describedby={errors.name ? "contact-name-error" : undefined}
-          />
-          {errors.name ? (
-            <p id="contact-name-error" className="mt-1.5 text-sm text-red-700">
-              {errors.name}
-            </p>
-          ) : null}
-        </div>
-
-        <div className="sm:col-span-1">
-          <label htmlFor="contact-email" className={labelClass}>
-            Work email
-          </label>
-          <input
-            id="contact-email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            className={fieldClass}
-            placeholder="you@organisation.com"
-            aria-invalid={Boolean(errors.email)}
-            aria-describedby={errors.email ? "contact-email-error" : undefined}
-          />
-          {errors.email ? (
-            <p id="contact-email-error" className="mt-1.5 text-sm text-red-700">
-              {errors.email}
-            </p>
-          ) : null}
-        </div>
-
-        <div className="sm:col-span-2">
-          <label htmlFor="contact-organisation" className={labelClass}>
-            Organisation <span className="font-normal text-stone-500">(optional)</span>
-          </label>
-          <input
-            id="contact-organisation"
-            name="organisation"
-            type="text"
-            autoComplete="organization"
-            className={fieldClass}
-            placeholder="Firm or institution"
-          />
-        </div>
-
-        <div className="sm:col-span-2">
-          <label htmlFor="contact-message" className={labelClass}>
-            How can we help?
-          </label>
-          <textarea
-            id="contact-message"
-            name="message"
-            rows={5}
-            className={`${fieldClass} resize-y min-h-[8rem]`}
-            placeholder="Share the decision, programme or operational challenge in front of you."
-            aria-invalid={Boolean(errors.message)}
-            aria-describedby={
-              errors.message ? "contact-message-error" : undefined
-            }
-          />
-          {errors.message ? (
-            <p
-              id="contact-message-error"
-              className="mt-1.5 text-sm text-red-700"
-            >
-              {errors.message}
-            </p>
-          ) : null}
-        </div>
+      <div className="h-1.5 w-full bg-[#e7e5df]" aria-hidden>
+        <div
+          className="h-full bg-[#0b1220] transition-all duration-300"
+          style={{ width: step === 1 ? "50%" : "100%" }}
+        />
       </div>
 
-      {/* Honeypot — hidden from people, visible to simple bots */}
-      <input
-        type="checkbox"
-        name="botcheck"
-        className="hidden"
-        tabIndex={-1}
-        autoComplete="off"
-        aria-hidden="true"
-      />
+      <div className="p-6 sm:p-8 lg:p-9">
+        <p className="text-sm text-stone-500">Step {step}/2</p>
+        <h3 className="mt-2 text-2xl font-semibold tracking-tight text-[#0b1220] sm:text-[1.65rem]">
+          {step === 1 ? "How can we help you?" : "A few details about you"}
+        </h3>
 
-      {status === "error" && errorMessage ? (
-        <p className="mt-5 text-sm text-red-700" role="alert">
-          {errorMessage}
-        </p>
-      ) : null}
-
-      <div className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <button
-          type="submit"
-          disabled={status === "submitting"}
-          className="inline-flex items-center justify-center rounded-lg bg-[#0b1220] px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#14201a] disabled:cursor-not-allowed disabled:opacity-70"
-        >
-          {status === "submitting" ? "Sending…" : "Send message"}
-        </button>
-        <p className="text-sm text-stone-600">
-          Or email{" "}
+        <div className="mt-4 rounded-lg bg-[#edf7f1] px-4 py-3 text-sm leading-relaxed text-[#1f4037]">
+          Prefer email?{" "}
           <a
             href="mailto:hello@sureclear.com"
             className="font-semibold text-[#2d6a4f] underline-offset-2 hover:underline"
           >
             hello@sureclear.com
           </a>
-        </p>
+        </div>
+
+        {step === 1 ? (
+          <div className="mt-6 space-y-5">
+            <div>
+              <label htmlFor="contact-challenge" className={labelClass}>
+                What challenge would you like to discuss?
+              </label>
+              <select
+                id="contact-challenge"
+                name="challenge"
+                value={challenge}
+                onChange={(event) => {
+                  setChallenge(event.target.value);
+                  setErrors((prev) => ({ ...prev, challenge: undefined }));
+                }}
+                className={`${fieldClass} appearance-none bg-[url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22none%22 viewBox=%220 0 24 24%22 stroke=%22%230b1220%22%3E%3Cpath stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%221.75%22 d=%22m6 9 6 6 6-6%22/%3E%3C/svg%3E')] bg-[length:1.1rem] bg-[right_0.85rem_center] bg-no-repeat pr-10 ${
+                  errors.challenge ? "border-red-400" : ""
+                }`}
+                aria-invalid={Boolean(errors.challenge)}
+              >
+                <option value="">Select an option</option>
+                {CHALLENGES.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+              {errors.challenge ? (
+                <p className="mt-1.5 text-sm text-stone-600">
+                  {errors.challenge}
+                </p>
+              ) : null}
+            </div>
+
+            <div>
+              <label htmlFor="contact-email" className={labelClass}>
+                Work email address
+              </label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                  setErrors((prev) => ({ ...prev, email: undefined }));
+                }}
+                className={`${fieldClass} ${errors.email ? "border-red-400" : ""}`}
+                placeholder="you@organisation.com"
+                aria-invalid={Boolean(errors.email)}
+              />
+              {errors.email ? (
+                <p className="mt-1.5 text-sm text-red-700">{errors.email}</p>
+              ) : null}
+            </div>
+
+            <button
+              type="button"
+              onClick={goToStep2}
+              disabled={!step1Ready}
+              className={`mt-2 inline-flex w-full items-center justify-center rounded-lg px-5 py-3.5 text-sm font-semibold transition ${
+                step1Ready
+                  ? "contact-continue-pulse bg-[#0b1220] text-white hover:bg-[#14201a]"
+                  : "cursor-not-allowed bg-[#d6d3d1] text-[#78716c]"
+              }`}
+            >
+              Continue
+              <span aria-hidden="true" className="ml-1.5">
+                ›
+              </span>
+            </button>
+          </div>
+        ) : (
+          <div className="mt-6 space-y-5">
+            <div>
+              <label htmlFor="contact-name" className={labelClass}>
+                Name
+              </label>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                value={name}
+                onChange={(event) => {
+                  setName(event.target.value);
+                  setErrors((prev) => ({ ...prev, name: undefined }));
+                }}
+                className={`${fieldClass} ${errors.name ? "border-red-400" : ""}`}
+                placeholder="Your name"
+              />
+              {errors.name ? (
+                <p className="mt-1.5 text-sm text-red-700">{errors.name}</p>
+              ) : null}
+            </div>
+
+            <div>
+              <label htmlFor="contact-organisation" className={labelClass}>
+                Organisation name
+              </label>
+              <input
+                id="contact-organisation"
+                name="organisation"
+                type="text"
+                autoComplete="organization"
+                value={organisation}
+                onChange={(event) => {
+                  setOrganisation(event.target.value);
+                  setErrors((prev) => ({ ...prev, organisation: undefined }));
+                }}
+                className={`${fieldClass} ${
+                  errors.organisation ? "border-red-400" : ""
+                }`}
+                placeholder="Firm or institution"
+              />
+              {errors.organisation ? (
+                <p className="mt-1.5 text-sm text-red-700">
+                  {errors.organisation}
+                </p>
+              ) : null}
+            </div>
+
+            <div>
+              <label htmlFor="contact-phone" className={labelClass}>
+                Phone number
+              </label>
+              <input
+                id="contact-phone"
+                name="phone"
+                type="tel"
+                autoComplete="tel"
+                value={phone}
+                onChange={(event) => {
+                  setPhone(event.target.value);
+                  setErrors((prev) => ({ ...prev, phone: undefined }));
+                }}
+                className={`${fieldClass} ${errors.phone ? "border-red-400" : ""}`}
+                placeholder="+44 …"
+              />
+              {errors.phone ? (
+                <p className="mt-1.5 text-sm text-red-700">{errors.phone}</p>
+              ) : null}
+            </div>
+
+            <div>
+              <p className={labelClass}>Verification</p>
+              <div className="overflow-hidden rounded-lg">
+                <HCaptcha
+                  ref={captchaRef}
+                  sitekey={HCAPTCHA_SITEKEY}
+                  reCaptchaCompat={false}
+                  onVerify={(token) => {
+                    setCaptchaToken(token);
+                    setErrors((prev) => ({ ...prev, captcha: undefined }));
+                  }}
+                  onExpire={() => setCaptchaToken(null)}
+                  onError={() => {
+                    setCaptchaToken(null);
+                    setErrors((prev) => ({
+                      ...prev,
+                      captcha: "Captcha failed to load. Please try again.",
+                    }));
+                  }}
+                />
+              </div>
+              {errors.captcha ? (
+                <p className="mt-1.5 text-sm text-red-700">{errors.captcha}</p>
+              ) : null}
+            </div>
+
+            {/* Honeypot */}
+            <input
+              type="checkbox"
+              name="botcheck"
+              className="hidden"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
+
+            {status === "error" && errorMessage ? (
+              <p className="text-sm text-red-700" role="alert">
+                {errorMessage}
+              </p>
+            ) : null}
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <button
+                type="button"
+                onClick={() => {
+                  setStep(1);
+                  setErrorMessage(null);
+                }}
+                className="inline-flex w-full items-center justify-center rounded-lg border border-[#0b1220]/20 px-5 py-3.5 text-sm font-semibold text-[#0b1220] transition hover:bg-[#f5f4ef] sm:w-auto"
+              >
+                Back
+              </button>
+              <button
+                type="submit"
+                disabled={status === "submitting"}
+                className="inline-flex w-full flex-1 items-center justify-center rounded-lg bg-[#0b1220] px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#14201a] disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                {status === "submitting" ? "Sending…" : "Submit"}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </form>
   );

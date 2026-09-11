@@ -37,8 +37,10 @@ emails the inbox configured on that access key.
    - `WEB3FORMS_ACCESS_KEY` = your access key  
      (Production + Preview). Prefer this server-only name.
 3. In Web3Forms, allow the site domain (`sureclear-dev.vercel.app`).
-4. Redeploy after adding the env var.
-5. Test at `/contact` and `/home#contact`.
+4. In the Web3Forms form settings, enable **hCaptcha** as spam protection
+   (required for the step-2 captcha to validate).
+5. Redeploy after adding the env var.
+6. Test at `/contact`.
 
 Locally, copy `.env.example` to `.env.local` and set `WEB3FORMS_ACCESS_KEY`.
 
