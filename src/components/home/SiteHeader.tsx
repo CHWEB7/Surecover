@@ -1,24 +1,28 @@
+import { BrandLogo } from "@/components/home/BrandLogo";
+
 const navLinks = [
-  { href: "#focus", label: "Focus" },
-  { href: "#clients", label: "Who we help" },
-  { href: "#approach", label: "Approach" },
-  { href: "#contact", label: "Contact" },
+  { href: "/home#focus", label: "Focus" },
+  { href: "/home#clients", label: "Who we help" },
+  { href: "/home#approach", label: "Approach" },
+  { href: "/home/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
-export function SiteHeader() {
+type SiteHeaderProps = {
+  /** Header logo variant — defaults to the SureClear wordmark */
+  logoVariant?: "dark" | "light" | "wordmark" | "wordmark-light";
+};
+
+export function SiteHeader({ logoVariant = "wordmark" }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-[#e7e5df] bg-[#f5f4ef]/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <a href="/home" className="group flex items-center gap-2.5">
-          <span
-            aria-hidden
-            className="flex h-8 w-8 items-center justify-center rounded-md bg-gradient-to-br from-[#1f4037] to-[#99f2c8] text-sm font-bold text-white"
-          >
-            SC
-          </span>
-          <span className="text-sm font-semibold tracking-[0.18em] text-[#1f4037] uppercase">
-            Sureclear
-          </span>
+        <a href="/home" className="group inline-flex items-center">
+          <BrandLogo
+            variant={logoVariant}
+            priority
+            className="h-8 w-auto sm:h-9"
+          />
         </a>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
@@ -34,7 +38,7 @@ export function SiteHeader() {
         </nav>
 
         <a
-          href="#contact"
+          href="/contact"
           className="rounded-full bg-[#1f4037] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2d6a4f]"
         >
           Talk to us

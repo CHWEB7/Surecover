@@ -26,8 +26,9 @@ export default function SureclearHomePage() {
         <FocusAreas />
         <WhoWeHelp />
         <Approach />
-        <ContactCta />
       </main>
+      {/* Full-bleed contact + footer stack (edge to edge) */}
+      <ContactCta />
       <SiteFooter />
     </div>
   );

@@ -8,15 +8,48 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-outfit);
   --font-mono: var(--font-geist-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+/* SVG text does not always inherit HTML font-family reliably */
+svg text,
+svg tspan {
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* About hero — transformation fiber image fills the SureClear mark */
+.about-mark-fill {
+  background-color: #1f4037;
+  /* Match the transformation card fiber treatment */
+  filter: hue-rotate(-48deg) saturate(1.25) brightness(0.92) contrast(1.06);
+  -webkit-mask-image: url(/about-icon-mask.png);
+  mask-image: url(/about-icon-mask.png);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 .infinity-logo {
@@ -60,5 +93,461 @@ body {
   .infinity-runner {
     animation: none;
     stroke-dasharray: none;
+  }
+
+  .strategy-pulse-ring,
+  .strategy-link,
+  .strategy-link-flow,
+  .strategy-node,
+  .strategy-node-dot,
+  .strategy-node-pulse,
+  .strategy-hub,
+  .strategy-label,
+  .strategy-step-enter,
+  .strategy-step-line,
+  .transform-circuit-flow,
+  .transform-circuit-node,
+  .transform-circuit-cluster,
+  .transform-fiber-image,
+  .regulation-network-image,
+  .ops-node-float,
+  .ops-line-trail,
+  .hero-focus-pulse,
+  .services-cta-pulse,
+  .transform-service-pulse,
+  .contact-continue-pulse {
+    animation: none !important;
+  }
+
+  .ops-line-trail {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    opacity: 0.9;
+  }
+
+  .strategy-step-enter,
+  .strategy-step-line {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .transform-circuit-flow {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    opacity: 0.85;
+  }
+
+  .transform-fiber-image {
+    transform: scale(1.12) !important;
+  }
+
+  .regulation-network-image {
+    transform: scale(1.12) !important;
+  }
+
+  .strategy-link-flow {
+    opacity: 0;
+  }
+
+  .hero-focus-pulse,
+  .services-cta-pulse,
+  .strategy-node-pulse,
+  .transform-service-pulse,
+  .contact-continue-pulse {
+    box-shadow: none;
+  }
+}
+
+/* Strategy card — subtle motion to draw the eye */
+.strategy-pulse-ring,
+.strategy-hub,
+.strategy-node,
+.strategy-node-dot {
+  transform-box: fill-box;
+}
+
+.strategy-pulse-ring {
+  transform-origin: center;
+  animation: strategy-ring 3.6s ease-out infinite;
+}
+
+.strategy-pulse-ring--delayed {
+  animation-delay: 1.2s;
+}
+
+.strategy-hub {
+  transform-origin: center;
+  animation: strategy-hub-breathe 3.2s ease-in-out infinite;
+}
+
+.strategy-link {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: strategy-link-draw 2.8s ease-in-out infinite;
+}
+
+.strategy-link-flow {
+  stroke-dasharray: 14 110;
+  stroke-dashoffset: 120;
+  animation: strategy-link-travel 2.4s linear infinite;
+  opacity: 0.9;
+}
+
+.strategy-node {
+  animation: strategy-node-float 3.4s ease-in-out infinite;
+}
+
+.strategy-node-dot {
+  animation: strategy-dot-pulse 2.2s ease-in-out infinite;
+}
+
+.strategy-node-pulse {
+  animation: strategy-node-pulse 2.4s ease-in-out infinite;
+}
+
+/* Transformation card — fiber plate tinted to brand greens */
+.transform-fiber-image {
+  /* Shift cool blue/cyan fibers toward Sureclear greens + soft blur */
+  filter: hue-rotate(-48deg) saturate(1.25) brightness(0.9) contrast(1.06)
+    blur(2.5px);
+  transform-origin: center;
+  animation: transform-fiber-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes transform-fiber-drift {
+  from {
+    transform: scale(1.12) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.18) translate3d(-1.5%, 1%, 0);
+  }
+}
+
+/* Transformation card — pulsing service bullets */
+@keyframes transform-service-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(82, 183, 136, 0.55);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(82, 183, 136, 0);
+    transform: scale(1.18);
+  }
+}
+
+.transform-service-pulse {
+  animation: transform-service-pulse 2.4s ease-in-out infinite;
+}
+
+/* Regulation / Fractional Leadership card — network plate + soft blur */
+.regulation-network-image {
+  filter: hue-rotate(-22deg) saturate(1.2) brightness(1.05) contrast(1.02)
+    blur(2.5px);
+  transform-origin: center;
+  animation: regulation-network-drift 20s ease-in-out infinite alternate;
+}
+
+@keyframes regulation-network-drift {
+  from {
+    transform: scale(1.12) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.18) translate3d(1.2%, -0.8%, 0);
+  }
+}
+
+/* Operations card — subtle float on icon boxes only */
+.ops-node-float {
+  animation: ops-node-float 3.4s ease-in-out infinite;
+}
+
+@keyframes ops-node-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Operations connectors — short bright pulse traveling hub → node */
+.ops-line-trail {
+  stroke-dasharray: 26 220;
+  stroke-dashoffset: 0;
+  animation: ops-line-trail 2.5s linear infinite;
+}
+
+@keyframes ops-line-trail {
+  to {
+    stroke-dashoffset: -246;
+  }
+}
+
+/* Transformation card — circuit network (legacy, unused) */
+.transform-circuit-flow {
+  stroke-dasharray: 18 90;
+  stroke-dashoffset: 220;
+  animation: transform-circuit-flow 3.2s linear infinite;
+}
+
+.transform-circuit-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: transform-circuit-node 2.6s ease-in-out infinite;
+}
+
+.transform-circuit-cluster {
+  animation: transform-circuit-cluster 3s ease-in-out infinite;
+}
+
+@keyframes transform-circuit-flow {
+  0% {
+    stroke-dashoffset: 220;
+    opacity: 0.35;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.45;
+  }
+}
+
+@keyframes transform-circuit-node {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+}
+
+@keyframes transform-circuit-cluster {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.strategy-step-enter {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: strategy-step-enter 0.7s ease-out forwards;
+}
+
+.strategy-step-line {
+  min-height: 2.75rem;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top center;
+  animation: strategy-step-line 0.55s ease-out forwards;
+}
+
+@keyframes strategy-step-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes strategy-step-line {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.strategy-label {
+  animation: strategy-label-fade 3.4s ease-in-out infinite;
+}
+
+@keyframes strategy-ring {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.72);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(1.55);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.55);
+  }
+}
+
+@keyframes strategy-hub-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+}
+
+@keyframes strategy-link-draw {
+  0%,
+  12% {
+    stroke-dashoffset: 120;
+    opacity: 0.25;
+  }
+  35%,
+  70% {
+    stroke-dashoffset: 0;
+    opacity: 0.7;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.45;
+  }
+}
+
+@keyframes strategy-link-travel {
+  0% {
+    stroke-dashoffset: 120;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.15;
+  }
+}
+
+@keyframes strategy-node-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes strategy-dot-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes strategy-node-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(153, 242, 200, 0.4);
+    border-color: rgba(255, 255, 255, 0.75);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 10px rgba(153, 242, 200, 0);
+    border-color: rgba(153, 242, 200, 0.95);
+  }
+}
+
+@keyframes strategy-label-fade {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Hero — soft constant pulse on Explore our focus */
+.hero-focus-pulse {
+  position: relative;
+  animation: hero-focus-pulse 2.4s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.28);
+}
+
+.hero-focus-pulse:hover {
+  animation-play-state: paused;
+}
+
+@keyframes hero-focus-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0);
+  }
+  50% {
+    transform: scale(1.035);
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Who we help — same pulse rhythm on View our services (dark on cream) */
+.services-cta-pulse {
+  position: relative;
+  animation: services-cta-pulse 2.4s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(11, 18, 32, 0.18);
+}
+
+.services-cta-pulse:hover {
+  animation-play-state: paused;
+}
+
+@keyframes services-cta-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    border-color: rgba(11, 18, 32, 0.55);
+    box-shadow: 0 0 0 0 rgba(11, 18, 32, 0.22);
+    background-color: rgba(11, 18, 32, 0);
+  }
+  50% {
+    transform: scale(1.035);
+    border-color: rgba(11, 18, 32, 1);
+    box-shadow: 0 0 0 10px rgba(11, 18, 32, 0);
+    background-color: rgba(11, 18, 32, 0.06);
+  }
+}
+
+/* Contact form — pulse Continue once step 1 is ready */
+.contact-continue-pulse {
+  animation: contact-continue-pulse 1.9s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(11, 18, 32, 0.28);
+}
+
+@keyframes contact-continue-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(11, 18, 32, 0.28);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 12px rgba(11, 18, 32, 0);
   }
 }

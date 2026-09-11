@@ -1,21 +1,23 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { FocusStackCard } from "@/components/home/FocusStackCard";
+import type { FocusVisualVariant } from "@/components/home/FocusCardVisual";
 
-const iconClass = "h-6 w-6";
+const iconClass = "h-10 w-10";
+const iconStroke = "#0b1220";
 
 const CubeIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
     <path
       d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinejoin="round"
     />
     <path
       d="M12 12l8-4.5M12 12v9M12 12L4 7.5"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -27,14 +29,14 @@ const RefreshIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
     <path
       d="M4 12a8 8 0 0 1 13.66-5.66M20 4v4h-4"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
     <path
       d="M20 12a8 8 0 0 1-13.66 5.66M4 20v-4h4"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -46,13 +48,13 @@ const ShieldIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
     <path
       d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3z"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinejoin="round"
     />
     <path
       d="M9 12l2 2 4-4"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -62,129 +64,63 @@ const ShieldIcon = (
 
 const GearIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.75" />
+    <circle cx="12" cy="12" r="3" stroke={iconStroke} strokeWidth="1.75" />
     <path
       d="M12 3v2.5M12 18.5V21M4.9 6.5l1.8 1.8M17.3 15.7l1.8 1.8M3 12h2.5M18.5 12H21M4.9 17.5l1.8-1.8M17.3 8.3l1.8-1.8"
-      stroke="currentColor"
+      stroke={iconStroke}
       strokeWidth="1.75"
       strokeLinecap="round"
     />
   </svg>
 );
 
-const LayersIcon = (
-  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <path
-      d="M12 3l9 5-9 5-9-5 9-5z"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M3 12l9 5 9-5M3 16l9 5 9-5"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
+type FocusCard = {
+  title: string;
+  tagline?: string;
+  description: string;
+  includesLabel?: string;
+  bullets?: readonly string[];
+  ctaLabel: string;
+  icon: ReactNode;
+  visualVariant: FocusVisualVariant;
+};
 
-const SparkIcon = (
-  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <path
-      d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-const ChipIcon = (
-  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <rect
-      x="7"
-      y="7"
-      width="10"
-      height="10"
-      rx="1.5"
-      stroke="currentColor"
-      strokeWidth="1.75"
-    />
-    <path
-      d="M9 3v4M12 3v4M15 3v4M9 17v4M12 17v4M15 17v4M3 9h4M3 12h4M3 15h4M17 9h4M17 12h4M17 15h4"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
-const DatabaseIcon = (
-  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <ellipse
-      cx="12"
-      cy="6"
-      rx="7"
-      ry="3"
-      stroke="currentColor"
-      strokeWidth="1.75"
-    />
-    <path
-      d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"
-      stroke="currentColor"
-      strokeWidth="1.75"
-    />
-  </svg>
-);
-
-const NetworkIcon = (
-  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <circle cx="6" cy="7" r="2.25" stroke="currentColor" strokeWidth="1.75" />
-    <circle cx="18" cy="7" r="2.25" stroke="currentColor" strokeWidth="1.75" />
-    <circle cx="12" cy="17" r="2.25" stroke="currentColor" strokeWidth="1.75" />
-    <path
-      d="M8 8.5l3 6.5M16 8.5l-3 6.5M8.2 7h7.6"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
-const cards = [
+const cards: FocusCard[] = [
   {
-    title: "Clearing strategy that fits how markets actually work",
+    title: "Clearing Strategy",
+    tagline: "Navigate what comes next.",
     description:
-      "Define clearing models, membership choices, product coverage and competitive positioning with decisions grounded in market structure — not generic frameworks.",
+      "Helping organisations understand and respond to changes in Clearing and market infrastructure.",
     ctaLabel: "Talk to us about strategy",
     icon: CubeIcon,
-    visualIcons: [LayersIcon, NetworkIcon, SparkIcon, ChipIcon, DatabaseIcon],
+    visualVariant: "strategy",
   },
   {
-    title: "Transformation designed for delivery, not just diagnosis",
+    title: "Transformation & Change",
+    tagline: "Turn decisions into capability.",
     description:
-      "Shape and deliver change across technology, target operating models and client propositions — with outcomes that can be implemented by the teams who run the business.",
+      "We help turn a clearing decision into a workable operating model, roadmap and delivery plan.",
     ctaLabel: "Talk to us about transformation",
     icon: RefreshIcon,
-    visualIcons: [ChipIcon, LayersIcon, GearIcon, SparkIcon, NetworkIcon],
+    visualVariant: "transformation",
   },
   {
-    title: "Regulatory change that protects the franchise",
+    title: "Fractional Leadership",
+    tagline: "Senior experience when it matters.",
     description:
-      "Translate regulatory requirements into practical programmes that meet obligations while preserving commercial momentum and operational resilience.",
-    ctaLabel: "Talk to us about regulation",
+      "Providing experienced leadership without the commitment of a permanent senior hire.",
+    ctaLabel: "Talk to us about fractional leadership",
     icon: ShieldIcon,
-    visualIcons: [ShieldIcon, DatabaseIcon, LayersIcon, ChipIcon, SparkIcon],
+    visualVariant: "regulation",
   },
   {
-    title: "Operations that keep scale, risk and service in balance",
+    title: "Operations & Resilience",
+    tagline: "Make clearing work better.",
     description:
-      "Strengthen day-to-day clearing operations, controls and resilience so growth does not come at the expense of risk or client service quality.",
+      "Helping organisations improve resilience, efficiency, controls and governance.",
     ctaLabel: "Talk to us about operations",
     icon: GearIcon,
-    visualIcons: [GearIcon, NetworkIcon, DatabaseIcon, LayersIcon, ChipIcon],
+    visualVariant: "operations",
   },
 ];
 
@@ -236,39 +172,39 @@ export function FocusAreas() {
     };
   }, [reduceMotion]);
 
-  // Stacking uses most of the track; the final stretch collapses the
-  // peek offsets so the deck becomes a single flush card before exit.
-  const STACK_PORTION = 0.78;
-  const stackProgress = clamp(progress / STACK_PORTION, 0, 1);
-  const collapseProgress = clamp(
-    (progress - STACK_PORTION) / (1 - STACK_PORTION),
-    0,
-    1,
-  );
-  const stackIndex = stackProgress * Math.max(cards.length - 1, 1);
-  const peekRoom = 40 * (1 - collapseProgress);
+  // Same pacing for every card, including the last: one sticky step per
+  // interval. The track ends when the final card lands, so the page
+  // continues immediately — no settle / collapse phase.
+  const lastIndex = Math.max(cards.length - 1, 1);
+  const stackIndex = progress * lastIndex;
+  const peekRoom = 40;
 
   return (
     <section id="focus" className="scroll-mt-24 bg-[#f5f4ef]">
-      <div className="mx-auto max-w-6xl px-6 pt-16 lg:pt-24">
-        <div className="max-w-2xl">
-          <p className="text-xs font-semibold tracking-[0.28em] text-[#2d6a4f] uppercase">
-            Where we focus
-          </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#1f4037] sm:text-4xl">
-            Better decisions across the clearing lifecycle
+      <div className="mx-auto max-w-7xl px-6 pt-16 lg:px-10 lg:pt-24">
+        <div className="max-w-5xl">
+          <h2 className="max-w-3xl text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">
+            Make complex clearing decisions with confidence.
           </h2>
-          <p className="mt-4 text-lg text-stone-600">
-            Keep scrolling — each card grows into place and stacks under the
-            last. When the final card lands, the stack settles into one card and
-            the page continues.
+          <p className="mt-5 text-lg leading-relaxed text-stone-600 sm:text-xl">
+            Specialist cleared derivatives advisory across strategy,
+            transformation, operations and regulatory change.
+            <br />
+            Built on 30+ years inside clearing across operations, transformation,
+            product and market infrastructure.
           </p>
+          <a
+            href="/home/services"
+            className="mt-8 inline-flex rounded-lg border border-[#0b1220] px-5 py-2.5 text-sm font-semibold text-[#0b1220] transition hover:bg-[#0b1220] hover:text-white"
+          >
+            Explore our services
+          </a>
         </div>
       </div>
 
       {/* Mobile / reduced motion: static vertical list */}
       <div
-        className={`mx-auto max-w-6xl space-y-6 px-6 pt-12 pb-16 ${
+        className={`mx-auto max-w-7xl space-y-6 px-6 pt-6 pb-8 lg:px-10 ${
           reduceMotion ? "block" : "md:hidden"
         }`}
       >
@@ -277,9 +213,12 @@ export function FocusAreas() {
             key={card.title}
             icon={card.icon}
             title={card.title}
+            tagline={card.tagline}
             description={card.description}
+            includesLabel={card.includesLabel}
+            bullets={card.bullets}
             ctaLabel={card.ctaLabel}
-            visualIcons={card.visualIcons}
+            visualVariant={card.visualVariant}
           />
         ))}
       </div>
@@ -288,59 +227,64 @@ export function FocusAreas() {
       {!reduceMotion && (
         <div
           ref={trackRef}
-          className="relative mt-10 hidden md:block"
-          style={{ height: `${(cards.length + 0.45) * 100}vh` }}
+          className="relative mt-3 hidden md:block"
+          style={{ height: `${lastIndex * 100}vh` }}
         >
-          <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-            <div className="relative mx-auto w-full max-w-6xl px-6">
-              <div className="relative h-[min(38rem,74vh)] overflow-hidden lg:h-[min(40rem,76vh)]">
+          <div className="sticky top-16 flex h-[calc(100vh-4rem)] flex-col overflow-hidden pt-3 pb-6">
+            <div className="relative mx-auto w-[min(80vw,78rem)]">
+              <div className="relative h-[min(42rem,74vh)] overflow-hidden xl:h-[min(46rem,76vh)]">
                 {cards.map((card, index) => {
                   const delta = stackIndex - index;
                   // Incoming: start narrower than the original card, grow to
                   // full width as it arrives. Buried cards peek ABOVE the
-                  // front card (tops visible). Collapse flushes everything
-                  // into one card at the end.
+                  // front card (tops visible), including after the last card.
                   const approach = clamp(1 + delta, 0, 1);
                   const translateYPercent =
-                    delta < 0
-                      ? Math.min(110, -delta * 110) * (1 - collapseProgress)
-                      : 0;
-                  // Negative = higher: previous cards show above the front one
-                  const peekUpPx =
-                    delta >= 0
-                      ? -delta * 14 * (1 - collapseProgress)
-                      : 0;
-                  const scaleX =
-                    delta < 0
-                      ? 0.88 + 0.12 * approach
-                      : 1;
-                  const visible = delta >= -0.98 || collapseProgress > 0;
+                    delta < 0 ? Math.min(110, -delta * 110) : 0;
+                  const peekUpPx = delta >= 0 ? -delta * 16 : 0;
+                  const scaleX = delta < 0 ? 0.88 + 0.12 * approach : 1;
+                  const visible = delta >= -0.98;
+                  const frontIndex = Math.min(
+                    lastIndex,
+                    Math.floor(stackIndex + 0.999),
+                  );
 
                   return (
                     <div
                       key={card.title}
-                      className="absolute inset-x-0 will-change-transform"
+                      className="absolute overflow-visible rounded-[1.75rem] bg-white"
                       style={{
+                        // Leave room for the rounded shadow so the overflow
+                        // container doesn't hard-clip it into a square edge.
                         top: peekRoom,
+                        right: 52,
+                        bottom: 36,
+                        left: 52,
                         zIndex: index + 1,
                         transformOrigin: "center top",
                         transform: `translate3d(0, calc(${translateYPercent}% + ${peekUpPx}px), 0) scaleX(${scaleX})`,
                         visibility: visible ? "visible" : "hidden",
                         pointerEvents:
-                          collapseProgress > 0.2 ||
-                          delta < -0.05 ||
-                          delta > 1.05
-                            ? "none"
-                            : "auto",
+                          delta < -0.05 || delta > 1.05 ? "none" : "auto",
+                        // Opaque rounded shell + matching radius = soft
+                        // shadow that reads as part of the card.
+                        boxShadow:
+                          index === frontIndex
+                            ? "0 10px 24px rgba(15, 31, 26, 0.12), 0 2px 6px rgba(15, 31, 26, 0.05)"
+                            : "none",
                       }}
                     >
                       <FocusStackCard
                         icon={card.icon}
                         title={card.title}
+                        tagline={card.tagline}
                         description={card.description}
+                        includesLabel={card.includesLabel}
+                        bullets={card.bullets}
                         ctaLabel={card.ctaLabel}
-                        visualIcons={card.visualIcons}
-                        className="w-full"
+                        visualVariant={card.visualVariant}
+                        elevated={false}
+                        className="h-full w-full"
                       />
                     </div>
                   );
@@ -348,14 +292,11 @@ export function FocusAreas() {
               </div>
 
               <div
-                className="mt-8 flex items-center justify-center gap-2"
+                className="mt-4 flex items-center justify-center gap-2"
                 aria-hidden="true"
               >
                 {cards.map((card, index) => {
-                  const active =
-                    collapseProgress > 0.5
-                      ? index === cards.length - 1
-                      : Math.round(stackIndex) === index;
+                  const active = Math.round(stackIndex) === index;
                   return (
                     <span
                       key={card.title}

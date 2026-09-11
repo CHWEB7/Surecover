@@ -1,52 +1,114 @@
+"use client";
+
+import { useState } from "react";
+
+const processSteps = [
+  {
+    title: "Diagnose the decision",
+    body: "We start with the commercial, risk and operational reality — membership, product coverage, regulation, technology and operating model — so the problem is framed clearly before options are shaped.",
+  },
+  {
+    title: "Design the path",
+    body: "We translate that diagnosis into practical choices: target models, delivery plans and trade-offs that can be owned by the teams who run clearing day to day.",
+  },
+  {
+    title: "Deliver with the business",
+    body: "We stay close through implementation — aligning stakeholders, unblocking decisions and keeping outcomes tied to clearing realities rather than generic programme theatre.",
+  },
+  {
+    title: "Embed lasting capability",
+    body: "We leave clients with clearer judgement, stronger controls and a transferable playbook — so progress continues after the engagement ends.",
+  },
+];
+
 export function Approach() {
+  const [openIndex, setOpenIndex] = useState(0);
+
   return (
     <section
       id="approach"
-      className="scroll-mt-24 bg-[#f5f4ef] py-20 lg:py-28"
+      className="scroll-mt-24 bg-[#f5f4ef] py-16 lg:py-24"
     >
-      <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-2 lg:items-center">
-        <div>
-          <p className="text-xs font-semibold tracking-[0.28em] text-[#2d6a4f] uppercase">
-            Our approach
-          </p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#1f4037] sm:text-4xl">
-            Specialist advice from people who have done the work
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-stone-600">
-            The firm is built on deep practitioner experience rather than
-            broad-based consultancy. We bring the judgement of operators who
-            have lived clearing strategy, regulation and delivery — not slide
-            decks recycled from adjacent industries.
-          </p>
-        </div>
-
-        <div className="grid gap-4">
-          {[
-            {
-              title: "Independent by design",
-              body: "No clearing product to sell. Advice stays aligned to client outcomes.",
-            },
-            {
-              title: "Exclusive industry focus",
-              body: "Cleared derivatives only — so context, nuance and risk are understood.",
-            },
-            {
-              title: "Practical delivery",
-              body: "Recommendations that can be implemented by the teams who run the business.",
-            },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="rounded-2xl border border-[#e7e5df] bg-white/70 p-6"
-            >
-              <h3 className="text-lg font-semibold text-[#1f4037]">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-stone-600">
-                {item.body}
+      <div className="mx-auto w-full max-w-[90rem] px-5 sm:px-6 lg:px-8">
+        <div className="overflow-hidden rounded-[1.75rem] border border-[#d9d6cf] bg-transparent">
+          <div className="grid lg:grid-cols-2">
+            {/* Left — intro */}
+            <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12">
+              <h2 className="text-3xl font-semibold tracking-tight text-[#0b1220] sm:text-4xl">
+                A clear process for complex clearing decisions
+              </h2>
+              <p className="mt-4 max-w-md text-base leading-relaxed text-stone-600 sm:text-lg">
+                Specialist advice from practitioners who have lived clearing
+                strategy, regulation and delivery — structured so each
+                engagement moves from diagnosis to lasting capability.
               </p>
             </div>
-          ))}
+
+            {/* Right — process dropdowns + CTAs */}
+            <div className="border-t border-[#e7e5df] p-8 sm:p-10 lg:border-t-0 lg:border-l lg:p-12">
+              <div className="divide-y divide-[#e7e5df] border-y border-[#e7e5df]">
+                {processSteps.map((step, index) => {
+                  const isOpen = openIndex === index;
+                  return (
+                    <div key={step.title}>
+                      <button
+                        type="button"
+                        aria-expanded={isOpen}
+                        onClick={() =>
+                          setOpenIndex(isOpen ? -1 : index)
+                        }
+                        className="flex w-full items-center justify-between gap-4 py-4 text-left transition hover:text-[#2d6a4f]"
+                      >
+                        <span className="text-base font-semibold text-[#0b1220]">
+                          {step.title}
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[#e7e5df] text-lg leading-none text-[#0b1220] transition ${
+                            isOpen ? "bg-[#0b1220] text-white" : "bg-white"
+                          }`}
+                        >
+                          {isOpen ? "−" : "+"}
+                        </span>
+                      </button>
+                      <div
+                        className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                        }`}
+                      >
+                        <div className="overflow-hidden">
+                          <p className="pb-4 text-sm leading-relaxed text-stone-600 sm:text-base">
+                            {step.body}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-8 flex flex-wrap items-center gap-5">
+                <a
+                  href="#contact"
+                  className="services-cta-pulse inline-flex rounded-full border border-[#0b1220]/55 px-6 py-3 text-sm font-semibold text-[#0b1220] transition hover:border-[#0b1220] hover:bg-[#0b1220]/10"
+                >
+                  Talk to us
+                </a>
+                <a
+                  href="/home/services"
+                  className="group inline-flex items-center gap-1 text-sm font-semibold text-[#0b1220] transition hover:text-[#2d6a4f]"
+                >
+                  View our services
+                  <span
+                    aria-hidden="true"
+                    className="transition group-hover:translate-x-0.5"
+                  >
+                    ›
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
