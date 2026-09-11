@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
 };
 
-/** Alternate About page — same content, wordmark logo in the header only */
+/** Alternate About page — kept for parity; site header now defaults to wordmark */
 export default function AboutAltPage() {
   return (
     <div className="flex min-h-dvh flex-col bg-[#f5f4ef] text-[#0b1220]">

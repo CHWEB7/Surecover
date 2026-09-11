@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 type BrandLogoProps = {
-  variant?: "dark" | "light" | "wordmark";
+  variant?: "dark" | "light" | "wordmark" | "wordmark-light";
   className?: string;
   priority?: boolean;
 };
@@ -25,10 +25,16 @@ const sources = {
     width: 600,
     height: 128,
   },
+  "wordmark-light": {
+    src: "/sureclear-logo-wordmark-light.png",
+    alt: "SureClear",
+    width: 600,
+    height: 128,
+  },
 } as const;
 
 export function BrandLogo({
-  variant = "dark",
+  variant = "wordmark",
   className = "h-8 w-auto",
   priority = false,
 }: BrandLogoProps) {

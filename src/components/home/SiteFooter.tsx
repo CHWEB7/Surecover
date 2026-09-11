@@ -46,7 +46,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
           <div className="shrink-0 lg:max-w-xs lg:w-64">
             <a href="/home" className="inline-flex items-center">
-              <BrandLogo variant="light" className="h-8 w-auto sm:h-9" />
+              <BrandLogo variant="wordmark-light" className="h-8 w-auto sm:h-9" />
             </a>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">
               Independent specialist advisory for the cleared derivatives

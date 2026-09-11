@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   },
 };
 
+/** About page — same content as about-alt (site-wide wordmark header) */
 export default function AboutPage() {
   return (
     <div className="flex min-h-dvh flex-col bg-[#f5f4ef] text-[#0b1220]">

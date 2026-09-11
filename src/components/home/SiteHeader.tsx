@@ -9,11 +9,11 @@ const navLinks = [
 ];
 
 type SiteHeaderProps = {
-  /** Header logo variant — defaults to the standard dark mark */
-  logoVariant?: "dark" | "light" | "wordmark";
+  /** Header logo variant — defaults to the SureClear wordmark */
+  logoVariant?: "dark" | "light" | "wordmark" | "wordmark-light";
 };
 
-export function SiteHeader({ logoVariant = "dark" }: SiteHeaderProps) {
+export function SiteHeader({ logoVariant = "wordmark" }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-[#e7e5df] bg-[#f5f4ef]/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
@@ -21,11 +21,7 @@ export function SiteHeader({ logoVariant = "dark" }: SiteHeaderProps) {
           <BrandLogo
             variant={logoVariant}
             priority
-            className={
-              logoVariant === "wordmark"
-                ? "h-8 w-auto sm:h-9"
-                : "h-7 w-auto sm:h-8"
-            }
+            className="h-8 w-auto sm:h-9"
           />
         </a>
 
