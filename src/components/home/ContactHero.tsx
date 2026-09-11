@@ -156,7 +156,7 @@ export function ContactHero() {
             aria-hidden
             className="pointer-events-none absolute -right-16 -bottom-20 h-64 w-64 rounded-full bg-[#99f2c8]/35 blur-3xl"
           />
-          <div className="relative w-full max-w-md">
+          <div className="relative w-full max-w-lg">
             <ContactForm />
           </div>
         </div>

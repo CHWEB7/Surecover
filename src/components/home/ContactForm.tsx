@@ -48,9 +48,10 @@ const STEP_TITLES: Record<Step, string> = {
 };
 
 const fieldClass =
-  "w-full rounded-lg border border-[#0b1220]/18 bg-white px-4 py-3 text-sm text-[#0b1220] outline-none transition placeholder:text-stone-400 focus:border-[#2d6a4f] focus:ring-2 focus:ring-[#52b788]/30";
+  "w-full rounded-lg border border-[#0b1220]/18 bg-white px-4 py-3.5 text-[0.95rem] text-[#0b1220] outline-none transition placeholder:text-stone-400 focus:border-[#2d6a4f] focus:ring-2 focus:ring-[#52b788]/30";
 
-const labelClass = "mb-1.5 block text-left text-sm font-semibold text-[#0b1220]";
+const labelClass =
+  "mb-1.5 block text-left text-[0.95rem] font-semibold text-[#0b1220]";
 
 function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -203,9 +204,9 @@ export function ContactForm() {
         role="status"
       >
         <div className="h-1.5 w-full bg-[#0b1220]" aria-hidden />
-        <div className="p-8 sm:p-10">
+        <div className="px-4 py-6 sm:px-5 sm:py-7">
           <p className="text-sm text-stone-500">Submitted</p>
-          <h3 className="mt-2 text-2xl font-semibold tracking-tight text-[#0b1220]">
+          <h3 className="mt-2 text-2xl font-semibold tracking-tight text-[#0b1220] sm:text-[1.75rem]">
             Thanks — we have your details.
           </h3>
           <p className="mt-3 text-base leading-relaxed text-stone-600">
@@ -238,13 +239,13 @@ export function ContactForm() {
         />
       </div>
 
-      <div className="p-6 sm:p-8 lg:p-9">
+      <div className="px-4 py-6 sm:px-5 sm:py-7">
         <p className="text-sm text-stone-500">Step {step}/3</p>
-        <h3 className="mt-2 text-2xl font-semibold tracking-tight text-[#0b1220] sm:text-[1.65rem]">
+        <h3 className="mt-2 text-2xl font-semibold tracking-tight text-[#0b1220] sm:text-[1.75rem]">
           {STEP_TITLES[step]}
         </h3>
 
-        <div className="mt-4 rounded-lg bg-[#edf7f1] px-4 py-3 text-sm leading-relaxed text-[#1f4037]">
+        <div className="mt-4 rounded-lg bg-[#edf7f1] px-4 py-3 text-[0.95rem] leading-relaxed text-[#1f4037]">
           Prefer email?{" "}
           <a
             href="mailto:hello@sureclear.com"
