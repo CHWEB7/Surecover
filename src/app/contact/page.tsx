@@ -18,7 +18,7 @@ export default function ContactPage() {
     <div className="flex min-h-dvh flex-col bg-[#f5f4ef] text-[#0b1220]">
       <SiteHeader />
       <main className="flex-1 pt-6 sm:pt-8">
-        <ContactCta />
+        <ContactCta showForm />
       </main>
       <SiteFooter />
     </div>
