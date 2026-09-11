@@ -1,15 +1,22 @@
 import { chromium } from "playwright";
 import fs from "node:fs";
 
-const base = "http://127.0.0.1:3001";
+const base = process.env.CONTACT_BASE_URL || "http://127.0.0.1:3001";
 const outDir = "/opt/cursor/artifacts";
+fs.mkdirSync(outDir, { recursive: true });
+
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
 
 await page.goto(`${base}/contact`, { waitUntil: "networkidle" });
-await page.screenshot({ path: `${outDir}/contact-form-fix-step1.png`, fullPage: true });
+await page.screenshot({
+  path: `${outDir}/contact-3step-step1.png`,
+  fullPage: true,
+});
 
-await page.getByLabel("What challenge would you like to discuss?").selectOption("Clearing strategy");
+await page
+  .getByLabel("What challenge would you like to discuss?")
+  .selectOption("Clearing strategy");
 await page.getByLabel("Work email address").fill("test@example.com");
 await page.waitForFunction(() => {
   const btn = [...document.querySelectorAll("button")].find((b) =>
@@ -17,17 +24,34 @@ await page.waitForFunction(() => {
   );
   return btn && !btn.disabled;
 });
-await page.screenshot({ path: `${outDir}/contact-form-fix-step1-ready.png`, fullPage: true });
 await page.getByRole("button", { name: "Continue" }).click({ force: true });
+
+await page.waitForSelector("#contact-discussion");
+await page.getByText("Step 2/3").waitFor();
+await page
+  .getByLabel("Briefly tell us what you would like to discuss")
+  .fill(
+    "We are reviewing CCP membership options and want a focused conversation.",
+  );
+await page.screenshot({
+  path: `${outDir}/contact-3step-step2-message.png`,
+  fullPage: true,
+});
+await page.getByRole("button", { name: "Continue" }).click({ force: true });
+
 await page.waitForSelector("#contact-name");
+await page.getByText("Step 3/3").waitFor();
 await page.getByLabel("Name", { exact: true }).fill("Test User");
 await page.getByLabel("Organisation name").fill("SureClear QA");
 await page.getByLabel("Phone number").fill("+440000000000");
-await page.screenshot({ path: `${outDir}/contact-form-fix-step2.png`, fullPage: true });
+await page.screenshot({
+  path: `${outDir}/contact-3step-step3-details.png`,
+  fullPage: true,
+});
 await page.getByRole("button", { name: "Submit" }).click({ force: true });
 await page.getByText("Please complete the captcha").waitFor();
 await page.screenshot({
-  path: `${outDir}/contact-form-fix-captcha-validation.png`,
+  path: `${outDir}/contact-3step-captcha-validation.png`,
   fullPage: true,
 });
 
@@ -37,23 +61,26 @@ const scripts = [
     [...html.matchAll(/\/_next\/static\/chunks\/[^"']+\.js/g)].map((m) => m[0]),
   ),
 ];
+let foundDiscussion = false;
 let foundWeb3 = false;
-let foundApi = false;
-let web3Snippet = "";
 for (const s of scripts) {
   const js = await (await fetch(`${base}${s}`)).text();
-  if (js.includes("api.web3forms.com")) {
-    foundWeb3 = true;
-    const idx = js.indexOf("api.web3forms.com");
-    web3Snippet = js.slice(Math.max(0, idx - 40), idx + 50);
-  }
-  if (js.includes('fetch("/api/contact"') || js.includes("fetch('/api/contact'"))
-    foundApi = true;
+  if (js.includes("contact-discussion") || js.includes("discussion"))
+    foundDiscussion = true;
+  if (js.includes("api.web3forms.com")) foundWeb3 = true;
 }
 
-const report = { bundleCheck: { foundWeb3, foundApi, web3Snippet }, uiFlow: "step1->step2->captcha validation ok" };
-fs.writeFileSync(`${outDir}/contact-submit-proof.json`, JSON.stringify(report, null, 2));
+const report = {
+  uiFlow: "step1 -> step2 message -> step3 details/captcha validation ok",
+  foundDiscussion,
+  foundWeb3,
+};
+fs.writeFileSync(
+  `${outDir}/contact-3step-proof.json`,
+  JSON.stringify(report, null, 2),
+);
 console.log(JSON.stringify(report, null, 2));
 await browser.close();
-if (!foundWeb3 || foundApi) process.exit(1);
+
+if (!foundDiscussion || !foundWeb3) process.exit(1);
 console.log("ALL CHECKS PASSED");

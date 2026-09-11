@@ -3,12 +3,13 @@
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useRef, useState, type FormEvent } from "react";
 
-type Step = 1 | 2;
+type Step = 1 | 2 | 3;
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
 type FormErrors = {
   challenge?: string;
   email?: string;
+  discussion?: string;
   name?: string;
   organisation?: string;
   phone?: string;
@@ -40,6 +41,12 @@ const WEB3FORMS_ACCESS_KEY =
 
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
+const STEP_TITLES: Record<Step, string> = {
+  1: "How can we help you?",
+  2: "What would you like to discuss?",
+  3: "A few details about you",
+};
+
 const fieldClass =
   "w-full rounded-lg border border-[#0b1220]/18 bg-white px-4 py-3 text-sm text-[#0b1220] outline-none transition placeholder:text-stone-400 focus:border-[#2d6a4f] focus:ring-2 focus:ring-[#52b788]/30";
 
@@ -47,6 +54,12 @@ const labelClass = "mb-1.5 block text-left text-sm font-semibold text-[#0b1220]"
 
 function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function progressWidth(step: Step) {
+  if (step === 1) return "33%";
+  if (step === 2) return "66%";
+  return "100%";
 }
 
 async function readWeb3FormsResult(response: Response): Promise<{
@@ -79,6 +92,7 @@ export function ContactForm() {
 
   const [challenge, setChallenge] = useState("");
   const [email, setEmail] = useState("");
+  const [discussion, setDiscussion] = useState("");
   const [name, setName] = useState("");
   const [organisation, setOrganisation] = useState("");
   const [phone, setPhone] = useState("");
@@ -86,6 +100,7 @@ export function ContactForm() {
   const captchaRef = useRef<HCaptcha>(null);
 
   const step1Ready = Boolean(challenge) && isValidEmail(email.trim());
+  const step2Ready = discussion.trim().length > 0;
 
   function goToStep2() {
     const nextErrors: FormErrors = {};
@@ -97,6 +112,16 @@ export function ContactForm() {
     if (Object.keys(nextErrors).length > 0) return;
     setErrorMessage(null);
     setStep(2);
+  }
+
+  function goToStep3() {
+    const nextErrors: FormErrors = {};
+    if (!discussion.trim())
+      nextErrors.discussion = "Please share a short note about what to discuss.";
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) return;
+    setErrorMessage(null);
+    setStep(3);
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -126,10 +151,12 @@ export function ContactForm() {
       payload.append("organisation", organisation.trim());
       payload.append("phone", phone.trim());
       payload.append("challenge", challenge);
+      payload.append("discussion", discussion.trim());
       payload.append(
         "message",
         [
           `Challenge: ${challenge}`,
+          `Discussion: ${discussion.trim()}`,
           `Name: ${name.trim()}`,
           `Email: ${email.trim()}`,
           `Organisation: ${organisation.trim()}`,
@@ -207,14 +234,14 @@ export function ContactForm() {
       <div className="h-1.5 w-full bg-[#e7e5df]" aria-hidden>
         <div
           className="h-full bg-[#0b1220] transition-all duration-300"
-          style={{ width: step === 1 ? "50%" : "100%" }}
+          style={{ width: progressWidth(step) }}
         />
       </div>
 
       <div className="p-6 sm:p-8 lg:p-9">
-        <p className="text-sm text-stone-500">Step {step}/2</p>
+        <p className="text-sm text-stone-500">Step {step}/3</p>
         <h3 className="mt-2 text-2xl font-semibold tracking-tight text-[#0b1220] sm:text-[1.65rem]">
-          {step === 1 ? "How can we help you?" : "A few details about you"}
+          {STEP_TITLES[step]}
         </h3>
 
         <div className="mt-4 rounded-lg bg-[#edf7f1] px-4 py-3 text-sm leading-relaxed text-[#1f4037]">
@@ -299,7 +326,67 @@ export function ContactForm() {
               </span>
             </button>
           </div>
-        ) : (
+        ) : null}
+
+        {step === 2 ? (
+          <div className="mt-6 space-y-5">
+            <div>
+              <label htmlFor="contact-discussion" className={labelClass}>
+                Briefly tell us what you would like to discuss
+              </label>
+              <textarea
+                id="contact-discussion"
+                name="discussion"
+                rows={5}
+                value={discussion}
+                onChange={(event) => {
+                  setDiscussion(event.target.value);
+                  setErrors((prev) => ({ ...prev, discussion: undefined }));
+                }}
+                className={`${fieldClass} min-h-[8.5rem] resize-y ${
+                  errors.discussion ? "border-red-400" : ""
+                }`}
+                placeholder="A short note on the decision, programme or operational challenge in front of you…"
+                aria-invalid={Boolean(errors.discussion)}
+              />
+              {errors.discussion ? (
+                <p className="mt-1.5 text-sm text-red-700">
+                  {errors.discussion}
+                </p>
+              ) : null}
+            </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <button
+                type="button"
+                onClick={() => {
+                  setStep(1);
+                  setErrorMessage(null);
+                }}
+                className="inline-flex w-full items-center justify-center rounded-lg border border-[#0b1220]/20 px-5 py-3.5 text-sm font-semibold text-[#0b1220] transition hover:bg-[#f5f4ef] sm:w-auto"
+              >
+                Back
+              </button>
+              <button
+                type="button"
+                onClick={goToStep3}
+                disabled={!step2Ready}
+                className={`inline-flex w-full flex-1 items-center justify-center rounded-lg px-5 py-3.5 text-sm font-semibold transition ${
+                  step2Ready
+                    ? "contact-continue-pulse bg-[#0b1220] text-white hover:bg-[#14201a]"
+                    : "cursor-not-allowed bg-[#d6d3d1] text-[#78716c]"
+                }`}
+              >
+                Continue
+                <span aria-hidden="true" className="ml-1.5">
+                  ›
+                </span>
+              </button>
+            </div>
+          </div>
+        ) : null}
+
+        {step === 3 ? (
           <div className="mt-6 space-y-5">
             <div>
               <label htmlFor="contact-name" className={labelClass}>
@@ -417,7 +504,7 @@ export function ContactForm() {
               <button
                 type="button"
                 onClick={() => {
-                  setStep(1);
+                  setStep(2);
                   setErrorMessage(null);
                 }}
                 className="inline-flex w-full items-center justify-center rounded-lg border border-[#0b1220]/20 px-5 py-3.5 text-sm font-semibold text-[#0b1220] transition hover:bg-[#f5f4ef] sm:w-auto"
@@ -433,7 +520,7 @@ export function ContactForm() {
               </button>
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     </form>
   );
