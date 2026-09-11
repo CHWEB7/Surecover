@@ -78,6 +78,7 @@ export function ContactForm() {
     if (!captchaToken) nextErrors.captcha = "Please complete the captcha.";
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
+    if (!captchaToken) return;
 
     const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
     if (!accessKey) {
@@ -87,8 +88,6 @@ export function ContactForm() {
       );
       return;
     }
-
-    const verifiedCaptchaToken = captchaToken;
 
     setStatus("submitting");
 
@@ -114,7 +113,7 @@ export function ContactForm() {
           `Phone: ${phone.trim()}`,
         ].join("\n"),
       );
-      payload.append("h-captcha-response", verifiedCaptchaToken);
+      payload.append("h-captcha-response", captchaToken);
       payload.append("botcheck", "");
 
       const response = await fetch("https://api.web3forms.com/submit", {
