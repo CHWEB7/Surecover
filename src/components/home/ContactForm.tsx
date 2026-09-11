@@ -79,24 +79,45 @@ export function ContactForm() {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setStatus("error");
+      setErrorMessage(
+        "The contact form is not configured yet. Please email hello@sureclear.com.",
+      );
+      return;
+    }
+
     setStatus("submitting");
 
     try {
-      const response = await fetch("/api/contact", {
+      // Submit from the browser so Cloudflare does not block the request
+      // (server-side proxy from Vercel/local is often challenged).
+      const payload = new FormData();
+      payload.append("access_key", accessKey);
+      payload.append("subject", `SureClear enquiry — ${challenge}`);
+      payload.append("from_name", "SureClear website");
+      payload.append("name", name.trim());
+      payload.append("email", email.trim());
+      payload.append("organisation", organisation.trim());
+      payload.append("phone", phone.trim());
+      payload.append("challenge", challenge);
+      payload.append(
+        "message",
+        [
+          `Challenge: ${challenge}`,
+          `Name: ${name.trim()}`,
+          `Email: ${email.trim()}`,
+          `Organisation: ${organisation.trim()}`,
+          `Phone: ${phone.trim()}`,
+        ].join("\n"),
+      );
+      payload.append("h-captcha-response", captchaToken);
+      payload.append("botcheck", "");
+
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          challenge,
-          email: email.trim(),
-          name: name.trim(),
-          organisation: organisation.trim(),
-          phone: phone.trim(),
-          "h-captcha-response": captchaToken,
-          botcheck: "",
-        }),
+        body: payload,
       });
 
       const result = (await response.json()) as {
@@ -110,10 +131,14 @@ export function ContactForm() {
 
       setStatus("success");
       setErrors({});
-    } catch {
+    } catch (error) {
+      const detail =
+        error instanceof Error && error.message
+          ? error.message
+          : "Something went wrong sending your message.";
       setStatus("error");
       setErrorMessage(
-        "Something went wrong sending your message. Please try again or email hello@sureclear.com.",
+        `${detail} If this continues, email hello@sureclear.com.`,
       );
       setCaptchaToken(null);
       captchaRef.current?.resetCaptcha();
