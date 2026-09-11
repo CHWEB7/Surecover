@@ -3,7 +3,6 @@ import type { ReactNode } from "react";
 type ServiceCard = {
   title: string;
   description: string;
-  tags: readonly string[];
   icon: ReactNode;
 };
 
@@ -81,28 +80,24 @@ const services: ServiceCard[] = [
     title: "Clearing Strategy",
     description:
       "Help organisations understand and respond to changes in clearing and market infrastructure — membership, product coverage and competitive positioning grounded in how markets actually work.",
-    tags: ["Membership", "Product coverage", "Market structure", "Positioning"],
     icon: StrategyIcon,
   },
   {
     title: "Transformation & Change",
     description:
       "Turn a clearing decision into a workable operating model, roadmap and delivery plan — with outcomes that can be owned by the teams who run the business day to day.",
-    tags: ["Operating model", "Roadmaps", "Vendor assessment", "Delivery"],
     icon: TransformationIcon,
   },
   {
     title: "Fractional Leadership",
     description:
       "Provide experienced clearing leadership without the commitment of a permanent senior hire — senior judgement when programmes, platforms or teams need it most.",
-    tags: ["Interim leadership", "Programmes", "Stakeholders", "Decisions"],
     icon: LeadershipIcon,
   },
   {
     title: "Operations & Resilience",
     description:
       "Improve resilience, efficiency, controls and governance so clearing operations stay robust as volumes, products and regulatory expectations change.",
-    tags: ["Controls", "Resilience", "Efficiency", "Governance"],
     icon: OperationsIcon,
   },
 ];
@@ -129,25 +124,17 @@ export function ServicesOverview() {
           {services.map((service) => (
             <article
               key={service.title}
-              className="flex h-full flex-col rounded-2xl bg-[#14201a] p-6 sm:p-7"
+              className="group flex h-full flex-col rounded-2xl border border-transparent bg-[#14201a] p-6 transition duration-300 ease-out hover:-translate-y-1.5 hover:border-[#52b788]/35 hover:bg-[#1a2a22] hover:shadow-[0_18px_40px_rgba(0,0,0,0.35)] sm:p-7 motion-reduce:transform-none motion-reduce:transition-none"
             >
-              <div className="text-[#99f2c8]">{service.icon}</div>
+              <div className="text-[#99f2c8] transition duration-300 group-hover:text-[#b7f7d7]">
+                {service.icon}
+              </div>
               <h3 className="mt-5 text-xl font-semibold tracking-tight text-white sm:text-[1.35rem]">
                 {service.title}
               </h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-white/70 sm:text-[0.95rem]">
+              <p className="mt-3 text-sm leading-relaxed text-white/70 transition duration-300 group-hover:text-white/80 sm:text-[0.95rem]">
                 {service.description}
               </p>
-              <ul className="mt-6 flex flex-wrap gap-2">
-                {service.tags.map((tag) => (
-                  <li
-                    key={tag}
-                    className="rounded-full border border-white/20 px-2.5 py-1 text-xs text-white/70"
-                  >
-                    {tag}
-                  </li>
-                ))}
-              </ul>
             </article>
           ))}
         </div>
