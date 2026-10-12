@@ -99,7 +99,7 @@ export function ServicesHero() {
               </g>
             </svg>
 
-            <div className="relative z-10 flex w-full flex-col justify-end p-7 sm:p-8 lg:p-9">
+            <div className="relative z-10 flex w-full flex-col justify-start p-7 sm:p-8 lg:p-9">
               <p className="text-sm font-medium tracking-wide text-white/70">
                 {featureCard.eyebrow}
               </p>
