@@ -1,18 +1,14 @@
 export function ContactCta() {
   return (
-    <section id="contact" className="scroll-mt-24 -mt-10 w-full bg-[#f5f4ef] lg:-mt-14">
-      <div className="relative overflow-hidden px-6 pt-10 pb-24 sm:pt-12 sm:pb-28 lg:pt-14 lg:pb-32">
+    <section id="contact" className="scroll-mt-24 -mt-6 w-full bg-[#f5f4ef] lg:-mt-8">
+      <div className="relative overflow-hidden px-6 pt-8 pb-24 sm:pt-10 sm:pb-28 lg:pt-12 lg:pb-32">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-gradient-to-b from-[#f5f4ef] via-[#f5f4ef]/85 to-transparent"
+          className="pointer-events-none absolute -left-24 top-20 h-64 w-64 rounded-full bg-[#99f2c8]/10 blur-3xl"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -left-24 top-16 h-64 w-64 rounded-full bg-[#99f2c8]/12 blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-[#2d6a4f]/08 blur-3xl"
+          className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-[#2d6a4f]/06 blur-3xl"
         />
 
         <div className="relative mx-auto max-w-3xl text-center">

@@ -552,7 +552,7 @@ html {
   }
 }
 
-/* Approach — green into site cream, then white contact */
+/* Approach — keep green through the cards, then soft-fade into cream */
 .approach-section {
   position: relative;
   background-image: linear-gradient(
@@ -561,7 +561,8 @@ html {
     #2d6a4f 42%,
     #99f2c8 100%
   );
-  padding-bottom: 8rem;
+  /* Tall bottom pad so the cream fade lives under the card row */
+  padding-bottom: 9rem;
 }
 
 .approach-section::after {
@@ -570,14 +571,13 @@ html {
   position: absolute;
   inset-inline: 0;
   bottom: 0;
-  height: min(70%, 36rem);
+  /* Fade only in the lower band beneath the process cards */
+  height: 9rem;
   background: linear-gradient(
     180deg,
     rgba(245, 244, 239, 0) 0%,
-    rgba(245, 244, 239, 0.12) 22%,
-    rgba(245, 244, 239, 0.38) 48%,
-    rgba(245, 244, 239, 0.72) 72%,
-    rgba(245, 244, 239, 0.94) 90%,
+    rgba(245, 244, 239, 0.25) 35%,
+    rgba(245, 244, 239, 0.7) 70%,
     #f5f4ef 100%
   );
 }
@@ -588,7 +588,7 @@ html {
   }
 
   .approach-section::after {
-    height: min(72%, 42rem);
+    height: 11rem;
   }
 }
 
