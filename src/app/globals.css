@@ -593,12 +593,6 @@ html {
 /* Services hero — soft transparent brand wash, no hard edges */
 .services-hero-wash {
   background-color: #ffffff;
-  background-image: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.55) 0%,
-    rgba(255, 255, 255, 0.2) 45%,
-    rgba(255, 255, 255, 0.85) 100%
-  );
 }
 
 /* Services — large feature cards */

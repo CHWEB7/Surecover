@@ -228,7 +228,7 @@ export function ServicesOverview() {
       className="scroll-mt-24 w-full bg-white pb-20 lg:pb-28"
     >
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 xl:px-24">
-        <div className="max-w-3xl border-t border-[#e7e5df] pt-12 lg:pt-16">
+        <div className="max-w-3xl pt-4 lg:pt-6">
           <p className="text-sm font-semibold tracking-wide text-[#2d6a4f]">
             By service
           </p>

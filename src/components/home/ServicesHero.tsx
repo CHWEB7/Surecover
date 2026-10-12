@@ -9,21 +9,18 @@ const featureCard = {
 export function ServicesHero() {
   return (
     <section className="services-hero-wash relative w-full overflow-hidden">
+      {/* Soft brand wash from the top corners only — fades cleanly into white */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage:
-            "linear-gradient(115deg, rgba(31,64,55,0.07) 0%, rgba(45,106,79,0.05) 38%, rgba(153,242,200,0.10) 72%, rgba(245,244,239,0.35) 100%)",
+          backgroundImage: [
+            "radial-gradient(ellipse 70% 85% at 0% 0%, rgba(31,64,55,0.10) 0%, rgba(31,64,55,0) 70%)",
+            "radial-gradient(ellipse 75% 90% at 100% 0%, rgba(153,242,200,0.18) 0%, rgba(153,242,200,0) 68%)",
+            "radial-gradient(ellipse 55% 60% at 55% 0%, rgba(45,106,79,0.06) 0%, rgba(45,106,79,0) 65%)",
+            "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 58%, #ffffff 100%)",
+          ].join(", "),
         }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-24 left-[-10%] h-72 w-[55%] rounded-full bg-[#99f2c8]/20 blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-16 bottom-[-20%] h-80 w-[45%] rounded-full bg-[#2d6a4f]/10 blur-3xl"
       />
       <div className="relative mx-auto max-w-7xl px-6 py-14 sm:px-10 sm:py-16 lg:px-16 lg:py-20 xl:px-24">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] lg:gap-12 xl:grid-cols-[minmax(0,1.45fr)_minmax(0,0.8fr)] xl:gap-14">
