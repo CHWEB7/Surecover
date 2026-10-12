@@ -199,7 +199,7 @@ export function WhoWeHelp() {
                 </span>
               </a>
 
-              <p className="mt-3 text-sm leading-relaxed text-stone-600">
+              <p className="mt-3 text-base leading-relaxed text-stone-600">
                 {audience.description}
               </p>
             </li>

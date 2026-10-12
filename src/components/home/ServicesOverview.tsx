@@ -132,7 +132,7 @@ export function ServicesOverview() {
               <h3 className="mt-5 text-xl font-semibold tracking-tight text-white sm:text-[1.35rem]">
                 {service.title}
               </h3>
-              <p className="mt-3 text-xs leading-relaxed text-white/70 transition duration-300 group-hover:text-white/80 sm:text-[0.8rem]">
+              <p className="mt-3 text-sm leading-relaxed text-white/70 transition duration-300 group-hover:text-white/80 sm:text-[0.95rem]">
                 {service.description}
               </p>
             </article>

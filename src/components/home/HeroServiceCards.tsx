@@ -267,7 +267,7 @@ export function HeroServiceCards() {
                 <h2 className="text-lg font-semibold text-white">
                   {service.title}
                 </h2>
-                <p className="mt-3 text-xs leading-relaxed text-slate-300 sm:text-[0.8rem]">
+                <p className="mt-3 text-sm leading-relaxed text-slate-300">
                   {service.description}
                 </p>
               </article>
