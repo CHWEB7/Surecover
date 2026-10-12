@@ -41,7 +41,7 @@ function ProcessCard({
   return (
     <article
       ref={cardRef}
-      className="approach-scroll-card flex w-[min(20.5rem,78vw)] shrink-0 flex-col rounded-2xl border border-white/10 bg-[#0b1220] p-6 sm:w-[min(22rem,42vw)] sm:p-7 lg:w-[min(23rem,28vw)]"
+      className="approach-scroll-card flex w-[20.5rem] shrink-0 flex-col self-stretch rounded-2xl border border-white/10 bg-[#0b1220] p-6 sm:w-[22rem] sm:p-7 lg:w-[23rem]"
     >
       <div className="flex items-start justify-between gap-4">
         <span
@@ -60,7 +60,7 @@ function ProcessCard({
       <h3 className="mt-8 text-xl font-semibold tracking-tight text-white sm:text-[1.35rem]">
         {step.title}
       </h3>
-      <p className="mt-3 text-sm leading-relaxed text-white/65 sm:text-[0.95rem]">
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-white/65 sm:text-[0.95rem]">
         {step.body}
       </p>
     </article>
@@ -263,7 +263,7 @@ export function Approach() {
           onPointerUp={endDrag}
           onPointerCancel={endDrag}
         >
-          <div className="flex w-max items-center gap-5 pl-[8%] pr-8 sm:gap-6 sm:pl-[10%] sm:pr-10 lg:gap-7 lg:pl-[12%] lg:pr-14">
+          <div className="flex w-max items-stretch gap-5 pl-[8%] pr-8 sm:gap-6 sm:pl-[10%] sm:pr-10 lg:gap-7 lg:pl-[12%] lg:pr-14">
             <button
               type="button"
               onClick={() => {
@@ -271,7 +271,7 @@ export function Approach() {
               }}
               disabled={!canAdvance}
               aria-label="Show the final process step"
-              className="approach-scroll-cta mr-3 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/55 bg-white/15 text-xl text-white backdrop-blur-sm transition hover:border-white hover:bg-white/25 disabled:cursor-default disabled:opacity-35 sm:mr-4 sm:h-14 sm:w-14 sm:text-2xl lg:h-16 lg:w-16 lg:text-3xl"
+              className="approach-scroll-cta my-auto mr-3 flex h-12 w-12 shrink-0 items-center justify-center self-center rounded-full border border-white/55 bg-white/15 text-xl text-white backdrop-blur-sm transition hover:border-white hover:bg-white/25 disabled:cursor-default disabled:opacity-35 sm:mr-4 sm:h-14 sm:w-14 sm:text-2xl lg:h-16 lg:w-16 lg:text-3xl"
             >
               <span aria-hidden="true">→</span>
             </button>
