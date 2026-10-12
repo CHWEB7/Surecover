@@ -1,6 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useRef, type PointerEvent as ReactPointerEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
 
 const processSteps = [
   {
@@ -24,14 +30,19 @@ const processSteps = [
 function ProcessCard({
   step,
   index,
+  cardRef,
 }: {
   step: (typeof processSteps)[number];
   index: number;
+  cardRef?: (node: HTMLElement | null) => void;
 }) {
   const number = String(index + 1).padStart(2, "0");
 
   return (
-    <article className="approach-scroll-card flex w-[min(20.5rem,78vw)] shrink-0 snap-start flex-col rounded-2xl border border-white/10 bg-[#0b1220] p-6 sm:w-[min(22rem,42vw)] sm:p-7 lg:w-[min(23rem,28vw)]">
+    <article
+      ref={cardRef}
+      className="approach-scroll-card flex w-[min(20.5rem,78vw)] shrink-0 flex-col rounded-2xl border border-white/10 bg-[#0b1220] p-6 sm:w-[min(22rem,42vw)] sm:p-7 lg:w-[min(23rem,28vw)]"
+    >
       <div className="flex items-start justify-between gap-4">
         <span
           className="text-4xl font-normal tracking-tight text-white sm:text-5xl"
@@ -58,36 +69,76 @@ function ProcessCard({
 
 export function Approach() {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const lastCardRef = useRef<HTMLElement | null>(null);
+  const [canAdvance, setCanAdvance] = useState(true);
   const dragRef = useRef<{
     active: boolean;
     startX: number;
     startScroll: number;
     moved: boolean;
-  }>({ active: false, startX: 0, startScroll: 0, moved: false });
+    pointerId: number | null;
+  }>({
+    active: false,
+    startX: 0,
+    startScroll: 0,
+    moved: false,
+    pointerId: null,
+  });
 
-  const onPointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+  const syncAdvanceState = useCallback(() => {
     const scroller = scrollerRef.current;
-    if (!scroller || event.button !== 0) return;
-
-    dragRef.current = {
-      active: true,
-      startX: event.clientX,
-      startScroll: scroller.scrollLeft,
-      moved: false,
-    };
-    scroller.setPointerCapture(event.pointerId);
-    scroller.classList.add("approach-scroll-dragging");
+    if (!scroller) return;
+    const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+    setCanAdvance(maxScroll > 8 && scroller.scrollLeft < maxScroll - 8);
   }, []);
 
-  const onPointerMove = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
-    const scroller = scrollerRef.current;
-    const drag = dragRef.current;
-    if (!scroller || !drag.active) return;
+  const userInteractedRef = useRef(false);
 
-    const delta = event.clientX - drag.startX;
-    if (Math.abs(delta) > 4) drag.moved = true;
-    scroller.scrollLeft = drag.startScroll - delta;
+  const scrollToLastCard = useCallback(() => {
+    const scroller = scrollerRef.current;
+    const lastCard = lastCardRef.current;
+    if (!scroller || !lastCard) return;
+
+    userInteractedRef.current = true;
+    const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+    scroller.scrollTo({
+      left: Math.max(0, maxScroll),
+      behavior: "smooth",
+    });
   }, []);
+
+  const onPointerDown = useCallback(
+    (event: ReactPointerEvent<HTMLDivElement>) => {
+      const scroller = scrollerRef.current;
+      if (!scroller || event.button !== 0) return;
+      if ((event.target as HTMLElement | null)?.closest("button")) return;
+
+      dragRef.current = {
+        active: true,
+        startX: event.clientX,
+        startScroll: scroller.scrollLeft,
+        moved: false,
+        pointerId: event.pointerId,
+      };
+      scroller.setPointerCapture(event.pointerId);
+      scroller.classList.add("approach-scroll-dragging");
+    },
+    [],
+  );
+
+  const onPointerMove = useCallback(
+    (event: ReactPointerEvent<HTMLDivElement>) => {
+      const scroller = scrollerRef.current;
+      const drag = dragRef.current;
+      if (!scroller || !drag.active) return;
+
+      const delta = event.clientX - drag.startX;
+      if (Math.abs(delta) > 4) drag.moved = true;
+      scroller.scrollLeft = drag.startScroll - delta;
+      syncAdvanceState();
+    },
+    [syncAdvanceState],
+  );
 
   const endDrag = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
     const scroller = scrollerRef.current;
@@ -97,18 +148,37 @@ export function Approach() {
     drag.active = false;
     scroller.classList.remove("approach-scroll-dragging");
     try {
-      scroller.releasePointerCapture(event.pointerId);
+      if (drag.pointerId !== null) {
+        scroller.releasePointerCapture(drag.pointerId);
+      }
     } catch {
       // Pointer may already be released.
     }
+    drag.pointerId = null;
   }, []);
 
   useEffect(() => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
 
+    const markInteracted = () => {
+      userInteractedRef.current = true;
+    };
+
+    const lockStart = () => {
+      if (!userInteractedRef.current) scroller.scrollLeft = 0;
+      syncAdvanceState();
+    };
+
+    // Hash/scrollIntoView can nudge nested overflow; reassert the offset start.
+    lockStart();
+    const raf = requestAnimationFrame(lockStart);
+    const t1 = window.setTimeout(lockStart, 50);
+    const t2 = window.setTimeout(lockStart, 200);
+
+    const onScroll = () => syncAdvanceState();
     const onWheel = (event: WheelEvent) => {
-      // Prefer horizontal intent; map vertical wheel to sideways scroll.
+      markInteracted();
       const dominant =
         Math.abs(event.deltaX) > Math.abs(event.deltaY)
           ? event.deltaX
@@ -128,18 +198,26 @@ export function Approach() {
       }
     };
 
+    scroller.addEventListener("pointerdown", markInteracted, { passive: true });
+    scroller.addEventListener("scroll", onScroll, { passive: true });
     scroller.addEventListener("wheel", onWheel, { passive: false });
-    return () => scroller.removeEventListener("wheel", onWheel);
-  }, []);
+    window.addEventListener("resize", syncAdvanceState);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+      scroller.removeEventListener("pointerdown", markInteracted);
+      scroller.removeEventListener("scroll", onScroll);
+      scroller.removeEventListener("wheel", onWheel);
+      window.removeEventListener("resize", syncAdvanceState);
+    };
+  }, [syncAdvanceState]);
 
   return (
     <section
       id="approach"
-      className="scroll-mt-24 overflow-hidden py-16 text-white lg:py-24"
-      style={{
-        backgroundImage:
-          "linear-gradient(145deg, #1f4037 0%, #2d6a4f 42%, #99f2c8 100%)",
-      }}
+      className="approach-section scroll-mt-24 overflow-hidden pt-16 text-white lg:pt-24"
     >
       <div className="mx-auto w-full max-w-[90rem] px-5 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
@@ -175,19 +253,45 @@ export function Approach() {
         </div>
       </div>
 
-      <div
-        ref={scrollerRef}
-        className="approach-scroll-strip relative mt-12 w-full touch-pan-x overflow-x-auto overscroll-x-contain pb-3 sm:mt-14 lg:mt-16"
-        aria-label="Process steps"
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
-      >
-        <div className="flex w-max gap-4 px-[8%] sm:gap-5 sm:px-[12%] lg:gap-6 lg:px-[14%]">
-          {processSteps.map((step, index) => (
-            <ProcessCard key={step.title} step={step} index={index} />
-          ))}
+      <div className="relative mt-12 sm:mt-14 lg:mt-16">
+        <button
+          type="button"
+          onClick={() => {
+            scrollToLastCard();
+          }}
+          disabled={!canAdvance}
+          aria-label="Show the final process step"
+          className="approach-scroll-cta absolute top-1/2 left-[max(0.75rem,calc(8%-3.25rem))] z-10 flex h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full border border-white/55 bg-white/15 text-2xl text-white shadow-[0_10px_30px_rgba(11,18,32,0.18)] backdrop-blur-sm transition hover:border-white hover:bg-white/25 disabled:cursor-default disabled:opacity-35 sm:left-[max(1rem,calc(12%-3.5rem))] sm:h-16 sm:w-16 sm:text-3xl lg:left-[max(1.25rem,calc(14%-3.75rem))]"
+        >
+          <span aria-hidden="true">→</span>
+        </button>
+
+        <div
+          ref={scrollerRef}
+          className="approach-scroll-strip relative w-full touch-pan-x overflow-x-auto overscroll-x-contain overflow-anchor-none pb-4"
+          aria-label="Process steps"
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+        >
+          {/* Left padding restores the original right-offset card train */}
+          <div className="flex w-max gap-4 pl-[8%] pr-8 sm:gap-5 sm:pl-[12%] sm:pr-10 lg:gap-6 lg:pl-[14%] lg:pr-14">
+            {processSteps.map((step, index) => (
+              <ProcessCard
+                key={step.title}
+                step={step}
+                index={index}
+                cardRef={
+                  index === processSteps.length - 1
+                    ? (node) => {
+                        lastCardRef.current = node;
+                      }
+                    : undefined
+                }
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

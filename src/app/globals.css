@@ -552,13 +552,34 @@ html {
   }
 }
 
+/* Approach — green into site cream, then white contact */
+.approach-section {
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(245, 244, 239, 0) 0%,
+      rgba(245, 244, 239, 0.08) 45%,
+      rgba(245, 244, 239, 0.55) 72%,
+      rgba(245, 244, 239, 0.92) 88%,
+      #f5f4ef 100%
+    ),
+    linear-gradient(145deg, #1f4037 0%, #2d6a4f 42%, #99f2c8 100%);
+  padding-bottom: 6.5rem;
+}
+
+@media (min-width: 1024px) {
+  .approach-section {
+    padding-bottom: 8rem;
+  }
+}
+
 /* Approach — manual horizontal process card strip */
 .approach-scroll-strip {
   cursor: grab;
-  scroll-snap-type: x proximity;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.45) rgba(255, 255, 255, 0.12);
+  scrollbar-color: rgba(31, 64, 55, 0.35) rgba(255, 255, 255, 0.35);
   -webkit-overflow-scrolling: touch;
+  overflow-anchor: none;
 }
 
 .approach-scroll-strip::-webkit-scrollbar {
@@ -566,21 +587,49 @@ html {
 }
 
 .approach-scroll-strip::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.35);
   border-radius: 999px;
 }
 
 .approach-scroll-strip::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.45);
+  background: rgba(31, 64, 55, 0.35);
   border-radius: 999px;
 }
 
 .approach-scroll-dragging {
   cursor: grabbing;
-  scroll-snap-type: none;
   user-select: none;
 }
 
 .approach-scroll-dragging .approach-scroll-card {
   pointer-events: none;
+}
+
+.approach-scroll-cta {
+  animation: approach-cta-pulse 2.4s ease-in-out infinite;
+}
+
+.approach-scroll-cta:hover,
+.approach-scroll-cta:disabled {
+  animation-play-state: paused;
+}
+
+@keyframes approach-cta-pulse {
+  0%,
+  100% {
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.28);
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+  50% {
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 12px rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0.22);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .approach-scroll-cta {
+    animation: none;
+  }
 }
