@@ -590,6 +590,28 @@ html {
   }
 }
 
+/* Services — large feature cards */
+.services-feature-card {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    filter 0.35s ease;
+}
+
+.services-feature-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 28px 60px rgba(11, 18, 32, 0.28);
+  filter: saturate(1.05) brightness(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-feature-card,
+  .services-feature-card:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
 /* Approach — keep green through the cards, then soft-fade into cream */
 .approach-section {
   position: relative;
