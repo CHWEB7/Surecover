@@ -552,35 +552,35 @@ html {
   }
 }
 
-/* Approach — seamless duplicated-track process marquee */
-.approach-marquee-track {
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
+/* Approach — manual horizontal process card strip */
+.approach-scroll-strip {
+  cursor: grab;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.45) rgba(255, 255, 255, 0.12);
+  -webkit-overflow-scrolling: touch;
 }
 
-.approach-marquee-running {
-  animation: approach-marquee 42s linear infinite;
+.approach-scroll-strip::-webkit-scrollbar {
+  height: 6px;
 }
 
-.approach-marquee-paused {
-  animation: approach-marquee 42s linear infinite;
-  animation-play-state: paused;
+.approach-scroll-strip::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
 }
 
-@keyframes approach-marquee {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    /* Exact half width of duplicated track = seamless loop, no jump */
-    transform: translate3d(-50%, 0, 0);
-  }
+.approach-scroll-strip::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .approach-marquee-running,
-  .approach-marquee-paused {
-    animation: none;
-    transform: none;
-  }
+.approach-scroll-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.approach-scroll-dragging .approach-scroll-card {
+  pointer-events: none;
 }

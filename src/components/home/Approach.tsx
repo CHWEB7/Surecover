@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, type PointerEvent as ReactPointerEvent } from "react";
 
 const processSteps = [
   {
@@ -31,7 +31,7 @@ function ProcessCard({
   const number = String(index + 1).padStart(2, "0");
 
   return (
-    <article className="flex w-[min(20.5rem,78vw)] shrink-0 flex-col rounded-2xl border border-white/10 bg-[#0b1220] p-6 sm:w-[min(22rem,42vw)] sm:p-7 lg:w-[min(23rem,28vw)]">
+    <article className="approach-scroll-card flex w-[min(20.5rem,78vw)] shrink-0 snap-start flex-col rounded-2xl border border-white/10 bg-[#0b1220] p-6 sm:w-[min(22rem,42vw)] sm:p-7 lg:w-[min(23rem,28vw)]">
       <div className="flex items-start justify-between gap-4">
         <span
           className="text-4xl font-normal tracking-tight text-white sm:text-5xl"
@@ -39,7 +39,10 @@ function ProcessCard({
         >
           {number}
         </span>
-        <span aria-hidden="true" className="mt-1 text-xl font-normal text-white/70">
+        <span
+          aria-hidden="true"
+          className="mt-1 text-xl font-normal text-white/70"
+        >
           →
         </span>
       </div>
@@ -54,43 +57,83 @@ function ProcessCard({
 }
 
 export function Approach() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [reduceMotion, setReduceMotion] = useState(false);
-  const [inView, setInView] = useState(false);
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const dragRef = useRef<{
+    active: boolean;
+    startX: number;
+    startScroll: number;
+    moved: boolean;
+  }>({ active: false, startX: 0, startScroll: 0, moved: false });
 
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setReduceMotion(media.matches);
-    sync();
-    media.addEventListener("change", sync);
-    return () => media.removeEventListener("change", sync);
+  const onPointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    const scroller = scrollerRef.current;
+    if (!scroller || event.button !== 0) return;
+
+    dragRef.current = {
+      active: true,
+      startX: event.clientX,
+      startScroll: scroller.scrollLeft,
+      moved: false,
+    };
+    scroller.setPointerCapture(event.pointerId);
+    scroller.classList.add("approach-scroll-dragging");
+  }, []);
+
+  const onPointerMove = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    const scroller = scrollerRef.current;
+    const drag = dragRef.current;
+    if (!scroller || !drag.active) return;
+
+    const delta = event.clientX - drag.startX;
+    if (Math.abs(delta) > 4) drag.moved = true;
+    scroller.scrollLeft = drag.startScroll - delta;
+  }, []);
+
+  const endDrag = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    const scroller = scrollerRef.current;
+    const drag = dragRef.current;
+    if (!scroller || !drag.active) return;
+
+    drag.active = false;
+    scroller.classList.remove("approach-scroll-dragging");
+    try {
+      scroller.releasePointerCapture(event.pointerId);
+    } catch {
+      // Pointer may already be released.
+    }
   }, []);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
 
-    const markVisible = () => setInView(true);
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) markVisible();
-      },
-      { threshold: 0 },
-    );
-    observer.observe(section);
+    const onWheel = (event: WheelEvent) => {
+      // Prefer horizontal intent; map vertical wheel to sideways scroll.
+      const dominant =
+        Math.abs(event.deltaX) > Math.abs(event.deltaY)
+          ? event.deltaX
+          : event.deltaY;
+      if (dominant === 0) return;
 
-    // Start immediately if already on-screen (IO can miss the first paint).
-    const rect = section.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) markVisible();
+      const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+      if (maxScroll <= 0) return;
 
-    return () => observer.disconnect();
+      const next = Math.max(
+        0,
+        Math.min(maxScroll, scroller.scrollLeft + dominant),
+      );
+      if (next !== scroller.scrollLeft) {
+        event.preventDefault();
+        scroller.scrollLeft = next;
+      }
+    };
+
+    scroller.addEventListener("wheel", onWheel, { passive: false });
+    return () => scroller.removeEventListener("wheel", onWheel);
   }, []);
-
-  const loopSteps = [...processSteps, ...processSteps];
 
   return (
     <section
-      ref={sectionRef}
       id="approach"
       className="scroll-mt-24 overflow-hidden py-16 text-white lg:py-24"
       style={{
@@ -133,28 +176,18 @@ export function Approach() {
       </div>
 
       <div
-        className="relative mt-12 w-full overflow-hidden sm:mt-14 lg:mt-16"
+        ref={scrollerRef}
+        className="approach-scroll-strip relative mt-12 w-full touch-pan-x overflow-x-auto overscroll-x-contain pb-3 sm:mt-14 lg:mt-16"
         aria-label="Process steps"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
       >
-        {/* Offset lives outside the animated track so -50% stays seamless */}
-        <div className="pl-[8%] sm:pl-[12%] lg:pl-[14%]">
-          <div
-            className={`approach-marquee-track flex w-max gap-4 sm:gap-5 lg:gap-6 ${
-              reduceMotion
-                ? ""
-                : inView
-                  ? "approach-marquee-running"
-                  : "approach-marquee-paused"
-            }`}
-          >
-            {(reduceMotion ? processSteps : loopSteps).map((step, index) => (
-              <ProcessCard
-                key={`${step.title}-${index}`}
-                step={step}
-                index={index % processSteps.length}
-              />
-            ))}
-          </div>
+        <div className="flex w-max gap-4 px-[8%] sm:gap-5 sm:px-[12%] lg:gap-6 lg:px-[14%]">
+          {processSteps.map((step, index) => (
+            <ProcessCard key={step.title} step={step} index={index} />
+          ))}
         </div>
       </div>
     </section>
