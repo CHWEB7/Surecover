@@ -67,7 +67,7 @@ export function FocusStackCard({
                 </p>
               ) : null}
               <p
-                className={`max-w-xl text-base leading-relaxed text-stone-600 sm:text-lg ${
+                className={`max-w-xl text-sm leading-relaxed text-stone-600 sm:text-base ${
                   hasBullets ? "mt-3" : "mt-4"
                 }`}
               >

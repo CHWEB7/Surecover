@@ -60,7 +60,7 @@ function ProcessCard({
       <h3 className="mt-6 text-lg font-semibold tracking-tight text-white sm:text-xl">
         {step.title}
       </h3>
-      <p className="mt-2.5 flex-1 text-sm leading-relaxed text-white/65">
+      <p className="mt-2.5 flex-1 text-xs leading-relaxed text-white/65 sm:text-[0.8rem]">
         {step.body}
       </p>
     </article>
