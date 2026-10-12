@@ -10,13 +10,51 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-outfit);
   --font-mono: var(--font-geist-mono);
+  --font-body: var(--font-identidad);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+  /* Body copy defaults to Identidad ExtraLight */
+  font-family: var(--font-identidad), var(--font-outfit), system-ui, -apple-system,
+    sans-serif;
+  font-weight: 200;
   -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * Titles / UI chrome stay on Outfit.
+ * Card & feature titles use heading tags or semibold/medium weights.
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+input,
+select,
+textarea,
+label,
+nav a,
+.font-semibold,
+.font-medium,
+.font-bold,
+.font-extrabold {
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+}
+
+/* Explicit body-copy helper for non-heading descriptions */
+.font-body,
+p:not([class*="font-semibold"]):not([class*="font-medium"]):not(
+    [class*="font-bold"]
+  ),
+li:not([class*="font-semibold"]):not([class*="font-medium"]) {
+  font-family: var(--font-identidad), var(--font-outfit), system-ui, -apple-system,
+    sans-serif;
+  font-weight: 200;
 }
 
 /* SVG text does not always inherit HTML font-family reliably */
