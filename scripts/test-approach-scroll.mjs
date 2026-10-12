@@ -24,13 +24,14 @@ await page.waitForTimeout(700);
 
 const before = await page.evaluate(() => {
   const strip = document.querySelector(".approach-scroll-strip");
-  const track = strip?.querySelector(":scope > div");
   const cards = [...document.querySelectorAll("#approach article")];
   const first = cards[0]?.getBoundingClientRect();
   const last = cards[cards.length - 1]?.getBoundingClientRect();
   const cta = document.querySelector(".approach-scroll-cta");
+  const ctaRect = cta?.getBoundingClientRect();
   const contact = document.querySelector("#contact");
   const approach = document.querySelector("#approach");
+  const stripCs = strip ? getComputedStyle(strip) : null;
   return {
     scrollLeft: strip?.scrollLeft ?? -1,
     cardCount: cards.length,
@@ -39,6 +40,10 @@ const before = await page.evaluate(() => {
     viewport: window.innerWidth,
     hasCta: !!cta,
     ctaDisabled: cta?.hasAttribute("disabled") ?? true,
+    ctaRight: ctaRect?.right ?? -1,
+    gapArrowToCard:
+      first && ctaRect ? first.left - ctaRect.right : -999,
+    scrollbarWidth: stripCs?.scrollbarWidth ?? "",
     approachHasBlend: (approach?.className || "").includes("approach-section"),
     contactBg: contact ? getComputedStyle(contact).backgroundColor : "",
     contactHeading: contact?.querySelector("h2")?.textContent?.trim() || "",
@@ -46,7 +51,7 @@ const before = await page.evaluate(() => {
 });
 
 await page.locator("#approach").screenshot({
-  path: `${outDir}/approach-offset-arrow-start.png`,
+  path: `${outDir}/approach-arrow-gap-start.png`,
 });
 
 await page
@@ -74,22 +79,29 @@ const afterClick = await page.evaluate(() => {
 });
 
 await page.locator("#approach").screenshot({
-  path: `${outDir}/approach-offset-arrow-after-click.png`,
+  path: `${outDir}/approach-arrow-gap-after-click.png`,
 });
 
 await page.evaluate(() => {
-  document.querySelector("#contact")?.scrollIntoView({ block: "center" });
+  const approach = document.querySelector("#approach");
+  if (!approach) return;
+  const top =
+    approach.getBoundingClientRect().top +
+    window.scrollY +
+    approach.offsetHeight -
+    520;
+  window.scrollTo(0, Math.max(0, top));
 });
 await page.waitForTimeout(400);
-await page.locator("#contact").screenshot({
-  path: `${outDir}/contact-cta-white-blend.png`,
+await page.screenshot({
+  path: `${outDir}/approach-contact-smooth-blend.png`,
 });
 
 const videoPath = await page.video().path();
 await context.close();
 await browser.close();
 
-const destVideo = `${outDir}/approach-offset-arrow.webm`;
+const destVideo = `${outDir}/approach-arrow-blend-fix.webm`;
 fs.renameSync(videoPath, destVideo);
 
 const ok =
@@ -97,6 +109,8 @@ const ok =
   before.scrollLeft === 0 &&
   before.firstLeft > 120 &&
   before.hasCta &&
+  before.gapArrowToCard >= 10 &&
+  before.scrollbarWidth === "none" &&
   before.approachHasBlend &&
   before.contactBg.includes("245, 244, 239") &&
   afterClick.scrollLeft > before.scrollLeft + 80 &&
