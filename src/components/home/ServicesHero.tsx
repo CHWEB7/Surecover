@@ -8,8 +8,24 @@ const featureCard = {
 
 export function ServicesHero() {
   return (
-    <section className="w-full bg-white">
-      <div className="mx-auto max-w-7xl px-6 py-14 sm:px-10 sm:py-16 lg:px-16 lg:py-20 xl:px-24">
+    <section className="services-hero-wash relative w-full overflow-hidden">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(115deg, rgba(31,64,55,0.07) 0%, rgba(45,106,79,0.05) 38%, rgba(153,242,200,0.10) 72%, rgba(245,244,239,0.35) 100%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-24 left-[-10%] h-72 w-[55%] rounded-full bg-[#99f2c8]/20 blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-16 bottom-[-20%] h-80 w-[45%] rounded-full bg-[#2d6a4f]/10 blur-3xl"
+      />
+      <div className="relative mx-auto max-w-7xl px-6 py-14 sm:px-10 sm:py-16 lg:px-16 lg:py-20 xl:px-24">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] lg:gap-12 xl:grid-cols-[minmax(0,1.45fr)_minmax(0,0.8fr)] xl:gap-14">
           <div className="max-w-2xl xl:max-w-3xl">
             <h1 className="text-5xl leading-[1.05] font-semibold tracking-tight text-[#0b1220] sm:text-6xl lg:text-7xl">
