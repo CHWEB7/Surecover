@@ -15,9 +15,9 @@ export function ServicesHero() {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage: [
-            "radial-gradient(ellipse 70% 85% at 0% 0%, rgba(31,64,55,0.10) 0%, rgba(31,64,55,0) 70%)",
-            "radial-gradient(ellipse 75% 90% at 100% 0%, rgba(153,242,200,0.18) 0%, rgba(153,242,200,0) 68%)",
-            "radial-gradient(ellipse 55% 60% at 55% 0%, rgba(45,106,79,0.06) 0%, rgba(45,106,79,0) 65%)",
+            "radial-gradient(ellipse 70% 85% at 0% 0%, rgba(31,64,55,0.12) 0%, rgba(31,64,55,0) 70%)",
+            "radial-gradient(ellipse 75% 90% at 100% 0%, rgba(45,106,79,0.11) 0%, rgba(45,106,79,0) 68%)",
+            "radial-gradient(ellipse 55% 60% at 50% 0%, rgba(31,64,55,0.06) 0%, rgba(31,64,55,0) 65%)",
             "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 58%, #ffffff 100%)",
           ].join(", "),
         }}
