@@ -263,7 +263,7 @@ export function Approach() {
           onPointerUp={endDrag}
           onPointerCancel={endDrag}
         >
-          <div className="flex w-max items-center gap-4 pl-[8%] pr-8 sm:gap-5 sm:pl-[10%] sm:pr-10 lg:gap-6 lg:pl-[12%] lg:pr-14">
+          <div className="flex w-max items-center gap-5 pl-[8%] pr-8 sm:gap-6 sm:pl-[10%] sm:pr-10 lg:gap-7 lg:pl-[12%] lg:pr-14">
             <button
               type="button"
               onClick={() => {
@@ -271,7 +271,7 @@ export function Approach() {
               }}
               disabled={!canAdvance}
               aria-label="Show the final process step"
-              className="approach-scroll-cta mr-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/55 bg-white/15 text-xl text-white shadow-[0_10px_30px_rgba(11,18,32,0.18)] backdrop-blur-sm transition hover:border-white hover:bg-white/25 disabled:cursor-default disabled:opacity-35 sm:mr-2 sm:h-14 sm:w-14 sm:text-2xl lg:h-16 lg:w-16 lg:text-3xl"
+              className="approach-scroll-cta mr-3 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/55 bg-white/15 text-xl text-white backdrop-blur-sm transition hover:border-white hover:bg-white/25 disabled:cursor-default disabled:opacity-35 sm:mr-4 sm:h-14 sm:w-14 sm:text-2xl lg:h-16 lg:w-16 lg:text-3xl"
             >
               <span aria-hidden="true">→</span>
             </button>
