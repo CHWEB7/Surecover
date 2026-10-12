@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const featureCard = {
   title: "Decide with clarity",
   eyebrow: "Clearing strategy",
@@ -50,7 +48,7 @@ export function ServicesHero() {
           >
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-35 mix-blend-soft-light transition duration-500 group-hover:opacity-50"
+              className="pointer-events-none absolute inset-0 opacity-30 mix-blend-soft-light transition duration-500 group-hover:opacity-45"
               style={{
                 backgroundImage: `url(${featureCard.image})`,
                 backgroundSize: "cover",
@@ -59,55 +57,55 @@ export function ServicesHero() {
             />
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-[0.18]"
+              className="pointer-events-none absolute inset-0 opacity-[0.16]"
               style={{
                 backgroundImage:
                   "radial-gradient(circle at 20% 20%, rgba(153,242,200,0.35), transparent 42%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.16), transparent 40%)",
               }}
             />
+
             <svg
               aria-hidden
-              className="pointer-events-none absolute inset-0 h-full w-full opacity-25"
+              className="services-feature-lines pointer-events-none absolute inset-0 h-full w-full"
               viewBox="0 0 600 360"
               fill="none"
+              preserveAspectRatio="xMidYMid slice"
             >
-              <path
-                d="M40 80h90l45 78H85L40 80zm140 40h110l55 95H235l-55-95zm210-20h100l50 86H400l-50-86zM80 220h120l60 104H140L80 220z"
-                stroke="rgba(255,255,255,0.55)"
-                strokeWidth="1.25"
-              />
-              <path
-                d="M320 200h140l70 120H390l-70-120z"
-                stroke="rgba(153,242,200,0.55)"
-                strokeWidth="1.25"
-              />
+              <g className="services-feature-lines-drift">
+                <path
+                  className="services-feature-line services-feature-line-a"
+                  d="M20 70h100l50 86H70L20 70zm130 30h120l60 104H210l-60-104zm200-25h110l55 95H405l-55-95z"
+                  stroke="rgba(255,255,255,0.45)"
+                  strokeWidth="1.35"
+                />
+                <path
+                  className="services-feature-line services-feature-line-b"
+                  d="M60 200h130l65 112H125L60 200zm180 20h140l70 120H310l-70-120zm210-40h100l50 86H500l-50-86z"
+                  stroke="rgba(153,242,200,0.55)"
+                  strokeWidth="1.35"
+                />
+                <path
+                  className="services-feature-line services-feature-line-c"
+                  d="M-10 140h90l45 78H35L-10 140zm420 90h120l60 104H480l-60-104zM250 10h90l45 78H295L250 10z"
+                  stroke="rgba(255,255,255,0.32)"
+                  strokeWidth="1.2"
+                />
+                <path
+                  className="services-feature-line services-feature-line-d"
+                  d="M150 250h90l45 78H195l-45-78zm280 40h80l40 69H360l-40-69z"
+                  stroke="rgba(153,242,200,0.4)"
+                  strokeWidth="1.2"
+                />
+              </g>
             </svg>
 
-            <div className="relative z-10 flex w-full flex-col justify-between p-7 sm:p-8 lg:p-9">
-              <div>
-                <p className="text-sm font-medium tracking-wide text-white/70">
-                  {featureCard.eyebrow}
-                </p>
-                <h2 className="mt-3 max-w-[12ch] text-3xl leading-[1.08] font-semibold tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
-                  {featureCard.title}
-                </h2>
-              </div>
-
-              <div className="mt-10 flex items-end justify-between gap-4">
-                <Image
-                  src="/sureclear-logo-wordmark-light.png"
-                  alt="SureClear"
-                  width={140}
-                  height={28}
-                  className="h-6 w-auto opacity-95 sm:h-7"
-                />
-                <span
-                  aria-hidden
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/55 bg-white/10 text-lg text-white backdrop-blur-sm transition duration-300 group-hover:border-white group-hover:bg-white/20"
-                >
-                  ›
-                </span>
-              </div>
+            <div className="relative z-10 flex w-full flex-col justify-end p-7 sm:p-8 lg:p-9">
+              <p className="text-sm font-medium tracking-wide text-white/70">
+                {featureCard.eyebrow}
+              </p>
+              <h2 className="mt-3 max-w-[12ch] text-3xl leading-[1.08] font-semibold tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
+                {featureCard.title}
+              </h2>
             </div>
           </a>
         </div>
