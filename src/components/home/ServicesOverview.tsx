@@ -233,44 +233,33 @@ export function ServicesOverview() {
             By service
           </p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[#0b1220] sm:text-4xl lg:text-[2.75rem]">
-            Specialist clearing support for every critical decision
+            Specialist clearing support for every{" "}
+            <span className="bg-[linear-gradient(135deg,#1f4037_0%,#2d6a4f_45%,#99f2c8_100%)] bg-clip-text text-transparent">
+              critical decision
+            </span>
           </h2>
         </div>
 
         <div className="mt-10 grid gap-3 sm:mt-12 sm:grid-cols-2 xl:grid-cols-4 xl:gap-4">
-          {services.map((service) => {
-            const isActive = service.id === active.id;
-            return (
-              <button
-                key={service.id}
-                type="button"
-                id={service.id}
-                onClick={() => selectService(service.id)}
-                className={`services-area-card group flex h-full flex-col rounded-2xl border p-5 text-left transition duration-300 ease-out sm:p-6 motion-reduce:transform-none motion-reduce:transition-none ${
-                  isActive
-                    ? "border-[#e7e5df] bg-[#f5f4ef] shadow-[0_16px_40px_rgba(11,18,32,0.08)]"
-                    : "border-transparent bg-transparent hover:-translate-y-1 hover:border-[#e7e5df] hover:bg-[#f5f4ef] hover:shadow-[0_16px_40px_rgba(11,18,32,0.08)]"
-                }`}
-                aria-pressed={isActive}
-              >
-                <div
-                  className={`transition duration-300 ${
-                    isActive
-                      ? "text-[#2d6a4f]"
-                      : "text-[#0b1220] group-hover:text-[#2d6a4f]"
-                  }`}
-                >
-                  {service.icon}
-                </div>
-                <h3 className="mt-5 text-xl font-semibold tracking-tight text-[#0b1220]">
-                  {service.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-stone-600">
-                  {service.shortDescription}
-                </p>
-              </button>
-            );
-          })}
+          {services.map((service) => (
+            <button
+              key={service.id}
+              type="button"
+              id={service.id}
+              onClick={() => selectService(service.id)}
+              className="services-area-card group flex h-full flex-col rounded-2xl border border-transparent bg-transparent p-5 text-left transition duration-300 ease-out hover:-translate-y-1 hover:border-[#ecece8] hover:bg-[#f3f3f0] sm:p-6 motion-reduce:transform-none motion-reduce:transition-none"
+            >
+              <div className="text-[#0b1220] transition duration-300 group-hover:text-[#2d6a4f]">
+                {service.icon}
+              </div>
+              <h3 className="mt-5 text-xl font-semibold tracking-tight text-[#0b1220]">
+                {service.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-stone-600">
+                {service.shortDescription}
+              </p>
+            </button>
+          ))}
         </div>
 
         <div className="mt-12 border-t border-[#e7e5df] pt-10 lg:mt-16 lg:pt-12">
