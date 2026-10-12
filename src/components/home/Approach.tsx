@@ -41,26 +41,26 @@ function ProcessCard({
   return (
     <article
       ref={cardRef}
-      className="approach-scroll-card flex w-[20.5rem] shrink-0 flex-col self-stretch rounded-2xl border border-white/10 bg-[#0b1220] p-6 sm:w-[22rem] sm:p-7 lg:w-[23rem]"
+      className="approach-scroll-card flex w-[17.5rem] shrink-0 flex-col self-stretch rounded-2xl border border-white/10 bg-[#0b1220] p-5 sm:w-[18.5rem] sm:p-6 lg:w-[19.5rem]"
     >
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex items-start justify-between gap-3">
         <span
-          className="text-4xl font-normal tracking-tight text-white sm:text-5xl"
+          className="text-3xl font-normal tracking-tight text-white sm:text-4xl"
           aria-hidden="true"
         >
           {number}
         </span>
         <span
           aria-hidden="true"
-          className="mt-1 text-xl font-normal text-white/70"
+          className="mt-1 text-lg font-normal text-white/70"
         >
           →
         </span>
       </div>
-      <h3 className="mt-8 text-xl font-semibold tracking-tight text-white sm:text-[1.35rem]">
+      <h3 className="mt-6 text-lg font-semibold tracking-tight text-white sm:text-xl">
         {step.title}
       </h3>
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-white/65 sm:text-[0.95rem]">
+      <p className="mt-2.5 flex-1 text-sm leading-relaxed text-white/65">
         {step.body}
       </p>
     </article>
