@@ -12,12 +12,12 @@ export function ServicesHero() {
   return (
     <section className="w-full bg-white">
       <div className="mx-auto max-w-7xl px-6 py-14 sm:px-10 sm:py-16 lg:px-16 lg:py-20 xl:px-24">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-12 xl:gap-16">
-          <div className="max-w-xl">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] lg:gap-12 xl:grid-cols-[minmax(0,1.45fr)_minmax(0,0.8fr)] xl:gap-14">
+          <div className="max-w-2xl xl:max-w-3xl">
             <h1 className="text-5xl leading-[1.05] font-semibold tracking-tight text-[#0b1220] sm:text-6xl lg:text-7xl">
               SureClear Services
             </h1>
-            <p className="mt-4 max-w-xl text-lg leading-relaxed text-stone-600 sm:text-xl">
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed text-stone-600 sm:text-xl">
               Explore specialist clearing journeys across strategy, change,
               leadership and operations — grounded in how markets actually work.
             </p>
@@ -45,7 +45,7 @@ export function ServicesHero() {
 
           <a
             href={featureCard.href}
-            className="services-feature-card group relative isolate flex min-h-[18rem] overflow-hidden rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl rounded-br-[3.5rem] text-white shadow-[0_18px_50px_rgba(11,18,32,0.16)] sm:min-h-[20rem] lg:min-h-[22rem] xl:min-h-[24rem]"
+            className="services-feature-card group relative isolate mx-auto flex min-h-[16rem] w-full max-w-[28rem] overflow-hidden rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl rounded-br-[3rem] text-white shadow-[0_18px_50px_rgba(11,18,32,0.16)] sm:min-h-[18rem] lg:mx-0 lg:ml-auto lg:min-h-[19rem] lg:max-w-[26rem] xl:min-h-[20rem] xl:max-w-[28rem]"
             style={{ backgroundImage: featureCard.gradient }}
           >
             <div
