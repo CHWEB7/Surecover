@@ -12,11 +12,20 @@ const navLinks = [
 type SiteHeaderProps = {
   /** Header logo variant — defaults to the SureClear wordmark */
   logoVariant?: "dark" | "light" | "wordmark" | "wordmark-light";
+  /** Surface tone — cream matches most marketing pages; white for contact */
+  tone?: "cream" | "white";
 };
 
-export function SiteHeader({ logoVariant = "wordmark" }: SiteHeaderProps) {
+export function SiteHeader({
+  logoVariant = "wordmark",
+  tone = "cream",
+}: SiteHeaderProps) {
   return (
-    <header className="sticky top-0 z-50 border-b border-[#e7e5df] bg-[#f5f4ef]/90 backdrop-blur-md">
+    <header
+      className={`sticky top-0 z-50 border-b border-[#e7e5df] backdrop-blur-md ${
+        tone === "white" ? "bg-white/95" : "bg-[#f5f4ef]/90"
+      }`}
+    >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <a href="/home" className="group inline-flex items-center">
           <BrandLogo

@@ -77,9 +77,9 @@ function LinkedInIcon() {
 export function ContactHero() {
   return (
     <section className="w-full bg-white">
-      <div className="mx-auto grid min-h-[calc(100dvh-4rem)] w-full lg:grid-cols-2">
+      <div className="grid min-h-[calc(100dvh-4rem)] w-full lg:grid-cols-2">
         {/* Left — contact information */}
-        <div className="flex flex-col bg-white px-6 pt-5 pb-14 sm:px-10 sm:pt-6 sm:pb-16 lg:px-14 lg:pt-7 lg:pb-20 xl:px-20">
+        <div className="relative z-10 flex flex-col bg-white px-6 pt-5 pb-14 sm:px-10 sm:pt-6 sm:pb-16 lg:px-14 lg:pt-7 lg:pb-20 xl:px-20">
           <PageDirectory
             className="mb-8 sm:mb-10"
             items={[
@@ -150,9 +150,9 @@ export function ContactHero() {
           </div>
         </div>
 
-        {/* Right — green gradient + form card */}
+        {/* Right — green gradient + form card (overlap 1px to kill hairline seam) */}
         <div
-          className="relative flex items-center justify-center overflow-hidden px-6 py-14 sm:px-10 sm:py-16 lg:px-12 lg:py-20"
+          className="relative flex items-center justify-center overflow-hidden bg-[#1f4037] px-6 py-14 sm:px-10 sm:py-16 lg:-ml-px lg:px-12 lg:py-20"
           style={{
             backgroundImage:
               "linear-gradient(145deg, #1f4037 0%, #2d6a4f 42%, #99f2c8 100%)",
