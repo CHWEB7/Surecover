@@ -152,8 +152,10 @@ html {
   .ops-line-trail,
   .hero-focus-pulse,
   .services-cta-pulse,
+  .contact-cta-pulse,
   .transform-service-pulse,
-  .contact-continue-pulse {
+  .contact-continue-pulse,
+  .footer-logo-swoop-mark {
     animation: none !important;
   }
 
@@ -189,10 +191,16 @@ html {
 
   .hero-focus-pulse,
   .services-cta-pulse,
+  .contact-cta-pulse,
   .strategy-node-pulse,
   .transform-service-pulse,
   .contact-continue-pulse {
     box-shadow: none;
+  }
+
+  .footer-logo-swoop-mark {
+    background-image: none;
+    background-color: #ffffff;
   }
 }
 
@@ -770,5 +778,70 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .approach-scroll-cta {
     animation: none;
+  }
+}
+
+/* Contact CTA — pulse on Get in touch (brand / green card) */
+.contact-cta-pulse {
+  position: relative;
+  animation: contact-cta-pulse 2.4s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(153, 242, 200, 0.2);
+}
+
+.contact-cta-pulse:hover {
+  animation-play-state: paused;
+}
+
+@keyframes contact-cta-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    border-color: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 0 0 0 rgba(153, 242, 200, 0.22);
+    background-color: rgba(255, 255, 255, 0);
+  }
+  50% {
+    transform: scale(1.035);
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 10px rgba(153, 242, 200, 0);
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Footer wordmark — white base with a swooping green gradient every ~2s */
+.footer-logo-swoop-mark {
+  display: inline-block;
+  background-color: #ffffff;
+  background-image: linear-gradient(
+    105deg,
+    #ffffff 0%,
+    #ffffff 38%,
+    #99f2c8 48%,
+    #2d6a4f 54%,
+    #ffffff 64%,
+    #ffffff 100%
+  );
+  background-size: 220% 100%;
+  background-position: 100% 50%;
+  animation: footer-logo-swoop 2.2s ease-in-out infinite;
+  -webkit-mask-image: url("/sureclear-logo-wordmark.png");
+  mask-image: url("/sureclear-logo-wordmark.png");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+@keyframes footer-logo-swoop {
+  0% {
+    background-position: 120% 50%;
+  }
+  55% {
+    background-position: -20% 50%;
+  }
+  100% {
+    background-position: -20% 50%;
   }
 }

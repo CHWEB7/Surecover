@@ -25,7 +25,7 @@ export default function AboutPage() {
         <AboutStory />
         <AboutTeam />
       </main>
-      <ContactCta />
+      <ContactCta variant="brand" />
       <SiteFooter />
     </div>
   );

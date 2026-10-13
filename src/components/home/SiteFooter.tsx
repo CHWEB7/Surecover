@@ -1,5 +1,3 @@
-import { BrandLogo } from "@/components/home/BrandLogo";
-
 const footerColumns = [
   {
     title: "Focus",
@@ -45,8 +43,12 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-6 pt-14 pb-10 lg:px-10 lg:pt-16 lg:pb-12">
         <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
           <div className="shrink-0 lg:max-w-xs lg:w-64">
-            <a href="/home" className="inline-flex items-center">
-              <BrandLogo variant="wordmark-light" className="h-8 w-auto sm:h-9" />
+            <a
+              href="/home"
+              className="footer-logo-swoop inline-flex items-center"
+              aria-label="SureClear home"
+            >
+              <span className="footer-logo-swoop-mark h-8 w-[9.5rem] sm:h-9 sm:w-[10.75rem]" />
             </a>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">
               Independent specialist advisory for the cleared derivatives

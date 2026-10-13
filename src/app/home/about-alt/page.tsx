@@ -26,7 +26,7 @@ export default function AboutAltPage() {
         <AboutStory />
         <AboutTeam />
       </main>
-      <ContactCta />
+      <ContactCta variant="brand" />
       <SiteFooter />
     </div>
   );
