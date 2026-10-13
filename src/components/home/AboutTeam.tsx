@@ -21,7 +21,6 @@ const team: TeamMember[] = [
     role: "Founder, SureClear",
     headline: "30+ years in clearing",
     paragraphs: [
-      "I know how clearing works in practice — where the risks sit, where the operational pain points are, where change gets difficult and what it takes to turn strategy into something that actually works.",
       "Simon Haggett began his career in derivatives clearing operations and progressed through senior leadership roles across SEB, Credit Suisse and FIS.",
       "He has led organisations of more than 100 professionals, managed major transformation portfolios and led global product organisations responsible for platforms supporting more than 80 CCPs and exchanges.",
       "That experience — including major industry transitions such as Brexit and regulatory change — is the foundation of SureClear.",
