@@ -813,17 +813,18 @@ html {
   display: inline-block;
   background-color: #ffffff;
   background-image: linear-gradient(
-    105deg,
+    100deg,
     #ffffff 0%,
-    #ffffff 38%,
-    #99f2c8 48%,
-    #2d6a4f 54%,
-    #ffffff 64%,
+    #ffffff 34%,
+    #99f2c8 44%,
+    #2d6a4f 50%,
+    #99f2c8 56%,
+    #ffffff 66%,
     #ffffff 100%
   );
-  background-size: 220% 100%;
+  background-size: 260% 100%;
   background-position: 100% 50%;
-  animation: footer-logo-swoop 2.2s ease-in-out infinite;
+  animation: footer-logo-swoop 2s ease-in-out infinite;
   -webkit-mask-image: url("/sureclear-logo-wordmark.png");
   mask-image: url("/sureclear-logo-wordmark.png");
   -webkit-mask-repeat: no-repeat;
@@ -835,13 +836,15 @@ html {
 }
 
 @keyframes footer-logo-swoop {
-  0% {
-    background-position: 120% 50%;
+  0%,
+  12% {
+    background-position: 115% 50%;
   }
   55% {
-    background-position: -20% 50%;
+    background-position: -15% 50%;
   }
+  70%,
   100% {
-    background-position: -20% 50%;
+    background-position: -15% 50%;
   }
 }
