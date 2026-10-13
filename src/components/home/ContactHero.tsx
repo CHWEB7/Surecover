@@ -76,8 +76,8 @@ function LinkedInIcon() {
 
 export function ContactHero() {
   return (
-    <section className="w-full bg-[#f5f4ef]">
-      <div className="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-[92rem] lg:grid-cols-2">
+    <section className="w-full bg-white">
+      <div className="mx-auto grid min-h-[calc(100dvh-4rem)] w-full lg:grid-cols-2">
         {/* Left — contact information */}
         <div className="flex flex-col bg-white px-6 pt-5 pb-14 sm:px-10 sm:pt-6 sm:pb-16 lg:px-14 lg:pt-7 lg:pb-20 xl:px-20">
           <PageDirectory
@@ -113,11 +113,11 @@ export function ContactHero() {
             <p className="mt-3 text-xl font-semibold tracking-tight">
               Simon Haggett
             </p>
-            <ul className="mt-5 space-y-3.5">
+            <ul className="mt-5 space-y-3">
               <li>
                 <a
                   href="mailto:simon@sureclear.co.uk"
-                  className="inline-flex items-start gap-3 text-base transition hover:text-[#1f4037] sm:text-lg"
+                  className="inline-flex items-start gap-3 text-sm transition hover:text-[#1f4037] sm:text-base"
                 >
                   <EmailIcon />
                   <span>simon@sureclear.co.uk</span>
@@ -126,7 +126,7 @@ export function ContactHero() {
               <li>
                 <a
                   href="tel:+447761834938"
-                  className="inline-flex items-start gap-3 text-base transition hover:text-[#1f4037] sm:text-lg"
+                  className="inline-flex items-start gap-3 text-sm transition hover:text-[#1f4037] sm:text-base"
                 >
                   <PhoneIcon />
                   <span>07761 834938</span>
@@ -137,7 +137,7 @@ export function ContactHero() {
                   href="https://www.linkedin.com/in/simon-haggett-b370b532/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-start gap-3 text-base transition hover:text-[#1f4037] sm:text-lg"
+                  className="inline-flex items-start gap-3 text-sm transition hover:text-[#1f4037] sm:text-base"
                 >
                   <LinkedInIcon />
                   <span className="break-all">
