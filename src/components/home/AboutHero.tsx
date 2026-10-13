@@ -85,28 +85,6 @@ export function AboutHero() {
                   "radial-gradient(circle at 20% 20%, rgba(153,242,200,0.35), transparent 42%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.16), transparent 40%)",
               }}
             />
-            <svg
-              aria-hidden
-              className="services-feature-lines pointer-events-none absolute inset-0 h-full w-full"
-              viewBox="0 0 600 360"
-              fill="none"
-              preserveAspectRatio="xMidYMid slice"
-            >
-              <g className="services-feature-lines-drift">
-                <path
-                  className="services-feature-line services-feature-line-a"
-                  d="M20 70h100l50 86H70L20 70zm130 30h120l60 104H210l-60-104zm200-25h110l55 95H405l-55-95z"
-                  stroke="rgba(255,255,255,0.45)"
-                  strokeWidth="1.35"
-                />
-                <path
-                  className="services-feature-line services-feature-line-b"
-                  d="M60 200h130l65 112H125L60 200zm180 20h140l70 120H310l-70-120z"
-                  stroke="rgba(153,242,200,0.55)"
-                  strokeWidth="1.35"
-                />
-              </g>
-            </svg>
             <div className="relative z-10 flex w-full flex-col justify-start p-7 sm:p-8 lg:p-9">
               <p className="text-sm font-medium tracking-wide text-white/70">
                 {featureCard.eyebrow}
