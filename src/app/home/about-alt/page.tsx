@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { AboutHero } from "@/components/home/AboutHero";
 import { AboutStory } from "@/components/home/AboutStory";
 import { ContactCta } from "@/components/home/ContactCta";
-import { PageDirectory } from "@/components/home/PageDirectory";
 import { SiteFooter } from "@/components/home/SiteFooter";
 import { SiteHeader } from "@/components/home/SiteHeader";
 
@@ -21,12 +20,6 @@ export default function AboutAltPage() {
   return (
     <div className="flex min-h-dvh flex-col bg-[#f5f4ef] text-[#0b1220]">
       <SiteHeader logoVariant="wordmark" />
-      <PageDirectory
-        items={[
-          { label: "Home", href: "/home" },
-          { label: "About" },
-        ]}
-      />
       <main className="flex-1">
         <AboutHero />
         <AboutStory />

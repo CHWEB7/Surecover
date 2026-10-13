@@ -5,53 +5,52 @@ type Crumb = {
 
 type PageDirectoryProps = {
   items: Crumb[];
+  className?: string;
 };
 
-export function PageDirectory({ items }: PageDirectoryProps) {
+export function PageDirectory({ items, className = "" }: PageDirectoryProps) {
   if (items.length === 0) return null;
 
   return (
     <nav
       aria-label="Breadcrumb"
-      className="w-full border-b border-[#ebe8e2]/80 bg-white/80"
+      className={`font-body text-sm font-normal tracking-wide ${className}`.trim()}
     >
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-2 gap-y-1 px-6 py-3 text-sm sm:px-10 lg:px-16 xl:px-24">
-        <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
-          {items.map((item, index) => {
-            const isLast = index === items.length - 1;
+      <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
+        {items.map((item, index) => {
+          const isLast = index === items.length - 1;
 
-            return (
-              <li key={`${item.label}-${index}`} className="flex items-center gap-x-2">
-                {index > 0 ? (
-                  <span aria-hidden="true" className="text-[#2d6a4f]/70">
-                    ›
-                  </span>
-                ) : null}
+          return (
+            <li key={`${item.label}-${index}`} className="flex items-center gap-x-2">
+              {index > 0 ? (
+                <span aria-hidden="true" className="text-[#2d6a4f]/65">
+                  ›
+                </span>
+              ) : null}
 
-                {item.href && !isLast ? (
-                  <a
-                    href={item.href}
-                    className="font-medium text-[#2d6a4f] transition hover:text-[#1f4037]"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <span
-                    aria-current={isLast ? "page" : undefined}
-                    className={
-                      isLast
-                        ? "font-medium text-stone-600"
-                        : "font-medium text-[#2d6a4f]"
-                    }
-                  >
-                    {item.label}
-                  </span>
-                )}
-              </li>
-            );
-          })}
-        </ol>
-      </div>
+              {item.href && !isLast ? (
+                <a
+                  href={item.href}
+                  className="font-normal text-[#2d6a4f] transition hover:text-[#1f4037]"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <span
+                  aria-current={isLast ? "page" : undefined}
+                  className={
+                    isLast
+                      ? "font-normal text-stone-500"
+                      : "font-normal text-[#2d6a4f]"
+                  }
+                >
+                  {item.label}
+                </span>
+              )}
+            </li>
+          );
+        })}
+      </ol>
     </nav>
   );
 }

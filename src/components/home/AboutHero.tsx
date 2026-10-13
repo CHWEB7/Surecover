@@ -1,3 +1,5 @@
+import { PageDirectory } from "@/components/home/PageDirectory";
+
 export function AboutHero() {
   return (
     <section className="relative isolate w-full overflow-hidden bg-white">
@@ -12,29 +14,38 @@ export function AboutHero() {
       />
 
       {/* Same horizontal inset as AboutStory so copy lines up */}
-      <div className="relative mx-auto flex min-h-[min(34rem,72vh)] max-w-7xl flex-col justify-center px-6 py-16 sm:px-10 lg:px-16 lg:py-24 xl:px-24">
-        <div className="relative z-10 max-w-md lg:max-w-lg xl:max-w-xl">
-          <h1 className="text-5xl leading-[1.05] font-semibold tracking-tight text-[#0b1220] sm:text-6xl lg:text-7xl">
-            About SureClear
-          </h1>
-          <p className="mt-5 max-w-md text-lg leading-relaxed text-stone-600 sm:text-xl">
-            Behind the scenes of specialist advice for the cleared derivatives
-            industry.
-          </p>
-        </div>
+      <div className="relative mx-auto flex min-h-[min(34rem,72vh)] max-w-7xl flex-col px-6 pt-5 pb-16 sm:px-10 sm:pt-6 lg:px-16 lg:pt-7 lg:pb-24 xl:px-24">
+        <PageDirectory
+          className="relative z-10 mb-8 sm:mb-10"
+          items={[
+            { label: "Home", href: "/home" },
+            { label: "About" },
+          ]}
+        />
+        <div className="relative z-10 flex flex-1 flex-col justify-center">
+          <div className="max-w-md lg:max-w-lg xl:max-w-xl">
+            <h1 className="text-5xl leading-[1.05] font-semibold tracking-tight text-[#0b1220] sm:text-6xl lg:text-7xl">
+              About SureClear
+            </h1>
+            <p className="mt-5 max-w-md text-lg leading-relaxed text-stone-600 sm:text-xl">
+              Behind the scenes of specialist advice for the cleared derivatives
+              industry.
+            </p>
+          </div>
 
-        {/* Mobile / tablet: tinted band + centered mark */}
-        <div className="relative mt-12 flex justify-center rounded-3xl bg-[#ebe8e2] px-8 py-14 lg:hidden">
-          <div
-            className="about-mark-fill aspect-square w-full max-w-[16rem] sm:max-w-[18rem]"
-            role="img"
-            aria-label="SureClear mark filled with clearing network imagery"
-            style={{
-              backgroundImage: "url(/transformation-fibers.jpg)",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          />
+          {/* Mobile / tablet: tinted band + centered mark */}
+          <div className="relative mt-12 flex justify-center rounded-3xl bg-[#ebe8e2] px-8 py-14 lg:hidden">
+            <div
+              className="about-mark-fill aspect-square w-full max-w-[16rem] sm:max-w-[18rem]"
+              role="img"
+              aria-label="SureClear mark filled with clearing network imagery"
+              style={{
+                backgroundImage: "url(/transformation-fibers.jpg)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+          </div>
         </div>
       </div>
 

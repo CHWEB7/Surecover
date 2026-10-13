@@ -1,4 +1,5 @@
 import { ContactForm } from "@/components/home/ContactForm";
+import { PageDirectory } from "@/components/home/PageDirectory";
 
 const iconClass = "h-5 w-5 shrink-0 text-[#0b1220]";
 
@@ -78,7 +79,15 @@ export function ContactHero() {
     <section className="w-full bg-[#f5f4ef]">
       <div className="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-[92rem] lg:grid-cols-2">
         {/* Left — contact information */}
-        <div className="flex flex-col justify-center px-6 py-14 sm:px-10 sm:py-16 lg:px-14 lg:py-20 xl:px-20">
+        <div className="flex flex-col px-6 pt-5 pb-14 sm:px-10 sm:pt-6 sm:pb-16 lg:px-14 lg:pt-7 lg:pb-20 xl:px-20">
+          <PageDirectory
+            className="mb-8 sm:mb-10"
+            items={[
+              { label: "Home", href: "/home" },
+              { label: "Contact" },
+            ]}
+          />
+          <div className="flex flex-1 flex-col justify-center">
           <ContactLeadIcon />
 
           <h1 className="mt-5 max-w-xl text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:mt-6 sm:text-5xl lg:text-[3.25rem]">
@@ -137,6 +146,7 @@ export function ContactHero() {
                 </a>
               </li>
             </ul>
+          </div>
           </div>
         </div>
 

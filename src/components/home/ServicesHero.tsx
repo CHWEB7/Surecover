@@ -1,3 +1,5 @@
+import { PageDirectory } from "@/components/home/PageDirectory";
+
 const featureCard = {
   title: "Decide with clarity",
   eyebrow: "Clearing strategy",
@@ -22,7 +24,14 @@ export function ServicesHero() {
           ].join(", "),
         }}
       />
-      <div className="relative mx-auto max-w-7xl px-6 py-14 sm:px-10 sm:py-16 lg:px-16 lg:py-20 xl:px-24">
+      <div className="relative mx-auto max-w-7xl px-6 pt-5 pb-14 sm:px-10 sm:pt-6 sm:pb-16 lg:px-16 lg:pt-7 lg:pb-20 xl:px-24">
+        <PageDirectory
+          className="mb-8 sm:mb-10"
+          items={[
+            { label: "Home", href: "/home" },
+            { label: "Services" },
+          ]}
+        />
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] lg:gap-12 xl:grid-cols-[minmax(0,1.45fr)_minmax(0,0.8fr)] xl:gap-14">
           <div className="max-w-2xl xl:max-w-3xl">
             <h1 className="text-5xl leading-[1.05] font-semibold tracking-tight text-[#0b1220] sm:text-6xl lg:text-7xl">
