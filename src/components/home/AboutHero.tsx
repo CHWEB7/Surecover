@@ -37,9 +37,9 @@ export function AboutHero() {
               About SureClear
             </h1>
             <p className="mt-4 max-w-2xl text-lg leading-relaxed text-stone-600 sm:text-xl">
-              Independent specialist advice for the cleared derivatives industry
-              — built from real operating experience, not generic consulting
-              playbooks.
+              SureClear is an independent specialist advisory firm for the
+              cleared derivatives industry. Built on 30+ years inside clearing,
+              the firm exists to make complex clearing decisions clearer.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4 sm:gap-5">
               <a
