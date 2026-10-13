@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function AboutTeam() {
   return (
     <section
@@ -20,16 +22,22 @@ export function AboutTeam() {
             </p>
           </div>
 
-          {/* Portrait card — image placeholder for now; name/title pill ready */}
           <div className="mx-auto w-full max-w-sm lg:mx-0 lg:ml-auto">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-[#ebe8e2] shadow-[0_18px_40px_rgba(11,18,32,0.08)]">
-              {/* Image slot — replace this block when the portrait is provided */}
               <div
                 aria-hidden
-                className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.55),_transparent_55%)]"
+                className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.45),_transparent_55%)]"
+              />
+              <Image
+                src="/simon-haggett.webp"
+                alt="Simon Haggett, Founder of SureClear"
+                fill
+                sizes="(max-width: 1024px) 24rem, 22rem"
+                className="object-cover object-[50%_18%]"
+                priority
               />
 
-              <div className="absolute inset-x-0 bottom-5 flex justify-center px-4 sm:bottom-6">
+              <div className="absolute inset-x-0 bottom-5 z-10 flex justify-center px-4 sm:bottom-6">
                 <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-[#0b1220] bg-white p-1.5 shadow-[0_8px_24px_rgba(11,18,32,0.12)] sm:gap-2.5 sm:p-1.5">
                   <span className="inline-flex shrink-0 items-center rounded-full bg-[#0b1220] px-4 py-1.5 text-sm font-medium text-white sm:px-5 sm:py-2">
                     Simon
