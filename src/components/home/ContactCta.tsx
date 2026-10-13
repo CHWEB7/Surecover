@@ -16,31 +16,18 @@ export function ContactCta({ variant = "default" }: ContactCtaProps) {
       <div className="relative overflow-hidden px-6 pt-8 pb-24 sm:pt-10 sm:pb-28 lg:pt-12 lg:pb-32">
         {isBrand ? (
           <>
-            {/* Match About hero feature card: same gradient + fiber wash */}
+            {/* Match home page card 1 (Hero) green gradient */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0"
               style={{
                 backgroundImage:
-                  "linear-gradient(145deg, #0b1220 0%, #1f4037 48%, #2d6a4f 100%)",
+                  "linear-gradient(145deg, #1f4037 0%, #2d6a4f 42%, #99f2c8 100%)",
               }}
             />
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-20 mix-blend-soft-light"
-              style={{
-                backgroundImage: "url(/transformation-fibers.jpg)",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-[0.16]"
-              style={{
-                backgroundImage:
-                  "radial-gradient(circle at 20% 20%, rgba(153,242,200,0.35), transparent 42%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.16), transparent 40%)",
-              }}
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,255,255,0.12),_transparent_50%)]"
             />
           </>
         ) : (
@@ -89,7 +76,7 @@ export function ContactCta({ variant = "default" }: ContactCtaProps) {
               href="mailto:hello@sureclear.com"
               className={`inline-flex items-center gap-1 text-sm font-semibold transition ${
                 isBrand
-                  ? "text-[#99f2c8] hover:text-white"
+                  ? "text-white/90 hover:text-white"
                   : "text-[#1f4037] hover:text-[#2d6a4f]"
               }`}
             >
