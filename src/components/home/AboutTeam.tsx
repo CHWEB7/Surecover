@@ -8,6 +8,7 @@ type TeamMember = {
   name: string;
   role: string;
   headline: string;
+  quote?: string;
   paragraphs: string[];
   points: string[];
   image: string;
@@ -20,6 +21,8 @@ const team: TeamMember[] = [
     name: "Simon",
     role: "Founder, SureClear",
     headline: "30+ years in clearing",
+    quote:
+      "I know how clearing works in practice — where the risks sit, where the operational pain points are, where change gets difficult and what it takes to turn strategy into something that actually works.",
     paragraphs: [
       "Simon Haggett began his career in derivatives clearing operations and progressed through senior leadership roles across SEB, Credit Suisse and FIS.",
       "He has led organisations of more than 100 professionals, managed major transformation portfolios and led global product organisations responsible for platforms supporting more than 80 CCPs and exchanges.",
@@ -142,6 +145,11 @@ export function AboutTeam() {
                   <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
+              {active.quote ? (
+                <p className="mt-6 text-base leading-relaxed text-[#0b1220] italic sm:text-lg">
+                  &ldquo;{active.quote}&rdquo;
+                </p>
+              ) : null}
               <ul className="mt-8 space-y-4">
                 {active.points.map((point) => (
                   <li
