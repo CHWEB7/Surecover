@@ -71,7 +71,7 @@ const topics: AboutTopic[] = [
     id: "who-we-are",
     title: "Who we are",
     shortDescription:
-      "SureClear is an independent specialist advisory firm for the cleared derivatives industry. Founded by Simon Haggett and built on 30+ years inside clearing, the firm exists to make complex clearing decisions clearer.",
+      "SureClear is an independent specialist advisory firm for the cleared derivatives industry. Built on 30+ years inside clearing, the firm exists to make complex clearing decisions clearer.",
     icon: WhoIcon,
   },
   {
