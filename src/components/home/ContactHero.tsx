@@ -79,7 +79,7 @@ export function ContactHero() {
     <section className="w-full bg-[#f5f4ef]">
       <div className="mx-auto grid min-h-[calc(100dvh-4rem)] max-w-[92rem] lg:grid-cols-2">
         {/* Left — contact information */}
-        <div className="flex flex-col px-6 pt-5 pb-14 sm:px-10 sm:pt-6 sm:pb-16 lg:px-14 lg:pt-7 lg:pb-20 xl:px-20">
+        <div className="flex flex-col bg-white px-6 pt-5 pb-14 sm:px-10 sm:pt-6 sm:pb-16 lg:px-14 lg:pt-7 lg:pb-20 xl:px-20">
           <PageDirectory
             className="mb-8 sm:mb-10"
             items={[
@@ -94,7 +94,7 @@ export function ContactHero() {
             Start with the{" "}
             <span className="text-[#1f4037]">problem</span>.
           </h1>
-          <div className="mt-5 max-w-lg space-y-4 text-lg leading-relaxed text-stone-600 sm:text-xl">
+          <div className="mt-5 max-w-lg space-y-3 text-sm leading-relaxed text-stone-600 sm:text-base">
             <p>
               You do not need to know exactly what support you need before
               getting in touch.
