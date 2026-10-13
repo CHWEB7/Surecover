@@ -47,19 +47,18 @@ const MissionIcon = (
   </svg>
 );
 
-const FoundedIcon = (
+const HelpIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <rect
-      x="3.5"
-      y="5"
-      width="17"
-      height="15"
-      rx="2"
+    <circle cx="8" cy="8" r="2.75" stroke="currentColor" strokeWidth="1.5" />
+    <circle cx="16" cy="8.5" r="2.25" stroke="currentColor" strokeWidth="1.5" />
+    <path
+      d="M2.75 19c.7-2.8 2.7-4.4 5.25-4.4S12.55 16.2 13.25 19"
       stroke="currentColor"
       strokeWidth="1.5"
+      strokeLinecap="round"
     />
     <path
-      d="M3.5 10h17M8 3v4M16 3v4"
+      d="M13.5 14.2c1.1-.7 2.4-1.1 3.9-1.1 2.2 0 3.9 1.2 4.6 3.4"
       stroke="currentColor"
       strokeWidth="1.5"
       strokeLinecap="round"
@@ -72,29 +71,29 @@ const topics: AboutTopic[] = [
     id: "who-we-are",
     title: "Who we are",
     shortDescription:
-      "An independent clearing advisory led by practitioners who have run clearing operations, transformations and product organisations — not a generalist consulting bench.",
+      "SureClear is an independent specialist advisory firm for the cleared derivatives industry. Founded by Simon Haggett and built on 30+ years inside clearing, the firm exists to make complex clearing decisions clearer.",
     icon: WhoIcon,
   },
   {
     id: "what-we-do",
     title: "What we do",
     shortDescription:
-      "Strategy, transformation, fractional leadership and operations support — helping organisations decide, deliver and strengthen clearing with clarity.",
+      "Clearing does not need more complexity. It needs clearer judgement. Cleared derivatives is a specialist market. The decisions are technical, operational, regulatory and commercial at the same time. Senior teams rarely need more information. They need to know what matters, what it means and what to do next.",
     icon: WhatIcon,
   },
   {
     id: "our-mission",
     title: "Our mission",
     shortDescription:
-      "Close the gap between generic consulting and vendor-led advice — so clearing leaders can move with clarity and keep capability inside the business.",
+      "SureClear was created to bring specialist clearing experience directly to those moments. Not broad consultancy. Not generic frameworks. Not advice detached from delivery. Clear judgement. Practical action. Experience from inside the industry.",
     icon: MissionIcon,
   },
   {
-    id: "when-founded",
-    title: "When we were founded",
+    id: "who-we-help",
+    title: "Who we help",
     shortDescription:
-      "Established as an independent firm after decades of clearing leadership across banks and market infrastructure — so that experience could sit with the client.",
-    icon: FoundedIcon,
+      "Banks, brokers, exchanges, CCPs, fintechs and new market participants — organisations navigating clearing strategy, transformation and operations. We understand the industry because we've worked inside it.",
+    icon: HelpIcon,
   },
 ];
 
