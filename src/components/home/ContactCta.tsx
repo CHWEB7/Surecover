@@ -16,6 +16,7 @@ export function ContactCta({ variant = "default" }: ContactCtaProps) {
       <div className="relative overflow-hidden px-6 pt-8 pb-24 sm:pt-10 sm:pb-28 lg:pt-12 lg:pb-32">
         {isBrand ? (
           <>
+            {/* Match About hero feature card: same gradient + fiber wash */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0"
@@ -26,10 +27,19 @@ export function ContactCta({ variant = "default" }: ContactCtaProps) {
             />
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-40"
+              className="pointer-events-none absolute inset-0 opacity-30 mix-blend-soft-light"
+              style={{
+                backgroundImage: "url(/transformation-fibers.jpg)",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 opacity-[0.16]"
               style={{
                 backgroundImage:
-                  "radial-gradient(circle at 18% 20%, rgba(153,242,200,0.35), transparent 42%), radial-gradient(circle at 82% 75%, rgba(255,255,255,0.14), transparent 40%)",
+                  "radial-gradient(circle at 20% 20%, rgba(153,242,200,0.35), transparent 42%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.16), transparent 40%)",
               }}
             />
           </>
