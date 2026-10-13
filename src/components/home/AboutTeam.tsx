@@ -8,7 +8,6 @@ type TeamMember = {
   name: string;
   role: string;
   headline: string;
-  quote: string;
   paragraphs: string[];
   points: string[];
   image: string;
@@ -20,11 +19,9 @@ const team: TeamMember[] = [
     id: "simon",
     name: "Simon",
     role: "Founder, SureClear",
-    headline:
-      "30+ years inside clearing — practitioner experience at the centre of every engagement",
-    quote:
-      "I know how clearing works in practice — where the risks sit, where the operational pain points are, where change gets difficult and what it takes to turn strategy into something that actually works.",
+    headline: "30+ years in clearing",
     paragraphs: [
+      "I know how clearing works in practice — where the risks sit, where the operational pain points are, where change gets difficult and what it takes to turn strategy into something that actually works.",
       "Simon Haggett began his career in derivatives clearing operations and progressed through senior leadership roles across SEB, Credit Suisse and FIS.",
       "He has led organisations of more than 100 professionals, managed major transformation portfolios and led global product organisations responsible for platforms supporting more than 80 CCPs and exchanges.",
       "That experience — including major industry transitions such as Brexit and regulatory change — is the foundation of SureClear.",
@@ -188,15 +185,6 @@ export function AboutTeam() {
                   </div>
                 </div>
               </div>
-
-              <aside className="mt-6 rounded-2xl border border-[#e7e5df] border-l-[6px] border-l-[#2d6a4f] bg-[#f5f4ef] p-6 sm:p-7">
-                <p className="text-sm font-semibold tracking-wide text-[#2d6a4f]">
-                  Founder&apos;s quote
-                </p>
-                <p className="mt-3 text-base leading-relaxed text-[#0b1220] italic sm:text-lg">
-                  &ldquo;{active.quote}&rdquo;
-                </p>
-              </aside>
             </div>
           </div>
         </div>
