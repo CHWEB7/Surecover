@@ -14,7 +14,8 @@ export function PageDirectory({ items, className = "" }: PageDirectoryProps) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`font-body text-sm font-normal tracking-wide ${className}`.trim()}
+      className={`font-body text-sm tracking-wide ${className}`.trim()}
+      style={{ fontWeight: 200 }}
     >
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
         {items.map((item, index) => {
@@ -31,18 +32,16 @@ export function PageDirectory({ items, className = "" }: PageDirectoryProps) {
               {item.href && !isLast ? (
                 <a
                   href={item.href}
-                  className="font-normal text-[#2d6a4f] transition hover:text-[#1f4037]"
+                  className="text-[#2d6a4f] transition hover:text-[#1f4037]"
+                  style={{ fontWeight: 200 }}
                 >
                   {item.label}
                 </a>
               ) : (
                 <span
                   aria-current={isLast ? "page" : undefined}
-                  className={
-                    isLast
-                      ? "font-normal text-stone-500"
-                      : "font-normal text-[#2d6a4f]"
-                  }
+                  className={isLast ? "text-stone-500" : "text-[#2d6a4f]"}
+                  style={{ fontWeight: 200 }}
                 >
                   {item.label}
                 </span>
