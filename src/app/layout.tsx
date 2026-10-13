@@ -41,7 +41,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${outfit.variable} ${geistMono.variable} ${identidadExtraLight.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="font-body flex min-h-full flex-col">{children}</body>
     </html>
   );
 }

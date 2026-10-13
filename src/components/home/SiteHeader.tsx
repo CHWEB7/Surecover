@@ -31,7 +31,7 @@ export function SiteHeader({ logoVariant = "wordmark" }: SiteHeaderProps) {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-stone-600 transition hover:text-[#1f4037]"
+              className="font-sans text-sm text-stone-600 transition hover:text-[#1f4037]"
             >
               {link.label}
             </a>
