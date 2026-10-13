@@ -27,7 +27,7 @@ export function ContactCta({ variant = "default" }: ContactCtaProps) {
             />
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-30 mix-blend-soft-light"
+              className="pointer-events-none absolute inset-0 opacity-20 mix-blend-soft-light"
               style={{
                 backgroundImage: "url(/transformation-fibers.jpg)",
                 backgroundSize: "cover",
