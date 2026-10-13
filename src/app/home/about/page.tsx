@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AboutHero } from "@/components/home/AboutHero";
 import { AboutStory } from "@/components/home/AboutStory";
+import { AboutTeam } from "@/components/home/AboutTeam";
 import { ContactCta } from "@/components/home/ContactCta";
 import { SiteFooter } from "@/components/home/SiteFooter";
 import { SiteHeader } from "@/components/home/SiteHeader";
@@ -15,14 +16,14 @@ export const metadata: Metadata = {
   },
 };
 
-/** About page — same content as about-alt (site-wide wordmark header) */
 export default function AboutPage() {
   return (
-    <div className="flex min-h-dvh flex-col bg-[#f5f4ef] text-[#0b1220]">
+    <div className="flex min-h-dvh flex-col bg-white text-[#0b1220]">
       <SiteHeader />
       <main className="flex-1">
         <AboutHero />
         <AboutStory />
+        <AboutTeam />
       </main>
       <ContactCta />
       <SiteFooter />
