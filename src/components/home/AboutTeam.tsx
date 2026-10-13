@@ -24,15 +24,15 @@ export function AboutTeam() {
 
           <div className="mx-auto w-full max-w-sm lg:mx-0 lg:ml-auto">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] bg-[#ebe8e2] shadow-[0_18px_40px_rgba(11,18,32,0.08)]">
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.45),_transparent_55%)]"
-              />
               <Image
-                src="/simon-haggett.webp"
+                src="/simon-haggett.jpg"
                 alt="Simon Haggett, Founder of SureClear"
                 fill
-                sizes="(max-width: 1024px) 24rem, 22rem"
+                sizes="(max-width: 1024px) min(100vw, 28rem), 26rem"
+                quality={100}
+                // Serve the baked high-res JPEG as-is — Next 16's optimizer
+                // otherwise recompresses and softens facial detail.
+                unoptimized
                 className="object-cover object-[50%_18%]"
                 priority
               />
