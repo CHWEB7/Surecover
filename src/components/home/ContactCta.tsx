@@ -32,28 +32,6 @@ export function ContactCta({ variant = "default" }: ContactCtaProps) {
                   "radial-gradient(circle at 18% 20%, rgba(153,242,200,0.35), transparent 42%), radial-gradient(circle at 82% 75%, rgba(255,255,255,0.14), transparent 40%)",
               }}
             />
-            <svg
-              aria-hidden
-              className="services-feature-lines pointer-events-none absolute inset-0 h-full w-full opacity-40"
-              viewBox="0 0 1200 480"
-              fill="none"
-              preserveAspectRatio="xMidYMid slice"
-            >
-              <g className="services-feature-lines-drift">
-                <path
-                  className="services-feature-line services-feature-line-a"
-                  d="M40 90h180l90 150H130L40 90zm240 50h220l110 180H390l-110-180zm420-40h200l100 165H660l-100-165z"
-                  stroke="rgba(255,255,255,0.4)"
-                  strokeWidth="1.35"
-                />
-                <path
-                  className="services-feature-line services-feature-line-b"
-                  d="M120 260h240l120 195H240L120 260zm380 30h260l130 210H630l-130-210z"
-                  stroke="rgba(153,242,200,0.5)"
-                  strokeWidth="1.35"
-                />
-              </g>
-            </svg>
           </>
         ) : (
           <>

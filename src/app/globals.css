@@ -808,7 +808,7 @@ html {
   }
 }
 
-/* Footer wordmark — white base with a swooping green gradient every ~2s */
+/* Footer wordmark — white base with a slow, smooth green swoop */
 .footer-logo-swoop-mark {
   display: inline-block;
   background-color: #ffffff;
@@ -824,7 +824,7 @@ html {
   );
   background-size: 260% 100%;
   background-position: 100% 50%;
-  animation: footer-logo-swoop 2s ease-in-out infinite;
+  animation: footer-logo-swoop 6.5s cubic-bezier(0.45, 0.05, 0.25, 1) infinite;
   -webkit-mask-image: url("/sureclear-logo-wordmark.png");
   mask-image: url("/sureclear-logo-wordmark.png");
   -webkit-mask-repeat: no-repeat;
@@ -837,13 +837,12 @@ html {
 
 @keyframes footer-logo-swoop {
   0%,
-  12% {
+  18% {
     background-position: 115% 50%;
   }
-  55% {
+  72% {
     background-position: -15% 50%;
   }
-  70%,
   100% {
     background-position: -15% 50%;
   }
