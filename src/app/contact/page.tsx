@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactHero } from "@/components/home/ContactHero";
+import { PageDirectory } from "@/components/home/PageDirectory";
 import { SiteFooter } from "@/components/home/SiteFooter";
 import { SiteHeader } from "@/components/home/SiteHeader";
 
@@ -17,6 +18,12 @@ export default function ContactPage() {
   return (
     <div className="flex min-h-dvh flex-col bg-[#f5f4ef] text-[#0b1220]">
       <SiteHeader />
+      <PageDirectory
+        items={[
+          { label: "Home", href: "/home" },
+          { label: "Contact" },
+        ]}
+      />
       <main className="flex-1">
         <ContactHero />
       </main>
