@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BrandLogo } from "@/components/home/BrandLogo";
 import { OperationsHubGraphic } from "@/components/home/OperationsHubGraphic";
 
 type FocusVisualVariant =
@@ -283,6 +284,13 @@ const graphics: Record<FocusVisualVariant, () => React.ReactNode> = {
   operations: OperationsGraphic,
 };
 
+const showCornerLogo: Record<FocusVisualVariant, boolean> = {
+  strategy: false,
+  transformation: true,
+  regulation: true,
+  operations: false,
+};
+
 export function FocusCardVisual({ variant }: FocusCardVisualProps) {
   const Graphic = graphics[variant];
 
@@ -296,6 +304,17 @@ export function FocusCardVisual({ variant }: FocusCardVisualProps) {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,255,255,0.14),_transparent_55%)]"
       />
       <Graphic />
+      {showCornerLogo[variant] ? (
+        <div
+          className="pointer-events-none absolute right-5 bottom-5 z-20 sm:right-6 sm:bottom-6"
+          aria-hidden
+        >
+          <BrandLogo
+            variant="wordmark-light"
+            className="h-5 w-auto opacity-90 sm:h-6"
+          />
+        </div>
+      ) : null}
     </div>
   );
 }
