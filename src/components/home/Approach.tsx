@@ -11,19 +11,19 @@ import {
 const processSteps = [
   {
     title: "Diagnose the decision",
-    body: "We start with the commercial, risk and operational reality — membership, product coverage, regulation, technology and operating model — so the problem is framed clearly before options are shaped.",
+    body: "We clarify what needs to be decided before building the plan. We look across operations, technology, regulation, governance, risk and commercial priorities, ensuring the problem is framed correctly before solutions are formed.",
   },
   {
     title: "Design the path",
-    body: "We translate that diagnosis into practical choices: target models, delivery plans and trade-offs that can be owned by the teams who run clearing day to day.",
+    body: "We turn the diagnosis into practical choices, target operating models, roadmaps and delivery plans.",
   },
   {
     title: "Deliver with the business",
-    body: "We stay close through implementation — aligning stakeholders, unblocking decisions and keeping outcomes tied to clearing realities rather than generic programme theatre.",
+    body: "Recommendations must work inside real teams, real systems and real operating models. We work with the teams who run clearing day to day, keeping delivery tied to operational reality.",
   },
   {
     title: "Embed lasting capability",
-    body: "We leave clients with clearer judgement, stronger controls and a transferable playbook — so progress continues after the engagement ends.",
+    body: "Every engagement should create greater confidence about what matters and what should happen next. We leave clients with clearer judgement, stronger controls and a practical playbook they can continue to use.",
   },
 ] as const;
 
@@ -222,12 +222,12 @@ export function Approach() {
       <div className="relative z-10 mx-auto w-full max-w-[90rem] px-5 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <h2 className="text-3xl font-semibold tracking-tight text-[#0b1220] sm:text-4xl lg:text-5xl">
-            A clear process for complex clearing decisions
+            Clear thinking. Practical action.
           </h2>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-stone-600 sm:text-lg">
-            Specialist advice from practitioners who have lived clearing
-            strategy, regulation and delivery — structured so each engagement
-            moves from diagnosis to lasting capability.
+            Every engagement is shaped around the decision or outcome the client
+            needs to reach. The work is practical, focused and designed to
+            create clarity quickly.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-5">
