@@ -24,7 +24,7 @@ export function SiteHeader({
         tone === "white" ? "bg-white/95" : "bg-[#f5f4ef]/90"
       }`}
     >
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-6 lg:px-10">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between pr-6 pl-4 sm:pl-5 lg:pr-10 lg:pl-6">
         <a href="/home" className="group inline-flex shrink-0 items-center">
           <BrandLogo
             variant={logoVariant}
@@ -43,14 +43,14 @@ export function SiteHeader({
                 <a
                   key={link.label}
                   href={link.href}
-                  className="font-sans text-sm text-stone-600 transition hover:text-[#1f4037]"
+                  className="font-sans text-sm font-semibold text-stone-600 transition hover:text-[#1f4037]"
                 >
                   {link.label}
                 </a>
               ) : (
                 <span
                   key={link.label}
-                  className="font-sans text-sm text-stone-600"
+                  className="font-sans text-sm font-semibold text-stone-600"
                 >
                   {link.label}
                 </span>
