@@ -1,141 +1,107 @@
 import type { ReactNode } from "react";
 
-const ICON = "#0b1220";
-
 type Audience = {
+  id: string;
   title: string;
-  description: string;
-  href: string;
-  mark: ReactNode;
+  shortDescription: string;
+  icon: ReactNode;
 };
+
+const iconClass = "h-9 w-9";
+
+const ClearingParticipantsIcon = (
+  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
+    <path
+      d="M4 18V8.5L12 4l8 4.5V18M4 18h16M7 18v-5h3v5M14 18v-5h3v5M9.5 9.5h5"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const ExchangesIcon = (
+  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
+    <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5" />
+    <circle cx="12" cy="12" r="3.25" stroke="currentColor" strokeWidth="1.5" />
+    <path
+      d="M12 4v2.5M12 17.5V20M4 12h2.5M17.5 12H20"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+const FintechsIcon = (
+  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
+    <rect
+      x="5.5"
+      y="5.5"
+      width="13"
+      height="13"
+      rx="2.5"
+      stroke="currentColor"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M9 12h2.2l1.3-3.2L14.8 15 16 12h-1"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+const NewParticipantsIcon = (
+  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
+    <circle cx="8" cy="8" r="2.75" stroke="currentColor" strokeWidth="1.5" />
+    <circle cx="16" cy="8.5" r="2.25" stroke="currentColor" strokeWidth="1.5" />
+    <path
+      d="M2.75 19c.7-2.8 2.7-4.4 5.25-4.4S12.55 16.2 13.25 19"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+    <path
+      d="M13.5 14.2c1.1-.7 2.4-1.1 3.9-1.1 2.2 0 3.9 1.2 4.6 3.4"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+  </svg>
+);
 
 const audiences: Audience[] = [
   {
-    title: "Banks",
-    description:
-      "Navigate clearing membership, capital, client clearing propositions and operating model choices.",
-    href: "#contact",
-    mark: (
-      <path
-        d="M4 18V8.5L12 4l8 4.5V18M4 18h16M7 18v-5h3v5M14 18v-5h3v5M9.5 9.5h5"
-        stroke={ICON}
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-    ),
+    id: "clearing-participants",
+    title: "Clearing Participants",
+    shortDescription:
+      "Make clear decisions on clearing membership, tooling, client clearing propositions and operating models. Shape clearing access, margin efficiency, operational resilience and service models that win and retain sophisticated clients.",
+    icon: ClearingParticipantsIcon,
   },
   {
-    title: "Brokers",
-    description:
-      "Shape clearing access, margin efficiency and service models that win and retain sophisticated clients.",
-    href: "#contact",
-    mark: (
-      <path
-        d="M5 16.5 9.5 8l3 5.5L16 7.5 19 16.5M4 19h16"
-        stroke={ICON}
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-    ),
+    id: "exchanges-ccps",
+    title: "Exchanges & CCPs",
+    shortDescription:
+      "Align product launches, margin changes and technology transformation with vendors and market participants. Strengthen membership, operations, participant requirements and change agendas while protecting resilience and market confidence.",
+    icon: ExchangesIcon,
   },
   {
-    title: "Exchanges",
-    description:
-      "Align clearing arrangements, product launches and market structure with commercial goals.",
-    href: "#contact",
-    mark: (
-      <>
-        <path
-          d="M7 8.5 12 4l5 4.5M7 15.5 12 20l5-4.5"
-          stroke={ICON}
-          strokeWidth="1.75"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-        <path
-          d="M8.5 12h7"
-          stroke={ICON}
-          strokeWidth="1.75"
-          strokeLinecap="round"
-        />
-      </>
-    ),
-  },
-  {
-    title: "CCPs",
-    description:
-      "Support risk, membership, operations and change agendas that keep markets resilient and competitive.",
-    href: "#contact",
-    mark: (
-      <>
-        <circle
-          cx="12"
-          cy="12"
-          r="7.25"
-          stroke={ICON}
-          strokeWidth="1.75"
-          fill="none"
-        />
-        <circle cx="12" cy="12" r="2.75" fill={ICON} />
-      </>
-    ),
-  },
-  {
+    id: "fintechs",
     title: "Fintechs",
-    description:
-      "Bridge product ambition with clearing realities — connectivity, risk, regulation and go-to-market.",
-    href: "#contact",
-    mark: (
-      <>
-        <rect
-          x="5.5"
-          y="5.5"
-          width="13"
-          height="13"
-          rx="2.5"
-          stroke={ICON}
-          strokeWidth="1.75"
-          fill="none"
-        />
-        <path
-          d="M9 12h2.2l1.3-3.2L14.8 15 16 12h-1"
-          stroke={ICON}
-          strokeWidth="1.75"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          fill="none"
-        />
-      </>
-    ),
+    shortDescription:
+      "Bridge product ambition with clearing realities — connectivity, risk, regulation, functionality, user experience and go-to-market.",
+    icon: FintechsIcon,
   },
   {
-    title: "New market participants",
-    description:
-      "Enter cleared markets with a clear path through onboarding, membership and operating readiness.",
-    href: "#contact",
-    mark: (
-      <>
-        <circle
-          cx="12"
-          cy="12"
-          r="7.25"
-          stroke={ICON}
-          strokeWidth="1.75"
-          fill="none"
-        />
-        <path
-          d="M12 8.2v7.6M8.2 12h7.6"
-          stroke={ICON}
-          strokeWidth="1.75"
-          strokeLinecap="round"
-        />
-      </>
-    ),
+    id: "new-market-participants",
+    title: "New Market Participants",
+    shortDescription:
+      "Understand what needs to be built, establish procedures, controls and robust governance, make decisions on clearing relationships and memberships before entering the cleared derivatives ecosystem.",
+    icon: NewParticipantsIcon,
   },
 ];
 
@@ -148,8 +114,8 @@ export function WhoWeHelp() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-5xl">
           <h2 className="max-w-4xl text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">
-            We help organisations make complex clearing decisions{" "}
-            <span className="text-[#2d6a4f]">clearer.</span>
+            A clear process for complex clearing decisions,{" "}
+            <span className="text-[#2d6a4f]">who we help.</span>
           </h2>
           <div className="mt-5 max-w-5xl space-y-3 text-lg leading-relaxed text-stone-600 sm:text-xl">
             <p>
@@ -175,36 +141,25 @@ export function WhoWeHelp() {
           </a>
         </div>
 
-        <ul className="mt-14 grid list-none gap-x-10 gap-y-14 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-x-16 lg:gap-y-16">
+        <div className="mt-12 grid gap-3 sm:mt-14 sm:grid-cols-2 xl:mt-16 xl:grid-cols-4 xl:gap-4">
           {audiences.map((audience) => (
-            <li key={audience.title} className="max-w-sm">
-              <svg
-                viewBox="0 0 24 24"
-                className="h-11 w-11 sm:h-12 sm:w-12"
-                aria-hidden="true"
-              >
-                {audience.mark}
-              </svg>
-
-              <a
-                href={audience.href}
-                className="group mt-5 inline-flex items-center gap-1.5 text-lg font-semibold tracking-tight text-[#0b1220] transition hover:text-[#2d6a4f]"
-              >
+            <article
+              key={audience.id}
+              id={audience.id}
+              className="services-area-card group flex h-full flex-col rounded-2xl border border-transparent bg-transparent p-5 text-left transition duration-300 ease-out hover:-translate-y-1 hover:border-[#ecece8] hover:bg-[#f3f3f0] sm:p-6 motion-reduce:transform-none motion-reduce:transition-none"
+            >
+              <div className="text-[#0b1220] transition duration-300 group-hover:text-[#2d6a4f]">
+                {audience.icon}
+              </div>
+              <h3 className="mt-5 text-xl font-semibold tracking-tight text-[#0b1220]">
                 {audience.title}
-                <span
-                  aria-hidden="true"
-                  className="translate-y-px text-base font-normal text-[#0b1220] transition group-hover:translate-x-0.5 group-hover:text-[#2d6a4f]"
-                >
-                  ›
-                </span>
-              </a>
-
-              <p className="mt-3 text-base leading-relaxed text-stone-600">
-                {audience.description}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-stone-600">
+                {audience.shortDescription}
               </p>
-            </li>
+            </article>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );
