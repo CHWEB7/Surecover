@@ -41,28 +41,31 @@ function ProcessCard({
   return (
     <article
       ref={cardRef}
-      className="approach-scroll-card flex w-[17.5rem] shrink-0 flex-col self-stretch rounded-2xl border border-white/10 bg-[#0b1220] p-5 sm:w-[18.5rem] sm:p-6 lg:w-[19.5rem]"
+      className="approach-scroll-card approach-process-card relative w-[17.5rem] shrink-0 self-stretch sm:w-[18.5rem] lg:w-[19.5rem]"
     >
-      <div className="flex items-start justify-between gap-3">
-        <span
-          className="text-3xl font-normal tracking-tight text-white sm:text-4xl"
-          aria-hidden="true"
-        >
-          {number}
-        </span>
-        <span
-          aria-hidden="true"
-          className="mt-1 text-lg font-normal text-white/70"
-        >
-          →
-        </span>
+      <div aria-hidden className="approach-card-ring absolute inset-0 rounded-2xl" />
+      <div className="approach-process-card-inner relative flex h-full flex-col bg-[#0b1220] p-5 sm:p-6">
+        <div className="flex items-start justify-between gap-3">
+          <span
+            className="text-3xl font-normal tracking-tight text-white sm:text-4xl"
+            aria-hidden="true"
+          >
+            {number}
+          </span>
+          <span
+            aria-hidden="true"
+            className="mt-1 text-lg font-normal text-white/70"
+          >
+            →
+          </span>
+        </div>
+        <h3 className="mt-6 text-lg font-semibold tracking-tight text-white sm:text-xl">
+          {step.title}
+        </h3>
+        <p className="mt-2.5 flex-1 text-sm leading-relaxed text-white/65">
+          {step.body}
+        </p>
       </div>
-      <h3 className="mt-6 text-lg font-semibold tracking-tight text-white sm:text-xl">
-        {step.title}
-      </h3>
-      <p className="mt-2.5 flex-1 text-sm leading-relaxed text-white/65">
-        {step.body}
-      </p>
     </article>
   );
 }
@@ -219,12 +222,13 @@ export function Approach() {
       id="approach"
       className="approach-section scroll-mt-24 overflow-hidden bg-[#f5f4ef] pt-16 pb-20 text-[#0b1220] lg:pt-24 lg:pb-28"
     >
-      <div className="relative z-10 mx-auto w-full max-w-[90rem] px-5 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <h2 className="text-3xl font-semibold tracking-tight text-[#0b1220] sm:text-4xl lg:text-5xl">
-            Clear thinking. Practical action.
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-10">
+        <div className="max-w-5xl">
+          <h2 className="max-w-3xl text-4xl leading-[1.08] font-semibold tracking-tight text-[#0b1220] sm:text-5xl lg:text-6xl">
+            Clear thinking.{" "}
+            <span className="text-[#2d6a4f]">Practical action.</span>
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-stone-600 sm:text-lg">
+          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-stone-600 sm:text-xl">
             Every engagement is shaped around the decision or outcome the client
             needs to reach. The work is practical, focused and designed to
             create clarity quickly.

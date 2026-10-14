@@ -696,6 +696,42 @@ html {
   background-color: #f5f4ef;
 }
 
+/* Process cards — thin green outline with a travelling highlight */
+@property --approach-border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.approach-process-card {
+  border-radius: 1rem;
+  padding: 1.5px;
+}
+
+.approach-process-card-inner {
+  border-radius: 0.925rem;
+}
+
+.approach-card-ring {
+  background: conic-gradient(
+    from var(--approach-border-angle),
+    #3d8b66 0deg,
+    #2d6a4f 160deg,
+    #2d6a4f 210deg,
+    #99f2c8 250deg,
+    #6fbf93 295deg,
+    #3d8b66 335deg,
+    #3d8b66 360deg
+  );
+  animation: approach-border-spin 4s linear infinite;
+}
+
+@keyframes approach-border-spin {
+  to {
+    --approach-border-angle: 360deg;
+  }
+}
+
 /* Approach — manual horizontal process card strip */
 .approach-scroll-strip {
   cursor: grab;
@@ -744,6 +780,11 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .approach-scroll-cta {
     animation: none;
+  }
+
+  .approach-card-ring {
+    animation: none;
+    background: #2d6a4f;
   }
 }
 
