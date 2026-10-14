@@ -712,6 +712,74 @@ html {
   border-radius: 0.925rem;
 }
 
+/* Process cards — fill the row so all four stay visible from the offset */
+.approach-scroll-row {
+  --approach-card-gap: 1.25rem;
+  width: 100%;
+  gap: 0;
+}
+
+.approach-cards-track {
+  gap: var(--approach-card-gap);
+  transform: translateX(110%);
+  will-change: transform;
+}
+
+.approach-cards-track .approach-process-card {
+  width: calc((100% - (3 * var(--approach-card-gap))) / 4);
+  min-width: 0;
+}
+
+.approach-cards-track.is-entered {
+  animation: approach-cards-slide-bounce 1.35s linear forwards;
+}
+
+@keyframes approach-cards-slide-bounce {
+  0% {
+    transform: translateX(110%);
+  }
+  52% {
+    transform: translateX(0);
+  }
+  64% {
+    /* Hit and rebound off the right edge of the page */
+    transform: translateX(2.4rem);
+  }
+  76% {
+    transform: translateX(-0.7rem);
+  }
+  88% {
+    transform: translateX(0.4rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media (min-width: 640px) {
+  .approach-scroll-row {
+    --approach-card-gap: 1.35rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .approach-scroll-row {
+    --approach-card-gap: 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .approach-scroll-row {
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .approach-cards-track .approach-process-card {
+    width: 17.5rem;
+    min-width: 17.5rem;
+  }
+}
+
 .approach-card-ring {
   background: conic-gradient(
     from var(--approach-border-angle),
@@ -785,6 +853,12 @@ html {
   .approach-card-ring {
     animation: none;
     background: #2d6a4f;
+  }
+
+  .approach-cards-track,
+  .approach-cards-track.is-entered {
+    animation: none;
+    transform: translateX(0);
   }
 }
 

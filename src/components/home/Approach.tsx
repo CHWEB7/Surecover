@@ -41,7 +41,7 @@ function ProcessCard({
   return (
     <article
       ref={cardRef}
-      className="approach-scroll-card approach-process-card relative w-[17.5rem] shrink-0 self-stretch sm:w-[18.5rem] lg:w-[19.5rem]"
+      className="approach-scroll-card approach-process-card relative shrink-0 self-stretch"
     >
       <div aria-hidden className="approach-card-ring absolute inset-0 rounded-2xl" />
       <div className="approach-process-card-inner relative flex h-full flex-col bg-[#0b1220] p-5 sm:p-6">
@@ -71,9 +71,11 @@ function ProcessCard({
 }
 
 export function Approach() {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const lastCardRef = useRef<HTMLElement | null>(null);
-  const [canAdvance, setCanAdvance] = useState(true);
+  const [canAdvance, setCanAdvance] = useState(false);
+  const [cardsEntered, setCardsEntered] = useState(false);
   const dragRef = useRef<{
     active: boolean;
     startX: number;
@@ -161,6 +163,31 @@ export function Approach() {
   }, []);
 
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduceMotion) {
+      setCardsEntered(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        setCardsEntered(true);
+        observer.disconnect();
+      },
+      { threshold: 0.28, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
 
@@ -178,6 +205,7 @@ export function Approach() {
     const raf = requestAnimationFrame(lockStart);
     const t1 = window.setTimeout(lockStart, 50);
     const t2 = window.setTimeout(lockStart, 200);
+    const t3 = window.setTimeout(lockStart, 1400);
 
     const onScroll = () => syncAdvanceState();
     const onWheel = (event: WheelEvent) => {
@@ -210,15 +238,17 @@ export function Approach() {
       cancelAnimationFrame(raf);
       window.clearTimeout(t1);
       window.clearTimeout(t2);
+      window.clearTimeout(t3);
       scroller.removeEventListener("pointerdown", markInteracted);
       scroller.removeEventListener("scroll", onScroll);
       scroller.removeEventListener("wheel", onWheel);
       window.removeEventListener("resize", syncAdvanceState);
     };
-  }, [syncAdvanceState]);
+  }, [syncAdvanceState, cardsEntered]);
 
   return (
     <section
+      ref={sectionRef}
       id="approach"
       className="approach-section scroll-mt-24 overflow-hidden bg-[#f5f4ef] pt-16 pb-20 text-[#0b1220] lg:pt-24 lg:pb-28"
     >
@@ -267,7 +297,7 @@ export function Approach() {
           onPointerUp={endDrag}
           onPointerCancel={endDrag}
         >
-          <div className="flex w-max items-stretch gap-5 pl-[8%] pr-8 sm:gap-6 sm:pl-[10%] sm:pr-10 lg:gap-7 lg:pl-[12%] lg:pr-14">
+          <div className="approach-scroll-row flex items-stretch pl-[8%] pr-5 sm:pl-[10%] sm:pr-8 lg:pl-[12%] lg:pr-10">
             <button
               type="button"
               onClick={() => {
@@ -280,20 +310,26 @@ export function Approach() {
               <span aria-hidden="true">→</span>
             </button>
 
-            {processSteps.map((step, index) => (
-              <ProcessCard
-                key={step.title}
-                step={step}
-                index={index}
-                cardRef={
-                  index === processSteps.length - 1
-                    ? (node) => {
-                        lastCardRef.current = node;
-                      }
-                    : undefined
-                }
-              />
-            ))}
+            <div
+              className={`approach-cards-track flex min-w-0 flex-1 items-stretch${
+                cardsEntered ? " is-entered" : ""
+              }`}
+            >
+              {processSteps.map((step, index) => (
+                <ProcessCard
+                  key={step.title}
+                  step={step}
+                  index={index}
+                  cardRef={
+                    index === processSteps.length - 1
+                      ? (node) => {
+                          lastCardRef.current = node;
+                        }
+                      : undefined
+                  }
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
