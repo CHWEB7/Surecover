@@ -143,7 +143,7 @@ export function WhoWeHelp() {
   return (
     <section
       id="clients"
-      className="scroll-mt-24 -mt-16 bg-[#f5f4ef] pt-8 pb-20 lg:-mt-24 lg:pt-10 lg:pb-28"
+      className="scroll-mt-24 bg-[#f5f4ef] pt-8 pb-20 lg:pt-10 lg:pb-28"
     >
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-5xl">

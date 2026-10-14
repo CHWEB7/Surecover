@@ -217,14 +217,14 @@ export function Approach() {
   return (
     <section
       id="approach"
-      className="approach-section scroll-mt-24 overflow-hidden pt-16 text-white lg:pt-24"
+      className="approach-section scroll-mt-24 overflow-hidden bg-[#f5f4ef] pt-16 pb-20 text-[#0b1220] lg:pt-24 lg:pb-28"
     >
       <div className="relative z-10 mx-auto w-full max-w-[90rem] px-5 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
-          <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h2 className="text-3xl font-semibold tracking-tight text-[#0b1220] sm:text-4xl lg:text-5xl">
             A clear process for complex clearing decisions
           </h2>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-stone-600 sm:text-lg">
             Specialist advice from practitioners who have lived clearing
             strategy, regulation and delivery — structured so each engagement
             moves from diagnosis to lasting capability.
@@ -233,13 +233,13 @@ export function Approach() {
           <div className="mt-8 flex flex-wrap items-center gap-5">
             <a
               href="#contact"
-              className="hero-focus-pulse inline-flex rounded-full border border-white/70 px-6 py-3 text-sm font-semibold text-white transition hover:border-white hover:bg-white/10"
+              className="services-cta-pulse inline-flex rounded-full border border-[#0b1220]/55 px-6 py-3 text-sm font-semibold text-[#0b1220] transition hover:border-[#0b1220] hover:bg-[#0b1220]/10"
             >
               Talk to us
             </a>
             <a
               href="/home/services"
-              className="group inline-flex items-center gap-1 text-sm font-semibold text-white/90 transition hover:text-white"
+              className="group inline-flex items-center gap-1 text-sm font-semibold text-[#0b1220] transition hover:text-[#2d6a4f]"
             >
               View our services
               <span
@@ -271,7 +271,7 @@ export function Approach() {
               }}
               disabled={!canAdvance}
               aria-label="Show the final process step"
-              className="approach-scroll-cta my-auto mr-3 flex h-12 w-12 shrink-0 items-center justify-center self-center rounded-full border border-white/55 bg-white/15 text-xl text-white backdrop-blur-sm transition hover:border-white hover:bg-white/25 disabled:cursor-default disabled:opacity-35 sm:mr-4 sm:h-14 sm:w-14 sm:text-2xl lg:h-16 lg:w-16 lg:text-3xl"
+              className="approach-scroll-cta my-auto mr-3 flex h-12 w-12 shrink-0 items-center justify-center self-center rounded-full border border-[#0b1220]/45 bg-[#0b1220]/5 text-xl text-[#0b1220] transition hover:border-[#0b1220] hover:bg-[#0b1220]/10 disabled:cursor-default disabled:opacity-35 sm:mr-4 sm:h-14 sm:w-14 sm:text-2xl lg:h-16 lg:w-16 lg:text-3xl"
             >
               <span aria-hidden="true">→</span>
             </button>
