@@ -7,6 +7,25 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
+function NavChevron() {
+  return (
+    <svg
+      viewBox="0 0 12 12"
+      className="ml-1 h-2.5 w-2.5 shrink-0 text-current"
+      aria-hidden="true"
+      fill="none"
+    >
+      <path
+        d="M2.5 4.25 6 7.75l3.5-3.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 type SiteHeaderProps = {
   /** Header logo variant — defaults to the SureClear wordmark */
   logoVariant?: "dark" | "light" | "wordmark" | "wordmark-light";
@@ -24,7 +43,7 @@ export function SiteHeader({
         tone === "white" ? "bg-white/95" : "bg-[#f5f4ef]/90"
       }`}
     >
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between pr-6 pl-4 sm:pl-5 lg:pr-10 lg:pl-6">
+      <div className="flex h-16 w-full items-center justify-between pr-4 pl-4 sm:pr-5 sm:pl-5 lg:pr-6 lg:pl-6">
         <a href="/home" className="group inline-flex shrink-0 items-center">
           <BrandLogo
             variant={logoVariant}
@@ -33,29 +52,27 @@ export function SiteHeader({
           />
         </a>
 
-        <div className="flex items-center gap-5 sm:gap-6 md:gap-8">
+        <div className="flex items-center gap-5 sm:gap-6 md:gap-7">
           <nav
-            className="hidden items-center gap-6 md:flex lg:gap-8"
+            className="hidden items-center gap-5 md:flex lg:gap-7"
             aria-label="Primary"
           >
-            {navLinks.map((link) =>
-              link.href ? (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="font-sans text-sm font-semibold text-stone-600 transition hover:text-[#1f4037]"
-                >
+            {navLinks.map((link) => {
+              const className =
+                "inline-flex items-center font-sans text-sm font-semibold text-stone-600 transition hover:text-[#1f4037]";
+
+              return link.href ? (
+                <a key={link.label} href={link.href} className={className}>
                   {link.label}
+                  <NavChevron />
                 </a>
               ) : (
-                <span
-                  key={link.label}
-                  className="font-sans text-sm font-semibold text-stone-600"
-                >
+                <span key={link.label} className={className}>
                   {link.label}
+                  <NavChevron />
                 </span>
-              ),
-            )}
+              );
+            })}
           </nav>
 
           <a
