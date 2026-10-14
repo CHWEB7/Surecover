@@ -303,7 +303,13 @@ export function ServicesOverview() {
                         </ul>
                       ) : (
                         <>
-                          <p className="mt-3 text-base leading-relaxed text-stone-600">
+                          <p
+                            className={
+                              isMint
+                                ? "mt-3 text-sm font-semibold leading-relaxed text-[#0b1220]"
+                                : "mt-3 text-base leading-relaxed text-stone-600"
+                            }
+                          >
                             {offering.body}
                           </p>
                           {offering.showLink !== false ? (
