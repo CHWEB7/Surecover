@@ -277,7 +277,7 @@ export function ServicesOverview() {
                 {active.offerings.map((offering) => (
                   <article
                     key={offering.title}
-                    className="rounded-2xl bg-[#f5f4ef] px-6 py-7 sm:px-8 sm:py-8"
+                    className="rounded-lg bg-[#f5f4ef] px-6 py-7 sm:px-8 sm:py-8"
                   >
                     <h4 className="text-xl font-semibold tracking-tight text-[#0b1220] sm:text-2xl">
                       {offering.title}
