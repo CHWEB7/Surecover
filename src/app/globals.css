@@ -617,76 +617,11 @@ html {
   filter: saturate(1.05) brightness(1.03);
 }
 
-.services-feature-lines {
-  opacity: 0.55;
-}
-
-.services-feature-lines-drift {
-  transform-origin: 50% 50%;
-  animation: services-feature-lines-drift 18s ease-in-out infinite alternate;
-}
-
-.services-feature-line {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 18 72;
-  animation: services-feature-line-flow 7.5s linear infinite;
-}
-
-.services-feature-line-a {
-  animation-duration: 8.5s;
-  animation-delay: 0s;
-}
-
-.services-feature-line-b {
-  animation-duration: 6.8s;
-  animation-delay: -1.4s;
-}
-
-.services-feature-line-c {
-  animation-duration: 9.2s;
-  animation-delay: -2.8s;
-}
-
-.services-feature-line-d {
-  animation-duration: 7.1s;
-  animation-delay: -0.8s;
-}
-
-.services-feature-card:hover .services-feature-lines {
-  opacity: 0.8;
-}
-
-.services-feature-card:hover .services-feature-line {
-  animation-duration: 4.8s;
-}
-
-@keyframes services-feature-line-flow {
-  to {
-    stroke-dashoffset: -180;
-  }
-}
-
-@keyframes services-feature-lines-drift {
-  from {
-    transform: translate3d(0, 0, 0) scale(1.02);
-  }
-  to {
-    transform: translate3d(-2.5%, 1.5%, 0) scale(1.08);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .services-feature-card,
   .services-feature-card:hover {
     transition: none;
     transform: none;
-  }
-
-  .services-feature-lines-drift,
-  .services-feature-line {
-    animation: none;
   }
 }
 
