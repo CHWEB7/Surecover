@@ -43,18 +43,18 @@ export function SiteHeader({
         tone === "white" ? "bg-white/95" : "bg-[#f5f4ef]/90"
       }`}
     >
-      <div className="flex h-16 w-full items-center justify-between pr-4 pl-4 sm:pr-5 sm:pl-5 lg:pr-6 lg:pl-6">
-        <a href="/home" className="group inline-flex shrink-0 items-center">
+      <div className="flex h-20 w-full items-end justify-between pr-4 pb-3.5 pl-4 sm:pr-5 sm:pl-5 lg:h-[5.25rem] lg:pr-6 lg:pb-4 lg:pl-6">
+        <a href="/home" className="group inline-flex shrink-0 items-end">
           <BrandLogo
             variant={logoVariant}
             priority
-            className="h-8 w-auto sm:h-9"
+            className="h-11 w-auto sm:h-12"
           />
         </a>
 
-        <div className="flex items-center gap-5 sm:gap-6 md:gap-7">
+        <div className="flex items-end gap-5 pb-0.5 sm:gap-6 md:gap-7">
           <nav
-            className="hidden items-center gap-5 md:flex lg:gap-7"
+            className="hidden items-end gap-5 md:flex lg:gap-7"
             aria-label="Primary"
           >
             {navLinks.map((link) => {
