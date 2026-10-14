@@ -6,6 +6,8 @@ type ServiceOffering = {
   title: string;
   body?: string;
   includes?: string[];
+  /** When false, hide the contact link under the card body. */
+  showLink?: boolean;
 };
 
 type ServiceDetail = {
@@ -99,13 +101,8 @@ const services: ServiceDetail[] = [
     offerings: [
       {
         title: "Includes",
-        includes: [
-          "CCP connectivity and access models",
-          "Exchange membership and onboarding",
-          "Clearing operating models",
-          "Market entry and product coverage",
-          "New clearing mandates",
-        ],
+        body: "CCP connectivity and access models, exchange membership and onboarding, clearing operating models, market entry and product coverage, and new clearing mandates.",
+        showLink: false,
       },
     ],
     icon: StrategyIcon,
@@ -302,16 +299,18 @@ export function ServicesOverview() {
                         <p className="mt-3 text-base leading-relaxed text-stone-600">
                           {offering.body}
                         </p>
-                        <a
-                          href="/contact"
-                          className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#2d6a4f] transition hover:text-[#1f4037]"
-                        >
-                          <span
-                            aria-hidden
-                            className="inline-block h-1.5 w-1.5 rounded-full bg-[#2d6a4f]"
-                          />
-                          {offering.title}
-                        </a>
+                        {offering.showLink !== false ? (
+                          <a
+                            href="/contact"
+                            className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#2d6a4f] transition hover:text-[#1f4037]"
+                          >
+                            <span
+                              aria-hidden
+                              className="inline-block h-1.5 w-1.5 rounded-full bg-[#2d6a4f]"
+                            />
+                            {offering.title}
+                          </a>
+                        ) : null}
                       </>
                     )}
                   </article>
