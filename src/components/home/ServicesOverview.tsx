@@ -4,13 +4,15 @@ import { useEffect, useState, type ReactNode } from "react";
 
 type ServiceOffering = {
   title: string;
-  body: string;
+  body?: string;
+  includes?: string[];
 };
 
 type ServiceDetail = {
   id: string;
   title: string;
   shortDescription: string;
+  subtitle: string;
   intro: string;
   offerings: ServiceOffering[];
   icon: ReactNode;
@@ -91,20 +93,19 @@ const services: ServiceDetail[] = [
     title: "Clearing Strategy",
     shortDescription:
       "Help organisations understand and respond to changes in clearing and market infrastructure — membership, product coverage and competitive positioning grounded in how markets actually work.",
+    subtitle: "Know what to do next.",
     intro:
-      "Clearing decisions sit at the intersection of commercial positioning, risk appetite, regulation and the operating model needed to run the business day to day.",
+      "We help organisations make clear strategic decisions across clearing access, CCP connectivity, exchange membership, client clearing propositions, product coverage and market infrastructure.",
     offerings: [
       {
-        title: "Membership & market positioning",
-        body: "Clarify CCP membership, product coverage and competitive positioning choices so leadership can decide with a clear view of the market.",
-      },
-      {
-        title: "Options stress-testing",
-        body: "Pressure-test options against regulation, economics and operating constraints before committing to a path.",
-      },
-      {
-        title: "Decision narrative",
-        body: "Translate strategy into a decision narrative stakeholders can own, defend and act on across commercial, risk and operations teams.",
+        title: "Includes",
+        includes: [
+          "CCP connectivity and access models",
+          "Exchange membership and onboarding",
+          "Clearing operating models",
+          "Market entry and product coverage",
+          "New clearing mandates",
+        ],
       },
     ],
     icon: StrategyIcon,
@@ -114,6 +115,7 @@ const services: ServiceDetail[] = [
     title: "Transformation & Change",
     shortDescription:
       "Turn a clearing decision into a workable operating model, roadmap and delivery plan — with outcomes that can be owned by the teams who run the business day to day.",
+    subtitle: "From clearing decision to delivery that sticks.",
     intro:
       "Once the direction is set, the hard part begins: target operating models, sequencing, vendor choices, controls and the practical work of getting teams aligned.",
     offerings: [
@@ -137,6 +139,7 @@ const services: ServiceDetail[] = [
     title: "Fractional Leadership",
     shortDescription:
       "Provide experienced clearing leadership without the commitment of a permanent senior hire — senior judgement when programmes, platforms or teams need it most.",
+    subtitle: "Senior clearing judgement when you need it most.",
     intro:
       "Some moments need experienced clearing leadership quickly — a platform migration, a membership expansion, a stretched team, or a programme that has lost its way.",
     offerings: [
@@ -160,6 +163,7 @@ const services: ServiceDetail[] = [
     title: "Operations & Resilience",
     shortDescription:
       "Improve resilience, efficiency, controls and governance so clearing operations stay robust as volumes, products and regulatory expectations change.",
+    subtitle: "Operations built for resilience under pressure.",
     intro:
       "Clearing operations have to absorb volume spikes, product change, control expectations and regulatory scrutiny without losing reliability.",
     offerings: [
@@ -262,6 +266,9 @@ export function ServicesOverview() {
               >
                 {active.title}
               </h3>
+              <p className="mt-3 text-xl font-semibold tracking-tight text-[#0b1220] sm:text-2xl">
+                {active.subtitle}
+              </p>
               <p className="mt-4 max-w-3xl text-base leading-relaxed text-stone-600 sm:text-lg">
                 {active.intro}
               </p>
@@ -275,19 +282,38 @@ export function ServicesOverview() {
                     <h4 className="text-xl font-semibold tracking-tight text-[#0b1220] sm:text-2xl">
                       {offering.title}
                     </h4>
-                    <p className="mt-3 text-base leading-relaxed text-stone-600">
-                      {offering.body}
-                    </p>
-                    <a
-                      href="/contact"
-                      className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#2d6a4f] transition hover:text-[#1f4037]"
-                    >
-                      <span
-                        aria-hidden
-                        className="inline-block h-1.5 w-1.5 rounded-full bg-[#2d6a4f]"
-                      />
-                      {offering.title}
-                    </a>
+                    {offering.includes ? (
+                      <ul className="mt-4 space-y-2.5">
+                        {offering.includes.map((item) => (
+                          <li
+                            key={item}
+                            className="flex items-start gap-2.5 text-base leading-relaxed text-stone-600"
+                          >
+                            <span
+                              aria-hidden
+                              className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#2d6a4f]"
+                            />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <>
+                        <p className="mt-3 text-base leading-relaxed text-stone-600">
+                          {offering.body}
+                        </p>
+                        <a
+                          href="/contact"
+                          className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#2d6a4f] transition hover:text-[#1f4037]"
+                        >
+                          <span
+                            aria-hidden
+                            className="inline-block h-1.5 w-1.5 rounded-full bg-[#2d6a4f]"
+                          />
+                          {offering.title}
+                        </a>
+                      </>
+                    )}
                   </article>
                 ))}
               </div>
