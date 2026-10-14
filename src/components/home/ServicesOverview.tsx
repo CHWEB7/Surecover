@@ -2,18 +2,17 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 
+type ServiceOffering = {
+  title: string;
+  body: string;
+};
+
 type ServiceDetail = {
   id: string;
   title: string;
   shortDescription: string;
-  headline: string;
-  paragraphs: string[];
-  points: string[];
-  highlight: {
-    quote: string;
-    label: string;
-    detail: string;
-  };
+  intro: string;
+  offerings: ServiceOffering[];
   icon: ReactNode;
 };
 
@@ -92,22 +91,22 @@ const services: ServiceDetail[] = [
     title: "Clearing Strategy",
     shortDescription:
       "Help organisations understand and respond to changes in clearing and market infrastructure — membership, product coverage and competitive positioning grounded in how markets actually work.",
-    headline: "Clearing strategy that stands up in real markets",
-    paragraphs: [
-      "Clearing decisions are rarely just product or membership choices. They sit at the intersection of commercial positioning, risk appetite, regulation and the operating model needed to run the business day to day.",
-      "SureClear helps leadership teams frame the decision properly, pressure-test options against market reality, and leave with a path that can be owned internally — not a generic market map.",
+    intro:
+      "Clearing decisions sit at the intersection of commercial positioning, risk appetite, regulation and the operating model needed to run the business day to day.",
+    offerings: [
+      {
+        title: "Membership & market positioning",
+        body: "Clarify CCP membership, product coverage and competitive positioning choices so leadership can decide with a clear view of the market.",
+      },
+      {
+        title: "Options stress-testing",
+        body: "Pressure-test options against regulation, economics and operating constraints before committing to a path.",
+      },
+      {
+        title: "Decision narrative",
+        body: "Translate strategy into a decision narrative stakeholders can own, defend and act on across commercial, risk and operations teams.",
+      },
     ],
-    points: [
-      "Clarify CCP membership, product coverage and competitive positioning choices",
-      "Stress-test options against regulation, economics and operating constraints",
-      "Translate strategy into a decision narrative stakeholders can act on",
-    ],
-    highlight: {
-      quote:
-        "SureClear helps teams cut through clearing complexity and arrive at a decision they can defend commercially, operationally and with regulators.",
-      label: "How SureClear helps",
-      detail: "Independent clearing strategy advice for banks, brokers, CCPs and new market participants.",
-    },
     icon: StrategyIcon,
   },
   {
@@ -115,22 +114,22 @@ const services: ServiceDetail[] = [
     title: "Transformation & Change",
     shortDescription:
       "Turn a clearing decision into a workable operating model, roadmap and delivery plan — with outcomes that can be owned by the teams who run the business day to day.",
-    headline: "From clearing decision to delivery that sticks",
-    paragraphs: [
+    intro:
       "Once the direction is set, the hard part begins: target operating models, sequencing, vendor choices, controls and the practical work of getting teams aligned.",
-      "SureClear stays close through design and delivery — keeping transformation tied to clearing realities rather than generic programme theatre.",
+    offerings: [
+      {
+        title: "Target operating models",
+        body: "Design practical operating models and delivery roadmaps that turn a clearing decision into something the business can run.",
+      },
+      {
+        title: "Technology & control alignment",
+        body: "Align technology, process and control changes to clearing outcomes — not generic programme theatre.",
+      },
+      {
+        title: "Delivery that sticks",
+        body: "Unblock decisions and keep programmes grounded in day-to-day operations so change lands with clear ownership.",
+      },
     ],
-    points: [
-      "Design target operating models and practical delivery roadmaps",
-      "Align technology, process and control changes to clearing outcomes",
-      "Unblock decisions and keep programmes grounded in day-to-day operations",
-    ],
-    highlight: {
-      quote:
-        "We help turn a clearing decision into an operating model and delivery plan the business can actually run — with clear ownership after the engagement ends.",
-      label: "How SureClear helps",
-      detail: "Hands-on transformation support from practitioners who have lived clearing change.",
-    },
     icon: TransformationIcon,
   },
   {
@@ -138,22 +137,22 @@ const services: ServiceDetail[] = [
     title: "Fractional Leadership",
     shortDescription:
       "Provide experienced clearing leadership without the commitment of a permanent senior hire — senior judgement when programmes, platforms or teams need it most.",
-    headline: "Senior clearing judgement when you need it most",
-    paragraphs: [
+    intro:
       "Some moments need experienced clearing leadership quickly — a platform migration, a membership expansion, a stretched team, or a programme that has lost its way.",
-      "SureClear provides fractional leadership that brings senior judgement without forcing a permanent hire before the organisation is ready.",
+    offerings: [
+      {
+        title: "Embedded clearing leadership",
+        body: "Bring experienced clearing leadership into critical programmes and transitions without locking in a permanent hire too early.",
+      },
+      {
+        title: "Executive decision support",
+        body: "Support boards and executives with clear, practical recommendations when the decision window is tight.",
+      },
+      {
+        title: "Capability that remains",
+        body: "Build internal capability so progress continues after the engagement ends and the team can own what comes next.",
+      },
     ],
-    points: [
-      "Embed experienced clearing leadership for critical programmes and transitions",
-      "Support boards and executives with clear, practical recommendations",
-      "Build internal capability so progress continues after the engagement",
-    ],
-    highlight: {
-      quote:
-        "Fractional clearing leadership gives you senior judgement at the moments that matter — without locking in a permanent structure too early.",
-      label: "How SureClear helps",
-      detail: "Flexible leadership support shaped around the decision, programme or team in front of you.",
-    },
     icon: LeadershipIcon,
   },
   {
@@ -161,49 +160,30 @@ const services: ServiceDetail[] = [
     title: "Operations & Resilience",
     shortDescription:
       "Improve resilience, efficiency, controls and governance so clearing operations stay robust as volumes, products and regulatory expectations change.",
-    headline: "Operations built for resilience under pressure",
-    paragraphs: [
+    intro:
       "Clearing operations have to absorb volume spikes, product change, control expectations and regulatory scrutiny without losing reliability.",
-      "SureClear helps strengthen the operating backbone — processes, controls, governance and resilience — so clearing stays robust as the business evolves.",
+    offerings: [
+      {
+        title: "Controls & governance",
+        body: "Strengthen controls, governance and operating discipline so clearing stays robust when pressure rises.",
+      },
+      {
+        title: "Resilience & efficiency",
+        body: "Improve resilience and efficiency across clearing workflows without adding unnecessary complexity.",
+      },
+      {
+        title: "Ready for change",
+        body: "Prepare operations for volume, product and regulatory change with a practical operating backbone.",
+      },
     ],
-    points: [
-      "Strengthen controls, governance and operating discipline",
-      "Improve resilience and efficiency across clearing workflows",
-      "Prepare operations for volume, product and regulatory change",
-    ],
-    highlight: {
-      quote:
-        "We focus on the operating realities that keep clearing resilient — controls, process discipline and the governance teams need when pressure rises.",
-      label: "How SureClear helps",
-      detail: "Practical operations advice rooted in how clearing runs day to day.",
-    },
     icon: OperationsIcon,
   },
 ];
 
-function CheckIcon() {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      className="mt-0.5 h-5 w-5 shrink-0 text-[#2d6a4f]"
-      fill="none"
-      aria-hidden="true"
-    >
-      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M6 10.2l2.4 2.3L14 7.5"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
 export function ServicesOverview() {
   const [activeId, setActiveId] = useState(services[0].id);
-  const active = services.find((service) => service.id === activeId) ?? services[0];
+  const active =
+    services.find((service) => service.id === activeId) ?? services[0];
 
   useEffect(() => {
     const applyHash = () => {
@@ -217,9 +197,14 @@ export function ServicesOverview() {
     return () => window.removeEventListener("hashchange", applyHash);
   }, []);
 
-  const selectService = (id: string) => {
+  const selectService = (id: string, scrollToDetail = false) => {
     setActiveId(id);
     window.history.replaceState(null, "", `#${id}`);
+    if (scrollToDetail) {
+      document
+        .getElementById("service-detail")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   return (
@@ -245,8 +230,7 @@ export function ServicesOverview() {
             <button
               key={service.id}
               type="button"
-              id={service.id}
-              onClick={() => selectService(service.id)}
+              onClick={() => selectService(service.id, true)}
               className="services-area-card group flex h-full flex-col rounded-2xl border border-transparent bg-transparent p-5 text-left transition duration-300 ease-out hover:-translate-y-1 hover:border-[#ecece8] hover:bg-[#f3f3f0] sm:p-6 motion-reduce:transform-none motion-reduce:transition-none"
             >
               <div className="text-[#0b1220] transition duration-300 group-hover:text-[#2d6a4f]">
@@ -262,84 +246,84 @@ export function ServicesOverview() {
           ))}
         </div>
 
-        <div className="mt-12 border-t border-[#e7e5df] pt-10 lg:mt-16 lg:pt-12">
-          <div
-            role="tablist"
-            aria-label="Service areas"
-            className="flex flex-wrap gap-x-8 gap-y-3 border-b border-[#e7e5df]"
-          >
-            {services.map((service) => {
-              const isActive = service.id === active.id;
-              return (
-                <button
-                  key={`tab-${service.id}`}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => selectService(service.id)}
-                  className={`relative pb-3 text-sm font-semibold transition ${
-                    isActive
-                      ? "text-[#0b1220]"
-                      : "text-stone-400 hover:text-[#0b1220]"
-                  }`}
-                >
-                  {service.title}
-                  <span
-                    aria-hidden
-                    className={`absolute inset-x-0 -bottom-px h-[2px] rounded-full transition ${
-                      isActive ? "bg-[#2d6a4f]" : "bg-transparent"
-                    }`}
-                  />
-                </button>
-              );
-            })}
-          </div>
-
-          <div
-            role="tabpanel"
-            aria-labelledby={active.id}
-            className="mt-10 grid items-start gap-10 lg:mt-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:gap-14"
-          >
+        <div
+          id="service-detail"
+          className="mt-14 scroll-mt-28 border-t border-[#e7e5df] pt-12 lg:mt-20 lg:pt-16"
+        >
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_17.5rem] lg:gap-14 xl:grid-cols-[minmax(0,1fr)_19rem] xl:gap-16">
             <div>
-              <h3 className="text-3xl font-semibold tracking-tight text-[#0b1220] sm:text-4xl">
-                {active.headline}
+              <div
+                aria-hidden
+                className="h-1 w-14 rounded-full bg-[linear-gradient(90deg,#1f4037_0%,#2d6a4f_45%,#99f2c8_100%)]"
+              />
+              <h3
+                id={active.id}
+                className="mt-5 text-3xl font-semibold tracking-tight text-[#0b1220] sm:text-4xl lg:text-[2.75rem]"
+              >
+                {active.title}
               </h3>
-              <div className="mt-5 space-y-4 text-base leading-relaxed text-stone-600 sm:text-lg">
-                {active.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+              <p className="mt-4 max-w-3xl text-base leading-relaxed text-stone-600 sm:text-lg">
+                {active.intro}
+              </p>
+
+              <div className="mt-8 space-y-4 sm:mt-10 sm:space-y-5">
+                {active.offerings.map((offering) => (
+                  <article
+                    key={offering.title}
+                    className="rounded-2xl bg-[#f5f4ef] px-6 py-7 sm:px-8 sm:py-8"
+                  >
+                    <h4 className="text-xl font-semibold tracking-tight text-[#0b1220] sm:text-2xl">
+                      {offering.title}
+                    </h4>
+                    <p className="mt-3 text-base leading-relaxed text-stone-600">
+                      {offering.body}
+                    </p>
+                    <a
+                      href="/contact"
+                      className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#2d6a4f] transition hover:text-[#1f4037]"
+                    >
+                      <span
+                        aria-hidden
+                        className="inline-block h-1.5 w-1.5 rounded-full bg-[#2d6a4f]"
+                      />
+                      {offering.title}
+                    </a>
+                  </article>
                 ))}
               </div>
-              <ul className="mt-8 space-y-4">
-                {active.points.map((point) => (
-                  <li
-                    key={point}
-                    className="flex items-start gap-3 text-base leading-snug text-[#0b1220] sm:text-[1.05rem]"
-                  >
-                    <CheckIcon />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="/contact"
-                className="mt-8 inline-flex rounded-lg bg-[#0b1220] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#14201a]"
-              >
-                Talk to us about {active.title.toLowerCase()}
-              </a>
             </div>
 
-            <aside className="rounded-2xl border border-[#e7e5df] border-l-[6px] border-l-[#2d6a4f] bg-[#f5f4ef] p-7 sm:p-8">
-              <p className="text-lg leading-relaxed text-[#0b1220] italic sm:text-xl">
-                “{active.highlight.quote}”
-              </p>
-              <div className="mt-6 border-t border-[#e7e5df] pt-5">
-                <p className="text-base font-semibold text-[#0b1220]">
-                  {active.highlight.label}
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-stone-600 sm:text-[0.95rem]">
-                  {active.highlight.detail}
-                </p>
-              </div>
+            <aside className="lg:sticky lg:top-28">
+              <a
+                href="/contact"
+                className="inline-flex w-full items-center justify-center rounded-lg bg-[#0b1220] px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#14201a]"
+              >
+                Talk to us
+              </a>
+
+              <nav
+                aria-label="Service areas"
+                className="mt-6 flex flex-col gap-1"
+              >
+                {services.map((service) => {
+                  const isActive = service.id === active.id;
+                  return (
+                    <button
+                      key={`nav-${service.id}`}
+                      type="button"
+                      onClick={() => selectService(service.id)}
+                      aria-current={isActive ? "true" : undefined}
+                      className={`rounded-xl px-4 py-3 text-left text-sm font-semibold transition ${
+                        isActive
+                          ? "bg-[#eef3ef] text-[#0b1220]"
+                          : "text-[#0b1220] hover:bg-[#f5f4ef]"
+                      }`}
+                    >
+                      {service.title}
+                    </button>
+                  );
+                })}
+              </nav>
             </aside>
           </div>
         </div>
