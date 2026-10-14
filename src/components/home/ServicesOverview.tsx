@@ -8,8 +8,8 @@ type ServiceOffering = {
   includes?: string[];
   /** When false, hide the contact link under the card body. */
   showLink?: boolean;
-  /** Match the docked Talk to us button (`#0b1220`). */
-  tone?: "dark" | "cream";
+  /** Match the docked active menu highlight (`#eef3ef`). */
+  tone?: "mint" | "cream";
 };
 
 type ServiceDetail = {
@@ -105,7 +105,7 @@ const services: ServiceDetail[] = [
         title: "Includes",
         body: "CCP connectivity and access models, exchange membership and onboarding, clearing operating models, market entry and product coverage, and new clearing mandates.",
         showLink: false,
-        tone: "dark",
+        tone: "mint",
       },
     ],
     icon: StrategyIcon,
@@ -275,19 +275,15 @@ export function ServicesOverview() {
 
               <div className="mt-8 space-y-4 sm:mt-10 sm:space-y-5">
                 {active.offerings.map((offering) => {
-                  const isDark = offering.tone === "dark";
+                  const isMint = offering.tone === "mint";
                   return (
                     <article
                       key={offering.title}
                       className={`rounded-lg px-6 py-7 sm:px-8 sm:py-8 ${
-                        isDark ? "bg-[#0b1220] text-white" : "bg-[#f5f4ef]"
+                        isMint ? "bg-[#eef3ef]" : "bg-[#f5f4ef]"
                       }`}
                     >
-                      <h4
-                        className={`text-xl font-semibold tracking-tight sm:text-2xl ${
-                          isDark ? "text-white" : "text-[#0b1220]"
-                        }`}
-                      >
+                      <h4 className="text-xl font-semibold tracking-tight text-[#0b1220] sm:text-2xl">
                         {offering.title}
                       </h4>
                       {offering.includes ? (
@@ -295,15 +291,11 @@ export function ServicesOverview() {
                           {offering.includes.map((item) => (
                             <li
                               key={item}
-                              className={`flex items-start gap-2.5 text-base leading-relaxed ${
-                                isDark ? "text-white/70" : "text-stone-600"
-                              }`}
+                              className="flex items-start gap-2.5 text-base leading-relaxed text-stone-600"
                             >
                               <span
                                 aria-hidden
-                                className={`mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full ${
-                                  isDark ? "bg-[#99f2c8]" : "bg-[#2d6a4f]"
-                                }`}
+                                className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#2d6a4f]"
                               />
                               <span>{item}</span>
                             </li>
@@ -311,11 +303,7 @@ export function ServicesOverview() {
                         </ul>
                       ) : (
                         <>
-                          <p
-                            className={`mt-3 text-base leading-relaxed ${
-                              isDark ? "text-white/70" : "text-stone-600"
-                            }`}
-                          >
+                          <p className="mt-3 text-base leading-relaxed text-stone-600">
                             {offering.body}
                           </p>
                           {offering.showLink !== false ? (
