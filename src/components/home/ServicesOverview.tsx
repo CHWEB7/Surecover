@@ -8,6 +8,8 @@ type ServiceOffering = {
   includes?: string[];
   /** When false, hide the contact link under the card body. */
   showLink?: boolean;
+  /** Match the docked Talk to us button (`#0b1220`). */
+  tone?: "dark" | "cream";
 };
 
 type ServiceDetail = {
@@ -103,6 +105,7 @@ const services: ServiceDetail[] = [
         title: "Includes",
         body: "CCP connectivity and access models, exchange membership and onboarding, clearing operating models, market entry and product coverage, and new clearing mandates.",
         showLink: false,
+        tone: "dark",
       },
     ],
     icon: StrategyIcon,
@@ -271,50 +274,67 @@ export function ServicesOverview() {
               </p>
 
               <div className="mt-8 space-y-4 sm:mt-10 sm:space-y-5">
-                {active.offerings.map((offering) => (
-                  <article
-                    key={offering.title}
-                    className="rounded-lg bg-[#f5f4ef] px-6 py-7 sm:px-8 sm:py-8"
-                  >
-                    <h4 className="text-xl font-semibold tracking-tight text-[#0b1220] sm:text-2xl">
-                      {offering.title}
-                    </h4>
-                    {offering.includes ? (
-                      <ul className="mt-4 space-y-2.5">
-                        {offering.includes.map((item) => (
-                          <li
-                            key={item}
-                            className="flex items-start gap-2.5 text-base leading-relaxed text-stone-600"
+                {active.offerings.map((offering) => {
+                  const isDark = offering.tone === "dark";
+                  return (
+                    <article
+                      key={offering.title}
+                      className={`rounded-lg px-6 py-7 sm:px-8 sm:py-8 ${
+                        isDark ? "bg-[#0b1220] text-white" : "bg-[#f5f4ef]"
+                      }`}
+                    >
+                      <h4
+                        className={`text-xl font-semibold tracking-tight sm:text-2xl ${
+                          isDark ? "text-white" : "text-[#0b1220]"
+                        }`}
+                      >
+                        {offering.title}
+                      </h4>
+                      {offering.includes ? (
+                        <ul className="mt-4 space-y-2.5">
+                          {offering.includes.map((item) => (
+                            <li
+                              key={item}
+                              className={`flex items-start gap-2.5 text-base leading-relaxed ${
+                                isDark ? "text-white/70" : "text-stone-600"
+                              }`}
+                            >
+                              <span
+                                aria-hidden
+                                className={`mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full ${
+                                  isDark ? "bg-[#99f2c8]" : "bg-[#2d6a4f]"
+                                }`}
+                              />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <>
+                          <p
+                            className={`mt-3 text-base leading-relaxed ${
+                              isDark ? "text-white/70" : "text-stone-600"
+                            }`}
                           >
-                            <span
-                              aria-hidden
-                              className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#2d6a4f]"
-                            />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <>
-                        <p className="mt-3 text-base leading-relaxed text-stone-600">
-                          {offering.body}
-                        </p>
-                        {offering.showLink !== false ? (
-                          <a
-                            href="/contact"
-                            className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#2d6a4f] transition hover:text-[#1f4037]"
-                          >
-                            <span
-                              aria-hidden
-                              className="inline-block h-1.5 w-1.5 rounded-full bg-[#2d6a4f]"
-                            />
-                            {offering.title}
-                          </a>
-                        ) : null}
-                      </>
-                    )}
-                  </article>
-                ))}
+                            {offering.body}
+                          </p>
+                          {offering.showLink !== false ? (
+                            <a
+                              href="/contact"
+                              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#2d6a4f] transition hover:text-[#1f4037]"
+                            >
+                              <span
+                                aria-hidden
+                                className="inline-block h-1.5 w-1.5 rounded-full bg-[#2d6a4f]"
+                              />
+                              {offering.title}
+                            </a>
+                          ) : null}
+                        </>
+                      )}
+                    </article>
+                  );
+                })}
               </div>
             </div>
 
