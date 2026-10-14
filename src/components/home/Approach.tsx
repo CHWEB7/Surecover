@@ -47,7 +47,7 @@ function ProcessCard({
       <div className="approach-process-card-inner relative flex h-full flex-col bg-[#0b1220] p-5 sm:p-6">
         <div className="flex items-start justify-between gap-3">
           <span
-            className="text-3xl font-normal tracking-tight text-white sm:text-4xl"
+            className="text-3xl font-semibold tracking-tight text-[#99f2c8] sm:text-4xl"
             aria-hidden="true"
           >
             {number}
