@@ -9,8 +9,10 @@ type TeamMember = {
   role: string;
   headline: string;
   quote?: string;
+  intro: string;
+  experienceLabel?: string;
+  experience: string[];
   paragraphs: string[];
-  points: string[];
   image: string;
   imageAlt: string;
 };
@@ -23,15 +25,22 @@ const team: TeamMember[] = [
     headline: "30+ years in clearing",
     quote:
       "I know how clearing works in practice — where the risks sit, where the operational pain points are, where change gets difficult and what it takes to turn strategy into something that actually works.",
-    paragraphs: [
+    intro:
       "Simon Haggett began his career in derivatives clearing operations and progressed through senior leadership roles across SEB, Credit Suisse and FIS.",
-      "He has led organisations of more than 100 professionals, managed major transformation portfolios and led global product organisations responsible for platforms supporting more than 80 CCPs and exchanges.",
-      "That experience — including major industry transitions such as Brexit and regulatory change — is the foundation of SureClear.",
+    experienceLabel: "His experience spans:",
+    experience: [
+      "Clearing Operations",
+      "Business & Operational Transformation",
+      "Regulatory Change",
+      "Product Management",
+      "Technology & Infrastructure",
+      "Operating Models",
+      "Commercial Development",
     ],
-    points: [
-      "Clearing operations, transformation and regulatory change",
-      "Product leadership across platforms supporting 80+ CCPs and exchanges",
-      "Commercial development and multi-million dollar change portfolios",
+    paragraphs: [
+      "He has led organisations of more than 100 professionals, managed major transformation portfolios and led global product organisations responsible for platforms supporting more than 80 CCPs and exchanges.",
+      "He has also delivered major industry transitions, including Brexit and regulatory change, managed multi-million dollar change portfolios and generated annual recurring revenue through commercial product development.",
+      "That experience is the foundation of SureClear.",
     ],
     image: "/simon-haggett.jpg",
     imageAlt: "Simon Haggett, Founder of SureClear",
@@ -141,6 +150,29 @@ export function AboutTeam() {
                 {active.headline}
               </h3>
               <div className="mt-5 space-y-4 text-base leading-relaxed text-stone-600 sm:text-lg">
+                <p>{active.intro}</p>
+              </div>
+              {active.experience.length ? (
+                <div className="mt-6">
+                  {active.experienceLabel ? (
+                    <p className="text-base font-semibold tracking-tight text-[#0b1220] sm:text-lg">
+                      {active.experienceLabel}
+                    </p>
+                  ) : null}
+                  <ul className="mt-4 space-y-3">
+                    {active.experience.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-3 text-base leading-snug text-[#0b1220] sm:text-[1.05rem]"
+                      >
+                        <CheckIcon />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+              <div className="mt-6 space-y-4 text-base leading-relaxed text-stone-600 sm:text-lg">
                 {active.paragraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -150,17 +182,6 @@ export function AboutTeam() {
                   &ldquo;{active.quote}&rdquo;
                 </p>
               ) : null}
-              <ul className="mt-8 space-y-4">
-                {active.points.map((point) => (
-                  <li
-                    key={point}
-                    className="flex items-start gap-3 text-base leading-snug text-[#0b1220] sm:text-[1.05rem]"
-                  >
-                    <CheckIcon />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
               <a
                 href="/contact"
                 className="mt-8 inline-flex rounded-lg bg-[#0b1220] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#14201a]"
