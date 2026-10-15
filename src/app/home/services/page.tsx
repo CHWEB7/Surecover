@@ -23,7 +23,7 @@ export default function ServicesPage() {
         <ServicesHero />
         <ServicesOverview />
       </main>
-      <ContactCta />
+      <ContactCta variant="brand" />
       <SiteFooter />
     </div>
   );
