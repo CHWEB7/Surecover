@@ -8,9 +8,29 @@ type ServiceDetail = {
   shortDescription: string;
   subtitle: string;
   intro: string;
-  includes: string;
+  includes: string[];
   icon: ReactNode;
 };
+
+function CheckIcon() {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      className="mt-0.5 h-5 w-5 shrink-0 text-[#2d6a4f]"
+      fill="none"
+      aria-hidden="true"
+    >
+      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
+      <path
+        d="M6 10.2l2.4 2.3L14 7.5"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 const iconClass = "h-9 w-9";
 
@@ -90,8 +110,13 @@ const services: ServiceDetail[] = [
     subtitle: "Know what to do next.",
     intro:
       "We help organisations make clear strategic decisions across clearing access, CCP connectivity, exchange membership, client clearing propositions, product coverage and market infrastructure.",
-    includes:
-      "CCP connectivity and access models, exchange membership and onboarding, clearing operating models, market entry and product coverage, and new clearing mandates.",
+    includes: [
+      "CCP connectivity and access models",
+      "Exchange membership and onboarding",
+      "Clearing operating models",
+      "Market entry and product coverage",
+      "New clearing mandates",
+    ],
     icon: StrategyIcon,
   },
   {
@@ -102,8 +127,13 @@ const services: ServiceDetail[] = [
     subtitle: "Turn decisions into capability.",
     intro:
       "We help translate clearing strategy into practical roadmaps, delivery plans, operating models and technology change that can work in the real world.",
-    includes:
-      "Product and platform transformation, capability mapping and roadmaps, vendor assessment and RFP support, regulatory change, and programme structure, delivery support and governance.",
+    includes: [
+      "Product and platform transformation",
+      "Capability mapping and roadmaps",
+      "Vendor assessment and RFP support",
+      "Regulatory change",
+      "Programme structure, delivery support and governance",
+    ],
     icon: TransformationIcon,
   },
   {
@@ -114,8 +144,13 @@ const services: ServiceDetail[] = [
     subtitle: "Make clearing work better.",
     intro:
       "We support clearing operations that need to become more resilient, efficient, controlled or scalable.",
-    includes:
-      "Operational risk and control reviews, procedures, controls and SLA frameworks, process optimisation and automation, target operating models, and outsourcing, offshoring and governance.",
+    includes: [
+      "Operational risk and control reviews",
+      "Procedures, controls and SLA frameworks",
+      "Process optimisation and automation",
+      "Target operating models",
+      "Outsourcing, offshoring and governance",
+    ],
     icon: OperationsIcon,
   },
   {
@@ -126,8 +161,13 @@ const services: ServiceDetail[] = [
     subtitle: "Senior experience when it matters.",
     intro:
       "We provide experienced clearing leadership without the commitment of a permanent senior hire, supporting organisations through change, recovery, governance or capability build.",
-    includes:
-      "Fractional COO support, operations leadership, change and transformation leadership, programme recovery, and steering committee preparation and executive reporting.",
+    includes: [
+      "Fractional COO support",
+      "Operations leadership",
+      "Change and transformation leadership",
+      "Programme recovery",
+      "Steering committee preparation and executive reporting",
+    ],
     icon: LeadershipIcon,
   },
 ];
@@ -249,9 +289,17 @@ export function ServicesOverview() {
                     <h4 className="text-xl font-semibold tracking-tight text-[#0b1220] sm:text-2xl">
                       Includes
                     </h4>
-                    <p className="mt-3 text-sm font-semibold leading-relaxed text-[#0b1220]">
-                      {service.includes}
-                    </p>
+                    <ul className="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                      {service.includes.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-3 text-sm font-semibold leading-snug text-[#0b1220] sm:text-[0.95rem]"
+                        >
+                          <CheckIcon />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
                   {index < services.length - 1 ? (
