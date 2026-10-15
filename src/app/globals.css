@@ -8,15 +8,86 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-outfit);
   --font-mono: var(--font-geist-mono);
+  --font-body: var(--font-identidad);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  /* Body copy defaults to Identidad ExtraLight */
+  font-family: var(--font-identidad), var(--font-outfit), system-ui, -apple-system,
+    sans-serif;
+  font-weight: 200;
   -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * Titles / UI chrome stay on Outfit.
+ * Card & feature titles use heading tags or semibold/medium weights.
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button,
+input,
+select,
+textarea,
+label,
+header nav a,
+.font-semibold,
+.font-medium,
+.font-bold,
+.font-extrabold {
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+}
+
+/* Explicit body-copy helper for non-heading descriptions */
+.font-body,
+p:not([class*="font-semibold"]):not([class*="font-medium"]):not(
+    [class*="font-bold"]
+  ),
+li:not([class*="font-semibold"]):not([class*="font-medium"]) {
+  font-family: var(--font-identidad), var(--font-outfit), system-ui, -apple-system,
+    sans-serif;
+  font-weight: 200;
+}
+
+/* SVG text does not always inherit HTML font-family reliably */
+svg text,
+svg tspan {
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* About hero — transformation fiber image fills the SureClear mark */
+.about-mark-fill {
+  background-color: #1f4037;
+  /* Match the transformation card fiber treatment */
+  filter: hue-rotate(-48deg) saturate(1.25) brightness(0.92) contrast(1.06);
+  -webkit-mask-image: url(/about-icon-mask.png);
+  mask-image: url(/about-icon-mask.png);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 .infinity-logo {
@@ -60,5 +131,735 @@ body {
   .infinity-runner {
     animation: none;
     stroke-dasharray: none;
+  }
+
+  .strategy-pulse-ring,
+  .strategy-link,
+  .strategy-link-flow,
+  .strategy-node,
+  .strategy-node-dot,
+  .strategy-node-pulse,
+  .strategy-hub,
+  .strategy-label,
+  .strategy-step-enter,
+  .strategy-step-line,
+  .transform-circuit-flow,
+  .transform-circuit-node,
+  .transform-circuit-cluster,
+  .transform-fiber-image,
+  .regulation-network-image,
+  .ops-node-float,
+  .ops-line-trail,
+  .hero-focus-pulse,
+  .services-cta-pulse,
+  .contact-cta-pulse,
+  .transform-service-pulse,
+  .contact-continue-pulse,
+  .footer-logo-swoop-mark {
+    animation: none !important;
+  }
+
+  .ops-line-trail {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    opacity: 0.9;
+  }
+
+  .strategy-step-enter,
+  .strategy-step-line {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .transform-circuit-flow {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    opacity: 0.85;
+  }
+
+  .transform-fiber-image {
+    transform: scale(1.12) !important;
+  }
+
+  .regulation-network-image {
+    transform: scale(1.12) !important;
+  }
+
+  .strategy-link-flow {
+    opacity: 0;
+  }
+
+  .hero-focus-pulse,
+  .services-cta-pulse,
+  .contact-cta-pulse,
+  .strategy-node-pulse,
+  .transform-service-pulse,
+  .contact-continue-pulse {
+    box-shadow: none;
+  }
+
+  .footer-logo-swoop-mark {
+    background-image: none;
+    background-color: #ffffff;
+  }
+}
+
+/* Strategy card — subtle motion to draw the eye */
+.strategy-pulse-ring,
+.strategy-hub,
+.strategy-node,
+.strategy-node-dot {
+  transform-box: fill-box;
+}
+
+.strategy-pulse-ring {
+  transform-origin: center;
+  animation: strategy-ring 3.6s ease-out infinite;
+}
+
+.strategy-pulse-ring--delayed {
+  animation-delay: 1.2s;
+}
+
+.strategy-hub {
+  transform-origin: center;
+  animation: strategy-hub-breathe 3.2s ease-in-out infinite;
+}
+
+.strategy-link {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 120;
+  animation: strategy-link-draw 2.8s ease-in-out infinite;
+}
+
+.strategy-link-flow {
+  stroke-dasharray: 14 110;
+  stroke-dashoffset: 120;
+  animation: strategy-link-travel 2.4s linear infinite;
+  opacity: 0.9;
+}
+
+.strategy-node {
+  animation: strategy-node-float 3.4s ease-in-out infinite;
+}
+
+.strategy-node-dot {
+  animation: strategy-dot-pulse 2.2s ease-in-out infinite;
+}
+
+.strategy-node-pulse {
+  animation: strategy-node-pulse 2.4s ease-in-out infinite;
+}
+
+/* Transformation card — fiber plate tinted to brand greens */
+.transform-fiber-image {
+  /* Shift cool blue/cyan fibers toward Sureclear greens + soft blur */
+  filter: hue-rotate(-48deg) saturate(1.25) brightness(0.9) contrast(1.06)
+    blur(2.5px);
+  transform-origin: center;
+  animation: transform-fiber-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes transform-fiber-drift {
+  from {
+    transform: scale(1.12) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.18) translate3d(-1.5%, 1%, 0);
+  }
+}
+
+/* Transformation card — pulsing service bullets */
+@keyframes transform-service-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(82, 183, 136, 0.55);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(82, 183, 136, 0);
+    transform: scale(1.18);
+  }
+}
+
+.transform-service-pulse {
+  animation: transform-service-pulse 2.4s ease-in-out infinite;
+}
+
+/* Regulation / Fractional Leadership card — network plate + soft blur */
+.regulation-network-image {
+  filter: hue-rotate(-22deg) saturate(1.2) brightness(1.05) contrast(1.02)
+    blur(2.5px);
+  transform-origin: center;
+  animation: regulation-network-drift 20s ease-in-out infinite alternate;
+}
+
+@keyframes regulation-network-drift {
+  from {
+    transform: scale(1.12) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.18) translate3d(1.2%, -0.8%, 0);
+  }
+}
+
+/* Operations card — subtle float on icon boxes only */
+.ops-node-float {
+  animation: ops-node-float 3.4s ease-in-out infinite;
+}
+
+@keyframes ops-node-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Operations connectors — short bright pulse traveling hub → node */
+.ops-line-trail {
+  stroke-dasharray: 26 220;
+  stroke-dashoffset: 0;
+  animation: ops-line-trail 2.5s linear infinite;
+}
+
+@keyframes ops-line-trail {
+  to {
+    stroke-dashoffset: -246;
+  }
+}
+
+/* Transformation card — circuit network (legacy, unused) */
+.transform-circuit-flow {
+  stroke-dasharray: 18 90;
+  stroke-dashoffset: 220;
+  animation: transform-circuit-flow 3.2s linear infinite;
+}
+
+.transform-circuit-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: transform-circuit-node 2.6s ease-in-out infinite;
+}
+
+.transform-circuit-cluster {
+  animation: transform-circuit-cluster 3s ease-in-out infinite;
+}
+
+@keyframes transform-circuit-flow {
+  0% {
+    stroke-dashoffset: 220;
+    opacity: 0.35;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.45;
+  }
+}
+
+@keyframes transform-circuit-node {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+}
+
+@keyframes transform-circuit-cluster {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.strategy-step-enter {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: strategy-step-enter 0.7s ease-out forwards;
+}
+
+.strategy-step-line {
+  min-height: 2.75rem;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top center;
+  animation: strategy-step-line 0.55s ease-out forwards;
+}
+
+@keyframes strategy-step-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes strategy-step-line {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+.strategy-label {
+  animation: strategy-label-fade 3.4s ease-in-out infinite;
+}
+
+@keyframes strategy-ring {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.72);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(1.55);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.55);
+  }
+}
+
+@keyframes strategy-hub-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+}
+
+@keyframes strategy-link-draw {
+  0%,
+  12% {
+    stroke-dashoffset: 120;
+    opacity: 0.25;
+  }
+  35%,
+  70% {
+    stroke-dashoffset: 0;
+    opacity: 0.7;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.45;
+  }
+}
+
+@keyframes strategy-link-travel {
+  0% {
+    stroke-dashoffset: 120;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.15;
+  }
+}
+
+@keyframes strategy-node-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes strategy-dot-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes strategy-node-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(153, 242, 200, 0.4);
+    border-color: rgba(255, 255, 255, 0.75);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 10px rgba(153, 242, 200, 0);
+    border-color: rgba(153, 242, 200, 0.95);
+  }
+}
+
+@keyframes strategy-label-fade {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Hero — soft constant pulse on Explore our focus */
+.hero-focus-pulse {
+  position: relative;
+  animation: hero-focus-pulse 2.4s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.28);
+}
+
+.hero-focus-pulse:hover {
+  animation-play-state: paused;
+}
+
+@keyframes hero-focus-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0);
+  }
+  50% {
+    transform: scale(1.035);
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Who we help — same pulse rhythm on View our services (dark on cream) */
+.services-cta-pulse {
+  position: relative;
+  animation: services-cta-pulse 2.4s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(11, 18, 32, 0.18);
+}
+
+.services-cta-pulse:hover {
+  animation-play-state: paused;
+}
+
+@keyframes services-cta-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    border-color: rgba(11, 18, 32, 0.55);
+    box-shadow: 0 0 0 0 rgba(11, 18, 32, 0.22);
+    background-color: rgba(11, 18, 32, 0);
+  }
+  50% {
+    transform: scale(1.035);
+    border-color: rgba(11, 18, 32, 1);
+    box-shadow: 0 0 0 10px rgba(11, 18, 32, 0);
+    background-color: rgba(11, 18, 32, 0.06);
+  }
+}
+
+/* Contact form — pulse Continue once step 1 is ready */
+.contact-continue-pulse {
+  animation: contact-continue-pulse 1.9s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(11, 18, 32, 0.28);
+}
+
+@keyframes contact-continue-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(11, 18, 32, 0.28);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 12px rgba(11, 18, 32, 0);
+  }
+}
+
+/* Services hero — soft transparent brand wash, no hard edges */
+.services-hero-wash {
+  background-color: #ffffff;
+}
+
+/* Services — large feature cards */
+.services-feature-card {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    filter 0.35s ease;
+}
+
+.services-feature-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 28px 60px rgba(11, 18, 32, 0.28);
+  filter: saturate(1.05) brightness(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-feature-card,
+  .services-feature-card:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* Approach — keep green through the cards, then soft-fade into cream */
+.approach-section {
+  position: relative;
+  background-color: #f5f4ef;
+}
+
+/* Process cards — thin green outline with a travelling highlight */
+@property --approach-border-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.approach-process-card {
+  border-radius: 1rem;
+  padding: 1.5px;
+}
+
+.approach-process-card-inner {
+  border-radius: 0.925rem;
+}
+
+/* Process cards — fill the row so all four stay visible from the offset */
+.approach-scroll-row {
+  --approach-card-gap: 1.25rem;
+  width: 100%;
+  gap: 0;
+}
+
+.approach-cards-track {
+  gap: var(--approach-card-gap);
+  transform: translateX(110%);
+  will-change: transform;
+}
+
+.approach-cards-track .approach-process-card {
+  width: calc((100% - (3 * var(--approach-card-gap))) / 4);
+  min-width: 0;
+}
+
+.approach-cards-track.is-entered {
+  animation: approach-cards-slide-bounce 1.35s linear forwards;
+}
+
+@keyframes approach-cards-slide-bounce {
+  0% {
+    transform: translateX(110%);
+  }
+  52% {
+    transform: translateX(0);
+  }
+  64% {
+    /* Hit and rebound off the right edge of the page */
+    transform: translateX(2.4rem);
+  }
+  76% {
+    transform: translateX(-0.7rem);
+  }
+  88% {
+    transform: translateX(0.4rem);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media (min-width: 640px) {
+  .approach-scroll-row {
+    --approach-card-gap: 1.35rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .approach-scroll-row {
+    --approach-card-gap: 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .approach-scroll-row {
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .approach-cards-track .approach-process-card {
+    width: 17.5rem;
+    min-width: 17.5rem;
+  }
+}
+
+.approach-card-ring {
+  background: conic-gradient(
+    from var(--approach-border-angle),
+    #3d8b66 0deg,
+    #2d6a4f 160deg,
+    #2d6a4f 210deg,
+    #99f2c8 250deg,
+    #6fbf93 295deg,
+    #3d8b66 335deg,
+    #3d8b66 360deg
+  );
+  animation: approach-border-spin 4s linear infinite;
+}
+
+@keyframes approach-border-spin {
+  to {
+    --approach-border-angle: 360deg;
+  }
+}
+
+/* Approach — manual horizontal process card strip */
+.approach-scroll-strip {
+  cursor: grab;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  overflow-anchor: none;
+}
+
+.approach-scroll-strip::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.approach-scroll-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.approach-scroll-dragging .approach-scroll-card {
+  pointer-events: none;
+}
+
+.approach-scroll-cta {
+  animation: approach-cta-pulse 2.4s ease-in-out infinite;
+}
+
+.approach-scroll-cta:hover,
+.approach-scroll-cta:disabled {
+  animation-play-state: paused;
+}
+
+@keyframes approach-cta-pulse {
+  0%,
+  100% {
+    border-color: rgba(11, 18, 32, 0.35);
+    background-color: rgba(11, 18, 32, 0.04);
+  }
+  50% {
+    border-color: rgba(11, 18, 32, 0.85);
+    background-color: rgba(11, 18, 32, 0.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .approach-scroll-cta {
+    animation: none;
+  }
+
+  .approach-card-ring {
+    animation: none;
+    background: #2d6a4f;
+  }
+
+  .approach-cards-track,
+  .approach-cards-track.is-entered {
+    animation: none;
+    transform: translateX(0);
+  }
+}
+
+/* Contact CTA — pulse on Get in touch (brand / green card) */
+.contact-cta-pulse {
+  position: relative;
+  animation: contact-cta-pulse 2.4s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(153, 242, 200, 0.2);
+}
+
+.contact-cta-pulse:hover {
+  animation-play-state: paused;
+}
+
+@keyframes contact-cta-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    border-color: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 0 0 0 rgba(153, 242, 200, 0.22);
+    background-color: rgba(255, 255, 255, 0);
+  }
+  50% {
+    transform: scale(1.035);
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 10px rgba(153, 242, 200, 0);
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Footer wordmark — white base with a slow, smooth green swoop */
+.footer-logo-swoop-mark {
+  display: inline-block;
+  background-color: #ffffff;
+  background-image: linear-gradient(
+    100deg,
+    #ffffff 0%,
+    #ffffff 34%,
+    #99f2c8 44%,
+    #2d6a4f 50%,
+    #99f2c8 56%,
+    #ffffff 66%,
+    #ffffff 100%
+  );
+  background-size: 260% 100%;
+  background-position: 100% 50%;
+  animation: footer-logo-swoop 6.5s cubic-bezier(0.45, 0.05, 0.25, 1) infinite;
+  -webkit-mask-image: url("/sureclear-logo-wordmark.png");
+  mask-image: url("/sureclear-logo-wordmark.png");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+@keyframes footer-logo-swoop {
+  0%,
+  18% {
+    background-position: 115% 50%;
+  }
+  72% {
+    background-position: -15% 50%;
+  }
+  100% {
+    background-position: -15% 50%;
   }
 }
