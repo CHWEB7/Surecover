@@ -2,23 +2,13 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 
-type ServiceOffering = {
-  title: string;
-  body?: string;
-  includes?: string[];
-  /** When false, hide the contact link under the card body. */
-  showLink?: boolean;
-  /** Match the docked active menu highlight (`#eef3ef`). */
-  tone?: "mint" | "cream";
-};
-
 type ServiceDetail = {
   id: string;
   title: string;
   shortDescription: string;
   subtitle: string;
   intro: string;
-  offerings: ServiceOffering[];
+  includes: string;
   icon: ReactNode;
 };
 
@@ -61,6 +51,18 @@ const TransformationIcon = (
   </svg>
 );
 
+const OperationsIcon = (
+  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
+    <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
+    <path
+      d="M12 3v2.5M12 18.5V21M4.9 6.5l1.8 1.8M17.3 15.7l1.8 1.8M3 12h2.5M18.5 12H21M4.9 17.5l1.8-1.8M17.3 8.3l1.8-1.8"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
 const LeadershipIcon = (
   <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
     <path
@@ -79,18 +81,6 @@ const LeadershipIcon = (
   </svg>
 );
 
-const OperationsIcon = (
-  <svg viewBox="0 0 24 24" fill="none" className={iconClass} aria-hidden="true">
-    <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
-    <path
-      d="M12 3v2.5M12 18.5V21M4.9 6.5l1.8 1.8M17.3 15.7l1.8 1.8M3 12h2.5M18.5 12H21M4.9 17.5l1.8-1.8M17.3 8.3l1.8-1.8"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
 const services: ServiceDetail[] = [
   {
     id: "clearing-strategy",
@@ -100,14 +90,8 @@ const services: ServiceDetail[] = [
     subtitle: "Know what to do next.",
     intro:
       "We help organisations make clear strategic decisions across clearing access, CCP connectivity, exchange membership, client clearing propositions, product coverage and market infrastructure.",
-    offerings: [
-      {
-        title: "Includes",
-        body: "CCP connectivity and access models, exchange membership and onboarding, clearing operating models, market entry and product coverage, and new clearing mandates.",
-        showLink: false,
-        tone: "mint",
-      },
-    ],
+    includes:
+      "CCP connectivity and access models, exchange membership and onboarding, clearing operating models, market entry and product coverage, and new clearing mandates.",
     icon: StrategyIcon,
   },
   {
@@ -115,79 +99,41 @@ const services: ServiceDetail[] = [
     title: "Transformation & Change",
     shortDescription:
       "Turn a clearing decision into a workable operating model, roadmap and delivery plan — with outcomes that can be owned by the teams who run the business day to day.",
-    subtitle: "From clearing decision to delivery that sticks.",
+    subtitle: "Turn decisions into capability.",
     intro:
-      "Once the direction is set, the hard part begins: target operating models, sequencing, vendor choices, controls and the practical work of getting teams aligned.",
-    offerings: [
-      {
-        title: "Target operating models",
-        body: "Design practical operating models and delivery roadmaps that turn a clearing decision into something the business can run.",
-      },
-      {
-        title: "Technology & control alignment",
-        body: "Align technology, process and control changes to clearing outcomes — not generic programme theatre.",
-      },
-      {
-        title: "Delivery that sticks",
-        body: "Unblock decisions and keep programmes grounded in day-to-day operations so change lands with clear ownership.",
-      },
-    ],
+      "We help translate clearing strategy into practical roadmaps, delivery plans, operating models and technology change that can work in the real world.",
+    includes:
+      "Product and platform transformation, capability mapping and roadmaps, vendor assessment and RFP support, regulatory change, and programme structure, delivery support and governance.",
     icon: TransformationIcon,
-  },
-  {
-    id: "fractional-leadership",
-    title: "Fractional Leadership",
-    shortDescription:
-      "Provide experienced clearing leadership without the commitment of a permanent senior hire — senior judgement when programmes, platforms or teams need it most.",
-    subtitle: "Senior clearing judgement when you need it most.",
-    intro:
-      "Some moments need experienced clearing leadership quickly — a platform migration, a membership expansion, a stretched team, or a programme that has lost its way.",
-    offerings: [
-      {
-        title: "Embedded clearing leadership",
-        body: "Bring experienced clearing leadership into critical programmes and transitions without locking in a permanent hire too early.",
-      },
-      {
-        title: "Executive decision support",
-        body: "Support boards and executives with clear, practical recommendations when the decision window is tight.",
-      },
-      {
-        title: "Capability that remains",
-        body: "Build internal capability so progress continues after the engagement ends and the team can own what comes next.",
-      },
-    ],
-    icon: LeadershipIcon,
   },
   {
     id: "operations-resilience",
     title: "Operations & Resilience",
     shortDescription:
       "Improve resilience, efficiency, controls and governance so clearing operations stay robust as volumes, products and regulatory expectations change.",
-    subtitle: "Operations built for resilience under pressure.",
+    subtitle: "Make clearing work better.",
     intro:
-      "Clearing operations have to absorb volume spikes, product change, control expectations and regulatory scrutiny without losing reliability.",
-    offerings: [
-      {
-        title: "Controls & governance",
-        body: "Strengthen controls, governance and operating discipline so clearing stays robust when pressure rises.",
-      },
-      {
-        title: "Resilience & efficiency",
-        body: "Improve resilience and efficiency across clearing workflows without adding unnecessary complexity.",
-      },
-      {
-        title: "Ready for change",
-        body: "Prepare operations for volume, product and regulatory change with a practical operating backbone.",
-      },
-    ],
+      "We support clearing operations that need to become more resilient, efficient, controlled or scalable.",
+    includes:
+      "Operational risk and control reviews, procedures, controls and SLA frameworks, process optimisation and automation, target operating models, and outsourcing, offshoring and governance.",
     icon: OperationsIcon,
+  },
+  {
+    id: "fractional-leadership",
+    title: "Fractional Leadership",
+    shortDescription:
+      "Provide experienced clearing leadership without the commitment of a permanent senior hire — senior judgement when programmes, platforms or teams need it most.",
+    subtitle: "Senior experience when it matters.",
+    intro:
+      "We provide experienced clearing leadership without the commitment of a permanent senior hire, supporting organisations through change, recovery, governance or capability build.",
+    includes:
+      "Fractional COO support, operations leadership, change and transformation leadership, programme recovery, and steering committee preparation and executive reporting.",
+    icon: LeadershipIcon,
   },
 ];
 
 export function ServicesOverview() {
   const [activeId, setActiveId] = useState(services[0].id);
-  const active =
-    services.find((service) => service.id === activeId) ?? services[0];
 
   useEffect(() => {
     const applyHash = () => {
@@ -201,14 +147,37 @@ export function ServicesOverview() {
     return () => window.removeEventListener("hashchange", applyHash);
   }, []);
 
-  const selectService = (id: string, scrollToDetail = false) => {
+  useEffect(() => {
+    const syncActiveFromScroll = () => {
+      // Activate the last section whose top has crossed under the sticky header band.
+      const activationLine = 160;
+      let current = services[0].id;
+      for (const service of services) {
+        const el = document.getElementById(service.id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= activationLine) {
+          current = service.id;
+        }
+      }
+      setActiveId((prev) => (prev === current ? prev : current));
+    };
+
+    syncActiveFromScroll();
+    window.addEventListener("scroll", syncActiveFromScroll, { passive: true });
+    window.addEventListener("resize", syncActiveFromScroll);
+    return () => {
+      window.removeEventListener("scroll", syncActiveFromScroll);
+      window.removeEventListener("resize", syncActiveFromScroll);
+    };
+  }, []);
+
+  const selectService = (id: string, fromOverview = false) => {
     setActiveId(id);
     window.history.replaceState(null, "", `#${id}`);
-    if (scrollToDetail) {
-      document
-        .getElementById("service-detail")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+      block: fromOverview ? "start" : "start",
+    });
   };
 
   return (
@@ -255,84 +224,47 @@ export function ServicesOverview() {
           className="mt-14 scroll-mt-28 border-t border-[#e7e5df] pt-12 lg:mt-20 lg:pt-16"
         >
           <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_17.5rem] lg:gap-14 xl:grid-cols-[minmax(0,1fr)_19rem] xl:gap-16">
-            <div>
-              <div
-                aria-hidden
-                className="h-1 w-14 rounded-full bg-[linear-gradient(90deg,#1f4037_0%,#2d6a4f_45%,#99f2c8_100%)]"
-              />
-              <h3
-                id={active.id}
-                className="mt-5 text-3xl font-semibold tracking-tight text-[#0b1220] sm:text-4xl lg:text-[2.75rem]"
-              >
-                {active.title}
-              </h3>
-              <p className="mt-3 text-xl font-semibold tracking-tight text-[#0b1220] sm:text-2xl">
-                {active.subtitle}
-              </p>
-              <p className="mt-4 max-w-3xl text-base leading-relaxed text-stone-600 sm:text-lg">
-                {active.intro}
-              </p>
+            <div className="space-y-16 sm:space-y-20 lg:space-y-24">
+              {services.map((service, index) => (
+                <article
+                  key={service.id}
+                  id={service.id}
+                  className="scroll-mt-28"
+                >
+                  <div
+                    aria-hidden
+                    className="h-1 w-14 rounded-full bg-[linear-gradient(90deg,#1f4037_0%,#2d6a4f_45%,#99f2c8_100%)]"
+                  />
+                  <h3 className="mt-5 text-3xl font-semibold tracking-tight text-[#0b1220] sm:text-4xl lg:text-[2.75rem]">
+                    {service.title}
+                  </h3>
+                  <p className="mt-3 text-xl font-semibold tracking-tight text-[#0b1220] sm:text-2xl">
+                    {service.subtitle}
+                  </p>
+                  <p className="mt-4 max-w-3xl text-base leading-relaxed text-stone-600 sm:text-lg">
+                    {service.intro}
+                  </p>
 
-              <div className="mt-8 space-y-4 sm:mt-10 sm:space-y-5">
-                {active.offerings.map((offering) => {
-                  const isMint = offering.tone === "mint";
-                  return (
-                    <article
-                      key={offering.title}
-                      className={`rounded-lg px-6 py-7 sm:px-8 sm:py-8 ${
-                        isMint ? "bg-[#eef3ef]" : "bg-[#f5f4ef]"
-                      }`}
-                    >
-                      <h4 className="text-xl font-semibold tracking-tight text-[#0b1220] sm:text-2xl">
-                        {offering.title}
-                      </h4>
-                      {offering.includes ? (
-                        <ul className="mt-4 space-y-2.5">
-                          {offering.includes.map((item) => (
-                            <li
-                              key={item}
-                              className="flex items-start gap-2.5 text-base leading-relaxed text-stone-600"
-                            >
-                              <span
-                                aria-hidden
-                                className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#2d6a4f]"
-                              />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <>
-                          <p
-                            className={
-                              isMint
-                                ? "mt-3 text-sm font-semibold leading-relaxed text-[#0b1220]"
-                                : "mt-3 text-base leading-relaxed text-stone-600"
-                            }
-                          >
-                            {offering.body}
-                          </p>
-                          {offering.showLink !== false ? (
-                            <a
-                              href="/contact"
-                              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#2d6a4f] transition hover:text-[#1f4037]"
-                            >
-                              <span
-                                aria-hidden
-                                className="inline-block h-1.5 w-1.5 rounded-full bg-[#2d6a4f]"
-                              />
-                              {offering.title}
-                            </a>
-                          ) : null}
-                        </>
-                      )}
-                    </article>
-                  );
-                })}
-              </div>
+                  <div className="mt-8 rounded-lg bg-[#eef3ef] px-6 py-7 sm:mt-10 sm:px-8 sm:py-8">
+                    <h4 className="text-xl font-semibold tracking-tight text-[#0b1220] sm:text-2xl">
+                      Includes
+                    </h4>
+                    <p className="mt-3 text-sm font-semibold leading-relaxed text-[#0b1220]">
+                      {service.includes}
+                    </p>
+                  </div>
+
+                  {index < services.length - 1 ? (
+                    <div
+                      aria-hidden
+                      className="mt-16 border-b border-[#e7e5df] sm:mt-20 lg:mt-24"
+                    />
+                  ) : null}
+                </article>
+              ))}
             </div>
 
-            <aside className="lg:sticky lg:top-28">
+            <aside className="lg:sticky lg:top-28 lg:self-start">
               <a
                 href="/contact"
                 className="inline-flex w-full items-center justify-center rounded-lg bg-[#0b1220] px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-[#14201a]"
@@ -345,7 +277,7 @@ export function ServicesOverview() {
                 className="mt-6 flex flex-col gap-1"
               >
                 {services.map((service) => {
-                  const isActive = service.id === active.id;
+                  const isActive = service.id === activeId;
                   return (
                     <button
                       key={`nav-${service.id}`}
