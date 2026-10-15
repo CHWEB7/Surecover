@@ -130,7 +130,9 @@ export function WhoWeHelp() {
               industry.
             </p>
             <p className="font-medium text-[#0b1220]">
-              We understand the industry because we&apos;ve worked inside it.
+              SureClear works with organisations that need specialist clearing
+              judgement, practical experience and a clear path through complex
+              decisions.
             </p>
           </div>
           <a
