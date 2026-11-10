@@ -17,10 +17,10 @@ export function ServicesHero() {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage: [
-            "linear-gradient(180deg, rgba(238,243,239,0.95) 0%, rgba(245,244,239,0.72) 42%, rgba(255,255,255,0.35) 78%, #ffffff 100%)",
-            "radial-gradient(ellipse 90% 70% at 15% 20%, rgba(45,106,79,0.10) 0%, rgba(45,106,79,0) 70%)",
-            "radial-gradient(ellipse 85% 65% at 85% 25%, rgba(153,242,200,0.18) 0%, rgba(153,242,200,0) 68%)",
-            "radial-gradient(ellipse 70% 55% at 50% 0%, rgba(31,64,55,0.07) 0%, rgba(31,64,55,0) 72%)",
+            "linear-gradient(180deg, #e7f2ea 0%, #eef6f0 38%, #f7faf7 72%, #ffffff 100%)",
+            "radial-gradient(ellipse 95% 75% at 12% 18%, rgba(45,106,79,0.14) 0%, rgba(45,106,79,0) 72%)",
+            "radial-gradient(ellipse 90% 70% at 88% 22%, rgba(153,242,200,0.28) 0%, rgba(153,242,200,0) 70%)",
+            "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(31,64,55,0.08) 0%, rgba(31,64,55,0) 75%)",
           ].join(", "),
         }}
       />
