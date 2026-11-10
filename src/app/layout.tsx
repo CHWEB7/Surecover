@@ -31,8 +31,9 @@ const identidadExtraLight = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "New website under development — Foxlead",
-  description: "A new website is currently under development by Foxlead.",
+  title: "SureClear — Cleared Derivatives Advisory",
+  description:
+    "SureClear is an independent specialist advisory firm focused exclusively on the cleared derivatives industry.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
