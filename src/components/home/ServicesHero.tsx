@@ -11,16 +11,16 @@ const featureCard = {
 export function ServicesHero() {
   return (
     <section className="services-hero-wash relative w-full overflow-hidden">
-      {/* Soft brand wash from the top corners only — fades cleanly into white */}
+      {/* Soft light-green wash across the full hero, fading to white into the next section */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage: [
-            "radial-gradient(ellipse 70% 85% at 0% 0%, rgba(31,64,55,0.12) 0%, rgba(31,64,55,0) 70%)",
-            "radial-gradient(ellipse 75% 90% at 100% 0%, rgba(45,106,79,0.11) 0%, rgba(45,106,79,0) 68%)",
-            "radial-gradient(ellipse 55% 60% at 50% 0%, rgba(31,64,55,0.06) 0%, rgba(31,64,55,0) 65%)",
-            "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 58%, #ffffff 100%)",
+            "linear-gradient(180deg, rgba(238,243,239,0.95) 0%, rgba(245,244,239,0.72) 42%, rgba(255,255,255,0.35) 78%, #ffffff 100%)",
+            "radial-gradient(ellipse 90% 70% at 15% 20%, rgba(45,106,79,0.10) 0%, rgba(45,106,79,0) 70%)",
+            "radial-gradient(ellipse 85% 65% at 85% 25%, rgba(153,242,200,0.18) 0%, rgba(153,242,200,0) 68%)",
+            "radial-gradient(ellipse 70% 55% at 50% 0%, rgba(31,64,55,0.07) 0%, rgba(31,64,55,0) 72%)",
           ].join(", "),
         }}
       />
