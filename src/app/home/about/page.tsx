@@ -1,0 +1,32 @@
+import type { Metadata } from "next";
+import { AboutHero } from "@/components/home/AboutHero";
+import { AboutStory } from "@/components/home/AboutStory";
+import { AboutTeam } from "@/components/home/AboutTeam";
+import { ContactCta } from "@/components/home/ContactCta";
+import { SiteFooter } from "@/components/home/SiteFooter";
+import { SiteHeader } from "@/components/home/SiteHeader";
+
+export const metadata: Metadata = {
+  title: "About — SureClear",
+  description:
+    "About SureClear — independent specialist advisory for the cleared derivatives industry.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+export default function AboutPage() {
+  return (
+    <div className="flex min-h-dvh flex-col bg-white text-[#0b1220]">
+      <SiteHeader />
+      <main className="flex-1">
+        <AboutHero />
+        <AboutStory />
+        <AboutTeam />
+      </main>
+      <ContactCta variant="brand" />
+      <SiteFooter />
+    </div>
+  );
+}

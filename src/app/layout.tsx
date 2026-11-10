@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Outfit } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
 });
 
@@ -12,18 +13,36 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const identidadExtraLight = localFont({
+  src: [
+    {
+      path: "../fonts/Identidad-ExtraLight.woff2",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Identidad-ExtraLight.woff",
+      weight: "200",
+      style: "normal",
+    },
+  ],
+  variable: "--font-identidad",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "New website under development — Foxlead",
-  description: "A new website is currently under development by Foxlead.",
+  title: "SureClear — Cleared Derivatives Advisory",
+  description:
+    "SureClear is an independent specialist advisory firm focused exclusively on the cleared derivatives industry.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${outfit.variable} ${geistMono.variable} ${identidadExtraLight.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="font-body flex min-h-full flex-col">{children}</body>
     </html>
   );
 }

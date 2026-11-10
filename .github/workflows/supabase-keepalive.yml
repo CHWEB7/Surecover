@@ -1,0 +1,46 @@
+name: Supabase keepalive
+
+on:
+  schedule:
+    # Mondays 09:00 UTC — inside the free-tier ~7 day pause window
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upsert weekly heartbeat row
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          # Prefer the new secret key; fall back to legacy service_role.
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${SUPABASE_URL:-}" ]; then
+            echo "Missing SUPABASE_URL secret."
+            exit 1
+          fi
+
+          API_KEY="${SUPABASE_SECRET_KEY:-${SUPABASE_SERVICE_ROLE_KEY:-}}"
+          if [ -z "${API_KEY}" ]; then
+            echo "Missing elevated key secret."
+            echo "Add either SUPABASE_SECRET_KEY (sb_secret_...) or SUPABASE_SERVICE_ROLE_KEY (legacy eyJ...)."
+            exit 1
+          fi
+
+          # Normalise trailing slash
+          BASE_URL="${SUPABASE_URL%/}"
+          PING_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+          curl --fail-with-body -sS -X POST \
+            "${BASE_URL}/rest/v1/keepalive" \
+            -H "apikey: ${API_KEY}" \
+            -H "Authorization: Bearer ${API_KEY}" \
+            -H "Content-Type: application/json" \
+            -H "Prefer: resolution=merge-duplicates,return=minimal" \
+            -d "{\"id\":1,\"last_ping\":\"${PING_AT}\",\"note\":\"github-actions\"}"
+
+          echo "Keepalive upserted at ${PING_AT}"

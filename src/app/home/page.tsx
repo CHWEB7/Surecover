@@ -24,10 +24,11 @@ export default function SureclearHomePage() {
       <main className="flex-1">
         <Hero />
         <FocusAreas />
-        <WhoWeHelp />
         <Approach />
-        <ContactCta />
+        <WhoWeHelp />
       </main>
+      {/* Full-bleed contact + footer stack (edge to edge) */}
+      <ContactCta variant="brand" />
       <SiteFooter />
     </div>
   );
