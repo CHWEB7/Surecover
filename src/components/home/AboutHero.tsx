@@ -10,17 +10,14 @@ const featureCard = {
 
 export function AboutHero() {
   return (
-    <section className="services-hero-wash relative w-full overflow-hidden">
+    <section className="services-hero-wash relative w-full overflow-hidden bg-[#d5e8dd]">
+      {/* Soft green wash: left (darker) → right (lighter), solid to the bottom edge for a hard cut-off into white */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: [
-            "radial-gradient(ellipse 70% 85% at 0% 0%, rgba(31,64,55,0.12) 0%, rgba(31,64,55,0) 70%)",
-            "radial-gradient(ellipse 75% 90% at 100% 0%, rgba(45,106,79,0.11) 0%, rgba(45,106,79,0) 68%)",
-            "radial-gradient(ellipse 55% 60% at 50% 0%, rgba(31,64,55,0.06) 0%, rgba(31,64,55,0) 65%)",
-            "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 58%, #ffffff 100%)",
-          ].join(", "),
+          backgroundImage:
+            "linear-gradient(90deg, #d5e8dd 0%, #e4f1ea 42%, #eef6f1 72%, #f7fbf8 100%)",
         }}
       />
       <div className="relative mx-auto max-w-7xl px-6 pt-5 pb-14 sm:px-10 sm:pt-6 sm:pb-16 lg:px-16 lg:pt-7 lg:pb-20 xl:px-24">
