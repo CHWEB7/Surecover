@@ -1,30 +1,11 @@
 import { BrandLogo } from "@/components/home/BrandLogo";
 
 const navLinks = [
-  { label: "Insights", href: "/home/insights" },
   { label: "Services", href: "/home/services" },
+  { label: "Insights", href: "/home/insights" },
   { label: "About", href: "/home/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
-
-function NavChevron() {
-  return (
-    <svg
-      viewBox="0 0 12 12"
-      className="ml-1 h-2.5 w-2.5 shrink-0 text-current"
-      aria-hidden="true"
-      fill="none"
-    >
-      <path
-        d="M2.5 4.25 6 7.75l3.5-3.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 type SiteHeaderProps = {
   /** Header logo variant — defaults to the SureClear wordmark */
@@ -64,7 +45,6 @@ export function SiteHeader({
                 className="inline-flex items-center font-sans text-sm font-semibold text-stone-600 transition hover:text-[#1f4037]"
               >
                 {link.label}
-                <NavChevron />
               </a>
             ))}
           </nav>
