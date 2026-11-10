@@ -57,22 +57,16 @@ export function SiteHeader({
             className="hidden items-center gap-5 md:flex lg:gap-7"
             aria-label="Primary"
           >
-            {navLinks.map((link) => {
-              const className =
-                "inline-flex items-center font-sans text-sm font-semibold text-stone-600 transition hover:text-[#1f4037]";
-
-              return link.href ? (
-                <a key={link.label} href={link.href} className={className}>
-                  {link.label}
-                  <NavChevron />
-                </a>
-              ) : (
-                <span key={link.label} className={className}>
-                  {link.label}
-                  <NavChevron />
-                </span>
-              );
-            })}
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="inline-flex items-center font-sans text-sm font-semibold text-stone-600 transition hover:text-[#1f4037]"
+              >
+                {link.label}
+                <NavChevron />
+              </a>
+            ))}
           </nav>
 
           <a
