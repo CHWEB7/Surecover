@@ -2,8 +2,8 @@ import { HeroServiceCards } from "@/components/home/HeroServiceCards";
 
 export function Hero() {
   return (
-    <section className="bg-[#f5f4ef] px-3 pt-3 pb-24 sm:px-4 sm:pt-4 sm:pb-28 lg:px-5 lg:pt-5 lg:pb-32">
-      <div className="relative mx-auto max-w-[92rem]">
+    <section className="bg-[#f5f4ef] px-2 pt-2 pb-24 sm:px-3 sm:pt-3 sm:pb-28 lg:px-3 lg:pt-3 lg:pb-32 xl:px-3 2xl:px-4">
+      <div className="relative mx-auto w-full max-w-none">
         {/* Large gradient panel — nearly full bleed, thin off-white edge */}
         <div
           className="relative min-h-[70vh] overflow-hidden rounded-[1.75rem] px-6 pt-20 pb-36 text-white sm:rounded-[2rem] sm:px-10 sm:pt-24 sm:pb-40 lg:min-h-[75vh] lg:rounded-[2.5rem] lg:px-16 lg:pt-28 lg:pb-44"
