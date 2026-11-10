@@ -238,26 +238,26 @@ export function ServicesOverview() {
           </h2>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 xl:grid-cols-4 xl:gap-5">
+        <div className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5">
           {services.map((service) => (
             <button
               key={service.id}
               type="button"
               onClick={() => selectService(service.id, true)}
-              className="services-area-card group flex h-full flex-col rounded-sm bg-[#f5f4ef] px-5 py-5 text-left transition duration-300 ease-out hover:-translate-y-1 hover:bg-[#eef3ef] sm:px-6 sm:py-5 motion-reduce:transform-none motion-reduce:transition-none"
+              className="services-area-card group flex h-full flex-col rounded-sm bg-[#f5f4ef] px-6 py-5 text-left transition duration-300 ease-out hover:-translate-y-1 hover:bg-[#eef3ef] sm:px-7 sm:py-6 motion-reduce:transform-none motion-reduce:transition-none"
             >
               <div className="text-[#0b1220] transition duration-300 group-hover:text-[#2d6a4f] [&_svg]:h-7 [&_svg]:w-7">
                 {service.icon}
               </div>
-              <h3 className="mt-3 text-lg font-semibold tracking-tight text-[#0b1220]">
+              <h3 className="mt-3 text-xl font-semibold tracking-tight text-[#0b1220]">
                 {service.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-stone-600">
+              <p className="mt-2 max-w-prose text-sm leading-relaxed text-stone-600 sm:text-[0.95rem]">
                 {service.shortDescription}
               </p>
               <span
                 aria-hidden="true"
-                className="mt-4 text-base font-normal text-[#0b1220] transition group-hover:translate-x-0.5 group-hover:text-[#2d6a4f]"
+                className="mt-5 text-base font-normal text-[#0b1220] transition group-hover:translate-x-0.5 group-hover:text-[#2d6a4f]"
               >
                 →
               </span>
