@@ -244,22 +244,20 @@ export function ServicesOverview() {
               key={service.id}
               type="button"
               onClick={() => selectService(service.id, true)}
-              className="services-area-card group flex h-full min-h-[18rem] flex-col rounded-lg bg-[#f5f4ef] p-6 text-left transition duration-300 ease-out hover:-translate-y-1 hover:bg-[#eef3ef] sm:min-h-[20rem] sm:p-7 motion-reduce:transform-none motion-reduce:transition-none"
+              className="services-area-card group flex h-full flex-col rounded-sm bg-[#f5f4ef] px-5 py-5 text-left transition duration-300 ease-out hover:-translate-y-1 hover:bg-[#eef3ef] sm:px-6 sm:py-5 motion-reduce:transform-none motion-reduce:transition-none"
             >
-              <div>
-                <div className="text-[#0b1220] transition duration-300 group-hover:text-[#2d6a4f]">
-                  {service.icon}
-                </div>
-                <h3 className="mt-5 text-xl font-semibold tracking-tight text-[#0b1220]">
-                  {service.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-stone-600">
-                  {service.shortDescription}
-                </p>
+              <div className="text-[#0b1220] transition duration-300 group-hover:text-[#2d6a4f] [&_svg]:h-7 [&_svg]:w-7">
+                {service.icon}
               </div>
+              <h3 className="mt-3 text-lg font-semibold tracking-tight text-[#0b1220]">
+                {service.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-stone-600">
+                {service.shortDescription}
+              </p>
               <span
                 aria-hidden="true"
-                className="mt-auto pt-8 text-lg font-normal text-[#0b1220] transition group-hover:translate-x-0.5 group-hover:text-[#2d6a4f]"
+                className="mt-4 text-base font-normal text-[#0b1220] transition group-hover:translate-x-0.5 group-hover:text-[#2d6a4f]"
               >
                 →
               </span>
