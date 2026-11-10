@@ -598,7 +598,7 @@ html {
   }
 }
 
-/* Services hero — soft transparent brand wash, no hard edges */
+/* Shared hero shell — wash layers are set per page component */
 .services-hero-wash {
   background-color: #ffffff;
 }
