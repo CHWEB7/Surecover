@@ -238,23 +238,31 @@ export function ServicesOverview() {
           </h2>
         </div>
 
-        <div className="mt-10 grid gap-3 sm:mt-12 sm:grid-cols-2 xl:grid-cols-4 xl:gap-4">
+        <div className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 xl:grid-cols-4 xl:gap-5">
           {services.map((service) => (
             <button
               key={service.id}
               type="button"
               onClick={() => selectService(service.id, true)}
-              className="services-area-card group flex h-full flex-col rounded-2xl border border-transparent bg-transparent p-5 text-left transition duration-300 ease-out hover:-translate-y-1 hover:border-[#ecece8] hover:bg-[#f3f3f0] sm:p-6 motion-reduce:transform-none motion-reduce:transition-none"
+              className="services-area-card group flex h-full min-h-[18rem] flex-col rounded-lg bg-[#f5f4ef] p-6 text-left transition duration-300 ease-out hover:-translate-y-1 hover:bg-[#eef3ef] sm:min-h-[20rem] sm:p-7 motion-reduce:transform-none motion-reduce:transition-none"
             >
-              <div className="text-[#0b1220] transition duration-300 group-hover:text-[#2d6a4f]">
-                {service.icon}
+              <div>
+                <div className="text-[#0b1220] transition duration-300 group-hover:text-[#2d6a4f]">
+                  {service.icon}
+                </div>
+                <h3 className="mt-5 text-xl font-semibold tracking-tight text-[#0b1220]">
+                  {service.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-stone-600">
+                  {service.shortDescription}
+                </p>
               </div>
-              <h3 className="mt-5 text-xl font-semibold tracking-tight text-[#0b1220]">
-                {service.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-stone-600">
-                {service.shortDescription}
-              </p>
+              <span
+                aria-hidden="true"
+                className="mt-auto pt-8 text-lg font-normal text-[#0b1220] transition group-hover:translate-x-0.5 group-hover:text-[#2d6a4f]"
+              >
+                →
+              </span>
             </button>
           ))}
         </div>
