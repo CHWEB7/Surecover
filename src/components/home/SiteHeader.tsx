@@ -1,7 +1,7 @@
 import { BrandLogo } from "@/components/home/BrandLogo";
 
 const navLinks = [
-  { label: "Insights", href: null },
+  { label: "Insights", href: "/home/insights" },
   { label: "Services", href: "/home/services" },
   { label: "About", href: "/home/about" },
   { label: "Contact", href: "/contact" },
